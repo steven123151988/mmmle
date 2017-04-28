@@ -1,0 +1,87 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:2:1-21:12
+	package
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:3:5-39
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+application
+ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\18\.android\build-cache\e23a628afe4ba3c180f095a4caeb945ee5e89424\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\18\.android\build-cache\1f290d85d49aae6eecf9ed93a8573bd4432ba5c2\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\18\.android\build-cache\94d5850f0168dba955771ab40bee29f5a2e0a600\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\18\.android\build-cache\f4d2086839c76bb2f5d8d44b0ba3ad62b51255a4\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\18\.android\build-cache\bf6807dbd528bae918e57e31eaf805673fe8116d\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\18\.android\build-cache\fdb811c010b2f196398cf096c8b53ce727ed7f05\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\18\.android\build-cache\c160e0fed400da8027375c4624ae8b1a39a2ee3f\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\18\.android\build-cache\2c4bb929f7dff66da86ea92aa30bca1d5c535775\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\18\.android\build-cache\72d687a0d109dbb9630f5b2a7b7a0fe9309566db\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\18\.android\build-cache\2ba9e0a6ad28f44bea27f7ead6cabd65819dc345\output\AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:8:9-41
+	android:supportsRtl
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:9:9-54
+	android:allowBackup
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:6:9-35
+	android:icon
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:7:9-43
+	android:theme
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.daking.lotteryleying.MainActivity
+ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:12:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\18\.android\build-cache\e23a628afe4ba3c180f095a4caeb945ee5e89424\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\18\.android\build-cache\1f290d85d49aae6eecf9ed93a8573bd4432ba5c2\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\18\.android\build-cache\94d5850f0168dba955771ab40bee29f5a2e0a600\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\18\.android\build-cache\f4d2086839c76bb2f5d8d44b0ba3ad62b51255a4\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\18\.android\build-cache\bf6807dbd528bae918e57e31eaf805673fe8116d\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\18\.android\build-cache\fdb811c010b2f196398cf096c8b53ce727ed7f05\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\18\.android\build-cache\c160e0fed400da8027375c4624ae8b1a39a2ee3f\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\18\.android\build-cache\2c4bb929f7dff66da86ea92aa30bca1d5c535775\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\18\.android\build-cache\72d687a0d109dbb9630f5b2a7b7a0fe9309566db\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\18\.android\build-cache\2ba9e0a6ad28f44bea27f7ead6cabd65819dc345\output\AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\18\.android\build-cache\e23a628afe4ba3c180f095a4caeb945ee5e89424\output\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+		INJECTED from F:\workspace\LotteryLeying\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\18\.android\build-cache\e23a628afe4ba3c180f095a4caeb945ee5e89424\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\18\.android\build-cache\1f290d85d49aae6eecf9ed93a8573bd4432ba5c2\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\18\.android\build-cache\94d5850f0168dba955771ab40bee29f5a2e0a600\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\18\.android\build-cache\f4d2086839c76bb2f5d8d44b0ba3ad62b51255a4\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\18\.android\build-cache\bf6807dbd528bae918e57e31eaf805673fe8116d\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\18\.android\build-cache\fdb811c010b2f196398cf096c8b53ce727ed7f05\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\18\.android\build-cache\c160e0fed400da8027375c4624ae8b1a39a2ee3f\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\18\.android\build-cache\2c4bb929f7dff66da86ea92aa30bca1d5c535775\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\18\.android\build-cache\72d687a0d109dbb9630f5b2a7b7a0fe9309566db\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\18\.android\build-cache\e23a628afe4ba3c180f095a4caeb945ee5e89424\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:appcompat-v7:25.3.1] C:\Users\18\.android\build-cache\e23a628afe4ba3c180f095a4caeb945ee5e89424\output\AndroidManifest.xml:26:9-47

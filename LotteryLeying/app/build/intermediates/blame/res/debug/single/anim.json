@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "F:\\workspace\\LotteryLeying\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\18\\.android\\build-cache\\e23a628afe4ba3c180f095a4caeb945ee5e89424\\output\\res\\anim\\abc_slide_out_bottom.xml"
+    }
+]
