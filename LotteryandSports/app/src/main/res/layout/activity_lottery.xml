@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
-    <!-- 手机摇啊摇 -->
+    <!-- 手机摇 -->
 
     <LinearLayout
         android:id="@+id/ii_lottery_buy_bottom"
