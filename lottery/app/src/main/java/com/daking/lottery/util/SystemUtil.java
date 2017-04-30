@@ -1,4 +1,4 @@
-package com.daking.lottery.base;
+package com.daking.lottery.util;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.List;
 
 /**
- * Created by quchuangye on 2017/3/29.  系统相关的工具类
+ * Created by Steven on 2017/3/29.  系统相关的工具类
  */
 
 public class SystemUtil {

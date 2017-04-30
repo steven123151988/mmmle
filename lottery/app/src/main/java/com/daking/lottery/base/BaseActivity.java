@@ -13,6 +13,7 @@ import com.daking.lottery.view.CustomProgressDialog;
 
 import java.util.List;
 
+
 public class BaseActivity extends Activity {
     public Context mContext;
     private String className;
@@ -30,10 +31,6 @@ public class BaseActivity extends Activity {
         String cn = component.getClassName();
         className = cn.substring(cn.lastIndexOf(".") + 1, cn.length());
     }
-
-
-
-
 
     public void showWaiting() {
         if (dialog == null) {

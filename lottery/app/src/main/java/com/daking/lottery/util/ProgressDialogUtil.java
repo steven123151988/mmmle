@@ -7,7 +7,7 @@ import com.daking.lottery.view.CustomProgressDialog;
 
 
 /**
- * Created by quchuangye on 2017/4/1.
+ * Created by Steven on 2017/4/1.
  */
 
 public class ProgressDialogUtil {

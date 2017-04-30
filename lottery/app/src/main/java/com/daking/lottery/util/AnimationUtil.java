@@ -7,7 +7,7 @@ import com.daking.lottery.R;
 import com.daking.lottery.application.MyActivityManager;
 
 /**
- * Created by quchuangye on 2017/3/29. 动画效果
+ * Created by Steven on 2017/3/29. 动画效果
  */
 
 public class AnimationUtil {

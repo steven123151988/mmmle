@@ -1,3 +1,40 @@
 <resources>
-    <string name="app_name">LOTTERY</string>
+    <string name="app_name">乐盈彩票</string>
+    <string name="betting">投注</string>
+    <string name="mainpage">主页</string>
+    <string name="mine">我的</string>
+    <string name="service">客服</string>
+    <string name="back">返回</string>
+    <string name="register">注册</string>
+    <string name="go_to_register">立即注册</string>
+    <string name="login">登录</string>
+    <string name="horseRacelamp">我们将一如既往的为您提供更优质的服务,请遵守游戏规则，否则。。。</string>
+    <string name="unsettleddetails">未结明细</string>
+    <string name="todayhassettled">今日已结</string>
+    <string name="historydetail">账户历史</string>
+    <string name="haventsettled">未结明细</string>
+    <string name="accesslog">存取记录</string>
+    <string name="gamerules">游戏规则</string>
+    <string name="personal">个人资料</string>
+    <string name="modifypassword">修改密码</string>
+    <string name="quit">安全退出</string>
+    <string name="available_balance">可用余额</string>
+    <string name="credit_limit">信用额度</string>
+    <string name="winning_amount">最近中奖金额</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+
 </resources>

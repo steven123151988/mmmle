@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_image_text_text" />
+
+    <RelativeLayout
+        android:id="@+id/banner_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dimen_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="最新公告" />
+
+        <com.dalong.marqueeview.MarqueeView
+            android:id="@+id/tv_marquee"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            app:direction="left"
+            app:isRepeat="true"
+            app:speed="5"
+            app:startPoint="end"
+            app:textSize="16sp"
+            app:textcolor="#FFFFFF" />
+    </LinearLayout>
+</LinearLayout>
