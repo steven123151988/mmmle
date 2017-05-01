@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <declare-styleable name="destiny">
+        <attr name="format" format="enum"> 
+		    <enum name="normal" value="0"/>
+		    <enum name="bank_card" value="1"/> 
+		    <enum name="phone" value="2"/> 
+		    <enum name="special_plane" value = "3"/>
+		</attr>
+		<attr name="digits" format="string"/>
+    </declare-styleable>
+
+</resources>

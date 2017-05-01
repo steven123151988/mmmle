@@ -3,6 +3,7 @@ package com.daking.lottery.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,19 @@ import com.daking.lottery.fragment.BettingFragment;
 import com.daking.lottery.fragment.FirstFragment;
 import com.daking.lottery.fragment.MineFragment;
 import com.daking.lottery.fragment.ServiceFragment;
+import com.daking.lottery.util.LogUtil;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static android.content.ContentValues.TAG;
 
 /**
  *   APP主页  控制四个fragment来展示界面
@@ -26,13 +40,11 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     private MineFragment mineFragment;
     private ServiceFragment serviceFragment;
 
-    private ImageView mIvBack;
     private ImageView mIvHome;
     private ImageView mIvBetting;
     private ImageView mIvMine;
     private ImageView mIvService;
 
-    private TextView mTvCenter;
     private TextView mTvHome;
     private TextView mTvBetting;
     private TextView mTvMime;
@@ -48,13 +60,11 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     }
 
     private void initView() {
-        mIvBack= (ImageView) findViewById(R.id.iv_back);
         mIvHome= (ImageView) findViewById(R.id.iv_home);
         mIvBetting= (ImageView) findViewById(R.id.iv_betting);
         mIvMine= (ImageView) findViewById(R.id.iv_mine);
         mIvService= (ImageView) findViewById(R.id.iv_service);
 
-        mTvCenter= (TextView) findViewById(R.id.tv_center);
         mTvHome= (TextView) findViewById(R.id.tv_home);
         mTvBetting= (TextView) findViewById(R.id.tv_betting);
         mTvMime= (TextView) findViewById(R.id.tv_mine);
@@ -83,7 +93,28 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     }
 
     private void initDate() {
+        LogUtil.e( "testHttpPost ... onFailure() e=");
+        RequestBody requestBody = new FormBody.Builder()
+                .add("key", "value")
+                .build();
+        LogUtil.e( "testHttpPost2 ... onFailure() e=" );
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://www.xhqb.com/pass/sendpass")
+                .post(requestBody)
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtil.e( "testHttpPost3 ... onFailure() e=" + e);
+            }
 
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                LogUtil.e( "testHttpPost 4... onResponse() response=" + response.body().string());
+            }
+        });
     }
 
 

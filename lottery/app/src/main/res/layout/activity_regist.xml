@@ -1,9 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.daking.lottery.activity.mine.RegistActivity">
+    android:orientation="vertical"
+    android:background="@color/gray_e6e6e6"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/title_image_text_text" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.58"
+            android:paddingLeft="@dimen/dimen_20"
+            android:text="@string/regist_agent"
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
+
+        <EditText
+            android:id="@+id/et_agent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.86"
+            android:hint="@string/regist_agent_account"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="@dimen/dimen_20"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/transparent_66"
+            android:text="@string/regist_account"
+            />
+
+        <EditText
+            android:id="@+id/et_account"
+            android:textSize="@dimen/dimen_14"
+            android:hint="@string/regist_account_action"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="@dimen/dimen_20"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/transparent_66"
+            android:text="@string/regist_psw"
+            />
+
+        <EditText
+            android:id="@+id/et_psw"
+            android:textSize="@dimen/dimen_14"
+           android:hint="@string/regist_psw_length"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="@dimen/dimen_20"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/transparent_66"
+            android:text="@string/regist_confirm"
+            />
+
+        <EditText
+            android:id="@+id/et_psw2"
+            android:textSize="@dimen/dimen_14"
+            android:hint="@string/regist_psw_length"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="@dimen/dimen_20"
+            android:layout_weight="0.29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/transparent_66"
+            android:text="@string/regist_name"
+            />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:textSize="@dimen/dimen_14"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="@dimen/dimen_20"
+            android:layout_weight="0.89"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/transparent_66"
+            android:text="@string/regist_money_psw"
+            />
+
+        <EditText
+            android:id="@+id/et_money_psw"
+            android:textSize="@dimen/dimen_14"
+          android:hint="@string/regist_money_psw_confirm"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white_ffffff"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:paddingLeft="@dimen/dimen_20"
+            android:layout_weight="0.64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_16"
+            android:textColor="@color/transparent_66"
+            android:text="@string/regist_email"
+            />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:textSize="@dimen/dimen_14"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.78"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_20"
+        android:layout_marginRight="@dimen/dimen_20"
+        android:layout_marginTop="@dimen/dimen_30"
+        android:background="@mipmap/btn_register_next_check"
+        android:gravity="center"
+        android:text="@string/register"
+        android:textColor="@color/white_ffffff"
+        android:textSize="@dimen/dimen_16" />
+
+</LinearLayout>

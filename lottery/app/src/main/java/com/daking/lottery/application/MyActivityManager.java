@@ -12,7 +12,6 @@ public class MyActivityManager {
     private WeakReference<Activity> sCurrentActivityWeakRef;
 
     private MyActivityManager() {
-
     }
 
     public static MyActivityManager getInstance() {

@@ -200,7 +200,6 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
             ImageView imageView = new ImageView(getContext());
             final BaseBannerBean d = (BaseBannerBean) datas.get(position);
 			Picasso.with(context).load(d.getUrl()).into(imageView);
-			Log.e("-----------", "" + position);
 //			((ViewPager)container).addView(imageView, position);
 			((ViewPager)container).addView(imageView);
 			imageView.setOnClickListener(new OnClickListener() {

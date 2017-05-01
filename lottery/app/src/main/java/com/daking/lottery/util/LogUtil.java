@@ -10,7 +10,7 @@ public class LogUtil {
     public final static int LOG_LEVEL_DEBUG = 2;
     public final static int LOG_LEVEL_TEST = 1;
     public final static int LOG_LEVEL_RELEASE = 0;
-    private static int level = LOG_LEVEL_RELEASE;
+    private static int level = LOG_LEVEL_DEBUG;
 
     /**
      * 默认level 为 LOG_LEVEL_RELEASE
@@ -34,7 +34,7 @@ public class LogUtil {
         if (level <= LOG_LEVEL_RELEASE)
             return;
         else if (level == LOG_LEVEL_TEST) {
-            Log.i(TAG, msg);
+            Log.e(TAG, msg);
             return;
         } else if (level == LOG_LEVEL_DEBUG) {
             Log.e(TAG, msg);
