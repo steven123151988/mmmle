@@ -24,6 +24,7 @@ public class MyActivityManager {
             currentActivity = sCurrentActivityWeakRef.get();
         }
         return currentActivity;
+
     }
 
     public void setCurrentActivity(Activity activity) {
