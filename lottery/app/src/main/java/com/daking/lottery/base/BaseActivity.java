@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 
 import com.daking.lottery.view.CustomProgressDialog;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -30,6 +31,19 @@ public class BaseActivity extends Activity {
         ComponentName component = cinfo.topActivity;
         String cn = component.getClassName();
         className = cn.substring(cn.lastIndexOf(".") + 1, cn.length());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //友盟数据统计
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     public void showWaiting() {

@@ -42,7 +42,7 @@ public class LotteryApplication extends Application  {
 
             @Override
             public void onActivityResumed(Activity activity) {
-                MyActivityManager.getInstance().setCurrentActivity(activity);
+                ActivityManager.getInstance().setCurrentActivity(activity);
             }
 
             @Override

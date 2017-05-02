@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.daking.lottery.R;
-import com.daking.lottery.application.MyActivityManager;
+import com.daking.lottery.application.ActivityManager;
 
 /**
  * Created by Steven on 2017/3/29. 动画效果
@@ -61,7 +61,7 @@ public class AnimationUtil {
      * @param animationId
      */
     public void finishActivity(ActivityAnimation animationId) {
-        MyActivityManager.getInstance().getCurrentActivity().finish();
+        ActivityManager.getInstance().getCurrentActivity().finish();
         animation(animationId);
     }
 
@@ -73,43 +73,43 @@ public class AnimationUtil {
     private void animation(ActivityAnimation animationId) {
         switch (animationId) {
             case FADE_HOLD:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.fade, R.anim.hold);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.fade, R.anim.hold);
                 break;
             case SCALE_ALPHA:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
                 break;
             case SCALE_ROTATE_ALPHA:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.scale_rotate, R.anim.my_alpha_action);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.scale_rotate, R.anim.my_alpha_action);
                 break;
             case SCALE_TRANSLATE_ROTATE_ALPHA:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.scale_translate_rotate, R.anim.my_alpha_action);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.scale_translate_rotate, R.anim.my_alpha_action);
                 break;
             case SCALE_TRANSLATE_ALPHA:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.scale_translate, R.anim.my_alpha_action);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.scale_translate, R.anim.my_alpha_action);
                 break;
             case HYPERSPACE:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.hyperspace_in, R.anim.hyperspace_out);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.hyperspace_in, R.anim.hyperspace_out);
                 break;
             case PUSH_LEFT:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;
             case PUSH_RIGHT:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.push_right_out, R.anim.push_right_in);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.push_right_out, R.anim.push_right_in);
                 break;
             case PUSH_UP:
-                MyActivityManager.getInstance().getCurrentActivity(). overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
+                ActivityManager.getInstance().getCurrentActivity(). overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
                 break;
             case SLIDE_LEFT:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
                 break;
             case WAVE_SCALE_ALPHA:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.wave_scale, R.anim.my_alpha_action);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.wave_scale, R.anim.my_alpha_action);
                 break;
             case ZOOM_ENTER:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
                 break;
             case SLIDE_UP:
-                MyActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
+                ActivityManager.getInstance().getCurrentActivity().overridePendingTransition(R.anim.slide_up_in, R.anim.slide_down_out);
                 break;
         }
     }

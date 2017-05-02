@@ -3,7 +3,6 @@ package com.daking.lottery.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import com.daking.lottery.R;
 import com.daking.lottery.base.BaseActivity;
 import com.daking.lottery.base.LotteryId;
+import com.daking.lottery.base.LotteryUrl;
 import com.daking.lottery.fragment.BettingFragment;
 import com.daking.lottery.fragment.FirstFragment;
 import com.daking.lottery.fragment.MineFragment;
@@ -18,16 +18,15 @@ import com.daking.lottery.fragment.ServiceFragment;
 import com.daking.lottery.util.LogUtil;
 
 import java.io.IOException;
-
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.content.ContentValues.TAG;
+
 
 /**
  *   APP主页  控制四个fragment来展示界面
@@ -39,17 +38,14 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     private FirstFragment firstFragment;
     private MineFragment mineFragment;
     private ServiceFragment serviceFragment;
-
     private ImageView mIvHome;
     private ImageView mIvBetting;
     private ImageView mIvMine;
     private ImageView mIvService;
-
     private TextView mTvHome;
     private TextView mTvBetting;
     private TextView mTvMime;
     private TextView mTvService;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +72,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
         findViewById(R.id.ll_service).setOnClickListener(this);
         //show the first view
         getFistView();
+
     }
 
     /**
@@ -93,26 +90,26 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     }
 
     private void initDate() {
-        LogUtil.e( "testHttpPost ... onFailure() e=");
         RequestBody requestBody = new FormBody.Builder()
-                .add("key", "value")
+                .add("username", "long")
+                .add("password", "long")
                 .build();
-        LogUtil.e( "testHttpPost2 ... onFailure() e=" );
+
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://www.xhqb.com/pass/sendpass")
+                .url(LotteryUrl.BASE_URL+LotteryUrl.REGIST)
                 .post(requestBody)
                 .build();
+
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                LogUtil.e( "testHttpPost3 ... onFailure() e=" + e);
+                LogUtil.e( "onFailure=" + e);
             }
-
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                LogUtil.e( "testHttpPost 4... onResponse() response=" + response.body().string());
+                LogUtil.e( "onResponse=" + response.body().string());
             }
         });
     }
@@ -185,7 +182,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 mIvBetting.setImageResource(R.mipmap.home_not_selected);
                 mIvMine.setImageResource(R.mipmap.home_not_selected);
                 mIvService.setImageResource(R.mipmap.home_not_selected);
-
                 mTvHome.setTextColor(getResources().getColor(R.color.red_ea541f));
                 mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
                 mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
@@ -196,7 +192,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 mIvBetting.setImageResource(R.mipmap.home_selected);
                 mIvMine.setImageResource(R.mipmap.home_not_selected);
                 mIvService.setImageResource(R.mipmap.home_not_selected);
-
                 mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
                 mTvBetting.setTextColor(getResources().getColor(R.color.red_ea541f));
                 mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
@@ -207,19 +202,16 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 mIvBetting.setImageResource(R.mipmap.home_not_selected);
                 mIvMine.setImageResource(R.mipmap.home_selected);
                 mIvService.setImageResource(R.mipmap.home_not_selected);
-
                 mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
                 mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
                 mTvMime.setTextColor(getResources().getColor(R.color.red_ea541f));
                 mTvService.setTextColor(getResources().getColor(R.color.gray_666666));
-
                 break;
             case LotteryId.TYPE_FOUR :
                  mIvHome.setImageResource(R.mipmap.home_not_selected);
                 mIvBetting.setImageResource(R.mipmap.home_not_selected);
                 mIvMine.setImageResource(R.mipmap.home_not_selected);
                 mIvService.setImageResource(R.mipmap.home_selected);
-
                 mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
                 mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
                 mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));

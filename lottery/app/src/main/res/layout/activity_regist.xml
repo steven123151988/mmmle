@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray_e6e6e6"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
+
     <include layout="@layout/title_image_text_text" />
 
     <LinearLayout
@@ -15,9 +16,9 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.58"
+            android:layout_weight="1.19"
             android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_agent"
             android:textColor="@color/transparent_66"
@@ -28,164 +29,183 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.86"
+            android:layout_weight="2.02"
             android:hint="@string/regist_agent_account"
+            android:maxLength="15"
+            android:maxLines="1"
             android:textSize="@dimen/dimen_14" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:background="@color/white_ffffff"
-        android:layout_marginTop="@dimen/dimen_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
         android:orientation="horizontal">
+
         <TextView
-            android:paddingLeft="@dimen/dimen_20"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16"
-            android:textColor="@color/transparent_66"
+            android:layout_weight="1.08"
+            android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_account"
-            />
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
 
         <EditText
             android:id="@+id/et_account"
-            android:textSize="@dimen/dimen_14"
-            android:hint="@string/regist_account_action"
-            android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/white_ffffff"
-        android:layout_marginTop="@dimen/dimen_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:paddingLeft="@dimen/dimen_20"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16"
-            android:textColor="@color/transparent_66"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:hint="@string/regist_account_action"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_psw"
-            />
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
 
         <EditText
             android:id="@+id/et_psw"
-            android:textSize="@dimen/dimen_14"
-           android:hint="@string/regist_psw_length"
-            android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/white_ffffff"
-        android:layout_marginTop="@dimen/dimen_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:paddingLeft="@dimen/dimen_20"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16"
-            android:textColor="@color/transparent_66"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:hint="@string/regist_psw_length"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_confirm"
-            />
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
 
         <EditText
             android:id="@+id/et_psw2"
-            android:textSize="@dimen/dimen_14"
-            android:hint="@string/regist_psw_length"
-            android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/white_ffffff"
-        android:layout_marginTop="@dimen/dimen_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:paddingLeft="@dimen/dimen_20"
-            android:layout_weight="0.29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16"
-            android:textColor="@color/transparent_66"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:hint="@string/regist_psw_length"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.36"
+            android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_name"
-            />
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
 
         <EditText
             android:id="@+id/et_name"
-            android:textSize="@dimen/dimen_14"
-            android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/white_ffffff"
-        android:layout_marginTop="@dimen/dimen_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:paddingLeft="@dimen/dimen_20"
-            android:layout_weight="0.89"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16"
-            android:textColor="@color/transparent_66"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.89"
+            android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_money_psw"
-            />
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
 
         <EditText
             android:id="@+id/et_money_psw"
-            android:textSize="@dimen/dimen_14"
-          android:hint="@string/regist_money_psw_confirm"
-            android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:background="@color/white_ffffff"
-        android:layout_marginTop="@dimen/dimen_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:paddingLeft="@dimen/dimen_20"
-            android:layout_weight="0.64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_16"
-            android:textColor="@color/transparent_66"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.40"
+            android:hint="@string/regist_money_psw_confirm"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.64"
+            android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_email"
-            />
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
 
         <EditText
             android:id="@+id/et_email"
-            android:textSize="@dimen/dimen_14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
             android:layout_weight="1.78"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
 
     </LinearLayout>
 
