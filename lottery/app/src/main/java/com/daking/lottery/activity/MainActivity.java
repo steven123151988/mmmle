@@ -1,9 +1,16 @@
 package com.daking.lottery.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,13 +25,13 @@ import com.daking.lottery.fragment.ServiceFragment;
 import com.daking.lottery.util.LogUtil;
 
 import java.io.IOException;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
 
 
 
@@ -70,9 +77,17 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
         findViewById(R.id.ll_betting).setOnClickListener(this);
         findViewById(R.id.ll_mine).setOnClickListener(this);
         findViewById(R.id.ll_service).setOnClickListener(this);
-        //show the first view
-        getFistView();
+        showFragmentView();
+    }
 
+    /**
+     *  加载frament面页
+     */
+    private void showFragmentView() {
+        getFistView();
+        bettingFragment = new BettingFragment();
+        mineFragment = new MineFragment();
+        serviceFragment = new ServiceFragment();
     }
 
     /**
@@ -115,23 +130,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     }
 
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -149,6 +147,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 mFragmentTransaction.commitAllowingStateLoss();
                 break;
             case R.id.ll_mine:
+                setAnimation();
                 switchViewByType(LotteryId.TYPE_THREE);
                 if (null== mineFragment){
                     mineFragment = new MineFragment();
@@ -169,6 +168,17 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 mFragmentTransaction.commitAllowingStateLoss();
                 break;
         }
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setAnimation() {
+        View view = findViewById(R.id.view_fragment);
+        //这个是计算宽高最大值
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth()/2, view.getHeight()/2, 0, finalRadius);
+        animator.setInterpolator(new AccelerateInterpolator());
+        //设置画圆的时间
+        animator.setDuration(500);
+        animator.start();
     }
 
     /**

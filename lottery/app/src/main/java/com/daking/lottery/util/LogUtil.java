@@ -6,12 +6,11 @@ import android.util.Log;
  * Log管理类
  */
 public class LogUtil {
-    private static final String TAG = "lotteryandsports=>";
+    private static final String TAG = "lottery=>";
     public final static int LOG_LEVEL_DEBUG = 2;
     public final static int LOG_LEVEL_TEST = 1;
     public final static int LOG_LEVEL_RELEASE = 0;
     private static int level = LOG_LEVEL_DEBUG;
-
     /**
      * 默认level 为 LOG_LEVEL_RELEASE
      * 开发为 LOG_LEVEL_DEBUG，测试为 LOG_LEVEL_TEST，生产为：LOG_LEVEL_RELEASE
