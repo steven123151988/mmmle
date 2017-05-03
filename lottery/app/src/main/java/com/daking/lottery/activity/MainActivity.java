@@ -1,9 +1,8 @@
 package com.daking.lottery.activity;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Build;
@@ -31,9 +30,6 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-
-
 
 /**
  *   APP主页  控制四个fragment来展示界面
@@ -77,32 +73,11 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
         findViewById(R.id.ll_betting).setOnClickListener(this);
         findViewById(R.id.ll_mine).setOnClickListener(this);
         findViewById(R.id.ll_service).setOnClickListener(this);
-        showFragmentView();
-    }
-
-    /**
-     *  加载frament面页
-     */
-    private void showFragmentView() {
         getFistView();
-        bettingFragment = new BettingFragment();
-        mineFragment = new MineFragment();
-        serviceFragment = new ServiceFragment();
     }
 
-    /**
-     *  获取APP的第一个界面U
-     */
-    private void getFistView() {
-        switchViewByType(LotteryId.TYPE_ONE);
-        if (null==firstFragment){
-            firstFragment = new FirstFragment();
-        }
-        mFragmentManager = getFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.view_fragment, firstFragment);
-        mFragmentTransaction.commitAllowingStateLoss();
-    }
+
+
 
     private void initDate() {
         RequestBody requestBody = new FormBody.Builder()
@@ -137,38 +112,54 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 getFistView();
                 break;
             case R.id.ll_betting:
-                switchViewByType(LotteryId.TYPE_TWO);
                 if (null==bettingFragment){
                     bettingFragment = new BettingFragment();
                 }
-                mFragmentManager = getFragmentManager();
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mFragmentTransaction.replace(R.id.view_fragment, bettingFragment);
-                mFragmentTransaction.commitAllowingStateLoss();
+                showFragmentViews(LotteryId.TYPE_TWO,bettingFragment);
                 break;
             case R.id.ll_mine:
                 setAnimation();
-                switchViewByType(LotteryId.TYPE_THREE);
                 if (null== mineFragment){
                     mineFragment = new MineFragment();
                 }
-                mFragmentManager = getFragmentManager();
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mFragmentTransaction.replace(R.id.view_fragment, mineFragment);
-                mFragmentTransaction.commitAllowingStateLoss();
+                showFragmentViews(LotteryId.TYPE_THREE,mineFragment);
                 break;
             case R.id.ll_service:
-                switchViewByType(LotteryId.TYPE_FOUR);
                 if (null==serviceFragment){
                     serviceFragment = new ServiceFragment();
                 }
-                mFragmentManager = getFragmentManager();
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mFragmentTransaction.replace(R.id.view_fragment, serviceFragment);
-                mFragmentTransaction.commitAllowingStateLoss();
+                showFragmentViews(LotteryId.TYPE_FOUR,serviceFragment);
                 break;
         }
     }
+
+
+
+    /**
+     * 展示fragment界面
+     * @param fragment
+     */
+    private void showFragmentViews(int type,Fragment fragment) {
+        switchViewByType(type);
+        mFragmentManager = getFragmentManager();
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        mFragmentTransaction.replace(R.id.view_fragment, fragment);
+        mFragmentTransaction.commitAllowingStateLoss();
+    }
+
+    /**
+     *  获取APP的第一个界面
+     */
+    private void getFistView() {
+        if (null==firstFragment){
+            firstFragment = new FirstFragment();
+        }
+        showFragmentViews(LotteryId.TYPE_ONE,firstFragment);
+    }
+
+    /**
+     * 设置动画效果
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setAnimation() {
         View view = findViewById(R.id.view_fragment);
