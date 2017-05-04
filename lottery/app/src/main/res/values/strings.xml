@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">乐盈彩票</string>
+    <string name="app_name">乐盈体育</string>
     <string name="betting">投注</string>
     <string name="mainpage">主页</string>
     <string name="mine">我的</string>
@@ -39,6 +39,13 @@
     <string name="regist_money_psw">取款密码</string>
     <string name="regist_money_psw_confirm">提款必须认证，务必记住</string>
     <string name="regist_email">邮箱</string>
+
+
+    <string name="sports_betting">体育投注</string>
+    <string name="sports_reallyperson">真人视讯</string>
+    <string name="sports_help">存取帮助</string>
+    <string name="sports_service">在线客服</string>
+
 
 
 

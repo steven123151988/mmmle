@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.daking.lottery.R;
 import com.daking.lottery.base.BaseFragment;
-
+import com.umeng.analytics.MobclickAgent;
 
 
 public class BettingFragment extends BaseFragment implements View.OnClickListener {
@@ -17,6 +17,18 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_betting, null);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("BettingFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("BettingFragment");
     }
 
     @Override

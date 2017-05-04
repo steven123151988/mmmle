@@ -13,6 +13,7 @@ import com.daking.lottery.base.GetBannerData;
 import com.daking.lottery.view.banner.BannerBaseView;
 import com.daking.lottery.view.banner.MainBannerView;
 import com.dalong.marqueeview.MarqueeView;
+import com.umeng.analytics.MobclickAgent;
 
 
 public class FirstFragment extends BaseFragment implements View.OnClickListener {
@@ -35,17 +36,45 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
 
         mTvCenter= (TextView) view.findViewById(R.id.tv_center);
         mTvCenter.setText(R.string.app_name);
+        //四个按钮点击
+        view.findViewById(R.id.ll_betting_top).setOnClickListener(this);
+        view.findViewById(R.id.ll_reallyperson).setOnClickListener(this);
+        view.findViewById(R.id.ll_sports_help).setOnClickListener(this);
+        view.findViewById(R.id.ll_service).setOnClickListener(this);
+
+
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("FirstFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("FirstFragment");
+    }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.all:
+            case R.id.ll_betting_top:
 
             break;
+            case R.id.ll_reallyperson:
+
+                break;
+            case R.id.ll_sports_help:
+
+                break;
+            case R.id.ll_service:
+
+                break;
+
         }
     }
 }

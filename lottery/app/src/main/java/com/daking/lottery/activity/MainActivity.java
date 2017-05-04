@@ -22,8 +22,11 @@ import com.daking.lottery.fragment.FirstFragment;
 import com.daking.lottery.fragment.MineFragment;
 import com.daking.lottery.fragment.ServiceFragment;
 import com.daking.lottery.util.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -73,11 +76,10 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
         findViewById(R.id.ll_betting).setOnClickListener(this);
         findViewById(R.id.ll_mine).setOnClickListener(this);
         findViewById(R.id.ll_service).setOnClickListener(this);
+        findViewById(R.id.ll_score).setOnClickListener(this);
+        findViewById(R.id.ll_prize).setOnClickListener(this);
         getFistView();
     }
-
-
-
 
     private void initDate() {
         RequestBody requestBody = new FormBody.Builder()
@@ -104,11 +106,24 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //fragmentActivity统计时长
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.ll_home:
+                setAnimation();
                 getFistView();
                 break;
             case R.id.ll_betting:
@@ -116,6 +131,12 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                     bettingFragment = new BettingFragment();
                 }
                 showFragmentViews(LotteryId.TYPE_TWO,bettingFragment);
+                break;
+            case R.id.ll_score:
+
+                break;
+            case R.id.ll_prize:
+
                 break;
             case R.id.ll_mine:
                 setAnimation();
@@ -132,8 +153,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 break;
         }
     }
-
-
 
     /**
      * 展示fragment界面
@@ -209,7 +228,27 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 mTvService.setTextColor(getResources().getColor(R.color.gray_666666));
                 break;
             case LotteryId.TYPE_FOUR :
-                 mIvHome.setImageResource(R.mipmap.home_not_selected);
+                mIvHome.setImageResource(R.mipmap.home_not_selected);
+                mIvBetting.setImageResource(R.mipmap.home_not_selected);
+                mIvMine.setImageResource(R.mipmap.home_not_selected);
+                mIvService.setImageResource(R.mipmap.home_selected);
+                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
+                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
+                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
+                mTvService.setTextColor(getResources().getColor(R.color.red_ea541f));
+                break;
+            case LotteryId.TYPE_FIVE :
+                mIvHome.setImageResource(R.mipmap.home_not_selected);
+                mIvBetting.setImageResource(R.mipmap.home_not_selected);
+                mIvMine.setImageResource(R.mipmap.home_not_selected);
+                mIvService.setImageResource(R.mipmap.home_selected);
+                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
+                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
+                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
+                mTvService.setTextColor(getResources().getColor(R.color.red_ea541f));
+                break;
+            case LotteryId.TYPE_SIX :
+                mIvHome.setImageResource(R.mipmap.home_not_selected);
                 mIvBetting.setImageResource(R.mipmap.home_not_selected);
                 mIvMine.setImageResource(R.mipmap.home_not_selected);
                 mIvService.setImageResource(R.mipmap.home_selected);

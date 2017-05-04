@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.daking.lottery.R;
 import com.daking.lottery.base.BaseFragment;
 import com.daking.lottery.base.LotteryUrl;
+import com.umeng.analytics.MobclickAgent;
 
 
 public class ServiceFragment extends BaseFragment {
@@ -53,5 +54,17 @@ public class ServiceFragment extends BaseFragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("ServiceFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("ServiceFragment");
     }
 }

@@ -17,6 +17,7 @@ import com.daking.lottery.activity.mine.RegistActivity;
 import com.daking.lottery.activity.mine.TodayClearedActivity;
 import com.daking.lottery.activity.mine.UnclearedActivity;
 import com.daking.lottery.base.BaseFragment;
+import com.umeng.analytics.MobclickAgent;
 
 
 public class MineFragment extends BaseFragment  implements View.OnClickListener{
@@ -35,6 +36,18 @@ public class MineFragment extends BaseFragment  implements View.OnClickListener{
         view.findViewById(R.id.bt_login).setOnClickListener(this);
         view.findViewById(R.id.bt_regist).setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("MineFragment");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("MineFragment");
     }
 
     @Override

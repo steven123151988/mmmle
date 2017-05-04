@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.daking.lottery.util.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -21,7 +22,13 @@ public class LotteryApplication extends Application  {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        //设置日志等级
         LogUtil.setLevel(2);
+        //设置友盟统计场景
+        MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType. E_UM_NORMAL);
+        //友盟日志加密6.0.0版本及以后
+        MobclickAgent.enableEncrypt(true);
+
         registerActivityLifecycleCallbacks();
     }
 
