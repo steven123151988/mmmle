@@ -5,4 +5,7 @@ package com.daking.lottery.base;
  */
 
 public class LotteryKey {
+    public static final String WEBVIEW_TITLE="webviewTitle";
+    public static final String WEBVIEW_URL="webviewUrl";
+
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.daking.lottery.R;
 import com.daking.lottery.base.BaseFragment;
+import com.daking.lottery.util.LogUtil;
 import com.umeng.analytics.MobclickAgent;
 
 
@@ -15,7 +16,7 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_betting, null);
-
+        LogUtil.e("===========BettingFragment123=================");
         return view;
     }
 

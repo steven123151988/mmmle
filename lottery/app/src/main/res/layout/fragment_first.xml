@@ -1,44 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <include layout="@layout/title_image_text_text" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <include layout="@layout/title_image_text_text" />
-
-        <RelativeLayout
-            android:id="@+id/banner_cont"
+        <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_3"
-            android:orientation="horizontal">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:text="最新公告" />
-
-            <com.dalong.marqueeview.MarqueeView
-                android:id="@+id/tv_marquee"
+            <RelativeLayout
+                android:id="@+id/banner_cont"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                app:direction="left"
-                app:isRepeat="true"
-                app:speed="5"
-                app:startPoint="end"
-                app:textSize="16sp"
-                app:textcolor="#FFFFFF" />
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_3"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="最新公告" />
+
+                <com.dalong.marqueeview.MarqueeView
+                    android:id="@+id/tv_marquee"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    app:direction="left"
+                    app:isRepeat="true"
+                    app:speed="5"
+                    app:startPoint="end"
+                    app:textSize="16sp"
+                    app:textcolor="#FFFFFF" />
+            </LinearLayout>
+
+            <include layout="@layout/firstfragment_betting" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_betting_sportd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10"
+                    android:src="@mipmap/hg6686_26" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hg6686_27" />
+            </LinearLayout>
+
+
+
+            <include layout="@layout/firstfragment_happy" />
+
+            <LinearLayout
+                android:id="@+id/ll_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_10"
+                    android:src="@mipmap/hg6686_64" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/hg6686_65" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-        <include layout="@layout/firstfragment_betting" />
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

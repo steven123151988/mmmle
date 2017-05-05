@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black_08090b"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/ll_home"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -21,23 +24,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/home_selected" />
+                android:src="@mipmap/main_main" />
 
             <TextView
-
                 android:id="@+id/tv_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/mainpage"
-                android:textColor="@color/red_ea541f"
-                android:textSize="@dimen/dimen_10" />
+                style="@style/main_button_text"
+                android:text="@string/mainpage" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_betting"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -47,17 +46,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/home_selected" />
+                android:src="@mipmap/main_betting_notselcet" />
 
             <TextView
-
                 android:id="@+id/tv_betting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/betting"
-                android:textColor="@color/gray_666666"
-                android:textSize="@dimen/dimen_10" />
+                style="@style/main_button_text"
+                android:text="@string/betting" />
         </LinearLayout>
 
 
@@ -65,6 +59,7 @@
             android:id="@+id/ll_score"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -74,21 +69,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/home_selected" />
+                android:src="@mipmap/main_score_notselect" />
 
             <TextView
                 android:id="@+id/tv_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/service"
-                android:textColor="@color/gray_666666"
-                android:textSize="@dimen/dimen_10" />
+                style="@style/main_button_text"
+                android:text="@string/score" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_prize"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -98,21 +91,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/home_selected" />
+                android:src="@mipmap/main_prize_notselect" />
 
             <TextView
                 android:id="@+id/tv_prize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/service"
-                android:textColor="@color/gray_666666"
-                android:textSize="@dimen/dimen_10" />
+                style="@style/main_button_text"
+                android:text="@string/prize"
+
+                />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_mine"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -122,22 +115,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/home_selected" />
+                android:src="@mipmap/main_mine_notselct" />
 
             <TextView
                 android:id="@+id/tv_mine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/mine"
-                android:textColor="@color/gray_666666"
-                android:textSize="@dimen/dimen_10" />
+                style="@style/main_button_text"
+                android:text="@string/mine" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_service"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -147,16 +137,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@mipmap/home_selected" />
+                android:src="@mipmap/main_service_notselect" />
 
             <TextView
                 android:id="@+id/tv_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_2"
-                android:text="@string/service"
-                android:textColor="@color/gray_666666"
-                android:textSize="@dimen/dimen_10" />
+                style="@style/main_button_text"
+                android:text="@string/service" />
         </LinearLayout>
     </LinearLayout>
 

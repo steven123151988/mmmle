@@ -20,13 +20,15 @@ import com.daking.lottery.base.LotteryUrl;
 import com.daking.lottery.fragment.BettingFragment;
 import com.daking.lottery.fragment.FirstFragment;
 import com.daking.lottery.fragment.MineFragment;
+import com.daking.lottery.fragment.PrizeFragment;
+import com.daking.lottery.fragment.ScoreFragment;
 import com.daking.lottery.fragment.ServiceFragment;
 import com.daking.lottery.util.LogUtil;
+import com.daking.lottery.util.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -35,40 +37,40 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- *   APP主页  控制四个fragment来展示界面
+ *   APP主页  控制6个fragment来展示界面
  */
-public class MainActivity extends BaseActivity  implements View.OnClickListener {
+public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private FragmentManager mFragmentManager;  // Fragment管理器
     private FragmentTransaction mFragmentTransaction;    // fragment事物
-    private BettingFragment bettingFragment;
     private FirstFragment firstFragment;
+    private BettingFragment bettingFragment;
+    private ScoreFragment scoreFragment;
+    private PrizeFragment prizeFragment;
     private MineFragment mineFragment;
     private ServiceFragment serviceFragment;
-    private ImageView mIvHome;
-    private ImageView mIvBetting;
-    private ImageView mIvMine;
-    private ImageView mIvService;
-    private TextView mTvHome;
-    private TextView mTvBetting;
-    private TextView mTvMime;
-    private TextView mTvService;
-
+    private ImageView mIvHome,mIvBetting,mIvMine,mIvService,mIvScore,mIvPrize;
+    private TextView mTvHome,mTvScore,mTvPrize,mTvBetting,mTvMime,mTvService;
+    private long mClickTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initDate();
+//        initDate();
     }
 
     private void initView() {
         mIvHome= (ImageView) findViewById(R.id.iv_home);
         mIvBetting= (ImageView) findViewById(R.id.iv_betting);
+        mIvScore= (ImageView) findViewById(R.id.iv_score);
+        mIvPrize= (ImageView) findViewById(R.id.iv_prize);
         mIvMine= (ImageView) findViewById(R.id.iv_mine);
         mIvService= (ImageView) findViewById(R.id.iv_service);
 
         mTvHome= (TextView) findViewById(R.id.tv_home);
         mTvBetting= (TextView) findViewById(R.id.tv_betting);
+        mTvScore= (TextView) findViewById(R.id.tv_score);
+        mTvPrize= (TextView) findViewById(R.id.tv_prize);
         mTvMime= (TextView) findViewById(R.id.tv_mine);
         mTvService= (TextView) findViewById(R.id.tv_service);
 
@@ -80,6 +82,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
         findViewById(R.id.ll_prize).setOnClickListener(this);
         getFistView();
     }
+
 
     private void initDate() {
         RequestBody requestBody = new FormBody.Builder()
@@ -133,23 +136,29 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
                 showFragmentViews(LotteryId.TYPE_TWO,bettingFragment);
                 break;
             case R.id.ll_score:
-
+                if (null==scoreFragment){
+                    scoreFragment = new ScoreFragment();
+                }
+                showFragmentViews(LotteryId.TYPE_THREE,scoreFragment);
                 break;
             case R.id.ll_prize:
-
+                if (null==prizeFragment){
+                    prizeFragment = new PrizeFragment();
+                }
+                showFragmentViews(LotteryId.TYPE_FOUR,prizeFragment);
                 break;
             case R.id.ll_mine:
                 setAnimation();
                 if (null== mineFragment){
                     mineFragment = new MineFragment();
                 }
-                showFragmentViews(LotteryId.TYPE_THREE,mineFragment);
+                showFragmentViews(LotteryId.TYPE_FIVE,mineFragment);
                 break;
             case R.id.ll_service:
                 if (null==serviceFragment){
                     serviceFragment = new ServiceFragment();
                 }
-                showFragmentViews(LotteryId.TYPE_FOUR,serviceFragment);
+                showFragmentViews(LotteryId.TYPE_SIX,serviceFragment);
                 break;
         }
     }
@@ -158,12 +167,15 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
      * 展示fragment界面
      * @param fragment
      */
-    private void showFragmentViews(int type,Fragment fragment) {
-        switchViewByType(type);
-        mFragmentManager = getFragmentManager();
-        mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.view_fragment, fragment);
-        mFragmentTransaction.commitAllowingStateLoss();
+    public void showFragmentViews(int type, Fragment fragment) {
+        if (null!=fragment){
+            switchViewByType(type);
+            mFragmentManager = getFragmentManager();
+            mFragmentTransaction = mFragmentManager.beginTransaction();
+            mFragmentTransaction.replace(R.id.view_fragment, fragment);
+            mFragmentTransaction.commitAllowingStateLoss();
+        }
+
     }
 
     /**
@@ -198,66 +210,105 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener 
     private void switchViewByType(int type) {
         switch(type){
             case LotteryId.TYPE_ONE :
-                mIvHome.setImageResource(R.mipmap.home_selected);
-                mIvBetting.setImageResource(R.mipmap.home_not_selected);
-                mIvMine.setImageResource(R.mipmap.home_not_selected);
-                mIvService.setImageResource(R.mipmap.home_not_selected);
-                mTvHome.setTextColor(getResources().getColor(R.color.red_ea541f));
-                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvService.setTextColor(getResources().getColor(R.color.gray_666666));
+                mIvHome.setImageResource(R.mipmap.main_main);
+                mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
+                mIvScore.setImageResource(R.mipmap.main_score_notselect);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
+                mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvService.setImageResource(R.mipmap.main_service_notselect);
+                mTvHome.setTextColor(getResources().getColor(R.color.red_84201e));
+                mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvService.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case LotteryId.TYPE_TWO:
-                mIvHome.setImageResource(R.mipmap.home_not_selected);
-                mIvBetting.setImageResource(R.mipmap.home_selected);
-                mIvMine.setImageResource(R.mipmap.home_not_selected);
-                mIvService.setImageResource(R.mipmap.home_not_selected);
-                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvBetting.setTextColor(getResources().getColor(R.color.red_ea541f));
-                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvService.setTextColor(getResources().getColor(R.color.gray_666666));
+                mIvHome.setImageResource(R.mipmap.main_main_notselect);
+                mIvBetting.setImageResource(R.mipmap.main_betting);
+                mIvScore.setImageResource(R.mipmap.main_score_notselect);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
+                mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvService.setImageResource(R.mipmap.main_service_notselect);
+                mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvBetting.setTextColor(getResources().getColor(R.color.red_84201e));
+                mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvService.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case LotteryId.TYPE_THREE :
-                mIvHome.setImageResource(R.mipmap.home_not_selected);
-                mIvBetting.setImageResource(R.mipmap.home_not_selected);
-                mIvMine.setImageResource(R.mipmap.home_selected);
-                mIvService.setImageResource(R.mipmap.home_not_selected);
-                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvMime.setTextColor(getResources().getColor(R.color.red_ea541f));
-                mTvService.setTextColor(getResources().getColor(R.color.gray_666666));
+                mIvHome.setImageResource(R.mipmap.main_main_notselect);
+                mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
+                mIvScore.setImageResource(R.mipmap.main_score);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
+                mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvService.setImageResource(R.mipmap.main_service_notselect);
+                mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvScore.setTextColor(getResources().getColor(R.color.red_84201e));
+                mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvService.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case LotteryId.TYPE_FOUR :
-                mIvHome.setImageResource(R.mipmap.home_not_selected);
-                mIvBetting.setImageResource(R.mipmap.home_not_selected);
-                mIvMine.setImageResource(R.mipmap.home_not_selected);
-                mIvService.setImageResource(R.mipmap.home_selected);
-                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvService.setTextColor(getResources().getColor(R.color.red_ea541f));
+                mIvHome.setImageResource(R.mipmap.main_main_notselect);
+                mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
+                mIvScore.setImageResource(R.mipmap.main_score_notselect);
+                mIvPrize.setImageResource(R.mipmap.main_prize);
+                mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvService.setImageResource(R.mipmap.main_service_notselect);
+                mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvPrize.setTextColor(getResources().getColor(R.color.red_84201e));
+                mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvService.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case LotteryId.TYPE_FIVE :
-                mIvHome.setImageResource(R.mipmap.home_not_selected);
-                mIvBetting.setImageResource(R.mipmap.home_not_selected);
-                mIvMine.setImageResource(R.mipmap.home_not_selected);
-                mIvService.setImageResource(R.mipmap.home_selected);
-                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvService.setTextColor(getResources().getColor(R.color.red_ea541f));
+                mIvHome.setImageResource(R.mipmap.main_main_notselect);
+                mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
+                mIvScore.setImageResource(R.mipmap.main_score_notselect);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
+                mIvMine.setImageResource(R.mipmap.main_mine);
+                mIvService.setImageResource(R.mipmap.main_service_notselect);
+                mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvMime.setTextColor(getResources().getColor(R.color.red_84201e));
+                mTvService.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case LotteryId.TYPE_SIX :
-                mIvHome.setImageResource(R.mipmap.home_not_selected);
-                mIvBetting.setImageResource(R.mipmap.home_not_selected);
-                mIvMine.setImageResource(R.mipmap.home_not_selected);
-                mIvService.setImageResource(R.mipmap.home_selected);
-                mTvHome.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvBetting.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvMime.setTextColor(getResources().getColor(R.color.gray_666666));
-                mTvService.setTextColor(getResources().getColor(R.color.red_ea541f));
+                mIvHome.setImageResource(R.mipmap.main_main_notselect);
+                mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
+                mIvScore.setImageResource(R.mipmap.main_score_notselect);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
+                mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvService.setImageResource(R.mipmap.main_service);
+                mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
+                mTvService.setTextColor(getResources().getColor(R.color.red_84201e));
                 break;
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        long time = System.currentTimeMillis();
+        if (time - mClickTime <= 2000) {
+            super.onBackPressed();
+            System.exit(0);
+        } else {
+            mClickTime = time;
+            ToastUtil.show(mContext, "再次点击退出");
+        }
+    }
+
+
+
 }

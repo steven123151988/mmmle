@@ -35,6 +35,7 @@ public class MineFragment extends BaseFragment  implements View.OnClickListener{
         view.findViewById(R.id.rl_8).setOnClickListener(this);
         view.findViewById(R.id.bt_login).setOnClickListener(this);
         view.findViewById(R.id.bt_regist).setOnClickListener(this);
+
         return view;
     }
 

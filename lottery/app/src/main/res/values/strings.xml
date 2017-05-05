@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">乐盈体育</string>
+    <string name="mainpage">购彩</string>
     <string name="betting">投注</string>
-    <string name="mainpage">主页</string>
+    <string name="score">比分</string>
+    <string name="prize">开奖</string>
     <string name="mine">我的</string>
     <string name="service">客服</string>
+
     <string name="back">返回</string>
     <string name="register">注册</string>
     <string name="go_to_register">立即注册</string>
@@ -36,17 +39,20 @@
     <string name="regist_psw_length">长度为6-15位字符</string>
     <string name="regist_confirm">确认</string>
     <string name="regist_name">真实名字</string>
+    <string name="regist_name_rule">与提款账号一致，否则无法提款</string>
     <string name="regist_money_psw">取款密码</string>
     <string name="regist_money_psw_confirm">提款必须认证，务必记住</string>
     <string name="regist_email">邮箱</string>
-
 
     <string name="sports_betting">体育投注</string>
     <string name="sports_reallyperson">真人视讯</string>
     <string name="sports_help">存取帮助</string>
     <string name="sports_service">在线客服</string>
+    <string name="baccarat">百家乐</string>
+    <string name="tigerVSdragon">龙虎斗</string>
+    <string name="roulette">轮盘</string>
 
-
+    <string name="news">最新优惠</string>
 
 
 </resources>

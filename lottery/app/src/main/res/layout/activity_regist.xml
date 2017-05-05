@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="2.02"
+            android:layout_weight="1.77"
             android:hint="@string/regist_agent_account"
             android:maxLength="15"
             android:maxLines="1"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
+            android:layout_weight="1.19"
             android:hint="@string/regist_account_action"
             android:maxLength="15"
             android:maxLines="1"
@@ -141,11 +141,12 @@
             android:textSize="@dimen/dimen_16" />
 
         <EditText
+            android:hint="@string/regist_name_rule"
             android:id="@+id/et_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
+            android:layout_weight="0.17"
             android:maxLength="15"
             android:maxLines="1"
             android:textSize="@dimen/dimen_14" />
@@ -173,7 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
+            android:layout_weight="1.05"
             android:hint="@string/regist_money_psw_confirm"
             android:maxLength="15"
             android:maxLines="1"
@@ -202,7 +203,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.78"
+            android:layout_weight="1.62"
             android:maxLength="15"
             android:maxLines="1"
             android:textSize="@dimen/dimen_14" />

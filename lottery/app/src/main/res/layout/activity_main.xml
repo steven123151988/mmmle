@@ -14,12 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_48"
         android:background="@color/white_fbfbfb">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_1"
             android:background="@color/gray_c8c8c8" />
-
         <include layout="@layout/main_bottom" />
     </RelativeLayout>
 
