@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.daking.lottery.activity.mine.PersonalActivity">
+    tools:context="com.daking.sports.activity.mine.PersonalActivity">
 
 </android.support.constraint.ConstraintLayout>

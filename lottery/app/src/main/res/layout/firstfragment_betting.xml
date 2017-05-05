@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="@string/sports_reallyperson"
+                android:text="@string/ag"
                 android:layout_marginTop="@dimen/dimen_5"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
