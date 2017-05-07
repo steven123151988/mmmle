@@ -20,19 +20,17 @@ import com.daking.sports.base.BaseFragment;
 import com.umeng.analytics.MobclickAgent;
 
 
-public class MineFragment extends BaseFragment  implements View.OnClickListener{
+public class PersonalCenterFragment extends BaseFragment  implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mine, null);
+        View view = inflater.inflate(R.layout.fragment_personal, null);
         view.findViewById(R.id.rl_1).setOnClickListener(this);
         view.findViewById(R.id.rl_2).setOnClickListener(this);
         view.findViewById(R.id.rl_3).setOnClickListener(this);
         view.findViewById(R.id.rl_4).setOnClickListener(this);
         view.findViewById(R.id.rl_5).setOnClickListener(this);
         view.findViewById(R.id.rl_6).setOnClickListener(this);
-        view.findViewById(R.id.rl_7).setOnClickListener(this);
-        view.findViewById(R.id.rl_8).setOnClickListener(this);
         view.findViewById(R.id.bt_login).setOnClickListener(this);
         view.findViewById(R.id.bt_regist).setOnClickListener(this);
 
@@ -42,13 +40,13 @@ public class MineFragment extends BaseFragment  implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart("MineFragment");
+        MobclickAgent.onPageStart("PersonalCenterFragment");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd("MineFragment");
+        MobclickAgent.onPageEnd("PersonalCenterFragment");
     }
 
     @Override
@@ -83,14 +81,6 @@ public class MineFragment extends BaseFragment  implements View.OnClickListener{
             case R.id.rl_6:
                 //个人资料
                 startActivity(new Intent(getActivity(),PersonalActivity.class));
-                break;
-            case R.id.rl_7:
-                //修改密码
-                startActivity(new Intent(getActivity(),ModifiPswActivity.class));
-                break;
-            case R.id.rl_8:
-                //安全退出
-                startActivity(new Intent(getActivity(),QuietActivity.class));
                 break;
         }
     }

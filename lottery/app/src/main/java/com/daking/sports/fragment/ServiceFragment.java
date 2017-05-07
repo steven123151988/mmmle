@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsUrl;
 import com.umeng.analytics.MobclickAgent;
 
 
-public class ServiceFragment extends BaseFragment {
+public class ServiceFragment extends BaseFragment implements View.OnClickListener {
     private WebView mWebView;
+    private ImageView mIvBack;
+    private FirstFragment firstFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +53,9 @@ public class ServiceFragment extends BaseFragment {
 
 
         mWebView.loadUrl(SportsUrl.SERVICE_URL);
-//        mIvBack.setOnClickListener(this);
+        mIvBack=(ImageView) view.findViewById(R.id.iv_back);
+        mIvBack.setVisibility(View.VISIBLE);
+        mIvBack.setOnClickListener(this);
 
 
         return view;
@@ -64,5 +71,19 @@ public class ServiceFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("ServiceFragment");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.iv_back:
+                if (null==firstFragment){
+                    firstFragment=new FirstFragment();
+                }
+                ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_ONE,firstFragment);
+                break;
+        }
+
+
     }
 }

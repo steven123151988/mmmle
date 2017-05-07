@@ -4,7 +4,7 @@
     <string name="betting">投注</string>
     <string name="score">比分</string>
     <string name="prize">开奖</string>
-    <string name="mine">我的</string>
+    <string name="mine">个人中心</string>
     <string name="service">客服</string>
 
     <string name="back">返回</string>
@@ -13,15 +13,16 @@
     <string name="foget_psw">忘记密码</string>
     <string name="login">登录</string>
     <string name="horseRacelamp">我们将一如既往的为您提供更优质的服务,请遵守游戏规则，否则。。。</string>
-    <string name="unsettleddetails">未结明细</string>
-    <string name="todayhassettled">今日已结</string>
-    <string name="historydetail">账户历史</string>
+    <string name="pc_pay">充值</string>
+    <string name="pc_getoutmoney">未结明细</string>
+    <string name="pc_betting_history">投注记录</string>
+    <string name="pc_account_datail">账户明细</string>
     <string name="haventsettled">未结明细</string>
     <string name="accesslog">存取记录</string>
     <string name="gamerules">游戏规则</string>
     <string name="personal">个人资料</string>
-    <string name="modifypassword">修改密码</string>
-    <string name="quit">安全退出</string>
+    <string name="pc_paw_manager">密码管理</string>
+    <string name="pc_service">我的客服</string>
     <string name="available_balance">可用余额</string>
     <string name="credit_limit">信用额度</string>
     <string name="winning_amount">最近中奖金额</string>
@@ -33,11 +34,11 @@
 
     <string name="regist_agent">推荐代理</string>
     <string name="regist_agent_account">推荐代码账号</string>
-    <string name="regist_account">账号</string>
+    <string name="regist_account">会员账号</string>
     <string name="regist_account_action">6-15个字母，数字</string>
-    <string name="regist_psw">密码</string>
+    <string name="regist_psw">会员密码</string>
     <string name="regist_psw_length">长度为6-15位字符</string>
-    <string name="regist_confirm">确认</string>
+    <string name="regist_confirm">密码确认</string>
     <string name="regist_name">真实名字</string>
     <string name="regist_name_rule">与提款账号一致，否则无法提款</string>
     <string name="regist_money_psw">取款密码</string>
