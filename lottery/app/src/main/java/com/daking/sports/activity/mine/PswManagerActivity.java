@@ -6,13 +6,13 @@ import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
 
 /**
- * 存取记录
+ * 修改密码管理
  */
-public class AccessRecordActivity extends BaseActivity {
+public class PswManagerActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_access_record);
+        setContentView(R.layout.activity_modifi_psw);
     }
 }

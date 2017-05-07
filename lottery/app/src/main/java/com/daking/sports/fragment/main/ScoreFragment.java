@@ -1,4 +1,4 @@
-package com.daking.sports.fragment;
+package com.daking.sports.fragment.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,10 +13,10 @@ import com.umeng.analytics.MobclickAgent;
  * Created by 18 on 2017/5/4.
  */
 
-public class PrizeFragment extends BaseFragment implements View.OnClickListener{
+public class ScoreFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_prize, null);
+        View view = inflater.inflate(R.layout.fragment_score, null);
 
         return view;
     }
@@ -24,13 +24,13 @@ public class PrizeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart("PrizeFragment");
+        MobclickAgent.onPageStart("ScoreFragment");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd("PrizeFragment");
+        MobclickAgent.onPageEnd("ScoreFragment");
     }
 
     @Override

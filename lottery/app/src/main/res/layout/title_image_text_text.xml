@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dimen_10"
         android:padding="@dimen/dimen_10"
-        android:src="@mipmap/back"
+        android:src="@mipmap/back_icon"
         android:visibility="invisible" />
 
     <TextView

@@ -17,15 +17,20 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:background="@color/red_84201e"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="150dp">
 
                 <ImageView
-                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/pc_account"
-                    android:id="@+id/imageView" />
+                    android:id="@+id/imageView"
+                    android:layout_alignTop="@+id/bt_login"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="15dp" />
                 <TextView  android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="anamea"
@@ -37,7 +42,8 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginStart="12dp"
                     android:id="@+id/textView" />
-                <Button  android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/login"
                     android:id="@+id/bt_login"
@@ -50,9 +56,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/register"
                     android:id="@+id/bt_regist"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_alignBaseline="@+id/bt_login"
+                    android:layout_alignBottom="@+id/bt_login"
                     android:layout_toRightOf="@+id/bt_login"
                     android:layout_toEndOf="@+id/bt_login" />
 

@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,17 +17,16 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsId;
-import com.daking.sports.fragment.BettingFragment;
-import com.daking.sports.fragment.FirstFragment;
-import com.daking.sports.fragment.PersonalCenterFragment;
-import com.daking.sports.fragment.PrizeFragment;
-import com.daking.sports.fragment.ScoreFragment;
-import com.daking.sports.fragment.ServiceFragment;
+import com.daking.sports.fragment.main.BettingFragment;
+import com.daking.sports.fragment.main.FirstFragment;
+import com.daking.sports.fragment.main.PersonalCenterFragment;
+import com.daking.sports.fragment.main.PrizeFragment;
+import com.daking.sports.fragment.main.ScoreFragment;
 import com.daking.sports.util.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
 /**
- *   APP主页  控制6个fragment来展示界面
+ *   APP主页  控制5个fragment来展示界面
  */
 public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private FragmentManager mFragmentManager;  // Fragment管理器
@@ -36,8 +36,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private ScoreFragment scoreFragment;
     private PrizeFragment prizeFragment;
     private PersonalCenterFragment personalCenterFragment;
-    private ServiceFragment serviceFragment;
-    private ImageView mIvHome,mIvBetting,mIvMine,mIvService,mIvScore;
+    private ImageView mIvHome,mIvBetting,mIvMine,mIvPrize,mIvScore;
     private TextView mTvHome,mTvScore,mTvPrize,mTvBetting,mTvMime;
     private long mClickTime;
     @Override
@@ -53,6 +52,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         mIvBetting= (ImageView) findViewById(R.id.iv_betting);
         mIvScore= (ImageView) findViewById(R.id.iv_score);
         mIvMine= (ImageView) findViewById(R.id.iv_mine);
+        mIvPrize= (ImageView) findViewById(R.id.iv_prize);
 
         mTvHome= (TextView) findViewById(R.id.tv_home);
         mTvBetting= (TextView) findViewById(R.id.tv_betting);
@@ -171,6 +171,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
                 mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
                 mTvHome.setTextColor(getResources().getColor(R.color.red_84201e));
                 mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
@@ -182,6 +183,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mIvBetting.setImageResource(R.mipmap.main_betting);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
                 mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
                 mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvBetting.setTextColor(getResources().getColor(R.color.red_84201e));
                 mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
@@ -193,6 +195,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score);
                 mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
                 mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvScore.setTextColor(getResources().getColor(R.color.red_84201e));
@@ -204,6 +207,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
                 mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvPrize.setImageResource(R.mipmap.main_prize);
                 mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
@@ -215,6 +219,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
                 mIvMine.setImageResource(R.mipmap.main_mine);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
                 mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
@@ -226,13 +231,13 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
                 mIvMine.setImageResource(R.mipmap.main_mine_notselct);
+                mIvPrize.setImageResource(R.mipmap.main_prize_notselect);
                 mTvHome.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvBetting.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvScore.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-
         }
     }
 
@@ -247,7 +252,5 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
             ToastUtil.show(mContext, "再次点击退出");
         }
     }
-
-
 
 }

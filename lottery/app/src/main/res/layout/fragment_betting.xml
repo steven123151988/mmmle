@@ -6,9 +6,92 @@
 
     <include layout="@layout/title_image_text_text" />
 
-    <TextView android:layout_width="wrap_content"
-        android:text="@string/betting"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:orientation="horizontal">
 
+        <LinearLayout
+            android:id="@+id/ll_football"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/dimen_5"
+                android:src="@mipmap/football" />
+
+            <TextView
+                android:id="@+id/tv_football"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="@dimen/dimen_5"
+                android:text="@string/football"
+                android:textSize="@dimen/dimen_16" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_basketball"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/dimen_5"
+                android:src="@mipmap/basketball" />
+
+            <TextView
+                android:id="@+id/tv_basketball"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="@dimen/dimen_5"
+                android:text="@string/basketball"
+                android:textSize="@dimen/dimen_16" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shixun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/dimen_5"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_shixun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="@dimen/dimen_5"
+                android:text="@string/shixun"
+                android:textSize="@dimen/dimen_16" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/view_fragment2"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
 </LinearLayout>

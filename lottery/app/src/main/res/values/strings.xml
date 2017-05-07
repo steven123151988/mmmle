@@ -14,7 +14,7 @@
     <string name="login">登录</string>
     <string name="horseRacelamp">我们将一如既往的为您提供更优质的服务,请遵守游戏规则，否则。。。</string>
     <string name="pc_pay">充值</string>
-    <string name="pc_getoutmoney">未结明细</string>
+    <string name="pc_getoutmoney">提款</string>
     <string name="pc_betting_history">投注记录</string>
     <string name="pc_account_datail">账户明细</string>
     <string name="haventsettled">未结明细</string>
@@ -53,6 +53,13 @@
     <string name="tigerVSdragon">龙虎斗</string>
     <string name="roulette">轮盘</string>
     <string name="news">最新优惠</string>
+
+    <string name="pay_online">在线支付</string>
+    <string name="company_income">公司入款</string>
+    <string name="football">足球</string>
+    <string name="basketball">篮球</string>
+    <string name="shixun">视讯</string>
+
 
 
 </resources>

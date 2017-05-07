@@ -48,7 +48,7 @@
         android:value="leying" />
 
     <application
-        android:name="com.daking.sports.application.LotteryApplication"
+        android:name=".application.LotteryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -57,7 +57,7 @@
         android:theme="@android:style/Theme.Light.NoTitleBar"
         tools:replace="android:icon">
         <activity
-            android:name="com.daking.sports.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,36 +66,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.daking.sports.activity.mine.UnclearedActivity"
+            android:name=".activity.mine.UnclearedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.TodayClearedActivity"
+            android:name=".activity.mine.TodayClearedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.AccoutHistoryActivity"
+            android:name=".activity.mine.AccoutHistoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.AccessRecordActivity"
+            android:name=".activity.mine.QuietActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.QuietActivity"
+            android:name=".activity.mine.PersonalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.PersonalActivity"
+            android:name=".activity.mine.PswManagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.ModifiPswActivity"
+            android:name=".activity.mine.RegistActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.RegistActivity"
+            android:name=".activity.mine.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.mine.LoginActivity"
+            android:name=".activity.webview.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.daking.sports.activity.webview.WebViewActivity"
+            android:name=".activity.mine.PayActivity"
             android:screenOrientation="portrait" />
-
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.daking.sports.fragment;
+package com.daking.sports.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,21 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.mine.AccessRecordActivity;
-import com.daking.sports.activity.mine.AccoutHistoryActivity;
+import com.daking.sports.activity.MainActivity;
 import com.daking.sports.activity.mine.LoginActivity;
-import com.daking.sports.activity.mine.ModifiPswActivity;
-import com.daking.sports.activity.mine.PersonalActivity;
-import com.daking.sports.activity.mine.QuietActivity;
+import com.daking.sports.activity.mine.PayActivity;
+import com.daking.sports.activity.mine.PswManagerActivity;
 import com.daking.sports.activity.mine.RegistActivity;
-import com.daking.sports.activity.mine.TodayClearedActivity;
-import com.daking.sports.activity.mine.UnclearedActivity;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsId;
 import com.umeng.analytics.MobclickAgent;
 
 
 public class PersonalCenterFragment extends BaseFragment  implements View.OnClickListener{
-
+    private ServiceFragment serviceFragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal, null);
@@ -33,7 +30,6 @@ public class PersonalCenterFragment extends BaseFragment  implements View.OnClic
         view.findViewById(R.id.rl_6).setOnClickListener(this);
         view.findViewById(R.id.bt_login).setOnClickListener(this);
         view.findViewById(R.id.bt_regist).setOnClickListener(this);
-
         return view;
     }
 
@@ -59,28 +55,28 @@ public class PersonalCenterFragment extends BaseFragment  implements View.OnClic
                 startActivity(new Intent(getActivity(),RegistActivity.class));
                 break;
             case R.id.rl_1:
-                //未结明细
-                startActivity(new Intent(getActivity(),UnclearedActivity.class));
+                //充值
+                startActivity(new Intent(getActivity(),PayActivity.class));
                 break;
             case R.id.rl_2:
-                //今日已结
-                startActivity(new Intent(getActivity(),TodayClearedActivity.class));
+                //提款
                 break;
             case R.id.rl_3:
-                //账户历史
-                startActivity(new Intent(getActivity(),AccoutHistoryActivity.class));
+                //投注记录
                 break;
             case R.id.rl_4:
-                //存取记录
-                startActivity(new Intent(getActivity(),AccessRecordActivity.class));
+                //账户明细
                 break;
             case R.id.rl_5:
-                //游戏规则
-
+                //密码管理
+                startActivity(new Intent(getActivity(),PswManagerActivity.class));
                 break;
             case R.id.rl_6:
-                //个人资料
-                startActivity(new Intent(getActivity(),PersonalActivity.class));
+                //客服
+                if (null==serviceFragment){
+                    serviceFragment=new ServiceFragment();
+                }
+                ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_SIX,serviceFragment);
                 break;
         }
     }

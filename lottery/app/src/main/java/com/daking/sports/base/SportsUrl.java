@@ -13,7 +13,7 @@ public class SportsUrl {
 
     public static final String NEWS="Help/promotion";
     public static final String AG ="Ag";
-    public static final String HELP="Help";
+    public static final String HELP="http://hg0909.com/index.php/Help";
 
 
 }

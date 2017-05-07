@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_1"
+        android:layout_marginTop="@dimen/dimen_30"
         android:background="@color/white_ffffff"
         android:orientation="horizontal">
 
@@ -112,12 +112,12 @@
             android:textSize="@dimen/dimen_16" />
 
         <EditText
-            android:hint="@string/regist_name_rule"
             android:id="@+id/et_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
             android:layout_weight="0.17"
+            android:hint="@string/regist_name_rule"
             android:maxLength="15"
             android:maxLines="1"
             android:textSize="@dimen/dimen_14" />

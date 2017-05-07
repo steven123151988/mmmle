@@ -1,4 +1,4 @@
-package com.daking.sports.fragment;
+package com.daking.sports.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;
