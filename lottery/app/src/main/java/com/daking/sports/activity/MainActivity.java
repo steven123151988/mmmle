@@ -15,13 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.mine.LoginActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsId;
+import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.main.BettingFragment;
 import com.daking.sports.fragment.main.FirstFragment;
 import com.daking.sports.fragment.main.PersonalCenterFragment;
 import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
+import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
@@ -111,13 +114,35 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 showFragmentViews(SportsId.TYPE_FOUR,prizeFragment);
                 break;
             case R.id.ll_mine:
-                setAnimation();
-                if (null== personalCenterFragment){
-                    personalCenterFragment = new PersonalCenterFragment();
+                if (SharePreferencesUtil.getString(mContext, SportsKey.UID,"").equals("")){
+                    startActivityForResult(new Intent(mContext, LoginActivity.class),1001);
+                }else{
+                    showPcview();
                 }
-                showFragmentViews(SportsId.TYPE_FIVE, personalCenterFragment);
                 break;
         }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1001:
+                showPcview();
+                break;
+        }
+    }
+
+    /**
+     *  展示个人中心展示界面
+     */
+    private void showPcview() {
+        setAnimation();
+        if (null== personalCenterFragment){
+            personalCenterFragment = new PersonalCenterFragment();
+        }
+        showFragmentViews(SportsId.TYPE_FIVE, personalCenterFragment);
     }
 
     /**

@@ -11,7 +11,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dimen_10"
         android:padding="@dimen/dimen_10"
-        android:src="@mipmap/back_icon"
+        android:src="@mipmap/arrow_left"
         android:visibility="invisible" />
 
     <TextView
@@ -28,6 +28,8 @@
         android:visibility="gone" />
 
     <ImageView
+        android:id="@+id/iv_center"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

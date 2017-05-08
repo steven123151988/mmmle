@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.daking.sports.R;
@@ -14,7 +15,7 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.GetBannerData;
 import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.base.SportsUrl;
+import com.daking.sports.base.SportsAPI;
 import com.daking.sports.view.banner.BannerBaseView;
 import com.daking.sports.view.banner.MainBannerView;
 import com.dalong.marqueeview.MarqueeView;
@@ -52,6 +53,8 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         view.findViewById(R.id.ll_roulette).setOnClickListener(this);
         view.findViewById(R.id.ll_betting_sportd).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
+        ImageView iv_center=(ImageView) view.findViewById(R.id.iv_center);
+        iv_center.setVisibility(View.VISIBLE);
         intent=new Intent();
         return view;
     }
@@ -80,7 +83,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             case R.id.ll_sports_help://帮助
                 intent=new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.news));
-                intent.putExtra(SportsKey.WEBVIEW_URL,SportsUrl.BASE_URL+SportsUrl.HELP);
+                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.HELP);
                 startActivity(intent);
                 break;
             case R.id.ll_service:  //客服
@@ -104,7 +107,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             case R.id.ll_news://更多新闻
                 intent=new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.news));
-                intent.putExtra(SportsKey.WEBVIEW_URL,SportsUrl.BASE_URL+SportsUrl.NEWS);
+                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.NEWS);
                 startActivity(intent);
                 break;
         }
@@ -126,7 +129,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private void gotoAG() {
         intent=new Intent(getActivity(), WebViewActivity.class);
         intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.ag));
-        intent.putExtra(SportsKey.WEBVIEW_URL, SportsUrl.BASE_URL+ SportsUrl.AG);
+        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.AG);
         startActivity(intent);
     }
 }

@@ -6,7 +6,7 @@ import android.util.Log;
  * Log管理类
  */
 public class LogUtil {
-    private static final String TAG = "lottery=>";
+    private static final String TAG = "sports===>";
     public final static int LOG_LEVEL_DEBUG = 2;
     public final static int LOG_LEVEL_TEST = 1;
     public final static int LOG_LEVEL_RELEASE = 0;

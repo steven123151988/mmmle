@@ -4,7 +4,7 @@
     <string name="betting">投注</string>
     <string name="score">比分</string>
     <string name="prize">开奖</string>
-    <string name="mine">个人中心</string>
+    <string name="mine">我的</string>
     <string name="service">客服</string>
 
     <string name="back">返回</string>
@@ -31,7 +31,7 @@
     <string name="input_password">请输入密码</string>
     <string name="btn_auth_code">获取验证码</string>
     <string name="input_account_name">请输入账户名</string>
-
+    <string name="regist">注册账户</string>
     <string name="regist_agent">推荐代理</string>
     <string name="regist_agent_account">推荐代码账号</string>
     <string name="regist_account">会员账号</string>
@@ -59,6 +59,14 @@
     <string name="football">足球</string>
     <string name="basketball">篮球</string>
     <string name="shixun">视讯</string>
+
+    <string name="accountisempty">账号密码为空，请检查！</string>
+    <string name="loginerr">登录失败</string>
+    <string name="loginsuccss">登录成功</string>
+    <string name="modifypsw_question">密码提示问题</string>
+    <string name="modifypsw_answer">问题答案</string>
+    <string name="birthday">生日</string>
+
 
 
 

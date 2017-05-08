@@ -3,10 +3,11 @@ package com.daking.sports.activity.mine;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
-import com.daking.sports.base.SportsUrl;
+import com.daking.sports.base.SportsAPI;
 import com.daking.sports.util.LogUtil;
 
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
     private String name;
     private String money_psw;
     private String email;
+    private TextView tv_center;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +48,9 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
         et_name=(EditText)findViewById(R.id.et_name);
         et_money_psw=(EditText)findViewById(R.id.et_money_psw);
         et_email=(EditText)findViewById(R.id.et_email);
-
-        account =et_account.getText().toString();
-        psw=et_psw.getText().toString();
-        psw2=et_psw2.getText().toString();
-        name=et_name.getText().toString();
-        money_psw=et_money_psw.getText().toString();
-        email=et_email.getText().toString();
-
+        tv_center=(TextView) findViewById(R.id.tv_center);
+        tv_center.setVisibility(View.VISIBLE);
+        tv_center.setText(getString(R.string.regist));
         findViewById(R.id.btn_register).setOnClickListener(this);
     }
 
@@ -63,18 +60,44 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
             case R.id.btn_register:
                 regist();
                 break;
-
         }
     }
 
     private void regist() {
+        account =et_account.getText().toString().replace(" ","");
+        psw=et_psw.getText().toString().replace(" ","");
+        psw2=et_psw2.getText().toString().replace(" ","");
+        name=et_name.getText().toString().replace(" ","");
+        money_psw=et_money_psw.getText().toString().replace(" ","");
+        email=et_email.getText().toString().replace(" ","");
         RequestBody requestBody = new FormBody.Builder()
-                .add("username", account)
-                .add("password", "long")
+                .add("fnName", "reg")
+                .add("keys", "add")
+                .add("reg", "2")
+                .add("intr", "add")  //代理账号
+                .add("username", account)//账号
+                .add("password", psw)//密码
+                .add("currency", "RMB")  //首选货币
+                .add("alias", name)  //真实姓名
+                .add("question", "") //密码提示问题
+                .add("answer", "")//答案
+                .add("Sex", "1") //性别
+                .add("drpAuthCodea", "")
+                .add("drpAuthCodeb", "")
+                .add("drpAuthCodec", "")
+                .add("drpAuthCoded", "")
+                .add("drpAuthCodee", "")
+                .add("drpAuthCodef", "")
+                .add("year11", "")
+                .add("maoth11", "")
+                .add("day11", "")
+                .add("contory", "中国")
+                .add("city", "")
+                .add("know_site", "")
+                .add("Checkbox", "")
                 .build();
-
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsUrl.BASE_URL+ SportsUrl.REGIST)
+                .url(SportsAPI.BASE_URL+ SportsAPI.REGIST)
                 .post(requestBody)
                 .build();
 

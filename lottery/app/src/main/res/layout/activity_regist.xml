@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.08"
+            android:layout_weight="1"
             android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_account"
             android:textColor="@color/transparent_66"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.19"
+            android:layout_weight="1"
             android:hint="@string/regist_account_action"
             android:maxLength="15"
             android:maxLines="1"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
+            android:layout_weight="1"
             android:hint="@string/regist_psw_length"
             android:maxLength="15"
             android:maxLines="1"
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.40"
+            android:layout_weight="1"
             android:hint="@string/regist_psw_length"
             android:maxLength="15"
             android:maxLines="1"
@@ -105,7 +105,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.36"
+            android:layout_weight="1"
             android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_name"
             android:textColor="@color/transparent_66"
@@ -116,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="0.17"
+            android:layout_weight="1"
             android:hint="@string/regist_name_rule"
             android:maxLength="15"
             android:maxLines="1"
@@ -134,7 +134,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.89"
+            android:layout_weight="1"
             android:paddingLeft="@dimen/dimen_20"
             android:text="@string/regist_money_psw"
             android:textColor="@color/transparent_66"
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_weight="1.05"
+            android:layout_weight="1"
             android:hint="@string/regist_money_psw_confirm"
             android:maxLength="15"
             android:maxLines="1"
@@ -165,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.64"
             android:paddingLeft="@dimen/dimen_20"
-            android:text="@string/regist_email"
+            android:text="@string/modifypsw_question"
             android:textColor="@color/transparent_66"
             android:textSize="@dimen/dimen_16" />
 
@@ -181,14 +181,69 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.64"
+            android:paddingLeft="@dimen/dimen_20"
+            android:text="@string/modifypsw_answer"
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
+
+        <EditText
+            android:id="@+id/et_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.62"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
+        android:background="@color/white_ffffff"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.64"
+            android:paddingLeft="@dimen/dimen_20"
+            android:text="@string/birthday"
+            android:textColor="@color/transparent_66"
+            android:textSize="@dimen/dimen_16" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_weight="1.62"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:textSize="@dimen/dimen_14" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginLeft="@dimen/dimen_20"
         android:layout_marginRight="@dimen/dimen_20"
         android:layout_marginTop="@dimen/dimen_30"
-        android:background="@mipmap/btn_register_next_check"
+        android:background="@color/red_84201e"
         android:gravity="center"
         android:text="@string/register"
         android:textColor="@color/white_ffffff"

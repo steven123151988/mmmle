@@ -7,5 +7,6 @@ package com.daking.sports.base;
 public class SportsKey {
     public static final String WEBVIEW_TITLE="webviewTitle";
     public static final String WEBVIEW_URL="webviewUrl";
+    public static final String UID="uid";
 
 }

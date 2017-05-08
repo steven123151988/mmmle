@@ -8,16 +8,25 @@
 
     <include layout="@layout/title_image_text_text" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_40"
+        android:src="@mipmap/login_photo"
+
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_45"
+            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_30"
             android:layout_marginTop="@dimen/dimen_20">
 
             <TextView
@@ -34,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_20"
-                android:src="@mipmap/iphone_icon" />
+                android:src="@mipmap/login_account" />
 
             <EditText
                 android:id="@+id/et_account"
@@ -53,7 +62,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45">
+            android:layout_height="@dimen/dimen_45"
+            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_30">
 
             <TextView
                 android:layout_width="match_parent"
@@ -69,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_20"
-                android:src="@mipmap/sms_icon" />
+                android:src="@mipmap/login_psw" />
 
             <EditText
                 android:id="@+id/et_psw"
@@ -108,16 +119,16 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginLeft="@dimen/dimen_20"
         android:layout_marginRight="@dimen/dimen_20"
         android:layout_marginTop="@dimen/dimen_30"
-        android:background="@mipmap/btn_register_next_check"
+        android:background="@color/red_84201e"
         android:gravity="center"
         android:text="@string/login"
         android:textColor="@color/white_ffffff"
-        android:textSize="@dimen/dimen_16" />
+        android:textSize="@dimen/dimen_18" />
 
     <LinearLayout
         android:layout_width="match_parent"

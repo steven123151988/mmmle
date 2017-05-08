@@ -22,11 +22,5 @@ public class FootballFragment extends BaseFragment{
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        LogUtil.e("=======FootballFragment=========");
-    }
 
 }

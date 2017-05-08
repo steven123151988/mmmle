@@ -14,7 +14,7 @@ import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsId;
-import com.daking.sports.base.SportsUrl;
+import com.daking.sports.base.SportsAPI;
 import com.umeng.analytics.MobclickAgent;
 
 
@@ -26,7 +26,8 @@ public class ServiceFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_service, null);
-
+        ImageView iv_center=(ImageView) view.findViewById(R.id.iv_center);
+        iv_center.setVisibility(View.VISIBLE);
         mWebView = (WebView) view.findViewById(R.id.webview);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setUseWideViewPort(true);// 设置此属性，可任意比例缩放
@@ -52,7 +53,7 @@ public class ServiceFragment extends BaseFragment implements View.OnClickListene
         mWebView.setWebViewClient(new WebViewClient());
 
 
-        mWebView.loadUrl(SportsUrl.SERVICE_URL);
+        mWebView.loadUrl(SportsAPI.SERVICE_URL);
         mIvBack=(ImageView) view.findViewById(R.id.iv_back);
         mIvBack.setVisibility(View.VISIBLE);
         mIvBack.setOnClickListener(this);

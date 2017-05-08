@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     private View view_betting;
 
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_betting, null);
         ll_football=(LinearLayout) view.findViewById(R.id.ll_football);
@@ -46,6 +48,8 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         tv_basketball=(TextView) view.findViewById(R.id.tv_basketball);
         tv_shixun=(TextView) view.findViewById(R.id.tv_shixun);
         view_betting = view.findViewById(R.id.view_fragment2);
+        ImageView iv_center=(ImageView) view.findViewById(R.id.iv_center);
+        iv_center.setVisibility(View.VISIBLE);
         getFootballView();
         return view;
     }
@@ -65,7 +69,6 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtil.e("=======BettingFragment=========");
     }
 
     @Override

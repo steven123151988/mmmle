@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
@@ -17,7 +18,8 @@ public class ScoreFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score, null);
-
+        ImageView iv_center=(ImageView) view.findViewById(R.id.iv_center);
+        iv_center.setVisibility(View.VISIBLE);
         return view;
     }
 
