@@ -37,7 +37,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * 个人中心面页
+ * 我的-个人中心面页
  */
 public class PersonalCenterFragment extends BaseFragment implements View.OnClickListener {
     private ServiceFragment serviceFragment;
@@ -85,12 +85,19 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
             public void onResponse(Call call, Response response) throws IOException {
                 Gson gson = new Gson();
                 personalDataRsp=gson.fromJson(response.body().string(),PersonalDataRsp.class);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        tv_name.setText(personalDataRsp.getIfo().getUserName());
-                    }
-                });
+
+                if(getActivity() == null){
+                    return;
+                }else{
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tv_name.setText(personalDataRsp.getIfo().getUserName());
+                        }
+                    });
+
+                }
+
 
             }
         });
