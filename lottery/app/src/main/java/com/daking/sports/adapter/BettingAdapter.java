@@ -19,8 +19,7 @@ public class BettingAdapter extends BaseAdapter {
     private Context mcontext;
 
     public BettingAdapter(Context context) {
-        mcontext = context;
-        mInflater = LayoutInflater.from(context);
+        this.mcontext = context;
     }
 
     @Override
@@ -41,6 +40,7 @@ public class BettingAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder viewHolder;
+        mInflater = LayoutInflater.from(mcontext);//写在这里结局了动画还没加载完点击其他地方导致的bug？等待填充数据的时间验证
         if (view == null) {
             view = mInflater.inflate(R.layout.adapter_sports_betting, null);
             viewHolder = new ViewHolder();

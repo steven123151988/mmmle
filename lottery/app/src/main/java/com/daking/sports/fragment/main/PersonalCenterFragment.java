@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
+import com.daking.sports.activity.mine.DepositRecordsActivity;
 import com.daking.sports.activity.mine.LoginActivity;
 import com.daking.sports.activity.mine.PayActivity;
 import com.daking.sports.activity.mine.PswManagerActivity;
@@ -97,11 +98,8 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                     });
 
                 }
-
-
             }
         });
-
 
     }
 
@@ -132,6 +130,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                 break;
             case R.id.rl_4:
                 //账户明细
+                startActivity(new Intent(getActivity(), DepositRecordsActivity.class));
                 break;
             case R.id.rl_5:
                 //密码管理

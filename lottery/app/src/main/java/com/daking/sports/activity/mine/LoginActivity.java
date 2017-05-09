@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 login();
                 break;
             case R.id.btn_forgetPsw:
-
+                startActivity(new Intent(mContext,PswManagerActivity.class));
                 break;
 
 

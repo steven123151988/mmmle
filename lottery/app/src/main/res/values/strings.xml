@@ -6,7 +6,6 @@
     <string name="prize">开奖</string>
     <string name="mine">我的</string>
     <string name="service">客服</string>
-
     <string name="back">返回</string>
     <string name="register">注册</string>
     <string name="go_to_register">立即注册</string>
@@ -44,7 +43,6 @@
     <string name="regist_money_psw">取款密码</string>
     <string name="regist_money_psw_confirm">提款必须认证，务必记住</string>
     <string name="regist_email">邮箱</string>
-
     <string name="sports_betting">体育投注</string>
     <string name="ag">真人视讯</string>
     <string name="sports_help">存取帮助</string>
@@ -53,21 +51,42 @@
     <string name="tigerVSdragon">龙虎斗</string>
     <string name="roulette">轮盘</string>
     <string name="news">最新优惠</string>
-
     <string name="pay_online">在线支付</string>
     <string name="company_income">公司入款</string>
     <string name="football">足球</string>
     <string name="basketball">篮球</string>
     <string name="shixun">视讯</string>
-
     <string name="accountisempty">账号密码为空，请检查！</string>
     <string name="loginerr">登录失败</string>
     <string name="loginsuccss">登录成功</string>
     <string name="modifypsw_question">密码提示问题</string>
     <string name="modifypsw_answer">问题答案</string>
     <string name="birthday">生日</string>
-
-
+    <string name="modify_login_psw">修改登录密码</string>
+    <string name="modify_money_psw">修改提款密码</string>
+    <string name="suggest_psw">为了您的额账号安全，我们强烈建议您每30天修改一次密码。</string>
+    <string name="suggest_modify_moneypsw">为了您的资金安全,我们强烈建议您不定时修改密码。</string>
+    <string name="pswisempty">密码有空值</string>
+    <string name="password">原密码</string>
+    <string name="newpassword1">新密码</string>
+    <string name="newpassword2">确认新密码</string>
+    <string name="affirm">确认提交</string>
+    <string name="depositrecords">存款记录</string>
+    <string name="wateraccount">汇款流水号</string>
+    <string name="time">时间</string>
+    <string name="sum">金额</string>
+    <string name="bank">银行</string>
+    <string name="style">方式</string>
+    <string name="state">状态</string>
+    <string name="success_money">本页汇款成功金额：</string>
+    <string name="pays_online">在线存款</string>
+    <string name="check_account"> + 查看入款账号</string>
+    <string name="use_companyincome">如何使用公司入款</string>
+    <string name="which_bank">转入银行</string>
+    <string name="which_type">汇款方式</string>
+    <string name="type_in">请输入汇款金额</string>
+    <string name="pay_time">汇款时间</string>
+    <string name="confirm_pay">确定提交</string>
 
 
 </resources>

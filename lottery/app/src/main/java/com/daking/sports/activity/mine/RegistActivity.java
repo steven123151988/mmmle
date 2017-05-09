@@ -20,7 +20,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * 注册页
+ *   注册面页
  */
 public class RegistActivity extends BaseActivity  implements View.OnClickListener{
     private EditText et_account;

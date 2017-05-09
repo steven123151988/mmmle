@@ -95,6 +95,11 @@
         <activity
             android:name=".activity.mine.PayActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.mine.DepositRecordsActivity"
+            android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>

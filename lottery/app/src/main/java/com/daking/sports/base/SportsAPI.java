@@ -9,7 +9,9 @@ public class SportsAPI {
     public static final String BASE_URL="http://sport.api.lebole5.com/api/";
     public static final String REGIST="member/account/mem_data.php";//注册
     public static final String LOGIN="member/login.php";//登陆
-    public static final String GET_DATA="member/account/mem_data.php";//回去会员资料
+    public static final String GET_DATA="member/account/mem_data.php";//获取会员资料
+    public static final String MODIFY_PSW="member/account/forgetservice.php";//忘记密码
+
 
     public static final String NEWS="Help/promotion";
     public static final String AG ="Ag";
