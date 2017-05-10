@@ -1,13 +1,24 @@
 package com.daking.sports.fragment.pay;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
+import com.mingle.entity.MenuEntity;
+import com.mingle.sweetpick.BlurEffect;
+import com.mingle.sweetpick.RecyclerViewDelegate;
+import com.mingle.sweetpick.SweetSheet;
+
+import java.util.ArrayList;
 
 /**
  * Created by 18 on 2017/5/7. 公司入款
@@ -15,7 +26,13 @@ import com.daking.sports.base.BaseFragment;
 
 public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener{
     private EditText et_money;
-    private String money;
+    private String money,type,time;
+    private SweetSheet mSweetSheet;
+    private SweetSheet mSweetSheet2;
+    private SweetSheet mSweetSheet3;
+    private RelativeLayout rl;
+    private TextView tv_type;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_companyincome, null);
@@ -26,8 +43,36 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         view.findViewById(R.id.rl_type).setOnClickListener(this);
         view.findViewById(R.id.btn_confirm_pay).setOnClickListener(this);
         et_money=(EditText) view.findViewById(R.id.et_money);
+        rl = (RelativeLayout) view.findViewById(R.id.rl);
+        tv_type= (TextView) view.findViewById(R.id.tv_type);
+        et_money.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String str = s.toString();
+                if (!str.equals("")) {
+                    if (str.substring(0, 1).equals("0")) {
+                        et_money.setText("");
+
+                    }
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 0) {
+                    int money = Integer.parseInt(s.toString());
+                } else {
+
+                }
+            }
+        });
         return view;
     }
+
 
     @Override
     public void onClick(View v) {
@@ -36,15 +81,19 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
              break;
              case R.id.tv_use_companyincome:
                  break;
-             case R.id.rl_pay_time:
-                 break;
+
              case R.id.rl_bank:
+
                  break;
              case R.id.rl_type:
+                 setupRecyclerView();//listview样式
+                 break;
+
+             case R.id.rl_pay_time:
+
                  break;
              case R.id.btn_confirm_pay:
-                 //入款金额
-                 money=et_money.getText().toString().replace(" ","");
+                 money=et_money.getText().toString().replace(" ","");        //入款金额
 
 
                  break;
@@ -53,4 +102,61 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         }
 
     }
+
+    private void setupRecyclerView() {
+        final ArrayList<MenuEntity> list = new ArrayList<>();
+        MenuEntity menuEntity = new MenuEntity();
+        menuEntity.iconId = R.mipmap.company_income;
+        menuEntity.titleColor = 0xff000000;
+        menuEntity.title = "网银转账";
+        list.add(menuEntity);
+        MenuEntity menuEntity1 = new MenuEntity();
+        menuEntity1.iconId = R.mipmap.company_income;
+        menuEntity1.titleColor = 0xff000000;
+        menuEntity1.title = "银行柜台";
+        list.add(menuEntity1);
+        MenuEntity menuEntity2 = new MenuEntity();
+        menuEntity2.iconId = R.mipmap.company_income;
+        menuEntity2.titleColor = 0xff000000;
+        menuEntity2.title = "ATM现金";
+        list.add(menuEntity2);
+        MenuEntity menuEntity3= new MenuEntity();
+        menuEntity3.iconId = R.mipmap.company_income;
+        menuEntity3.titleColor = 0xff000000;
+        menuEntity3.title = "ATM卡转";
+        list.add(menuEntity3);
+        MenuEntity menuEntity4 = new MenuEntity();
+        menuEntity4.iconId = R.mipmap.company_income;
+        menuEntity4.titleColor = 0xff000000;
+        menuEntity4.title = "第3方支付";
+        list.add(menuEntity4);
+        // SweetSheet 控件,根据 rl 确认位置
+        mSweetSheet = new SweetSheet(rl);
+        //设置数据源 (数据源支持设置 list 数组,也支持从菜单中获取)
+        mSweetSheet.setMenuList(list);
+        //根据设置不同的 Delegate 来显示不同的风格.
+        mSweetSheet.setDelegate(new RecyclerViewDelegate(true));
+        //根据设置不同Effect 来显示背景效果BlurEffect:模糊效果.DimEffect 变暗效果
+        mSweetSheet.setBackgroundEffect(new BlurEffect(8));
+        //设置点击事件
+        mSweetSheet.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
+            @Override
+            public boolean onItemClick(int position, MenuEntity menuEntity) {
+                //即时改变当前项的颜色
+                list.get(position).titleColor = 0xff5823ff;
+                ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
+                    type=menuEntity.title.toString();
+                    tv_type.setText(type);
+                //根据返回值, true 会关闭 SweetSheet ,false 则不会.
+                return true;
+            }
+        });
+
+        if (!mSweetSheet.isShow()){
+            mSweetSheet.toggle();
+        }
+
+    }
+
+
 }

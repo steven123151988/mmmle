@@ -122,7 +122,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                      .setContentText(LoginRsp.getIfo().getMsg())
                                      .show();
 
-                             //延迟3秒关闭
+                             //延迟5秒关闭
                              Handler handler=new Handler();
                              handler.postDelayed(new Runnable() {
                                  @Override
@@ -130,7 +130,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                      setResult(RESULT_OK);
                                      finish();
                                  }
-                             },3000);
+                             },5000);
                          }
                      });
                  }

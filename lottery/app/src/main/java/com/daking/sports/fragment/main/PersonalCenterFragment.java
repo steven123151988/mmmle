@@ -16,6 +16,7 @@ import com.daking.sports.activity.mine.LoginActivity;
 import com.daking.sports.activity.mine.PayActivity;
 import com.daking.sports.activity.mine.PswManagerActivity;
 import com.daking.sports.activity.mine.RegistActivity;
+import com.daking.sports.activity.mine.TakeOutMoneyActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsId;
@@ -124,6 +125,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                 break;
             case R.id.rl_2:
                 //提款
+                startActivity(new Intent(getActivity(), TakeOutMoneyActivity.class));
                 break;
             case R.id.rl_3:
                 //投注记录

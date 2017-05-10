@@ -80,13 +80,19 @@
     <string name="state">状态</string>
     <string name="success_money">本页汇款成功金额：</string>
     <string name="pays_online">在线存款</string>
+    <string name="takeoutmoney_online">在线提款</string>
     <string name="check_account"> + 查看入款账号</string>
     <string name="use_companyincome">如何使用公司入款</string>
     <string name="which_bank">转入银行</string>
     <string name="which_type">汇款方式</string>
     <string name="type_in">请输入汇款金额</string>
+    <string name="type_out">请输入提款金额</string>
     <string name="pay_time">汇款时间</string>
     <string name="confirm_pay">确定提交</string>
+    <string name="bank_name">银行账户</string>
+    <string name="bank_num">请输入完整的银行账号</string>
+    <string name="takeout_money">我要提款</string>
+    <string name="change_banknum">更改账户</string>
 
 
 </resources>

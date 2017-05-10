@@ -19,42 +19,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:orientation="horizontal"
-            android:padding="@dimen/dimen_20">
-
-            <TextView
-                android:id="@+id/tv_check_bank"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/dimen_20"
-                android:layout_marginRight="@dimen/dimen_20"
-                android:text="@string/check_account"
-                android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_16" />
-
-            <TextView
-                android:id="@+id/tv_use_companyincome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dimen_20"
-                android:text="@string/use_companyincome"
-                android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_16"
-
-                />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_45"
             android:layout_marginLeft="@dimen/dimen_30"
             android:layout_marginRight="@dimen/dimen_30"
-            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_80"
             android:background="@color/white_ffffff">
 
             <TextView
@@ -74,8 +42,6 @@
                 android:src="@mipmap/company_income" />
 
             <EditText
-                android:gravity="center"
-                android:inputType="number"
                 android:id="@+id/et_money"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -83,22 +49,24 @@
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_toRightOf="@+id/iv_money_psw1"
                 android:background="@null"
-                android:hint="@string/type_in"
+                android:gravity="center"
+                android:hint="@string/type_out"
+                android:inputType="number"
                 android:maxLength="7"
                 android:maxLines="1"
                 android:textColor="@color/red_84201e"
                 android:textSize="@dimen/dimen_16" />
 
             <TextView
-                android:textSize="@dimen/dimen_16"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:text="元"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_20"
                 android:layout_marginRight="@dimen/dimen_20"
-                android:background="@color/gray_e6e6e6" />
+                android:background="@color/gray_e6e6e6"
+                android:text="元"
+                android:textSize="@dimen/dimen_16" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -139,82 +107,50 @@
                 android:src="@mipmap/arrow_right" />
         </RelativeLayout>
 
+
         <RelativeLayout
-            android:id="@+id/rl_type"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_45"
-            android:layout_below="@+id/tv_line1"
             android:layout_marginLeft="@dimen/dimen_30"
             android:layout_marginRight="@dimen/dimen_30"
             android:background="@color/white_ffffff">
 
             <TextView
-                android:id="@+id/tv_pay_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0.5"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:background="@color/gray_e6e6e6" />
+
+            <TextView
+                android:id="@+id/tv_bankname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_18"
-                android:text="@string/which_type"
+                android:text="@string/bank_name"
                 android:textColor="@color/black_333333"
                 android:textSize="@dimen/dimen_18" />
 
-            <TextView
-                android:id="@+id/tv_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/dimen_56"
-                android:layout_toRightOf="@+id/tv_pay_type"
+
+            <EditText
+                android:id="@+id/et_banknum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_50"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:layout_toRightOf="@+id/tv_bankname"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/bank_num"
+                android:inputType="number"
+                android:maxLength="20"
+                android:maxLines="1"
                 android:textColor="@color/red_84201e"
                 android:textSize="@dimen/dimen_16" />
 
-            <ImageView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimen_18"
-                android:src="@mipmap/arrow_right" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_pay_time"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45"
-            android:layout_below="@+id/tv_line1"
-            android:layout_marginLeft="@dimen/dimen_30"
-            android:layout_marginRight="@dimen/dimen_30"
-            android:background="@color/white_ffffff">
-
-            <TextView
-                android:id="@+id/tv_pay_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_18"
-                android:text="@string/pay_time"
-                android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_18" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_56"
-                android:layout_toRightOf="@+id/tv_pay_time"
-                android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
-
-            <ImageView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimen_18"
-                android:src="@mipmap/arrow_right" />
         </RelativeLayout>
 
         <Button
