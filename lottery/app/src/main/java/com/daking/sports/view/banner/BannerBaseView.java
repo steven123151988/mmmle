@@ -204,7 +204,7 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 			imageView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(context,d.getUrl(),0).show();
+					Toast.makeText(context,d.getUrl(),Toast.LENGTH_LONG).show();
 				}
 			});
             return imageView;

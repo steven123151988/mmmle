@@ -15,6 +15,7 @@ import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private ImageView iv_back;
     private LoginRsp LoginRsp;
     private TextView tv_center;
+    private  Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +62,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
-                finish();
+                if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
+                    finish();
+                }
+
                 break;
             case R.id.btn_register:
-                startActivityForResult(new Intent(mContext,RegistActivity.class),1001);
+                startActivity(new Intent(mContext,RegistActivity.class));
                 break;
             case R.id.btn_login:
                 login();
@@ -76,13 +81,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1001){
-            finish();
-        }
-    }
+
 
     private void login() {
         account = et_account.getText().toString().replace(" ","");
@@ -110,29 +109,39 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
                  @Override
                  public void onResponse(Call call, Response response) throws IOException {
-                     Gson gson=new Gson();
-                      LoginRsp =gson.fromJson(response.body().string(), LoginRsp.class);
-                     SharePreferencesUtil.addString(mContext, SportsKey.UID,LoginRsp.getIfo().getUid());
-                     runOnUiThread(new Runnable() {
-                         @Override
-                         public void run() {
-                             //展示登录消息
-                             new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
-                                     .setTitleText(getString(R.string.loginsuccss))
-                                     .setContentText(LoginRsp.getIfo().getMsg())
-                                     .show();
+                      gson=new Gson();
+                     LoginRsp =gson.fromJson(response.body().string(), LoginRsp.class);
+                     LogUtil.e("====LoginRsp.getIfo().getUid()========"+LoginRsp.getIfo().getUid());
+                     if (LoginRsp.getCode()==0){
+                         SharePreferencesUtil.addString(mContext, SportsKey.UID,LoginRsp.getIfo().getUid());
+                         runOnUiThread(new Runnable() {
+                             @Override
+                             public void run() {
+                                 //展示登录消息
+                                 new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
+                                         .setTitleText(getString(R.string.loginsuccss))
+                                         .setContentText(LoginRsp.getIfo().getMsg())
+                                         .show();
 
-                             //延迟5秒关闭
-                             Handler handler=new Handler();
-                             handler.postDelayed(new Runnable() {
-                                 @Override
-                                 public void run() {
-                                     setResult(RESULT_OK);
-                                     finish();
-                                 }
-                             },5000);
-                         }
-                     });
+                                 //延迟5秒关闭
+                                 Handler handler=new Handler();
+                                 handler.postDelayed(new Runnable() {
+                                     @Override
+                                     public void run() {
+                                         setResult(RESULT_OK);
+                                         finish();
+                                     }
+                                 },3500);
+                             }
+                         });
+                     }else{
+
+                                  //TODO
+
+                     }
+
+
+
                  }
              });
          }

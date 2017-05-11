@@ -28,21 +28,18 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private BettingFragment bettingFragment;
     private ServiceFragment serviceFragment;
     private Intent  intent;
+    private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, null);
+         view = inflater.inflate(R.layout.fragment_first, null);
         //轮播图
         RelativeLayout bannerContent = (RelativeLayout) view.findViewById(R.id.banner_cont);
         BannerBaseView banner = new MainBannerView(getActivity());
         bannerContent.addView(banner);
         banner.update(GetBannerData.getBannerData());
         //跑马灯的逻辑
-        MarqueeView marqueeView = (MarqueeView)view.findViewById(R.id.tv_marquee);
-        marqueeView.setFocusable(true);
-        marqueeView.requestFocus();
-        marqueeView.setText(getResources().getString(R.string.horseRacelamp));//设置文本
-        marqueeView.startScroll(); //start
+        runhorseLight();
         //四个按钮点击
         view.findViewById(R.id.ll_betting_top).setOnClickListener(this);
         view.findViewById(R.id.ll_reallyperson).setOnClickListener(this);
@@ -63,6 +60,18 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("FirstFragment");
+        runhorseLight();
+
+    }
+    /**
+     *     跑马灯的逻辑
+     */
+    private void runhorseLight() {
+        MarqueeView marqueeView = (MarqueeView)view.findViewById(R.id.tv_marquee);
+        marqueeView.setFocusable(true);
+        marqueeView.requestFocus();
+        marqueeView.setText(getResources().getString(R.string.horseRacelamp));//设置文本
+        marqueeView.startScroll(); //start
     }
 
     @Override
@@ -83,7 +92,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             case R.id.ll_sports_help://帮助
                 intent=new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.news));
-                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.HELP);
+                intent.putExtra(SportsKey.WEBVIEW_URL,  SportsAPI.HELP);
                 startActivity(intent);
                 break;
             case R.id.ll_service:  //客服
@@ -107,7 +116,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             case R.id.ll_news://更多新闻
                 intent=new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.news));
-                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.NEWS);
+                intent.putExtra(SportsKey.WEBVIEW_URL,  SportsAPI.NEWS);
                 startActivity(intent);
                 break;
         }
@@ -129,7 +138,8 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private void gotoAG() {
         intent=new Intent(getActivity(), WebViewActivity.class);
         intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.ag));
-        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.AG);
+//      intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.AG);
+        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
         startActivity(intent);
     }
 }

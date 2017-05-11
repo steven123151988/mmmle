@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/login_bg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_50"
+            android:src="@mipmap/getinmoney" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_20">
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl_bank"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_45"
+            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_30"
+            android:background="@color/white_ffffff">
+
+            <TextView
+                android:id="@+id/tv_gathering_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_18"
+                android:text="@string/which_bank"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/dimen_18" />
+
+            <TextView
+                android:id="@+id/tv_bank_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_56"
+                android:layout_toRightOf="@+id/tv_gathering_card"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/dimen_14" />
+
+            <ImageView
+                android:id="@+id/iv_right_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimen_18"
+                android:src="@mipmap/arrow_right" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_45"
+            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_30"
+            android:background="@color/white_ffffff">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0.5"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:background="@color/gray_e6e6e6" />
+
+            <TextView
+                android:id="@+id/tv_bankname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_18"
+                android:text="@string/bank_name"
+                android:textColor="@color/black_333333"
+                android:textSize="@dimen/dimen_18" />
+
+
+            <EditText
+                android:id="@+id/et_banknum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_50"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:layout_toRightOf="@+id/tv_bankname"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/bank_num"
+                android:inputType="number"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:textColor="@color/red_84201e"
+                android:textSize="@dimen/dimen_16" />
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_confirm_pay"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/dimen_20"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_50"
+            android:background="@color/red_84201e"
+            android:gravity="center"
+            android:text="@string/confirm_pay"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/dimen_18" />
+
+    </LinearLayout>
+</RelativeLayout>

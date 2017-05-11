@@ -17,96 +17,140 @@
             android:layout_marginTop="@dimen/dimen_50"
             android:src="@mipmap/getinmoney" />
 
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_30"
+                android:layout_marginRight="@dimen/dimen_30"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:background="@color/white_ffffff"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/takeout_bank"
+                    android:textSize="@dimen/dimen_16" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:id="@+id/tv_tabkeout_bank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/dimen_16" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_30"
+                android:layout_marginRight="@dimen/dimen_30"
+
+                android:background="@color/white_ffffff"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/takeout_num"
+                    android:textSize="@dimen/dimen_16" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:id="@+id/tv_takeout_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/dimen_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_30"
+                android:layout_marginRight="@dimen/dimen_30"
+
+                android:background="@color/white_ffffff"
+                android:orientation="horizontal"
+                android:padding="@dimen/dimen_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/takeout_name"
+                    android:textSize="@dimen/dimen_16" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/dimen_20"
+                    android:id="@+id/tv_takeout_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="***"
+                    android:textSize="@dimen/dimen_16" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_45"
             android:layout_marginLeft="@dimen/dimen_30"
             android:layout_marginRight="@dimen/dimen_30"
-            android:layout_marginTop="@dimen/dimen_80"
+            android:layout_marginTop="@dimen/dimen_50"
             android:background="@color/white_ffffff">
 
             <TextView
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_0.5"
                 android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_20"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:background="@color/gray_e6e6e6" />
 
-            <ImageView
-                android:id="@+id/iv_money_psw1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_20"
-                android:src="@mipmap/company_income" />
-
-            <EditText
-                android:id="@+id/et_money"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_50"
-                android:layout_marginRight="@dimen/dimen_20"
-                android:layout_toRightOf="@+id/iv_money_psw1"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="@string/type_out"
-                android:inputType="number"
-                android:maxLength="7"
-                android:maxLines="1"
-                android:textColor="@color/red_84201e"
-                android:textSize="@dimen/dimen_16" />
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_20"
-                android:layout_marginRight="@dimen/dimen_20"
-                android:background="@color/gray_e6e6e6"
-                android:text="元"
-                android:textSize="@dimen/dimen_16" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_bank"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_45"
-            android:layout_marginLeft="@dimen/dimen_30"
-            android:layout_marginRight="@dimen/dimen_30"
-            android:background="@color/white_ffffff">
-
-            <TextView
-                android:id="@+id/tv_gathering_card"
+                android:id="@+id/tv_psw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_18"
-                android:text="@string/which_bank"
+                android:text="@string/getmoney_psw"
                 android:textColor="@color/black_333333"
                 android:textSize="@dimen/dimen_18" />
 
-            <TextView
-                android:id="@+id/tv_bank_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimen_56"
-                android:layout_toRightOf="@+id/tv_gathering_card"
-                android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
 
-            <ImageView
-                android:id="@+id/iv_right_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimen_18"
-                android:src="@mipmap/arrow_right" />
+            <EditText
+                android:id="@+id/et_takeoutmoney_psw"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_50"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:layout_toRightOf="@+id/tv_psw"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/type_in_psw"
+                android:inputType="number"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:textColor="@color/red_84201e"
+                android:textSize="@dimen/dimen_16" />
+
+
         </RelativeLayout>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -129,13 +173,13 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_18"
-                android:text="@string/bank_name"
+                android:text="@string/take_money"
                 android:textColor="@color/black_333333"
                 android:textSize="@dimen/dimen_18" />
 
 
             <EditText
-                android:id="@+id/et_banknum"
+                android:id="@+id/et_money"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dimen_50"
@@ -143,7 +187,7 @@
                 android:layout_toRightOf="@+id/tv_bankname"
                 android:background="@null"
                 android:gravity="center"
-                android:hint="@string/bank_num"
+                android:hint="@string/atleast"
                 android:inputType="number"
                 android:maxLength="20"
                 android:maxLines="1"
@@ -159,7 +203,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/dimen_20"
             android:layout_marginRight="@dimen/dimen_20"
-            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginTop="@dimen/dimen_50"
             android:background="@color/red_84201e"
             android:gravity="center"
             android:text="@string/confirm_pay"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
+import com.daking.sports.activity.mine.BettingRecordsActivity;
 import com.daking.sports.activity.mine.DepositRecordsActivity;
 import com.daking.sports.activity.mine.LoginActivity;
 import com.daking.sports.activity.mine.PayActivity;
@@ -58,7 +59,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
         tv_name=(TextView) view.findViewById(R.id.tv_name);
         ImageView iv_center = (ImageView) view.findViewById(R.id.iv_center);
         iv_center.setVisibility(View.VISIBLE);
-        initPersonData();
+//        initPersonData();
         return view;
     }
 
@@ -66,43 +67,44 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
      * 获取个人信息
      */
     private void initPersonData() {
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("fnName", "MData")
+                    .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
+                    .build();
 
-        RequestBody requestBody = new FormBody.Builder()
-                .add("fnName", "MData")
-                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
-                .build();
+            final okhttp3.Request request = new okhttp3.Request.Builder()
+                    .url(SportsAPI.BASE_URL + SportsAPI.GET_DATA)
+                    .post(requestBody)
+                    .build();
 
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.GET_DATA)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Gson gson = new Gson();
-                personalDataRsp=gson.fromJson(response.body().string(),PersonalDataRsp.class);
-
-                if(getActivity() == null){
-                    return;
-                }else{
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tv_name.setText(personalDataRsp.getIfo().getUserName());
-                        }
-                    });
-
+            OkHttpClient okHttpClient = new OkHttpClient();
+            okHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
                 }
-            }
-        });
 
-    }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    LogUtil.e("=====response.body().string()========="+response.body().string());
+                    Gson gson = new Gson();
+                    personalDataRsp=gson.fromJson(response.body().string(),PersonalDataRsp.class);
+                    if(getActivity() == null){
+                        return;
+                    }else{
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv_name.setText(personalDataRsp.getIfo().getUserName());
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
+
+
+
 
     @Override
     public void onResume() {
@@ -129,6 +131,7 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
                 break;
             case R.id.rl_3:
                 //投注记录
+                startActivity(new Intent(getActivity(), BettingRecordsActivity.class));
                 break;
             case R.id.rl_4:
                 //账户明细

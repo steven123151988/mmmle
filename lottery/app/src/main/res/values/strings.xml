@@ -93,6 +93,44 @@
     <string name="bank_num">请输入完整的银行账号</string>
     <string name="takeout_money">我要提款</string>
     <string name="change_banknum">更改账户</string>
+    <string name="getmoney_psw">取款密码</string>
+    <string name="take_money">提款金额</string>
+    <string name="type_in_psw">请输入取款密码</string>
+    <string name="atleast">最低100元</string>
+    <string name="takeout_bank">开户银行:</string>
+    <string name="takeout_num">银行账号:</string>
+    <string name="takeout_name">账户姓名:</string>
+    <string name="please_check">请选择</string>
+    <string name="regist_question1">你的车牌号码</string>
+    <string name="regist_question2">你所在城市</string>
+    <string name="regist_question3">你的生日</string>
+    <string name="regist_question4">你的名字</string>
+    <string name="regist_question5">你父亲的名字</string>
+    <string name="regist_question6">你母亲的名字</string>
+    <string name="regist_question7">你儿女的名字</string>
+    <string name="regist_question8">你喜欢的数字</string>
+    <string name="regist_question9">你喜欢的品牌</string>
+    <string name="regist_question10">你喜欢的运动</string>
+    <string name="regist_question11">你喜欢的颜色</string>
+    <string name="regist_question12">你喜欢的球队</string>
+    <string name="regist_question13">你喜欢的球星</string>
+    <string name="regist_null">所填参数有空值，请核对后在提交注册</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="transaction">交易状况</string>
+    <string name="acconut_history">账户历史</string>
+    <string name="betting_record">投注记录</string>
+
+    <string name="history_date">日期</string>
+    <string name="history_total">投注额</string>
+    <string name="history_total_can">有效金额</string>
+    <string name="history_win_or_lose">输/赢</string>
+
+
+
+
+
 
 
 </resources>

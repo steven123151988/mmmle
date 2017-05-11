@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initDate();
+//        initDate();
     }
 
     private void initView() {
@@ -72,7 +72,9 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     }
 
     private void initDate() {
-
+        if (SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
+            startActivity(new Intent(mContext,LoginActivity.class));
+        }
     }
 
     @Override
@@ -114,11 +116,8 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 showFragmentViews(SportsId.TYPE_FOUR,prizeFragment);
                 break;
             case R.id.ll_mine:
-                if (SharePreferencesUtil.getString(mContext, SportsKey.UID,"").equals("")){
-                    startActivityForResult(new Intent(mContext, LoginActivity.class),1001);
-                }else{
                     showPcview();
-                }
+
                 break;
         }
     }
@@ -129,7 +128,12 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case 1001:
-                showPcview();
+                if (SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
+
+                }else{
+                    showPcview();
+                }
+
                 break;
         }
     }
