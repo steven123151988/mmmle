@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsKey;
+import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.view.wheel.StrericWheelAdapter;
 import com.daking.sports.view.wheel.TimeSelectUtil;
 import com.daking.sports.view.wheel.WheelView;
@@ -78,7 +80,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 break;
             case R.id.btn_confirm_pay:
                 money = et_money.getText().toString().replace(" ", "");        //入款金额
-
+                String time= SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME,"");//汇款时间
 
                 break;
 

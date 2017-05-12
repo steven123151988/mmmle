@@ -116,38 +116,18 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 showFragmentViews(SportsId.TYPE_FOUR,prizeFragment);
                 break;
             case R.id.ll_mine:
-                    showPcview();
-
-                break;
-        }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case 1001:
-                if (SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
-
-                }else{
-                    showPcview();
+                setAnimation();
+                if (null== personalCenterFragment){
+                    personalCenterFragment = new PersonalCenterFragment();
                 }
+                showFragmentViews(SportsId.TYPE_FIVE, personalCenterFragment);
 
                 break;
         }
     }
 
-    /**
-     *  展示个人中心展示界面
-     */
-    private void showPcview() {
-        setAnimation();
-        if (null== personalCenterFragment){
-            personalCenterFragment = new PersonalCenterFragment();
-        }
-        showFragmentViews(SportsId.TYPE_FIVE, personalCenterFragment);
-    }
+
+
 
     /**
      * 展示fragment界面

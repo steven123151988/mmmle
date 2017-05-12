@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.TextView;
-
 import com.daking.sports.R;
-import com.daking.sports.util.LogUtil;
-
+import com.daking.sports.base.SportsKey;
+import com.daking.sports.util.SharePreferencesUtil;
 import java.util.Calendar;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -20,20 +19,20 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class TimeSelectUtil {
     private WheelView yearWheel, monthWheel, dayWheel, hourWheel, minuteWheel, secondWheel;
-    private  String[] yearContent = null;
-    private  String[] monthContent = null;
-    private  String[] dayContent = null;
-    private  String[] hourContent = null;
-    private  String[] minuteContent = null;
-    private  String[] secondContent = null;
-    private  StringBuffer sb;
+    private String[] yearContent = null;
+    private String[] monthContent = null;
+    private String[] dayContent = null;
+    private String[] hourContent = null;
+    private String[] minuteContent = null;
+    private String[] secondContent = null;
+    private StringBuffer sb;
 
     /**
-     *  选取汇款时间
+     * 选取汇款时间
      */
-    public  void selectTime(Context context, final TextView textView) {
+    public void selectTime(final Context context, final TextView textView) {
         initTimePiker();
-        View view = ((LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.time_picker, null);
+        View view = ((LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.time_picker, null);
         Calendar calendar = Calendar.getInstance();
         int curYear = calendar.get(Calendar.YEAR);
         int curMonth = calendar.get(Calendar.MONTH) + 1;
@@ -96,7 +95,8 @@ public class TimeSelectUtil {
                 sb.append(hourWheel.getCurrentItemValue())
                         .append(":").append(minuteWheel.getCurrentItemValue())
                         .append(":").append(secondWheel.getCurrentItemValue());
-                textView.setText(sb);
+                textView.setText(sb.toString());
+                SharePreferencesUtil.addString(context, SportsKey.PAY_TIME,sb.toString());
                 dialog.cancel();
 
             }
@@ -113,8 +113,9 @@ public class TimeSelectUtil {
         Calendar calendar = Calendar.getInstance();
         int curYear = calendar.get(Calendar.YEAR);
         yearContent = new String[1];
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 1; i++) {
             yearContent[i] = String.valueOf(curYear);
+        }
 
         monthContent = new String[12];
         for (int i = 0; i < 12; i++) {
@@ -154,7 +155,6 @@ public class TimeSelectUtil {
             }
         }
     }
-
 
 
 }
