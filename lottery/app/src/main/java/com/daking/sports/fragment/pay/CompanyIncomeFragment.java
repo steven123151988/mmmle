@@ -1,37 +1,46 @@
 package com.daking.sports.fragment.pay;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.view.wheel.StrericWheelAdapter;
+import com.daking.sports.view.wheel.TimeSelectUtil;
+import com.daking.sports.view.wheel.WheelView;
 import com.mingle.entity.MenuEntity;
 import com.mingle.sweetpick.BlurEffect;
 import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by 18 on 2017/5/7. 公司入款
  */
 
-public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener{
+public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener {
     private EditText et_money;
-    private String money,type,time;
+    private String money, type, time;
     private SweetSheet mSweetSheet;
     private SweetSheet mSweetSheet2;
     private SweetSheet mSweetSheet3;
     private RelativeLayout rl;
     private TextView tv_type;
+    private TextView tv_time;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,61 +51,36 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         view.findViewById(R.id.rl_pay_time).setOnClickListener(this);
         view.findViewById(R.id.rl_type).setOnClickListener(this);
         view.findViewById(R.id.btn_confirm_pay).setOnClickListener(this);
-        et_money=(EditText) view.findViewById(R.id.et_money);
+        tv_time = (TextView) view.findViewById(R.id.tv_time);
+        et_money = (EditText) view.findViewById(R.id.et_money);
         rl = (RelativeLayout) view.findViewById(R.id.rl);
-        tv_type= (TextView) view.findViewById(R.id.tv_type);
-        et_money.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = s.toString();
-                if (!str.equals("")) {
-                    if (str.substring(0, 1).equals("0")) {
-                        et_money.setText("");
-
-                    }
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
-                    int money = Integer.parseInt(s.toString());
-                } else {
-
-                }
-            }
-        });
+        tv_type = (TextView) view.findViewById(R.id.tv_type);
         return view;
     }
 
-
     @Override
     public void onClick(View v) {
-         switch(v.getId()) {
-             case R.id.tv_check_bank:
-             break;
-             case R.id.tv_use_companyincome:
-                 break;
+        switch (v.getId()) {
+            case R.id.tv_check_bank:
+                break;
+            case R.id.tv_use_companyincome:
+                break;
+            case R.id.rl_bank:
+                break;
+            case R.id.rl_type:
+                setupRecyclerView();//listview样式
+                break;
+            case R.id.rl_pay_time:
+                TimeSelectUtil timeSelectUtil=new  TimeSelectUtil();
+                if (null!=getActivity()&&null!=tv_time){
+                    timeSelectUtil.selectTime(getActivity(),tv_time);
+                }
+                break;
+            case R.id.btn_confirm_pay:
+                money = et_money.getText().toString().replace(" ", "");        //入款金额
 
-             case R.id.rl_bank:
 
-                 break;
-             case R.id.rl_type:
-                 setupRecyclerView();//listview样式
-                 break;
-
-             case R.id.rl_pay_time:
-
-                 break;
-             case R.id.btn_confirm_pay:
-                 money=et_money.getText().toString().replace(" ","");        //入款金额
-
-
-                 break;
+                break;
 
 
         }
@@ -120,7 +104,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         menuEntity2.titleColor = 0xff000000;
         menuEntity2.title = "ATM现金";
         list.add(menuEntity2);
-        MenuEntity menuEntity3= new MenuEntity();
+        MenuEntity menuEntity3 = new MenuEntity();
         menuEntity3.iconId = R.mipmap.company_income;
         menuEntity3.titleColor = 0xff000000;
         menuEntity3.title = "ATM卡转";
@@ -145,18 +129,19 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 //即时改变当前项的颜色
                 list.get(position).titleColor = 0xff5823ff;
                 ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
-                    type=menuEntity.title.toString();
-                    tv_type.setText(type);
+                type = menuEntity.title.toString();
+                tv_type.setText(type);
                 //根据返回值, true 会关闭 SweetSheet ,false 则不会.
                 return true;
             }
         });
 
-        if (!mSweetSheet.isShow()){
+        if (!mSweetSheet.isShow()) {
             mSweetSheet.toggle();
         }
 
     }
+
 
 
 }
