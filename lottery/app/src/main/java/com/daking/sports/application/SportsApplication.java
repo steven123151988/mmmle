@@ -11,9 +11,9 @@ import com.umeng.analytics.MobclickAgent;
 /**
  * 自定义的application类
  */
-public class LotteryApplication extends Application  {
-    private static LotteryApplication instance = null;
-    public static LotteryApplication getInstance()
+public class SportsApplication extends Application  {
+    private static SportsApplication instance = null;
+    public static SportsApplication getInstance()
     {
         return instance;
     }

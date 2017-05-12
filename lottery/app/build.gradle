@@ -8,7 +8,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,6 +25,12 @@ repositories {
     }
 }
 
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -34,7 +40,6 @@ dependencies {
     compile files('libs/gson-2.2.4.jar')
     compile(name: "sweetsheet-release", ext: "aar")
     //sweetsheet用到的开源库
-
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.yalantis:phoenix:1.2.3'
     compile 'com.android.support:appcompat-v7:25.3.1'

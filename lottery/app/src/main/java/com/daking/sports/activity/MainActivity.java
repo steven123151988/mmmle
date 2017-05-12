@@ -78,6 +78,11 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         //fragmentActivity统计时长

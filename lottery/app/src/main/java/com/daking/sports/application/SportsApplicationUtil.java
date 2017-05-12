@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.umeng.analytics.MobclickAgent;
 
-public class LotteryApplicationUtil {
+public class SportsApplicationUtil {
 
     /**
      * APP手动退出的入口
