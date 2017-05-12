@@ -24,7 +24,7 @@ import com.umeng.analytics.MobclickAgent;
 /**
  * 我的-个人中心面页
  */
-public class PersonalCenterFragment extends BaseFragment implements View.OnClickListener {
+public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ServiceFragment serviceFragment;
     private TextView tv_name;
 
@@ -48,13 +48,13 @@ public class PersonalCenterFragment extends BaseFragment implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart("PersonalCenterFragment");
+        MobclickAgent.onPageStart("MineFragment");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd("PersonalCenterFragment");
+        MobclickAgent.onPageEnd("MineFragment");
     }
 
     @Override

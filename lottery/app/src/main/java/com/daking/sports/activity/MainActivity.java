@@ -21,7 +21,7 @@ import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.main.BettingFragment;
 import com.daking.sports.fragment.main.FirstFragment;
-import com.daking.sports.fragment.main.PersonalCenterFragment;
+import com.daking.sports.fragment.main.MineFragment;
 import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private BettingFragment bettingFragment;
     private ScoreFragment scoreFragment;
     private PrizeFragment prizeFragment;
-    private PersonalCenterFragment personalCenterFragment;
+    private MineFragment personalCenterFragment;
     private ImageView mIvHome,mIvBetting,mIvMine,mIvPrize,mIvScore;
     private TextView mTvHome,mTvScore,mTvPrize,mTvBetting,mTvMime;
     private long mClickTime;
@@ -74,8 +74,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private void initDate() {
         if (SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
             startActivity(new Intent(mContext,LoginActivity.class));
-        }else{
-
         }
     }
 
@@ -125,7 +123,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
             case R.id.ll_mine:
                 setAnimation();
                 if (null== personalCenterFragment){
-                    personalCenterFragment = new PersonalCenterFragment();
+                    personalCenterFragment = new MineFragment();
                 }
                 showFragmentViews(SportsId.TYPE_FIVE, personalCenterFragment);
 

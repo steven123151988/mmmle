@@ -27,7 +27,7 @@ public class BettingAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 10;
     }
 
     @Override

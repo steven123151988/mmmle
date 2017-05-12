@@ -114,9 +114,10 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
         return view;
     }
 
+    /** ExpandableListView 如果子条目需要响应click事件,必需返回true */
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
+        return true;
     }
 
     @Override
@@ -162,6 +163,5 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
         TextView tv_5;
         TextView tv_6;
         TextView tv_7;
-
     }
 }

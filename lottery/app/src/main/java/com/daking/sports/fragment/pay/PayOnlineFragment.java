@@ -177,14 +177,19 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String msg = response.body().string();
-                LogUtil.e("===========msg==============" + msg);
                 gson = new Gson();
-                payStypeRsp = gson.fromJson(msg, PayStypeRsp.class);
-                list_name = new ArrayList<>();
-                int size = payStypeRsp.getIfo().size();
-                for (int i = 0; i < size; i++) {
-                    list_name.add(payStypeRsp.getIfo().get(i).getDspname());
+                try{
+                    payStypeRsp = gson.fromJson(msg, PayStypeRsp.class);
+                    list_name = new ArrayList<>();
+                    int size = payStypeRsp.getIfo().size();
+                    for (int i = 0; i < size; i++) {
+                        list_name.add(payStypeRsp.getIfo().get(i).getDspname());
+                    }
                 }
+                catch (Exception e){
+
+                }
+
             }
         });
     }
