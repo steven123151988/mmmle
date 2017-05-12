@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/ll_betting"
+        android:id="@+id/rl_betting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

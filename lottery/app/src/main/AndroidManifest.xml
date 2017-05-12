@@ -40,8 +40,6 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
 
-
-
     <application
         android:name=".application.SportsApplication"
         android:allowBackup="true"
@@ -96,12 +94,17 @@
         <activity
             android:name=".activity.mine.BettingRecordsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.betting.BettingActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="590822838630f5268000128c" />
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="leying" />
+
     </application>
 
 </manifest>

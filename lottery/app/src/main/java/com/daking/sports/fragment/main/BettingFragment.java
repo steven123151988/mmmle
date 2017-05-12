@@ -58,6 +58,8 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("BettingFragment");
+
+
     }
 
     @Override

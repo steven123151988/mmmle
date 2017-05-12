@@ -25,12 +25,6 @@ repositories {
     }
 }
 
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -50,5 +44,4 @@ dependencies {
     compile 'com.squareup.okio:okio:1.5.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'cn.pedant.sweetalert:library:1.3'
-
 }
