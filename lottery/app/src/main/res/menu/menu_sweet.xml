@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MainActivity">
+    <item
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="101"
+        android:title="QQ"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_recyclerView"
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="102"
+        android:title="Menu"
+        app:showAsAction="always"/>
+    <item
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="102"
+        android:title="QQ"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="100"
+        android:title="QQ"
+        app:showAsAction="always" />
+    <item
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="102"
+        android:title="QQ"
+        app:showAsAction="always"/>
+    <item
+        android:icon="@drawable/ic_launcher"
+        android:orderInCategory="102"
+        android:title="QQ"
+        app:showAsAction="always"/>
+
+</menu>

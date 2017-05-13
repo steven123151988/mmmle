@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
     android:id="@+id/rl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -154,7 +158,7 @@
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1"
                 android:hint="@string/regist_money_psw_confirm"
-                android:maxLength="15"
+                android:maxLength="6"
                 android:maxLines="1"
                 android:textSize="@dimen/dimen_14" />
 
@@ -250,13 +254,14 @@
                     android:textSize="@dimen/dimen_16" />
 
                 <EditText
+                    android:id="@+id/et_birthday"
                     android:inputType="number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dimen_20"
                     android:layout_weight="1"
                     android:hint="例子19880808"
-                    android:maxLength="1"
+                    android:maxLength="8"
                     android:maxLines="1"
                     android:textSize="@dimen/dimen_14" />
             </LinearLayout>
@@ -278,3 +283,4 @@
 
     </LinearLayout>
 </RelativeLayout>
+</ScrollView>

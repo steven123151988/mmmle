@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.mine.LoginActivity;
+import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-//        initDate();
+        initDate();
     }
 
     private void initView() {
@@ -74,6 +74,8 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private void initDate() {
         if (SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
             startActivity(new Intent(mContext,LoginActivity.class));
+        }else{
+
         }
     }
 

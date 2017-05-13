@@ -126,6 +126,7 @@
     <string name="history_total">投注额</string>
     <string name="history_total_can">有效金额</string>
     <string name="history_win_or_lose">输/赢</string>
+    <string name="login_err">登陆失败</string>
 
 
 </resources>

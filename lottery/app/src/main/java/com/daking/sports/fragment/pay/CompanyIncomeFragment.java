@@ -1,32 +1,26 @@
 package com.daking.sports.fragment.pay;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.util.SharePreferencesUtil;
-import com.daking.sports.view.wheel.StrericWheelAdapter;
 import com.daking.sports.view.wheel.TimeSelectUtil;
-import com.daking.sports.view.wheel.WheelView;
 import com.mingle.entity.MenuEntity;
 import com.mingle.sweetpick.BlurEffect;
+import com.mingle.sweetpick.DimEffect;
 import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
+import com.mingle.sweetpick.ViewPagerDelegate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 /**
  * Created by 18 on 2017/5/7. 公司入款
@@ -41,8 +35,6 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private RelativeLayout rl;
     private TextView tv_type;
     private TextView tv_time;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +60,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
             case R.id.tv_use_companyincome:
                 break;
             case R.id.rl_bank:
+                setupViewpager();
                 break;
             case R.id.rl_type:
                 setupRecyclerView();//listview样式
@@ -89,6 +82,9 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
 
     }
 
+    /**
+     * 选择入款方式
+     */
     private void setupRecyclerView() {
         final ArrayList<MenuEntity> list = new ArrayList<>();
         MenuEntity menuEntity = new MenuEntity();
@@ -141,7 +137,27 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         if (!mSweetSheet.isShow()) {
             mSweetSheet.toggle();
         }
+    }
 
+    /**\
+     *   选择银行入款账号
+     */
+    private void setupViewpager() {
+        mSweetSheet2 = new SweetSheet(rl);
+        //从menu 中设置数据源
+        mSweetSheet2.setMenuList(R.menu.menu_sweet);
+        mSweetSheet2.setDelegate(new ViewPagerDelegate());
+        mSweetSheet2.setBackgroundEffect(new DimEffect(0.5f));
+        mSweetSheet2.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
+            @Override
+            public boolean onItemClick(int position, MenuEntity menuEntity1) {
+                Toast.makeText(getActivity(), menuEntity1.title + "  " + position, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        if (!mSweetSheet2.isShow()) {
+            mSweetSheet2.toggle();
+        }
     }
 
 

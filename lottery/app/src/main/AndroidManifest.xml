@@ -74,10 +74,10 @@
             android:name=".activity.mine.PswManagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.RegistActivity"
+            android:name=".activity.login.RegistActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.LoginActivity"
+            android:name=".activity.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.webview.WebViewActivity"

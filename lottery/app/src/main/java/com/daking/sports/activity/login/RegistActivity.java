@@ -1,7 +1,9 @@
-package com.daking.sports.activity.mine;
+package com.daking.sports.activity.login;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,17 +39,17 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
     private EditText et_psw2;
     private EditText et_name;
     private EditText et_money_psw;//提款密码
-    private EditText et_email;
     private EditText et_answer;//回答问题
+    private EditText et_birthday;
     private String agent;
     private String account;
     private String psw;
     private String psw2;
     private String name;
     private String money_psw;
-    private String email;
     private String check_question;
     private String answer;
+    private String birthday;
     private TextView tv_center,tv_check_question;
     private SweetSheet mSweetSheet;
     private  MenuEntity menuEntity;
@@ -66,6 +68,7 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
         et_psw=(EditText)findViewById(R.id.et_psw);
         et_psw2=(EditText)findViewById(R.id.et_psw2);
         et_name=(EditText)findViewById(R.id.et_name);
+        et_birthday=(EditText)findViewById(R.id.et_birthday);
         et_money_psw=(EditText)findViewById(R.id.et_money_psw);
         et_answer=(EditText)findViewById(R.id.et_answer);
         tv_center=(TextView) findViewById(R.id.tv_center);
@@ -85,11 +88,20 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
         psw2=et_psw2.getText().toString().replace(" ","");
         name=et_name.getText().toString().replace(" ","");
         money_psw=et_money_psw.getText().toString().replace(" ","");
-        email=et_email.getText().toString().replace(" ","");
         answer=et_answer.getText().toString().replace(" ","");
+        birthday=et_birthday.getText().toString().replace(" ","");
+        if (money_psw.length()<6){
+            ToastUtil.show(mContext,"提款密码为6位数");
+            return;
+        }
+        if (birthday.length()<8){
+            ToastUtil.show(mContext,"生日格式为8位数");
+            return;
+        }
+
         if (TextUtils.isEmpty(account)||TextUtils.isEmpty(psw)||TextUtils.isEmpty(psw2)
-                ||TextUtils.isEmpty(name)||TextUtils.isEmpty(money_psw)||TextUtils.isEmpty(email)
-                ||TextUtils.isEmpty(answer)){
+                ||TextUtils.isEmpty(name)||TextUtils.isEmpty(money_psw)
+                ||TextUtils.isEmpty(answer)||TextUtils.isEmpty(birthday)){
             ToastUtil.show(mContext,getResources().getString(R.string.regist_null));
         }else{
             gotoRegist();
@@ -107,7 +119,7 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
                 .add("keys", "add")
                 .add("website", "android")
                 .add("website1", "android")
-                .add("reg", "1")
+                .add("reg", "3")
                 .add("intr", "daa88")  //代理账号
                 .add("username", account)//账号
                 .add("password", psw)//密码
@@ -115,19 +127,11 @@ public class RegistActivity extends BaseActivity  implements View.OnClickListene
                 .add("alias", name)  //真实姓名
                 .add("question", check_question) //密码提示问题
                 .add("answer", answer)//答案
-                .add("Sex", "1") //性别
-                .add("drpAuthCodea", money_psw.substring(0,1))//提款码6个字段，写后台的傻吊
-                .add("drpAuthCodeb",  money_psw.substring(1,2))
-                .add("drpAuthCodec",  money_psw.substring(2,3))
-                .add("drpAuthCoded",  money_psw.substring(3,4))
-                .add("drpAuthCodee",  money_psw.substring(4,5))
-                .add("drpAuthCodef",  money_psw.substring(5,6))
-                .add("year11", "")
-                .add("maoth11", "")
-                .add("day11", "")
+                .add("drpAuthCode",  money_psw)
+                .add("birthday",  birthday)
                 .add("contory", "中国")
-                .add("city", "")
-                .add("know_site", "")
+                .add("city", "深圳")
+                .add("know_site", "0")
                 .add("Checkbox", "1")  //是否选中已经满18岁
                 .build();
         final okhttp3.Request request = new okhttp3.Request.Builder()
