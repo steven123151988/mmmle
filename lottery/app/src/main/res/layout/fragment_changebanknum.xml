@@ -26,8 +26,6 @@
 
         </RelativeLayout>
 
-
-
         <RelativeLayout
             android:id="@+id/rl_bank"
             android:layout_width="match_parent"
@@ -47,14 +45,14 @@
                 android:textSize="@dimen/dimen_18" />
 
             <TextView
-                android:id="@+id/tv_bank_card"
+                android:id="@+id/tv_bank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_56"
                 android:layout_toRightOf="@+id/tv_gathering_card"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_16" />
 
             <ImageView
                 android:id="@+id/iv_right_arrow"

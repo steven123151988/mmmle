@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
+import com.daking.sports.activity.betting.BettingActivity;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.GetBannerData;

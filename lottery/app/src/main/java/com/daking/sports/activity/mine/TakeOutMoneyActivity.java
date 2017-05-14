@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
-import com.daking.sports.fragment.takeout.ChangeBankNumFragment;
+import com.daking.sports.fragment.takeout.ChangeBankAccountFragment;
 import com.daking.sports.fragment.takeout.TakeOutMoneyFragment;
 
 /**
@@ -23,7 +23,7 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
     private ImageView iv_back;
     private RadioButton rb_left, rb_right;
     private TakeOutMoneyFragment takeOutMoneyFragment;
-    private ChangeBankNumFragment changeBankNumFragment;
+    private ChangeBankAccountFragment changeBankNumFragment;
 
 
     @Override
@@ -58,7 +58,7 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
                 rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
                 rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
                 if (null == changeBankNumFragment) {
-                    changeBankNumFragment = new ChangeBankNumFragment();
+                    changeBankNumFragment = new ChangeBankAccountFragment();
                 }
                 mFragmentManager = getFragmentManager();
                 mFragmentTransaction = mFragmentManager.beginTransaction();

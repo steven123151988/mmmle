@@ -151,7 +151,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         mSweetSheet2.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
             @Override
             public boolean onItemClick(int position, MenuEntity menuEntity1) {
-                Toast.makeText(getActivity(), menuEntity1.title + "  " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), menuEntity1.title + "  " + position+"等待接口调试------", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

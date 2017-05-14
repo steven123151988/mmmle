@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.daking.sports.R;
 import com.daking.sports.adapter.BettingAdapter;
+import com.daking.sports.adapter.MyExpandableListAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -19,11 +21,16 @@ import com.yalantis.phoenix.PullToRefreshView;
 public class FootballFragment extends BaseFragment{
     private BettingAdapter bettingAdapter;
     private PullToRefreshView mPullToRefreshView;
-    private ListView listView;
+    private ListView lv_betting;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_football, null);
-        listView=(ListView) view.findViewById(R.id.list_view);
+        lv_betting= (ListView) view.findViewById(R.id.lv_betting);
+        bettingAdapter=new BettingAdapter(getActivity());
+        lv_betting.setAdapter(bettingAdapter);
+        bettingAdapter.notifyDataSetChanged();
+
         mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -32,17 +39,13 @@ public class FootballFragment extends BaseFragment{
                     @Override
                     public void run() {
                         mPullToRefreshView.setRefreshing(false);
-                        bettingAdapter=new BettingAdapter(getActivity());
-                        listView.setAdapter(bettingAdapter);
-
-
-
-
 
                     }
                 }, 1000);
             }
         });
+
+
         return view;
     }
 

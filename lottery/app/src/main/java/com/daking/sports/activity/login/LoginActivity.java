@@ -196,7 +196,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                     LogUtil.e("===========response.body().string()===========" + message);
                     personalDataRsp = gson.fromJson(message, PersonalDataRsp.class);
                     SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, personalDataRsp.getIfo().getUserName());
-
                 } catch (Exception e) {
                     LogUtil.e("========onResponse=============="+e);
                 }
