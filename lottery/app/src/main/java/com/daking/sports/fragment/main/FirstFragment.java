@@ -19,6 +19,7 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.view.banner.BannerBaseView;
 import com.daking.sports.view.banner.MainBannerView;
+import com.daking.sports.view.explosionfield.ExplosionField;
 import com.dalong.marqueeview.MarqueeView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -30,6 +31,8 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private ServiceFragment serviceFragment;
     private Intent  intent;
     private View view;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         iv_center.setVisibility(View.VISIBLE);
         intent=new Intent();
         return view;
+
     }
 
     @Override

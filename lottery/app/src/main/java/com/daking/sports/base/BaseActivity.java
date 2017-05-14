@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.View;
 
 
 import com.daking.sports.view.CustomProgressDialog;
@@ -44,6 +45,10 @@ public class BaseActivity extends Activity {
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    protected <T extends View> T f(int id) {
+        return (T) super.findViewById(id);
     }
 
     public void showWaiting() {

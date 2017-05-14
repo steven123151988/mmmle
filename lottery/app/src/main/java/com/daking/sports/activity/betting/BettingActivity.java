@@ -13,12 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.adapter.MyExpandableListAdapter;
 import com.daking.sports.base.BaseActivity;
+import com.daking.sports.view.explosionfield.ExplosionField;
 
 import java.text.DecimalFormat;
 
@@ -39,11 +41,11 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
     private double can_win_money;
     private DecimalFormat redf = new DecimalFormat("0.00");
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_betting);
+
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
         tv_center.setText("足球");
@@ -121,7 +123,6 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
-
 
         btn_confirm_bet = (Button) popView.findViewById(R.id.btn_confirm_bet);
         btn_confirm_bet.setOnClickListener(this);

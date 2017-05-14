@@ -26,6 +26,7 @@ import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
+import com.daking.sports.view.explosionfield.ExplosionField;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -38,14 +39,17 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private BettingFragment bettingFragment;
     private ScoreFragment scoreFragment;
     private PrizeFragment prizeFragment;
-    private MineFragment personalCenterFragment;
+    private MineFragment mineFragment;
     private ImageView mIvHome,mIvBetting,mIvMine,mIvPrize,mIvScore;
     private TextView mTvHome,mTvScore,mTvPrize,mTvBetting,mTvMime;
     private long mClickTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         initView();
         initDate();
     }
@@ -122,10 +126,10 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 break;
             case R.id.ll_mine:
                 setAnimation();
-                if (null== personalCenterFragment){
-                    personalCenterFragment = new MineFragment();
+                if (null== mineFragment){
+                    mineFragment = new MineFragment();
                 }
-                showFragmentViews(SportsId.TYPE_FIVE, personalCenterFragment);
+                showFragmentViews(SportsId.TYPE_FIVE, mineFragment);
 
                 break;
         }
