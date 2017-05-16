@@ -76,15 +76,14 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getPayUrl();
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_choose_type://选择充值方式
+                getPayUrl();
+                if (null == list_name) {
+                    ToastUtil.show(getActivity(), "暂无有效的充值方式");
+                    return;
+                }
                 final ArrayList<MenuEntity> list = new ArrayList<>();
                 for (int i = 0; i < list_name.size(); i++) {
                     menuEntity = new MenuEntity();
@@ -105,7 +104,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                 mSweetSheet.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
                     @Override
                     public boolean onItemClick(int position, MenuEntity menuEntity) {
-                        choose_position=position;
+                        choose_position = position;
                         //即时改变当前项的颜色
                         list.get(position).titleColor = 0xff5823ff;
                         ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
@@ -177,20 +176,23 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String msg = response.body().string();
+                LogUtil.e("=====getPayUrl=========" + msg);
                 gson = new Gson();
-                try{
-                    payStypeRsp = gson.fromJson(msg, PayStypeRsp.class);
-                    list_name = new ArrayList<>();
-                    int size = payStypeRsp.getIfo().size();
-                    for (int i = 0; i < size; i++) {
-                        list_name.add(payStypeRsp.getIfo().get(i).getDspname());
-                    }
-                }
-                catch (Exception e){
+                if (null != msg) {
+                    try {
+                        payStypeRsp = gson.fromJson(msg, PayStypeRsp.class);
+                        list_name = new ArrayList<>();
+                        int size = payStypeRsp.getIfo().size();
+                        for (int i = 0; i < size; i++) {
+                            list_name.add(payStypeRsp.getIfo().get(i).getDspname());
+                        }
+                    } catch (Exception e) {
 
+                    }
                 }
 
             }
+
         });
     }
 

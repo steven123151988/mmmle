@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.adapter.MyExpandableListAdapter;
 import com.daking.sports.base.BaseActivity;
+import com.daking.sports.util.ToastUtil;
 import com.daking.sports.view.explosionfield.ExplosionField;
 
 import java.text.DecimalFormat;
@@ -40,7 +42,7 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
     private EditText et_input_money;
     private double can_win_money;
     private DecimalFormat redf = new DecimalFormat("0.00");
-
+    ExplosionField mExplosionField;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,15 +149,27 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.btn_confirm_bet:
-
-
+                if (TextUtils.isEmpty(et_input_money.getText().toString())){
+                    ToastUtil.show(mContext,getString(R.string.type_in_betting_money));
+                }else{
+                    mExplosionField = ExplosionField.attach2Window(this);
+                    mExplosionField. addListener(popView.findViewById(R.id.main_pop));
+                    dismisspopviw();
+                }
                 break;
             case R.id.iv_right:
-                if (null != popupWindow && popupWindow.isShowing()) {
-                    popupWindow.dismiss();
-                }
+                dismisspopviw();
                 break;
         }
 
+    }
+
+    /**
+     *  popview消失
+     */
+    private void dismisspopviw() {
+        if (null != popupWindow && popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        }
     }
 }

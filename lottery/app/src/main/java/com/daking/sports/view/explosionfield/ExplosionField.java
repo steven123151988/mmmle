@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import com.daking.sports.util.LogUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -123,21 +125,25 @@ public class ExplosionField extends View {
     }
 
     public void addListener(View view) {
-        //这句胡的意思是判断view是不是ViewGroup的实例，如果是就给每个空间添加监听，如果不是给整个view添加点击事件，直接爆
+        //这句话的意思是判断view是不是ViewGroup的实例，如果是就给每个空间添加监听，如果不是给整个view添加点击事件，直接爆
         if (view instanceof ViewGroup) {
+            LogUtil.e("==========1=======");
             ViewGroup parent = (ViewGroup) view;
             for (int i = 0; i < parent.getChildCount(); i++) {
                 addListener(parent.getChildAt(i));
             }
         } else {
+            LogUtil.e("==========2=======");
             view.setClickable(true);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    explode(v);
-                    v.setOnClickListener(null);
-                }
-            });
+            explode(view);
+            //以下仅仅是设置了点击事件
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+////                    explode(v);
+//                    v.setOnClickListener(null);
+//                }
+//            });
         }
     }
 

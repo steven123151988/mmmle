@@ -26,7 +26,6 @@ import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
-import com.daking.sports.view.explosionfield.ExplosionField;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -48,8 +47,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         initView();
         initDate();
     }
@@ -130,12 +127,9 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                     mineFragment = new MineFragment();
                 }
                 showFragmentViews(SportsId.TYPE_FIVE, mineFragment);
-
                 break;
         }
     }
-
-
 
 
     /**
@@ -150,7 +144,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
             mFragmentTransaction.replace(R.id.view_fragment, fragment);
             mFragmentTransaction.commitAllowingStateLoss();
         }
-
     }
 
     /**

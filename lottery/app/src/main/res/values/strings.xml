@@ -134,10 +134,7 @@
     <string name="please_choose_pay_type">请选择充值方式</string>
     <string name="aoocunt_money_now">目前剩余金额：</string>
     <string name="can_win_total">可赢金额:</string>
-
     <string name="betting_once_atleast">单注最低:</string>
     <string name="betting_once_atmost">单注最高:</string>
-
-
-
+    <string name="type_in_betting_money">请输入投注金额</string>
 </resources>
