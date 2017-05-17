@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <customer name="网银转账" />
+    <customer name="微信支付" />
+    <customer name="支付宝" />
+    <customer name="银行柜台" />
+    <customer name="ATM现金" />
+    <customer name="ATM卡转" />
+    <customer name="其他支付方式" />
+</resources>

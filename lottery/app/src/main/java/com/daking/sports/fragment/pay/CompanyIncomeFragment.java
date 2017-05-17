@@ -1,4 +1,5 @@
 package com.daking.sports.fragment.pay;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.view.wheel.TimeSelectUtil;
 import com.mingle.entity.MenuEntity;
@@ -20,7 +22,11 @@ import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
 import com.mingle.sweetpick.ViewPagerDelegate;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 18 on 2017/5/7. 公司入款
@@ -35,6 +41,9 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private RelativeLayout rl;
     private TextView tv_type;
     private TextView tv_time;
+    private StringBuilder sb;
+    private List<String> stringList;
+    private MenuEntity menuEntity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,32 +95,39 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      * 选择入款方式
      */
     private void setupRecyclerView() {
+        stringList=new ArrayList<>()  ;
+        XmlResourceParser xrp = getResources().getXml(R.xml.paystype);
+        try {
+            while (xrp.getEventType() != XmlResourceParser.END_DOCUMENT) {
+                // 判断事件类型是否为文档结束
+                if (xrp.getEventType() == XmlResourceParser.START_TAG) {
+                    // 判断事件类型是否为开始标志
+                    String name = xrp.getName();
+                    if (name.equals("customer")) {
+                        // 判断标签名
+                        sb = new StringBuilder();
+                        sb.append(xrp.getAttributeValue(0)) ;
+                        // 获取一个标签中的各个数据
+                        stringList.add(sb.toString());
+                        LogUtil.e("==============="+sb.toString());
+                    }
+                }
+                xrp.next();
+                // 下一行
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         final ArrayList<MenuEntity> list = new ArrayList<>();
-        MenuEntity menuEntity = new MenuEntity();
-        menuEntity.iconId = R.mipmap.company_income;
-        menuEntity.titleColor = 0xff000000;
-        menuEntity.title = "网银转账";
-        list.add(menuEntity);
-        MenuEntity menuEntity1 = new MenuEntity();
-        menuEntity1.iconId = R.mipmap.company_income;
-        menuEntity1.titleColor = 0xff000000;
-        menuEntity1.title = "银行柜台";
-        list.add(menuEntity1);
-        MenuEntity menuEntity2 = new MenuEntity();
-        menuEntity2.iconId = R.mipmap.company_income;
-        menuEntity2.titleColor = 0xff000000;
-        menuEntity2.title = "ATM现金";
-        list.add(menuEntity2);
-        MenuEntity menuEntity3 = new MenuEntity();
-        menuEntity3.iconId = R.mipmap.company_income;
-        menuEntity3.titleColor = 0xff000000;
-        menuEntity3.title = "ATM卡转";
-        list.add(menuEntity3);
-        MenuEntity menuEntity4 = new MenuEntity();
-        menuEntity4.iconId = R.mipmap.company_income;
-        menuEntity4.titleColor = 0xff000000;
-        menuEntity4.title = "第3方支付";
-        list.add(menuEntity4);
+        for (int i = 0; i < stringList.size(); i++) {
+            menuEntity = new MenuEntity();
+            menuEntity.iconId = R.mipmap.company_income;
+            menuEntity.titleColor = 0xff000000;
+            menuEntity.title = stringList.get(i);
+            list.add(menuEntity);
+        }
         // SweetSheet 控件,根据 rl 确认位置
         mSweetSheet = new SweetSheet(rl);
         //设置数据源 (数据源支持设置 list 数组,也支持从菜单中获取)

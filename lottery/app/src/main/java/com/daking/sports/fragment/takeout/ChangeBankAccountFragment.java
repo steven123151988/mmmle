@@ -75,13 +75,11 @@ public class ChangeBankAccountFragment extends BaseFragment  implements View.OnC
                         xrp.next();
                         // 下一行
                     }
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 final ArrayList<MenuEntity> list = new ArrayList<>();
-                for (int i = 1; i < stringList.size(); i++) {
+                for (int i = 0; i < stringList.size(); i++) {
                     menuEntity = new MenuEntity();
                     menuEntity.iconId = R.mipmap.company_income;
                     menuEntity.titleColor = 0xff000000;

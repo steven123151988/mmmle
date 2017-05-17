@@ -87,6 +87,7 @@
     <string name="use_companyincome">如何使用公司入款</string>
     <string name="which_bank">转入银行</string>
     <string name="which_type">汇款方式</string>
+    <string name="getin_type">充值方式</string>
     <string name="type_in">请输入汇款金额</string>
     <string name="type_out">请输入提款金额</string>
     <string name="pay_time">汇款时间</string>
@@ -130,6 +131,7 @@
     <string name="history_win_or_lose">输/赢</string>
     <string name="login_err">登陆失败</string>
     <string name="please_typein_money">请输入金额</string>
+    <string name="please_choose_pay_type">请选择充值方式</string>
 
 
 </resources>

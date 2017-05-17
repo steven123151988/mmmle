@@ -153,11 +153,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                             });
 
                         }
-
-
-
-                    }catch (Exception e){
-                        LogUtil.e("========onResponse=============="+e);
+                    } catch (Exception e) {
+                        LogUtil.e("========onResponse==============" + e);
                     }
 
 
@@ -191,16 +188,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
-                    Gson gson = new Gson();
+                    gson = new Gson();
                     String message = response.body().string();
                     LogUtil.e("===========response.body().string()===========" + message);
                     personalDataRsp = gson.fromJson(message, PersonalDataRsp.class);
                     SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, personalDataRsp.getIfo().getUserName());
                 } catch (Exception e) {
-                    LogUtil.e("========onResponse=============="+e);
+                    LogUtil.e("========onResponse==============" + e);
                 }
-
-
             }
         });
     }
