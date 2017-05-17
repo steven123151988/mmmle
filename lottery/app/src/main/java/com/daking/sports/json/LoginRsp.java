@@ -16,6 +16,8 @@ public class LoginRsp {
     private int code;
     private String msg;
     private String ifo;
+    private String backup;
+
 
     public int getCode() {
         return code;
@@ -39,5 +41,13 @@ public class LoginRsp {
 
     public void setIfo(String ifo) {
         this.ifo = ifo;
+    }
+
+    public String getBackup() {
+        return backup;
+    }
+
+    public void setBackup(String backup) {
+        this.backup = backup;
     }
 }

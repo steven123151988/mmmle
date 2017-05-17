@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/ll_first_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/login_bg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_100"
+            android:src="@mipmap/getinmoney" />
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_45"
+            android:layout_marginLeft="@dimen/dimen_30"
+            android:layout_marginRight="@dimen/dimen_30"
+            android:layout_marginTop="@dimen/dimen_50"
+            android:background="@color/white_ffffff">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0.5"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:background="@color/gray_e6e6e6" />
+
+            <ImageView
+                android:id="@+id/iv_money_psw1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:src="@mipmap/company_income" />
+
+            <EditText
+                android:id="@+id/et_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_50"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:layout_toRightOf="@+id/iv_money_psw1"
+                android:background="@null"
+                android:gravity="center"
+                android:hint="@string/type_in"
+                android:inputType="number"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:textColor="@color/red_84201e"
+                android:textSize="@dimen/dimen_16" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_20"
+                android:layout_marginRight="@dimen/dimen_20"
+                android:background="@color/gray_e6e6e6"
+                android:text="元"
+                android:textSize="@dimen/dimen_16" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_confirm_pay"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/dimen_20"
+            android:layout_marginRight="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_100"
+            android:background="@color/red_84201e"
+            android:gravity="center"
+            android:text="@string/confirm_pay"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/dimen_18" />
+
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </LinearLayout>

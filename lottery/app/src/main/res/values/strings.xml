@@ -8,6 +8,7 @@
     <string name="service">客服</string>
     <string name="back">返回</string>
     <string name="register">注册</string>
+    <string name="register_success">注册成功</string>
     <string name="go_to_register">立即注册</string>
     <string name="foget_psw">忘记密码</string>
     <string name="login">登录</string>
@@ -58,6 +59,7 @@
     <string name="shixun">视讯</string>
     <string name="accountisempty">账号密码为空，请检查！</string>
     <string name="loginerr">登录失败</string>
+    <string name="regist_err">注册失败</string>
     <string name="loginsuccss">登录成功</string>
     <string name="modifypsw_question">密码提示问题</string>
     <string name="modifypsw_answer">问题答案</string>
@@ -127,6 +129,7 @@
     <string name="history_total_can">有效金额</string>
     <string name="history_win_or_lose">输/赢</string>
     <string name="login_err">登陆失败</string>
+    <string name="please_typein_money">请输入金额</string>
 
 
 </resources>

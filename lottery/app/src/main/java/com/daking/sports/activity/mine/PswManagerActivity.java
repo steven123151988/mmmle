@@ -63,7 +63,7 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_back: //下注
+            case R.id.iv_back:
                 finish();
                 break;
             case  R.id.btn_confirm:

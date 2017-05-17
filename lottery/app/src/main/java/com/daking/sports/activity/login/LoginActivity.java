@@ -137,7 +137,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                         public void run() {
                                             finish();
                                         }
-                                    }, 3000);
+                                    }, 2500);
                                 }
                             });
                         } else {

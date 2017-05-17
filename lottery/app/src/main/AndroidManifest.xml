@@ -51,8 +51,7 @@
         tools:replace="android:icon">
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,7 +75,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.login.RegistActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+       />
         <activity
             android:name=".activity.login.LoginActivity"
             android:screenOrientation="portrait" />

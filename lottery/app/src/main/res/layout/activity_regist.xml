@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -21,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginTop="@dimen/dimen_5"
             android:background="@color/white_ffffff"
             android:orientation="horizontal">
 
@@ -40,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="@string/regist_account_action"
                 android:maxLength="15"
                 android:maxLines="1"
@@ -69,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="@string/regist_psw_length"
                 android:maxLength="15"
                 android:maxLines="1"
@@ -98,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="@string/regist_psw_length"
                 android:maxLength="15"
                 android:maxLines="1"
@@ -127,6 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="@string/regist_name_rule"
                 android:maxLength="15"
                 android:maxLines="1"
@@ -151,13 +151,14 @@
                 android:textSize="@dimen/dimen_16" />
 
             <EditText
-                android:inputType="number"
                 android:id="@+id/et_money_psw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="@string/regist_money_psw_confirm"
+                android:inputType="number"
                 android:maxLength="6"
                 android:maxLines="1"
                 android:textSize="@dimen/dimen_14" />
@@ -225,6 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_weight="1.62"
+                android:gravity="center"
                 android:maxLength="15"
                 android:maxLines="1"
                 android:textSize="@dimen/dimen_14" />
@@ -255,12 +257,13 @@
 
                 <EditText
                     android:id="@+id/et_birthday"
-                    android:inputType="number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dimen_20"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:hint="例子19880808"
+                    android:inputType="number"
                     android:maxLength="8"
                     android:maxLines="1"
                     android:textSize="@dimen/dimen_14" />
@@ -283,4 +286,3 @@
 
     </LinearLayout>
 </RelativeLayout>
-</ScrollView>
