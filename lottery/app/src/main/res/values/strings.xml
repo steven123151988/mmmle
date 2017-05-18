@@ -124,7 +124,7 @@
     <string name="transaction">交易状况</string>
     <string name="acconut_history">账户历史</string>
     <string name="betting_record">投注记录</string>
-
+    <string name="betting_bill">交易单</string>
     <string name="history_date">日期</string>
     <string name="history_total">投注额</string>
     <string name="history_total_can">有效金额</string>
@@ -132,6 +132,12 @@
     <string name="login_err">登陆失败</string>
     <string name="please_typein_money">请输入金额</string>
     <string name="please_choose_pay_type">请选择充值方式</string>
+    <string name="aoocunt_money_now">目前剩余金额：</string>
+    <string name="can_win_total">可赢金额:</string>
+
+    <string name="betting_once_atleast">单注最低:</string>
+    <string name="betting_once_atmost">单注最高:</string>
+
 
 
 </resources>

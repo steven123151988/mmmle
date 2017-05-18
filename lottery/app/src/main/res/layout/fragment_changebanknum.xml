@@ -101,7 +101,7 @@
                 android:gravity="center"
                 android:hint="@string/bank_num"
                 android:inputType="number"
-                android:maxLength="20"
+                android:maxLength="19"
                 android:maxLines="1"
                 android:textColor="@color/red_84201e"
                 android:textSize="@dimen/dimen_16" />

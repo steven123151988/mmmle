@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -69,7 +68,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")) {
                     finish();
                 }
-
                 break;
             case R.id.btn_register:
                 startActivity(new Intent(mContext, RegistActivity.class));
@@ -80,8 +78,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             case R.id.btn_forgetPsw:
                 startActivity(new Intent(mContext, PswManagerActivity.class));
                 break;
-
-
         }
     }
 
@@ -200,5 +196,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+//        if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")) {
+//            super.onBackPressed();
+//        }
+        super.onBackPressed();
 
+    }
 }
