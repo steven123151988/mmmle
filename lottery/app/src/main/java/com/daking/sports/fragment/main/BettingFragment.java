@@ -21,14 +21,16 @@ import com.daking.sports.fragment.betting.ShixunFragment;
 import com.daking.sports.util.LogUtil;
 import com.umeng.analytics.MobclickAgent;
 
+import java.lang.reflect.Field;
+
 /**
- *   投注面页
+ * 投注面页
  */
 public class BettingFragment extends BaseFragment implements View.OnClickListener {
     private FragmentManager mFragmentManager;  // Fragment管理器
     private FragmentTransaction mFragmentTransaction;    // fragment事物
-    private LinearLayout ll_football,ll_basketball,ll_shixun;
-    private TextView tv_football,tv_basketball,tv_shixun;
+    private LinearLayout ll_football, ll_basketball, ll_shixun;
+    private TextView tv_football, tv_basketball, tv_shixun;
     private FootballFragment footballFragment;
     private BasketballFragment basketballFragment;
     private ShixunFragment shixunFragment;
@@ -38,17 +40,17 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_betting, null);
-        ll_football=(LinearLayout) view.findViewById(R.id.ll_football);
+        ll_football = (LinearLayout) view.findViewById(R.id.ll_football);
         ll_football.setOnClickListener(this);
-        ll_basketball=(LinearLayout) view.findViewById(R.id.ll_basketball);
+        ll_basketball = (LinearLayout) view.findViewById(R.id.ll_basketball);
         ll_basketball.setOnClickListener(this);
-        ll_shixun=(LinearLayout) view.findViewById(R.id.ll_shixun);
+        ll_shixun = (LinearLayout) view.findViewById(R.id.ll_shixun);
         ll_shixun.setOnClickListener(this);
-        tv_football=(TextView) view.findViewById(R.id.tv_football);
-        tv_basketball=(TextView) view.findViewById(R.id.tv_basketball);
-        tv_shixun=(TextView) view.findViewById(R.id.tv_shixun);
+        tv_football = (TextView) view.findViewById(R.id.tv_football);
+        tv_basketball = (TextView) view.findViewById(R.id.tv_basketball);
+        tv_shixun = (TextView) view.findViewById(R.id.tv_shixun);
         view_betting = view.findViewById(R.id.view_fragment2);
-        ImageView iv_center=(ImageView) view.findViewById(R.id.iv_center);
+        ImageView iv_center = (ImageView) view.findViewById(R.id.iv_center);
         iv_center.setVisibility(View.VISIBLE);
         getFootballView();
         return view;
@@ -76,10 +78,10 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.ll_football:
                 getFootballView();
-            break;
+                break;
             case R.id.ll_basketball:
                 ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
@@ -87,8 +89,8 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
                 tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
                 tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
                 tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-                if (null==basketballFragment){
-                    basketballFragment=new BasketballFragment();
+                if (null == basketballFragment) {
+                    basketballFragment = new BasketballFragment();
                 }
                 showView(basketballFragment);
                 break;
@@ -99,13 +101,14 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
                 tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
                 tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
                 tv_shixun.setTextColor(getResources().getColor(R.color.white_ffffff));
-                if (null==shixunFragment){
-                    shixunFragment=new ShixunFragment();
+                if (null == shixunFragment) {
+                    shixunFragment = new ShixunFragment();
                 }
                 showView(shixunFragment);
                 break;
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void getFootballView() {
         ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
@@ -114,22 +117,39 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
         tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
         tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-        if (null==footballFragment){
-            footballFragment=new FootballFragment();
+        if (null == footballFragment) {
+            footballFragment = new FootballFragment();
         }
         showView(footballFragment);
     }
 
     /**
      * 展示fragment布局
-     * @param fragment   因为getChildFragmentManager();在17才有所以引用
+     *
+     * @param fragment 因为getChildFragmentManager();在17才有所以引用
      */
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void showView(Fragment fragment) {
-        mFragmentManager =getChildFragmentManager();
+        mFragmentManager = getChildFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.view_fragment2, fragment);
         mFragmentTransaction.commitAllowingStateLoss();
+    }
+
+
+    //To solve fragment  include fragment case Activity has been destroyed.
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

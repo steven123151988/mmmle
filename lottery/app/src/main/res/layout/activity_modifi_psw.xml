@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/login_bg"
+    android:background="@mipmap/bg"
     android:orientation="vertical">
 
     <include layout="@layout/title_image_text_text" />
@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5"
                     android:text="@string/suggest_psw"
-                    android:textColor="@color/red_84201e"
+                    android:textColor="@color/white_ffffff"
                     android:textSize="@dimen/dimen_16" />
 
                 <RelativeLayout
@@ -185,11 +185,12 @@
                     android:textSize="@dimen/dimen_16" />
 
                 <TextView
+                    android:paddingRight="@dimen/dimen_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5"
                     android:text="@string/suggest_modify_moneypsw"
-                    android:textColor="@color/red_84201e"
+                    android:textColor="@color/white_ffffff"
                     android:textSize="@dimen/dimen_16" />
 
                 <RelativeLayout

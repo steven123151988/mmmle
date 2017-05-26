@@ -25,13 +25,6 @@ public class BaseActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        List<RunningTaskInfo> runningTasks = manager.getRunningTasks(1);
-        RunningTaskInfo cinfo = runningTasks.get(0);
-        ComponentName component = cinfo.topActivity;
-        String cn = component.getClassName();
-        className = cn.substring(cn.lastIndexOf(".") + 1, cn.length());
     }
 
     @Override

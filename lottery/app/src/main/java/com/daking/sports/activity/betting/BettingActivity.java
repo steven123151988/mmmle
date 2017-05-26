@@ -26,6 +26,8 @@ import com.daking.sports.view.explosionfield.ExplosionField;
 
 import java.text.DecimalFormat;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 /**
  * Created by 18 on 2017/5/12.  足球篮球下下注面页
  */
@@ -152,9 +154,24 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
                 if (TextUtils.isEmpty(et_input_money.getText().toString())){
                     ToastUtil.show(mContext,getString(R.string.type_in_betting_money));
                 }else{
-                    mExplosionField = ExplosionField.attach2Window(this);
-                    mExplosionField. addListener(popView.findViewById(R.id.main_pop));
-                    dismisspopviw();
+                    //请求接口
+                    if(true){
+                        //show success view
+                        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText("下注成功!")
+                                .setContentText("最高可得"+redf.format(can_win_money)+"彩金！")
+                                .show();
+                        mExplosionField = ExplosionField.attach2Window(this);
+                        mExplosionField. addListener(popView.findViewById(R.id.main_pop));
+                        dismisspopviw();
+                    }else{
+                        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText("Sorry...")
+                                .setContentText("下注失败，请重新尝试!")
+                                .show();
+                        dismisspopviw();
+                    }
+
                 }
                 break;
             case R.id.iv_right:

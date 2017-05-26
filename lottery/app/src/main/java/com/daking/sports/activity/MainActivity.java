@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private ImageView mIvHome,mIvBetting,mIvMine,mIvPrize,mIvScore;
     private TextView mTvHome,mTvScore,mTvPrize,mTvBetting,mTvMime;
     private long mClickTime;
+    private int version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,14 +162,17 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setAnimation() {
-        View view = findViewById(R.id.view_fragment);
-        //这个是计算宽高最大值
-        int finalRadius = Math.max(view.getWidth(), view.getHeight());
-        Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth()/2, view.getHeight()/2, 0, finalRadius);
-        animator.setInterpolator(new AccelerateInterpolator());
-        //设置画圆的时间
-        animator.setDuration(500);
-        animator.start();
+        if (version>20){
+            View view = findViewById(R.id.view_fragment);
+            //这个是计算宽高最大值
+            int finalRadius = Math.max(view.getWidth(), view.getHeight());
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth()/2, view.getHeight()/2, 0, finalRadius);
+            animator.setInterpolator(new AccelerateInterpolator());
+            //设置画圆的时间
+            animator.setDuration(500);
+            animator.start();
+        }
+
     }
 
     /**
