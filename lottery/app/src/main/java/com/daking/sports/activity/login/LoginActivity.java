@@ -115,6 +115,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                         LoginRsp = gson.fromJson(message, LoginRsp.class);
                         if (LoginRsp.getCode() == 0) {
                             SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
+                            SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -167,7 +168,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add("fnName", "MData")
-                .add("uid", SharePreferencesUtil.getString(mContext, SportsKey.UID, ""))
+                .add("uid", SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -198,10 +199,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
     @Override
     public void onBackPressed() {
-//        if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")) {
-//            super.onBackPressed();
-//        }
-        super.onBackPressed();
-
+        if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")) {
+            super.onBackPressed();
+        }
     }
 }

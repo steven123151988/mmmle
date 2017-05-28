@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <include layout="@layout/title_image_text_text" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,28 +27,27 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginLeft="@dimen/dimen_10"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimen_10"
+                    android:src="@mipmap/news" />
 
                 <com.dalong.marqueeview.MarqueeView
-                    android:layout_marginLeft="@dimen/dimen_10"
                     android:id="@+id/tv_marquee"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
+                    android:layout_marginLeft="@dimen/dimen_10"
                     app:direction="left"
                     app:isRepeat="true"
+                    app:marqueebackground="#FFFFFF"
                     app:speed="5"
                     app:startPoint="end"
                     app:textSize="16sp"
-                    app:textcolor="#FFFFFF" />
+                    app:textcolor="#4c4c4c" />
             </LinearLayout>
 
             <include layout="@layout/firstfragment_betting" />
-
 
             <include layout="@layout/firstfragment_sports" />
 

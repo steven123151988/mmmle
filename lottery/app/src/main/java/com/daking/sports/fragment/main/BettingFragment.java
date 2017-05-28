@@ -50,8 +50,8 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         tv_basketball = (TextView) view.findViewById(R.id.tv_basketball);
         tv_shixun = (TextView) view.findViewById(R.id.tv_shixun);
         view_betting = view.findViewById(R.id.view_fragment2);
-        ImageView iv_center = (ImageView) view.findViewById(R.id.iv_center);
-        iv_center.setVisibility(View.VISIBLE);
+//        ImageView iv_center = (ImageView) view.findViewById(R.id.iv_center);
+//        iv_center.setVisibility(View.VISIBLE);
         getFootballView();
         return view;
     }

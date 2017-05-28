@@ -1,25 +1,69 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    android:id="@+id/main_all"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_all"
-    android:background="@color/gray_f5f5f5"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <FrameLayout
-        android:id="@+id/view_fragment"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:background="@color/windowBackground">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white_fbfbfb">
-        <TextView
+        <!--内容区-->
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1"
-            android:background="@color/gray_c8c8c8" />
-        <include layout="@layout/main_bottom" />
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:background="@color/windowBackground"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            skin:enable="true">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.design.widget.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:background="@color/red_84201e"
+                        app:layout_collapseMode="pin"
+                        app:layout_scrollFlags="scroll|enterAlways"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:titleTextColor="#ffffff" />
+                </android.support.design.widget.AppBarLayout>
+
+                <FrameLayout
+                    android:id="@+id/view_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                   />
+
+                <include layout="@layout/main_bottom" />
+            </LinearLayout>
+
+
+        </android.support.design.widget.CoordinatorLayout>
+
+        <!--左侧导航菜单-->
+        <android.support.design.widget.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/white_ffffff"
+            app:menu="@menu/drawer"
+            skin:enable="true" />
+    </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

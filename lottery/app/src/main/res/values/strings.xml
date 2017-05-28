@@ -12,6 +12,7 @@
     <string name="go_to_register">立即注册</string>
     <string name="foget_psw">忘记密码</string>
     <string name="login">登录</string>
+    <string name="logout">退出登录</string>
     <string name="horseRacelamp">我们将一如既往的为您提供更优质的服务,请遵守游戏规则，否则。。。</string>
     <string name="pc_pay">充值</string>
     <string name="pc_getoutmoney">提款</string>
@@ -137,4 +138,6 @@
     <string name="betting_once_atleast">单注最低:</string>
     <string name="betting_once_atmost">单注最高:</string>
     <string name="type_in_betting_money">请输入投注金额</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 
@@ -16,7 +17,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.List;
 
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
     public Context mContext;
     private String className;
     private CustomProgressDialog dialog;
@@ -40,7 +41,7 @@ public class BaseActivity extends Activity {
         MobclickAgent.onPause(this);
     }
 
-    protected <T extends View> T f(int id) {
+    protected <T extends View> T fuck(int id) {
         return (T) super.findViewById(id);
     }
 

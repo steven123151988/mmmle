@@ -232,6 +232,31 @@
             android:layout_marginRight="@dimen/dimen_20"
             android:src="@mipmap/right_arrows" />
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_7"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50"
+        android:background="@color/white_ffffff">
 
+        <ImageView
+            android:id="@+id/iv_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_20"
+            android:src="@mipmap/pc_service" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_toRightOf="@+id/iv_7"
+            android:text="@string/logout"
+            android:textColor="@color/gray_4c4c4c"
+            android:textSize="@dimen/dimen_16" />
+
+      7
+    </RelativeLayout>
 
 </LinearLayout>

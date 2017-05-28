@@ -10,18 +10,29 @@ import android.widget.RelativeLayout;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
-import com.daking.sports.activity.betting.BettingActivity;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.GetBannerData;
 import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
+import com.daking.sports.json.MainIndexRsp;
+import com.daking.sports.util.LogUtil;
+import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.view.banner.BannerBaseView;
 import com.daking.sports.view.banner.MainBannerView;
-import com.daking.sports.view.explosionfield.ExplosionField;
 import com.dalong.marqueeview.MarqueeView;
+import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  *   购彩面页
@@ -32,11 +43,19 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private Intent  intent;
     private View view;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          view = inflater.inflate(R.layout.fragment_first, null);
+         initView();
+         initData();
+
+        return view;
+
+    }
+
+
+
+    private void initView() {
         //轮播图
         RelativeLayout bannerContent = (RelativeLayout) view.findViewById(R.id.banner_cont);
         BannerBaseView banner = new MainBannerView(getActivity());
@@ -54,12 +73,42 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         view.findViewById(R.id.ll_roulette).setOnClickListener(this);
         view.findViewById(R.id.ll_betting_sportd).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
-        ImageView iv_center=(ImageView) view.findViewById(R.id.iv_center);
-        iv_center.setVisibility(View.VISIBLE);
         intent=new Intent();
-        return view;
-
     }
+
+    private void initData() {
+        LogUtil.e("===============message=========" +  SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""));
+        RequestBody requestBody = new FormBody.Builder()
+                .add("fnName", "main")
+                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.HOME_INDEX)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String message = response.body().string();
+                LogUtil.e("===============message=========" + message);
+                 Gson gson=new Gson();
+                MainIndexRsp mainIndexRsp=new MainIndexRsp();
+                mainIndexRsp=gson.fromJson(message,MainIndexRsp.class);
+
+
+
+            }
+        });
+    }
+
+
 
     @Override
     public void onResume() {
