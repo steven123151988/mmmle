@@ -3,14 +3,16 @@ package com.daking.sports.json;
 import java.io.Serializable;
 
 /**
- * Created by 18 on 2017/5/28.
+ * Created by 18 on 2017/5/29.
  */
 
-public class MainIndexRsp  implements Serializable{
+public class MainMenuRsp implements Serializable {
+
+
     /**
-     * member : {"ID":"12247","Oid":"be3d5d5d636e79120dfera5","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-05-28","LoginTime":"2017-05-28 04:48:47","OnlineTime":"2017-05-28 04:48:47","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"222.127.25.26","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
+     * member : {"ID":"12247","Oid":"c08fec5a706e79120dfera7","Online":"1","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-05-28","LoginTime":"2017-05-28 22:57:17","OnlineTime":"2017-05-28 22:57:17","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
      * code : 0
-     * ifo : {"MID":"2763252","M_Start":"2017-05-28 04:00:00","M_League":"罗马尼亚乙组联赛","MB_Team":"巴罗特斯缇","TG_Team":"普利塔力卡蒂米什瓦拉","M_LetB_RB":"","M_LetB":"0.5","MB_Ball":"3","TG_Ball":"2","MB_Win_Rate":"1.95","MB_Win_Rate_RB":"0","TG_Win_Rate":"2.91","TG_Win_Rate_RB":"0","mpid":null}
+     * ifo : {"ft_gq_nums":0,"ft_ds_nums":20,"bk_gq_nums":0,"bk_ds_nums":0,"pt_nums":"5","zrsx_nums":8}
      */
 
     private MemberBean member;
@@ -44,8 +46,8 @@ public class MainIndexRsp  implements Serializable{
     public static class MemberBean {
         /**
          * ID : 12247
-         * Oid : be3d5d5d636e79120dfera5
-         * Online : 0
+         * Oid : c08fec5a706e79120dfera7
+         * Online : 1
          * Language : zh-cn
          * UserName : xiaobao
          * Money : 0
@@ -64,12 +66,12 @@ public class MainIndexRsp  implements Serializable{
          * Send : 0
          * BetType : 0
          * LoginDate : 2017-05-28
-         * LoginTime : 2017-05-28 04:48:47
-         * OnlineTime : 2017-05-28 04:48:47
+         * LoginTime : 2017-05-28 22:57:17
+         * OnlineTime : 2017-05-28 22:57:17
          * LogoutTime : 0000-00-00 00:00:00
          * AddDate : 2017-03-12 01:34:59
          * EditDate : 2017-03-12
-         * LoginIP : 222.127.25.26
+         * LoginIP : 122.55.4.242
          * Url : .http://bet365test.lebole5.com/
          * Agents : daa888
          * World : caa888
@@ -899,147 +901,67 @@ public class MainIndexRsp  implements Serializable{
 
     public static class IfoBean {
         /**
-         * MID : 2763252
-         * M_Start : 2017-05-28 04:00:00
-         * M_League : 罗马尼亚乙组联赛
-         * MB_Team : 巴罗特斯缇
-         * TG_Team : 普利塔力卡蒂米什瓦拉
-         * M_LetB_RB :
-         * M_LetB : 0.5
-         * MB_Ball : 3
-         * TG_Ball : 2
-         * MB_Win_Rate : 1.95
-         * MB_Win_Rate_RB : 0
-         * TG_Win_Rate : 2.91
-         * TG_Win_Rate_RB : 0
-         * mpid : null
+         * ft_gq_nums : 0
+         * ft_ds_nums : 20
+         * bk_gq_nums : 0
+         * bk_ds_nums : 0
+         * pt_nums : 5
+         * zrsx_nums : 8
          */
 
-        private String MID;
-        private String M_Start;
-        private String M_League;
-        private String MB_Team;
-        private String TG_Team;
-        private String M_LetB_RB;
-        private String M_LetB;
-        private String MB_Ball;
-        private String TG_Ball;
-        private String MB_Win_Rate;
-        private String MB_Win_Rate_RB;
-        private String TG_Win_Rate;
-        private String TG_Win_Rate_RB;
-        private Object mpid;
+        private int ft_gq_nums;
+        private int ft_ds_nums;
+        private int bk_gq_nums;
+        private int bk_ds_nums;
+        private String pt_nums;
+        private int zrsx_nums;
 
-        public String getMID() {
-            return MID;
+        public int getFt_gq_nums() {
+            return ft_gq_nums;
         }
 
-        public void setMID(String MID) {
-            this.MID = MID;
+        public void setFt_gq_nums(int ft_gq_nums) {
+            this.ft_gq_nums = ft_gq_nums;
         }
 
-        public String getM_Start() {
-            return M_Start;
+        public int getFt_ds_nums() {
+            return ft_ds_nums;
         }
 
-        public void setM_Start(String M_Start) {
-            this.M_Start = M_Start;
+        public void setFt_ds_nums(int ft_ds_nums) {
+            this.ft_ds_nums = ft_ds_nums;
         }
 
-        public String getM_League() {
-            return M_League;
+        public int getBk_gq_nums() {
+            return bk_gq_nums;
         }
 
-        public void setM_League(String M_League) {
-            this.M_League = M_League;
+        public void setBk_gq_nums(int bk_gq_nums) {
+            this.bk_gq_nums = bk_gq_nums;
         }
 
-        public String getMB_Team() {
-            return MB_Team;
+        public int getBk_ds_nums() {
+            return bk_ds_nums;
         }
 
-        public void setMB_Team(String MB_Team) {
-            this.MB_Team = MB_Team;
+        public void setBk_ds_nums(int bk_ds_nums) {
+            this.bk_ds_nums = bk_ds_nums;
         }
 
-        public String getTG_Team() {
-            return TG_Team;
+        public String getPt_nums() {
+            return pt_nums;
         }
 
-        public void setTG_Team(String TG_Team) {
-            this.TG_Team = TG_Team;
+        public void setPt_nums(String pt_nums) {
+            this.pt_nums = pt_nums;
         }
 
-        public String getM_LetB_RB() {
-            return M_LetB_RB;
+        public int getZrsx_nums() {
+            return zrsx_nums;
         }
 
-        public void setM_LetB_RB(String M_LetB_RB) {
-            this.M_LetB_RB = M_LetB_RB;
-        }
-
-        public String getM_LetB() {
-            return M_LetB;
-        }
-
-        public void setM_LetB(String M_LetB) {
-            this.M_LetB = M_LetB;
-        }
-
-        public String getMB_Ball() {
-            return MB_Ball;
-        }
-
-        public void setMB_Ball(String MB_Ball) {
-            this.MB_Ball = MB_Ball;
-        }
-
-        public String getTG_Ball() {
-            return TG_Ball;
-        }
-
-        public void setTG_Ball(String TG_Ball) {
-            this.TG_Ball = TG_Ball;
-        }
-
-        public String getMB_Win_Rate() {
-            return MB_Win_Rate;
-        }
-
-        public void setMB_Win_Rate(String MB_Win_Rate) {
-            this.MB_Win_Rate = MB_Win_Rate;
-        }
-
-        public String getMB_Win_Rate_RB() {
-            return MB_Win_Rate_RB;
-        }
-
-        public void setMB_Win_Rate_RB(String MB_Win_Rate_RB) {
-            this.MB_Win_Rate_RB = MB_Win_Rate_RB;
-        }
-
-        public String getTG_Win_Rate() {
-            return TG_Win_Rate;
-        }
-
-        public void setTG_Win_Rate(String TG_Win_Rate) {
-            this.TG_Win_Rate = TG_Win_Rate;
-        }
-
-        public String getTG_Win_Rate_RB() {
-            return TG_Win_Rate_RB;
-        }
-
-        public void setTG_Win_Rate_RB(String TG_Win_Rate_RB) {
-            this.TG_Win_Rate_RB = TG_Win_Rate_RB;
-        }
-
-        public Object getMpid() {
-            return mpid;
-        }
-
-        public void setMpid(Object mpid) {
-            this.mpid = mpid;
+        public void setZrsx_nums(int zrsx_nums) {
+            this.zrsx_nums = zrsx_nums;
         }
     }
 }

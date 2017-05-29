@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
+import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.GetBannerData;
@@ -40,20 +41,19 @@ import okhttp3.Response;
 public class FirstFragment extends BaseFragment implements View.OnClickListener {
     private BettingFragment bettingFragment;
     private ServiceFragment serviceFragment;
+    private   MainIndexRsp mainIndexRsp;
     private Intent  intent;
     private View view;
+    private TextView tv_A,tv_B,tv_C,tv_D,tv_E,tv_F;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          view = inflater.inflate(R.layout.fragment_first, null);
          initView();
-         initData();
-
         return view;
 
     }
-
-
 
     private void initView() {
         //轮播图
@@ -63,7 +63,16 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         banner.update(GetBannerData.getBannerData());
         //跑马灯的逻辑
         runhorseLight();
-        //四个按钮点击
+
+
+        tv_A= (TextView) view.findViewById(R.id.tv_A);
+        tv_B= (TextView) view.findViewById(R.id.tv_B);
+        tv_C= (TextView) view.findViewById(R.id.tv_C);
+        tv_D= (TextView) view.findViewById(R.id.tv_D);
+        tv_E= (TextView) view.findViewById(R.id.tv_E);
+        tv_F= (TextView) view.findViewById(R.id.tv_F);
+
+        //按钮点击
         view.findViewById(R.id.ll_betting_top).setOnClickListener(this);
         view.findViewById(R.id.ll_reallyperson).setOnClickListener(this);
         view.findViewById(R.id.ll_sports_help).setOnClickListener(this);
@@ -76,11 +85,10 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         intent=new Intent();
     }
 
-    private void initData() {
-        LogUtil.e("===============message=========" +  SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""));
+    private void initHomeIndex() {
         RequestBody requestBody = new FormBody.Builder()
-                .add("fnName", "main")
-                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add(SportsKey.FNNAME, "main")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -97,13 +105,33 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
-                LogUtil.e("===============message=========" + message);
+                LogUtil.e("===============initHomeIndex=========" + message);
                  Gson gson=new Gson();
-                MainIndexRsp mainIndexRsp=new MainIndexRsp();
-                mainIndexRsp=gson.fromJson(message,MainIndexRsp.class);
-
-
-
+                try{
+                    mainIndexRsp=gson.fromJson(message,MainIndexRsp.class);
+                    if (mainIndexRsp.getCode()==9){
+                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                        return;
+                    }
+                    if (mainIndexRsp.getCode()==0){
+                           //修改UI必须在主线程
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
+                                tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
+                                tv_C.setText(mainIndexRsp.getIfo().getM_League());
+                                tv_D.setText(mainIndexRsp.getIfo().getMB_Ball()+" : "+mainIndexRsp.getIfo().getTG_Ball());
+                                tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
+                                tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
+                            }
+                        });
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                }
             }
         });
     }
@@ -115,7 +143,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         super.onResume();
         MobclickAgent.onPageStart("FirstFragment");
         runhorseLight();
-
+        initHomeIndex();
     }
     /**
      *     跑马灯的逻辑
@@ -180,9 +208,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      * 跳转到下注面页
      */
     private void gtotoBetting() {
-        if (null==bettingFragment){
-            bettingFragment=new BettingFragment();
-        }
+        ((MainActivity)getActivity()).goBetting("","");
         ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
     }
 

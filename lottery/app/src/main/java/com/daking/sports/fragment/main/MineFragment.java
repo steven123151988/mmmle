@@ -44,6 +44,8 @@ import okhttp3.Response;
 public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ServiceFragment serviceFragment;
     private TextView tv_name;
+    private FirstFragment firstFragment;
+    private LoginRsp loginRsp;
 
 
     @Override
@@ -114,7 +116,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
      * 退出登陆
      */
     private void loginout() {
-        LogUtil.e("===============message=========" +  SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""));
         RequestBody requestBody = new FormBody.Builder()
                 .add("fnName", "lgout")
                 .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
@@ -134,7 +135,31 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
-                LogUtil.e("===============message=========" + message);
+                LogUtil.e("===============loginout=========" + message);
+                try {
+                    loginRsp = new LoginRsp();
+                    Gson gson = new Gson();
+                    loginRsp = gson.fromJson(message, loginRsp.getClass());
+                    //到主线程上更新UI
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtil.show(getActivity(), loginRsp.getIfo());
+                            if (loginRsp.getCode() == 0) {
+                                if (null == firstFragment) {
+                                    firstFragment = new FirstFragment();
+                                }
+                                SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
+                                ((MainActivity) getActivity()).showFragmentViews(SportsId.TYPE_ONE, firstFragment);
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+
+                }
+
 
             }
         });

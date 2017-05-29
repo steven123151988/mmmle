@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsKey;
 import com.daking.sports.util.LogUtil;
 
 /**
@@ -15,9 +16,16 @@ import com.daking.sports.util.LogUtil;
  */
 
 public class BasketballFragment extends BaseFragment {
+    private  String type;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_basketball, null);
+
+        if (null != getArguments().getString(SportsKey.TYPE)) {
+            type = getArguments().getString(SportsKey.TYPE);
+        }
+        LogUtil.e("===FootballFragment==type======="+type);
+
 
         return view;
     }

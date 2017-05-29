@@ -9,16 +9,15 @@ import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.betting.BasketballFragment;
 import com.daking.sports.fragment.betting.FootballFragment;
 import com.daking.sports.fragment.betting.ShixunFragment;
-import com.daking.sports.util.LogUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
@@ -35,6 +34,7 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     private BasketballFragment basketballFragment;
     private ShixunFragment shixunFragment;
     private View view_betting;
+    private String ball, type;
 
     @Override
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -50,9 +50,19 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         tv_basketball = (TextView) view.findViewById(R.id.tv_basketball);
         tv_shixun = (TextView) view.findViewById(R.id.tv_shixun);
         view_betting = view.findViewById(R.id.view_fragment2);
-//        ImageView iv_center = (ImageView) view.findViewById(R.id.iv_center);
-//        iv_center.setVisibility(View.VISIBLE);
-        getFootballView();
+
+        if (null != getArguments().getString(SportsKey.BALL)) {
+            ball = getArguments().getString(SportsKey.BALL);
+        }
+        if (null != getArguments().getString(SportsKey.TYPE)) {
+            type = getArguments().getString(SportsKey.TYPE);
+        }
+
+        if (ball.equals(SportsKey.FOOTBALL)||ball.equals("")) {
+            getFootballView(type);
+        } else {
+            goBasketball(type);
+        }
         return view;
     }
 
@@ -80,19 +90,10 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_football:
-                getFootballView();
+                getFootballView("");
                 break;
             case R.id.ll_basketball:
-                ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-                ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
-                tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
-                tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-                if (null == basketballFragment) {
-                    basketballFragment = new BasketballFragment();
-                }
-                showView(basketballFragment);
+                goBasketball("");
                 break;
             case R.id.ll_shixun:
                 ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
@@ -110,16 +111,32 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void getFootballView() {
+    private void goBasketball(String type) {
+        ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
+        tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
+        tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
+        if (null == basketballFragment) {
+            basketballFragment = new BasketballFragment();
+        }
+        setBasketballMessage(type);
+        showView(basketballFragment);
+    }
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private void getFootballView(String type) {
         ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
         ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
         ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
         tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
         tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
         tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-        if (null == footballFragment) {
-            footballFragment = new FootballFragment();
-        }
+        setFootballMessage(type);
         showView(footballFragment);
     }
 
@@ -152,4 +169,31 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 设置足球的数据
+     * @param type
+     */
+    public void setFootballMessage(String type) {
+        if (null==footballFragment){
+            footballFragment=new FootballFragment() ;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(SportsKey.TYPE,type);
+        footballFragment.setArguments(bundle);
+    }
+
+
+    /**
+     * 设置篮球的数据
+     */
+    private void setBasketballMessage(String type) {
+        if (null==basketballFragment){
+            basketballFragment=new BasketballFragment() ;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(SportsKey.TYPE,type);
+        basketballFragment.setArguments(bundle);
+    }
+
 }

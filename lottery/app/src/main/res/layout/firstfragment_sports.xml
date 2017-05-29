@@ -26,12 +26,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="@dimen/dimen_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -40,27 +42,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
                 android:layout_marginTop="@dimen/dimen_10"
                 android:src="@mipmap/hg6686_41" />
 
             <TextView
+                android:id="@+id/tv_A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:text="0.00"
+                android:text="A"
                 android:textSize="@dimen/dimen_14"
 
                 />
 
             <TextView
+                android:id="@+id/tv_B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_5"
-                android:text="0.00"
-                android:textSize="@dimen/dimen_16"
+                android:paddingLeft="@dimen/dimen_10"
+                android:text="B"
+                android:textSize="@dimen/dimen_13"
 
                 />
 
@@ -68,37 +72,39 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="123"
+                android:text="C"
                 android:textSize="@dimen/dimen_16" />
 
             <ImageView
-                android:layout_marginTop="@dimen/dimen_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_10"
                 android:src="@mipmap/hg6686_45" />
 
             <TextView
-                android:layout_marginTop="@dimen/dimen_10"
+                android:id="@+id/tv_D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="123"
-                android:textSize="@dimen/dimen_14" />
+                android:layout_marginTop="@dimen/dimen_10"
+                android:text="D"
+                android:textSize="@dimen/dimen_20" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -111,22 +117,25 @@
                 android:src="@mipmap/hg6686_41" />
 
             <TextView
+                android:id="@+id/tv_E"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:text="0.00"
+                android:text="E"
                 android:textSize="@dimen/dimen_14"
 
                 />
 
             <TextView
+                android:id="@+id/tv_F"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_5"
-                android:text="0.00"
-                android:textSize="@dimen/dimen_16"
+                android:paddingRight="@dimen/dimen_5"
+                android:text="F"
+                android:textSize="@dimen/dimen_13"
 
                 />
 

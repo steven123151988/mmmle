@@ -17,13 +17,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.login.LoginActivity;
+import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseActivity;
+import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.main.BettingFragment;
@@ -31,9 +33,21 @@ import com.daking.sports.fragment.main.FirstFragment;
 import com.daking.sports.fragment.main.MineFragment;
 import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
+import com.daking.sports.json.MainMenuRsp;
+import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
+import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  *   APP主页  控制5个fragment来展示界面
@@ -56,16 +70,14 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private Toolbar mToolbar;
     private NavigationView mNavigationView;//侧边菜单项
     private MenuItem mPreMenuItem;
-
-
+    private MainMenuRsp mainMenuRsp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initTitlebar();
-        initView();
-        initDate();
+        initMainMenu();
     }
+
 
     private void initTitlebar() {
         mToolbar = fuck(R.id.toolbar);
@@ -74,11 +86,9 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         //左侧的头部文件
         View navigation_header = LayoutInflater.from(this).inflate(R.layout.navigation_header, null);
         mNavigationView.addHeaderView(navigation_header);
-
-
         tv_username= (TextView)navigation_header.findViewById(R.id.tv_username);
         tv_username.setText( SharePreferencesUtil.getString(mContext,SportsKey.USER_NAME,"leying"));
-        mToolbar.setTitle("首页");
+        mToolbar.setTitle(getString(R.string.app_name));
         //这句一定要在下面几句之前调用，不然就会出现点击无反应
         setSupportActionBar(mToolbar);
         setNavigationViewItemClickListener();
@@ -110,11 +120,53 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         getFistView();
     }
 
-    private void initDate() {
-        if (SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")){
-            startActivity(new Intent(mContext,LoginActivity.class));
-        }
+    /**
+     *  请求左侧菜单的数据
+     */
+    private void initMainMenu() {
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, "menu")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.HOME_MENU)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String message = response.body().string();
+                LogUtil.e("===============initMainMenu=========" + message);
+                Gson gson=new Gson();
+                try{
+                    mainMenuRsp=gson.fromJson(message,MainMenuRsp.class);
+                    if(mainMenuRsp.getCode()==0){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                initTitlebar();
+                                initView();
+                            }
+                        });
+
+                    }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+
+                }
+            }
+        });
     }
+
 
     @Override
     protected void onStart() {
@@ -142,9 +194,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 getFistView();
                 break;
             case R.id.ll_betting:
-                if (null==bettingFragment){
-                    bettingFragment = new BettingFragment();
-                }
+                goBetting("","");
                 showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
                 break;
             case R.id.ll_score:
@@ -219,7 +269,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private void switchViewByType(int type) {
         switch(type){
             case SportsId.TYPE_ONE :
-                mToolbar.setTitle("首页");
+                mToolbar.setTitle(getString(R.string.app_name));
                 mIvHome.setImageResource(R.mipmap.main_main);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -232,7 +282,8 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case SportsId.TYPE_TWO:
-                mToolbar.setTitle(getString(R.string.betting));
+                //TODO  mToolbar chong
+//                mToolbar.setTitle(getString(R.string.betting));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -269,7 +320,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case SportsId.TYPE_FIVE :
-                mToolbar.setTitle("个人中心");
+                mToolbar.setTitle(getString(R.string.personal_center));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -282,7 +333,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvMime.setTextColor(getResources().getColor(R.color.red_84201e));
                 break;
             case SportsId.TYPE_SIX :
-                mToolbar.setTitle("在线客服");
+                mToolbar.setTitle(getString(R.string.sports_service));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -318,6 +369,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
      * 左侧空间点击事件的监听
      */
     private void setNavigationViewItemClickListener() {
+
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
 
@@ -328,32 +380,37 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 }
                 switch (item.getItemId()) {
                     case R.id.navigation_item_home:
-                        mToolbar.setTitle("首页");
-//                        switchFragment(MainFragment.class);
+                        mToolbar.setTitle(getString(R.string.app_name));
+                        getFistView();
                         break;
-                    case R.id.navigation_item_ganhuo:
-                        mToolbar.setTitle("ganhuo");
-//                        switchFragment(GanHuoFragment.class);
+                    case R.id.navigation_football_dan:
+                        mToolbar.setTitle(getString(R.string.football_dan)+"("+mainMenuRsp.getIfo().getFt_ds_nums()+")");
+                        goBetting(SportsKey.FOOTBALL,SportsKey.JRSS);
+
                         break;
-                    case R.id.navigation_item_blog:
-                        mToolbar.setTitle("我的博客");
-//                        switchFragment(BlogFragment.class);
+                    case R.id.navigation_football_gun:
+                        mToolbar.setTitle(getString(R.string.football_gun)+"("+mainMenuRsp.getIfo().getFt_gq_nums()+")");
+                        goBetting(SportsKey.FOOTBALL,SportsKey.GQ);
+
                         break;
-                    case R.id.navigation_item_custom_view:
-                        mToolbar.setTitle("自定义View");
-//                        switchFragment(CustomViewFragment.class);
+                    case R.id.navigation_basketball_dan:
+                         mToolbar.setTitle(getString(R.string.basketball_dan)+"("+mainMenuRsp.getIfo().getBk_ds_nums()+")");
+                        goBetting(SportsKey.BASKETBALL,SportsKey.JRSS);
                         break;
-                    case R.id.navigation_item_snackbar:
-                        mToolbar.setTitle("Snackbar演示");
-//                        switchFragment(SnackBarFragment.class);
+                    case R.id.navigation_basketball_gun:
+                        mToolbar.setTitle(getString(R.string.basketball_gun)+"("+mainMenuRsp.getIfo().getBk_gq_nums()+")");
+                        goBetting(SportsKey.BASKETBALL,SportsKey.GQ);
                         break;
-                    case R.id.navigation_item_switch_theme:
-                        mToolbar.setTitle("主题换肤");
-//                        switchFragment(ChangeSkinFragment.class);
+                    case R.id.navigation_ag:
+                        mToolbar.setTitle(getString(R.string.ag)+"("+mainMenuRsp.getIfo().getZrsx_nums()+")");
+                        Intent   intent=new Intent(mContext, WebViewActivity.class);
+                        intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.ag));
+                        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
+                        startActivity(intent);
                         break;
-                    case R.id.navigation_item_about:
-                        mToolbar.setTitle("关于");
-//                        switchFragment(AboutFragment.class);
+                    case R.id.navigation_lottery:
+                        mToolbar.setTitle(getString(R.string.lottery)+"("+mainMenuRsp.getIfo().getPt_nums()+")");
+                        ToastUtil.show(mContext,"暂未开放!");
                         break;
                     default:
                         break;
@@ -364,6 +421,26 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 return false;
             }
         });
+    }
+
+
+    /**
+     *  进入下注面页
+     * @param ball
+     * @param type
+     */
+    public void goBetting(String ball,String type) {
+        if (null==bettingFragment){
+            bettingFragment=new BettingFragment() ;
+        }else {
+            bettingFragment=null;
+            bettingFragment=new BettingFragment() ;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(SportsKey.BALL,ball);
+        bundle.putString(SportsKey.TYPE,type);
+        bettingFragment.setArguments(bundle);
+        showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
     }
 
 }

@@ -10,7 +10,9 @@ public class SportsAPI {
     public static final String REGIST="member/reg/mem_reg.php";//注册
     public static final String LOGIN="login/login";//登陆
     public static final String LOGIN_OUT="login/loginout";//登出
-    public static final String HOME_INDEX="home/index";
+    public static final String HOME_INDEX="home/index"; //主页数据
+    public static final String HOME_MENU="home/main_menu"; //主页菜单数据
+    public static final String MATCH_LIST="home/match_list";//赛事盘口资料
 
     public static final String GET_DATA="member/account/mem_data.php";//获取会员资料
     public static final String MODIFY_PSW="/app/member/account/forget_psw.php";//忘记密码

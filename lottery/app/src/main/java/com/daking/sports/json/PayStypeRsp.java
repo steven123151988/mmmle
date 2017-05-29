@@ -1,12 +1,13 @@
 package com.daking.sports.json;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 18 on 2017/5/17.
  */
 
-public class PayStypeRsp {
+public class PayStypeRsp implements Serializable {
 
     /**
      * code : 0

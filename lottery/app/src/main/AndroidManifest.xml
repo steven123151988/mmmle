@@ -46,7 +46,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.login.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +54,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.mine.UnclearedActivity"
             android:screenOrientation="portrait" />
@@ -93,9 +97,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.betting.BettingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.login.SplashActivitt"
             android:screenOrientation="portrait" />
 
         <meta-data

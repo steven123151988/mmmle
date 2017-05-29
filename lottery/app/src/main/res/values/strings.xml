@@ -46,7 +46,7 @@
     <string name="regist_money_psw_confirm">提款必须认证，务必记住</string>
     <string name="regist_email">邮箱</string>
     <string name="sports_betting">体育投注</string>
-    <string name="ag">真人视讯</string>
+
     <string name="sports_help">存取帮助</string>
     <string name="sports_service">在线客服</string>
     <string name="baccarat">百家乐</string>
@@ -140,4 +140,11 @@
     <string name="type_in_betting_money">请输入投注金额</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="football_dan">足球单式</string>
+    <string name="football_gun">足球滚球</string>
+    <string name="basketball_dan">篮球单式</string>
+    <string name="basketball_gun">篮球滚球</string>
+    <string name="ag">真人视讯</string>
+    <string name="lottery">彩票游戏</string>
+    <string name="personal_center">个人中心</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.daking.sports.json;
 
+import java.io.Serializable;
+
 /**
  * Created by 18 on 2017/5/8.
  */
 
-public class LoginRsp {
+public class LoginRsp implements Serializable {
 
 
     /**

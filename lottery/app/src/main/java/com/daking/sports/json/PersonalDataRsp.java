@@ -1,10 +1,12 @@
 package com.daking.sports.json;
 
+import java.io.Serializable;
+
 /**
  * Created by 18 on 2017/5/8.
  */
 
-public class PersonalDataRsp {
+public class PersonalDataRsp implements Serializable {
 
     private int code;
     private IfoBean ifo;

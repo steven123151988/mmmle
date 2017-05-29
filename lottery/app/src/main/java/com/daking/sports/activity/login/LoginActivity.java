@@ -3,6 +3,7 @@ package com.daking.sports.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.MainActivity;
 import com.daking.sports.activity.mine.PswManagerActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsKey;
@@ -38,7 +40,6 @@ import okhttp3.Response;
 public class LoginActivity extends BaseActivity implements OnClickListener {
     private EditText et_account, et_psw;
     private String account, psw;
-    private ImageView iv_back;
     private LoginRsp LoginRsp;
     private TextView tv_center;
     private Gson gson;
@@ -50,12 +51,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         setContentView(R.layout.activity_login);
         et_account = (EditText) findViewById(R.id.et_account);
         et_psw = (EditText) findViewById(R.id.et_psw);
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-        iv_back.setVisibility(View.VISIBLE);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
         tv_center.setText(getString(R.string.login));
-        iv_back.setOnClickListener(this);
         findViewById(R.id.btn_forgetPsw).setOnClickListener(this);
         findViewById(R.id.btn_register).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
@@ -64,11 +62,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
-                if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")) {
-                    finish();
-                }
-                break;
             case R.id.btn_register:
                 startActivity(new Intent(mContext, RegistActivity.class));
                 break;
@@ -91,7 +84,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             RequestBody requestBody = new FormBody.Builder()
                     .add("username", account)
                     .add("password", psw)
-                    .add("fnName", "lg")
+                    .add(SportsKey.FNNAME, "lg")
                     .add("langx", "zh-cn")
                     .build();
 
@@ -110,7 +103,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
                         String message = response.body().string();
-                        LogUtil.e("===============message=========" + message);
+                        LogUtil.e("===============login=========" + message);
                         gson = new Gson();
                         LoginRsp = gson.fromJson(message, LoginRsp.class);
                         if (LoginRsp.getCode() == 0) {
@@ -132,6 +125,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
+                                            startActivity(new Intent(mContext, MainActivity.class));
                                             finish();
                                         }
                                     }, 2500);
@@ -151,10 +145,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
                         }
                     } catch (Exception e) {
-                        LogUtil.e("========onResponse==============" + e);
+                        LogUtil.e("========login==============" + e);
                     }
-
-
                 }
             });
         }
@@ -187,11 +179,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 try {
                     gson = new Gson();
                     String message = response.body().string();
-                    LogUtil.e("===========response.body().string()===========" + message);
+                    LogUtil.e("==========initPersonData===========" + message);
                     personalDataRsp = gson.fromJson(message, PersonalDataRsp.class);
                     SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, personalDataRsp.getIfo().getUserName());
                 } catch (Exception e) {
-                    LogUtil.e("========onResponse==============" + e);
+                    LogUtil.e("========initPersonData==============" + e);
                 }
             }
         });
@@ -199,7 +191,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
     @Override
     public void onBackPressed() {
-        if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "").equals("")) {
+        if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "0").equals("0")) {
             super.onBackPressed();
         }
     }
