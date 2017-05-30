@@ -144,23 +144,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ToastUtil.show(getActivity(), loginRsp.getIfo());
-                            if (loginRsp.getCode() == 0) {
-                                if (null == firstFragment) {
-                                    firstFragment = new FirstFragment();
-                                }
-                                SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
-                                ((MainActivity) getActivity()).showFragmentViews(SportsId.TYPE_ONE, firstFragment);
+                            switch (loginRsp.getCode()) {
+                                case 0:
+                                    if (null == firstFragment) {
+                                        firstFragment = new FirstFragment();
+                                    }
+                                    SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
+                                    ((MainActivity) getActivity()).showFragmentViews(SportsId.TYPE_ONE, firstFragment);
+                                    ToastUtil.show(getActivity(), loginRsp.getIfo());
+                                    break;
+                                case 6:
+                                    ToastUtil.show(getActivity(), loginRsp.getIfo());
+                                    break;
                             }
                         }
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-
                 }
-
-
             }
         });
     }

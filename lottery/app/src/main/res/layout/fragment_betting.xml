@@ -4,8 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<include layout="@layout/title_image_text_text" />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingBottom="@dimen/dimen_5"
-                android:text="@string/shixun"
+                android:text="排球"
                 android:textSize="@dimen/dimen_16" />
         </LinearLayout>
 

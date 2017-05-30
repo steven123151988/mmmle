@@ -52,7 +52,6 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
          view = inflater.inflate(R.layout.fragment_first, null);
          initView();
         return view;
-
     }
 
     private void initView() {
@@ -63,15 +62,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         banner.update(GetBannerData.getBannerData());
         //跑马灯的逻辑
         runhorseLight();
-
-
         tv_A= (TextView) view.findViewById(R.id.tv_A);
         tv_B= (TextView) view.findViewById(R.id.tv_B);
         tv_C= (TextView) view.findViewById(R.id.tv_C);
         tv_D= (TextView) view.findViewById(R.id.tv_D);
         tv_E= (TextView) view.findViewById(R.id.tv_E);
         tv_F= (TextView) view.findViewById(R.id.tv_F);
-
         //按钮点击
         view.findViewById(R.id.ll_betting_top).setOnClickListener(this);
         view.findViewById(R.id.ll_reallyperson).setOnClickListener(this);
@@ -90,12 +86,10 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                 .add(SportsKey.FNNAME, "main")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
                 .build();
-
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(SportsAPI.BASE_URL + SportsAPI.HOME_INDEX)
                 .post(requestBody)
                 .build();
-
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -208,7 +202,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      * 跳转到下注面页
      */
     private void gtotoBetting() {
-        ((MainActivity)getActivity()).goBetting("","");
+        ((MainActivity)getActivity()).goBetting(SportsKey.FOOTBALL,"");
         ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
     }
 

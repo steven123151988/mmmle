@@ -15,8 +15,7 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.fragment.betting.BasketballFragment;
-import com.daking.sports.fragment.betting.FootballFragment;
+import com.daking.sports.fragment.betting.BallFragment;
 import com.daking.sports.fragment.betting.ShixunFragment;
 import com.umeng.analytics.MobclickAgent;
 
@@ -30,8 +29,7 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     private FragmentTransaction mFragmentTransaction;    // fragment事物
     private LinearLayout ll_football, ll_basketball, ll_shixun;
     private TextView tv_football, tv_basketball, tv_shixun;
-    private FootballFragment footballFragment;
-    private BasketballFragment basketballFragment;
+    private BallFragment ballFragment;
     private ShixunFragment shixunFragment;
     private View view_betting;
     private String ball, type;
@@ -50,18 +48,14 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         tv_basketball = (TextView) view.findViewById(R.id.tv_basketball);
         tv_shixun = (TextView) view.findViewById(R.id.tv_shixun);
         view_betting = view.findViewById(R.id.view_fragment2);
-
         if (null != getArguments().getString(SportsKey.BALL)) {
             ball = getArguments().getString(SportsKey.BALL);
         }
         if (null != getArguments().getString(SportsKey.TYPE)) {
             type = getArguments().getString(SportsKey.TYPE);
         }
-
-        if (ball.equals(SportsKey.FOOTBALL)||ball.equals("")) {
-            getFootballView(type);
-        } else {
-            goBasketball(type);
+        if (null != ball && null != type) {
+            getballView(ball, type);
         }
         return view;
     }
@@ -70,8 +64,6 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("BettingFragment");
-
-
     }
 
     @Override
@@ -90,10 +82,10 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_football:
-                getFootballView("");
+                getballView(SportsKey.FOOTBALL, "");
                 break;
             case R.id.ll_basketball:
-                goBasketball("");
+                getballView(SportsKey.BASKETBALL, "");
                 break;
             case R.id.ll_shixun:
                 ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
@@ -110,34 +102,27 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
         }
     }
 
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void goBasketball(String type) {
-        ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
-        tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
-        tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-        if (null == basketballFragment) {
-            basketballFragment = new BasketballFragment();
+    private void getballView(String ball, String type) {
+        if (ball.equals(SportsKey.FOOTBALL)) {
+            ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+            ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+            ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+            tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
+            tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
+            tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
+        } else {
+            ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+            ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+            ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+            tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
+            tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
+            tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
         }
-        setBasketballMessage(type);
-        showView(basketballFragment);
-    }
 
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    private void getFootballView(String type) {
-        ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
-        tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
-        tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-        setFootballMessage(type);
-        showView(footballFragment);
+        setBallMessage(ball, type);
+        showView(ballFragment);
     }
 
     /**
@@ -145,7 +130,6 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
      *
      * @param fragment 因为getChildFragmentManager();在17才有所以引用
      */
-
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void showView(Fragment fragment) {
         mFragmentManager = getChildFragmentManager();
@@ -155,7 +139,9 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-    //To solve fragment  include fragment case Activity has been destroyed.
+    /**
+     * To solve fragment  include fragment case Activity has been destroyed.
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -171,29 +157,21 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     }
 
     /**
-     * 设置足球的数据
+     * 设置球的数据
+     *
      * @param type
      */
-    public void setFootballMessage(String type) {
-        if (null==footballFragment){
-            footballFragment=new FootballFragment() ;
+    public void setBallMessage(String ball, String type) {
+        if (null == ballFragment) {
+            ballFragment = new BallFragment();
+        } else {
+            ballFragment = null;
+            ballFragment = new BallFragment();
         }
         Bundle bundle = new Bundle();
-        bundle.putString(SportsKey.TYPE,type);
-        footballFragment.setArguments(bundle);
-    }
-
-
-    /**
-     * 设置篮球的数据
-     */
-    private void setBasketballMessage(String type) {
-        if (null==basketballFragment){
-            basketballFragment=new BasketballFragment() ;
-        }
-        Bundle bundle = new Bundle();
-        bundle.putString(SportsKey.TYPE,type);
-        basketballFragment.setArguments(bundle);
+        bundle.putString(SportsKey.TYPE, type);
+        bundle.putString(SportsKey.BALL, ball);
+        ballFragment.setArguments(bundle);
     }
 
 }

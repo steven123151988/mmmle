@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.betting.BettingActivity;
+import com.daking.sports.json.FootballGQRsp;
+
+import java.util.List;
 
 /**
  * Created by 18 on 2017/5/8.  足球篮球下注的适配器
@@ -20,24 +23,26 @@ import com.daking.sports.activity.betting.BettingActivity;
 public class BettingAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
+    private List<FootballGQRsp.IfoBean> ifos;
 
-    public BettingAdapter(Context context) {
+    public BettingAdapter(Context context, List<FootballGQRsp.IfoBean> ifo) {
         this.mcontext = context;
+        this.ifos=ifo;
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return null==ifos?0:ifos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return position;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -53,7 +58,7 @@ public class BettingAdapter extends BaseAdapter {
             viewHolder.tv_4 = (TextView) view.findViewById(R.id.tv_4);
             viewHolder.tv_5 = (TextView) view.findViewById(R.id.tv_5);
             viewHolder.tv_6 = (TextView) view.findViewById(R.id.tv_6);
-            viewHolder.ll_betting = (RelativeLayout) view.findViewById(R.id.rl_betting);
+            viewHolder.ll_betting = (LinearLayout) view.findViewById(R.id.rl_betting);
             viewHolder.ll_betting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,6 +71,13 @@ public class BettingAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
+
+        viewHolder.tv_1.setText(ifos.get(position).getM_League());
+        viewHolder.tv_2.setText("2");
+        viewHolder.tv_3.setText("3");
+        viewHolder.tv_4.setText(ifos.get(position).getMB_Team());
+        viewHolder.tv_5.setText(ifos.get(position).getTG_Team());
+        viewHolder.tv_6.setText(ifos.get(position).getMB_Ball()+" : "+ifos.get(position).getTG_Ball());
         return view;
     }
 
@@ -76,6 +88,6 @@ public class BettingAdapter extends BaseAdapter {
         TextView tv_4;
         TextView tv_5;
         TextView tv_6;
-        RelativeLayout ll_betting;
+        LinearLayout ll_betting;
     }
 }

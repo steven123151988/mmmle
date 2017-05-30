@@ -50,9 +50,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- *   APP主页  控制5个fragment来展示界面
+ * APP主页  控制5个fragment来展示界面
  */
-public class MainActivity extends BaseActivity  implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private FragmentManager mFragmentManager;  // Fragment管理器
     private FragmentTransaction mFragmentTransaction;    // fragment事物
     private FirstFragment firstFragment;
@@ -60,21 +60,33 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     private ScoreFragment scoreFragment;
     private PrizeFragment prizeFragment;
     private MineFragment mineFragment;
-    private ImageView mIvHome,mIvBetting,mIvMine,mIvPrize,mIvScore;
-    private TextView mTvHome,mTvScore,mTvPrize,mTvBetting,mTvMime;
-    private long mClickTime;
+    private ImageView mIvHome, mIvBetting, mIvMine, mIvPrize, mIvScore;
+    private TextView mTvHome, mTvScore, mTvPrize, mTvBetting, mTvMime;
     private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
-    private  TextView tv_username;
+    private TextView tv_username;
     private DrawerLayout mDrawerLayout;//侧边菜单视图
     private ActionBarDrawerToggle mDrawerToggle;  //菜单开关
     private Toolbar mToolbar;
     private NavigationView mNavigationView;//侧边菜单项
     private MenuItem mPreMenuItem;
     private MainMenuRsp mainMenuRsp;
+    private long mClickTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initTitlebar();
+        initView();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //fragmentActivity统计时长
+        MobclickAgent.onResume(this);
+        //放在这边避免需要登录返回后没出事话左侧的点击事件
         initMainMenu();
     }
 
@@ -86,12 +98,12 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         //左侧的头部文件
         View navigation_header = LayoutInflater.from(this).inflate(R.layout.navigation_header, null);
         mNavigationView.addHeaderView(navigation_header);
-        tv_username= (TextView)navigation_header.findViewById(R.id.tv_username);
-        tv_username.setText( SharePreferencesUtil.getString(mContext,SportsKey.USER_NAME,"leying"));
+        tv_username = (TextView) navigation_header.findViewById(R.id.tv_username);
+        tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME, "leying"));
         mToolbar.setTitle(getString(R.string.app_name));
         //这句一定要在下面几句之前调用，不然就会出现点击无反应
         setSupportActionBar(mToolbar);
-        setNavigationViewItemClickListener();
+//        setNavigationViewItemClickListener();
         //ActionBarDrawerToggle配合Toolbar，实现Toolbar上菜单按钮开关效果。
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
@@ -100,17 +112,17 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     }
 
     private void initView() {
-        mIvHome= (ImageView) findViewById(R.id.iv_home);
-        mIvBetting= (ImageView) findViewById(R.id.iv_betting);
-        mIvScore= (ImageView) findViewById(R.id.iv_score);
-        mIvMine= (ImageView) findViewById(R.id.iv_mine);
-        mIvPrize= (ImageView) findViewById(R.id.iv_prize);
+        mIvHome = (ImageView) findViewById(R.id.iv_home);
+        mIvBetting = (ImageView) findViewById(R.id.iv_betting);
+        mIvScore = (ImageView) findViewById(R.id.iv_score);
+        mIvMine = (ImageView) findViewById(R.id.iv_mine);
+        mIvPrize = (ImageView) findViewById(R.id.iv_prize);
 
-        mTvHome= (TextView) findViewById(R.id.tv_home);
-        mTvBetting= (TextView) findViewById(R.id.tv_betting);
-        mTvScore= (TextView) findViewById(R.id.tv_score);
-        mTvPrize= (TextView) findViewById(R.id.tv_prize);
-        mTvMime= (TextView) findViewById(R.id.tv_mine);
+        mTvHome = (TextView) findViewById(R.id.tv_home);
+        mTvBetting = (TextView) findViewById(R.id.tv_betting);
+        mTvScore = (TextView) findViewById(R.id.tv_score);
+        mTvPrize = (TextView) findViewById(R.id.tv_prize);
+        mTvMime = (TextView) findViewById(R.id.tv_mine);
 
         findViewById(R.id.ll_home).setOnClickListener(this);
         findViewById(R.id.ll_betting).setOnClickListener(this);
@@ -121,7 +133,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     }
 
     /**
-     *  请求左侧菜单的数据
+     * 请求左侧菜单的数据
      */
     private void initMainMenu() {
         RequestBody requestBody = new FormBody.Builder()
@@ -144,23 +156,31 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
                 LogUtil.e("===============initMainMenu=========" + message);
-                Gson gson=new Gson();
-                try{
-                    mainMenuRsp=gson.fromJson(message,MainMenuRsp.class);
-                    if(mainMenuRsp.getCode()==0){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                initTitlebar();
-                                initView();
+                Gson gson = new Gson();
+                try {
+                    mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch (mainMenuRsp.getCode()){
+                                case 0:
+                                    //得到接口数据才能赋值，不然报空
+                                    setNavigationViewItemClickListener();
+                                    break;
+                                case 10 :
+                                    ToastUtil.show(mContext,"暂时没有您选择的赛事！");
+                                    break;
                             }
-                        });
 
-                    }
-                }
-                catch (Exception e){
+                        }
+                    });
+
+
+
+
+                } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
 
                 }
             }
@@ -173,12 +193,6 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         super.onStart();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //fragmentActivity统计时长
-        MobclickAgent.onResume(this);
-    }
 
     @Override
     protected void onPause() {
@@ -188,30 +202,30 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.ll_home:
                 setAnimation();
                 getFistView();
                 break;
             case R.id.ll_betting:
-                goBetting("","");
-                showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
+                goBetting(SportsKey.FOOTBALL, "");
+                showFragmentViews(SportsId.TYPE_TWO, bettingFragment);
                 break;
             case R.id.ll_score:
-                if (null==scoreFragment){
+                if (null == scoreFragment) {
                     scoreFragment = new ScoreFragment();
                 }
-                showFragmentViews(SportsId.TYPE_THREE,scoreFragment);
+                showFragmentViews(SportsId.TYPE_THREE, scoreFragment);
                 break;
             case R.id.ll_prize:
-                if (null==prizeFragment){
+                if (null == prizeFragment) {
                     prizeFragment = new PrizeFragment();
                 }
-                showFragmentViews(SportsId.TYPE_FOUR,prizeFragment);
+                showFragmentViews(SportsId.TYPE_FOUR, prizeFragment);
                 break;
             case R.id.ll_mine:
                 setAnimation();
-                if (null== mineFragment){
+                if (null == mineFragment) {
                     mineFragment = new MineFragment();
                 }
                 showFragmentViews(SportsId.TYPE_FIVE, mineFragment);
@@ -222,10 +236,11 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
 
     /**
      * 展示fragment界面
+     *
      * @param fragment
      */
     public void showFragmentViews(int type, Fragment fragment) {
-        if (null!=fragment){
+        if (null != fragment) {
             switchViewByType(type);
             mFragmentManager = getFragmentManager();
             mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -235,13 +250,13 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
     }
 
     /**
-     *  获取APP的第一个界面
+     * 获取APP的第一个界面
      */
     private void getFistView() {
-        if (null==firstFragment){
+        if (null == firstFragment) {
             firstFragment = new FirstFragment();
         }
-        showFragmentViews(SportsId.TYPE_ONE,firstFragment);
+        showFragmentViews(SportsId.TYPE_ONE, firstFragment);
     }
 
     /**
@@ -249,11 +264,11 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setAnimation() {
-        if (sdk_version >20){
+        if (sdk_version > 20) {
             View view = findViewById(R.id.view_fragment);
             //这个是计算宽高最大值
             int finalRadius = Math.max(view.getWidth(), view.getHeight());
-            Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth()/2, view.getHeight()/2, 0, finalRadius);
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, 0, finalRadius);
             animator.setInterpolator(new AccelerateInterpolator());
             //设置画圆的时间
             animator.setDuration(500);
@@ -264,11 +279,12 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
 
     /**
      * 切换底部UI
+     *
      * @param type
      */
     private void switchViewByType(int type) {
-        switch(type){
-            case SportsId.TYPE_ONE :
+        switch (type) {
+            case SportsId.TYPE_ONE:
                 mToolbar.setTitle(getString(R.string.app_name));
                 mIvHome.setImageResource(R.mipmap.main_main);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
@@ -295,7 +311,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_THREE :
+            case SportsId.TYPE_THREE:
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score);
@@ -307,7 +323,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_FOUR :
+            case SportsId.TYPE_FOUR:
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -319,7 +335,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvPrize.setTextColor(getResources().getColor(R.color.red_84201e));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_FIVE :
+            case SportsId.TYPE_FIVE:
                 mToolbar.setTitle(getString(R.string.personal_center));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
@@ -332,7 +348,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.red_84201e));
                 break;
-            case SportsId.TYPE_SIX :
+            case SportsId.TYPE_SIX:
                 mToolbar.setTitle(getString(R.string.sports_service));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
@@ -348,22 +364,7 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {//当前抽屉是打开的，则关闭
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-            return;
-        }
 
-        long time = System.currentTimeMillis();
-        if (time - mClickTime <= 2000) {
-            super.onBackPressed();
-            System.exit(0);
-        } else {
-            mClickTime = time;
-            ToastUtil.show(mContext, "再次点击退出");
-        }
-    }
 
     /**
      * 左侧空间点击事件的监听
@@ -384,33 +385,33 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
                         getFistView();
                         break;
                     case R.id.navigation_football_dan:
-                        mToolbar.setTitle(getString(R.string.football_dan)+"("+mainMenuRsp.getIfo().getFt_ds_nums()+")");
-                        goBetting(SportsKey.FOOTBALL,SportsKey.JRSS);
+                        mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
+                        goBetting(SportsKey.FOOTBALL, SportsKey.JRSS);
 
                         break;
                     case R.id.navigation_football_gun:
-                        mToolbar.setTitle(getString(R.string.football_gun)+"("+mainMenuRsp.getIfo().getFt_gq_nums()+")");
-                        goBetting(SportsKey.FOOTBALL,SportsKey.GQ);
+                        mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
+                        goBetting(SportsKey.FOOTBALL, SportsKey.GQ);
 
                         break;
                     case R.id.navigation_basketball_dan:
-                         mToolbar.setTitle(getString(R.string.basketball_dan)+"("+mainMenuRsp.getIfo().getBk_ds_nums()+")");
-                        goBetting(SportsKey.BASKETBALL,SportsKey.JRSS);
+                        mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
+                        goBetting(SportsKey.BASKETBALL, SportsKey.JRSS);
                         break;
                     case R.id.navigation_basketball_gun:
-                        mToolbar.setTitle(getString(R.string.basketball_gun)+"("+mainMenuRsp.getIfo().getBk_gq_nums()+")");
-                        goBetting(SportsKey.BASKETBALL,SportsKey.GQ);
+                        mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
+                        goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
                     case R.id.navigation_ag:
-                        mToolbar.setTitle(getString(R.string.ag)+"("+mainMenuRsp.getIfo().getZrsx_nums()+")");
-                        Intent   intent=new Intent(mContext, WebViewActivity.class);
-                        intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.ag));
+                        mToolbar.setTitle(getString(R.string.ag) + "(" + mainMenuRsp.getIfo().getZrsx_nums() + ")");
+                        Intent intent = new Intent(mContext, WebViewActivity.class);
+                        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
                         intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
                         startActivity(intent);
                         break;
                     case R.id.navigation_lottery:
-                        mToolbar.setTitle(getString(R.string.lottery)+"("+mainMenuRsp.getIfo().getPt_nums()+")");
-                        ToastUtil.show(mContext,"暂未开放!");
+                        mToolbar.setTitle(getString(R.string.lottery) + "(" + mainMenuRsp.getIfo().getPt_nums() + ")");
+                        ToastUtil.show(mContext, "暂未开放!");
                         break;
                     default:
                         break;
@@ -422,25 +423,43 @@ public class MainActivity extends BaseActivity  implements View.OnClickListener{
             }
         });
     }
-
-
     /**
-     *  进入下注面页
+     * 进入下注面页
+     *
      * @param ball
      * @param type
      */
-    public void goBetting(String ball,String type) {
-        if (null==bettingFragment){
-            bettingFragment=new BettingFragment() ;
-        }else {
-            bettingFragment=null;
-            bettingFragment=new BettingFragment() ;
+    public void goBetting(String ball, String type) {
+        if (null == bettingFragment) {
+            bettingFragment = new BettingFragment();
+        } else {
+            bettingFragment = null;
+            bettingFragment = new BettingFragment();
         }
         Bundle bundle = new Bundle();
-        bundle.putString(SportsKey.BALL,ball);
-        bundle.putString(SportsKey.TYPE,type);
+        bundle.putString(SportsKey.BALL, ball);
+        bundle.putString(SportsKey.TYPE, type);
         bettingFragment.setArguments(bundle);
-        showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
+        showFragmentViews(SportsId.TYPE_TWO, bettingFragment);
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        //当前抽屉是打开的，则关闭
+        if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            return;
+        }
+        long time = System.currentTimeMillis();
+        if (time - mClickTime <= 2000) {
+            super.onBackPressed();
+            System.exit(0);
+        } else {
+            mClickTime = time;
+            ToastUtil.show(mContext, "再次点击退出");
+        }
     }
 
 }
