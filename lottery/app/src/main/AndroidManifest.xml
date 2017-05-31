@@ -96,7 +96,7 @@
             android:name=".activity.mine.BettingRecordsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.betting.BettingActivity"
+            android:name=".activity.betting.BettingDetailActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

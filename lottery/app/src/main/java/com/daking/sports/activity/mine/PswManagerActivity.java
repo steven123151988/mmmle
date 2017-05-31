@@ -104,7 +104,7 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
 //                                        new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
 //                                                .setTitleText(getString(R.string.loginsuccss))
 //                                                .setContentText(LoginRsp.getIfo().getMsg())
-//                                                .show();
+//                                                .write();
 //
 //                                        //延迟3秒关闭
 //                                        Handler handler=new Handler();

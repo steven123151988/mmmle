@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseFragment;
-import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsAPI;
+import com.daking.sports.base.SportsKey;
 import com.umeng.analytics.MobclickAgent;
 
 
@@ -81,7 +81,7 @@ public class ServiceFragment extends BaseFragment implements View.OnClickListene
                 if (null==firstFragment){
                     firstFragment=new FirstFragment();
                 }
-                ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_ONE,firstFragment);
+                ((MainActivity)getActivity()).showFragmentViews(SportsKey.TYPE_ONE,firstFragment);
                 break;
         }
 

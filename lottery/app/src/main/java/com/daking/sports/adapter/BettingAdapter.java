@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.betting.BettingActivity;
+import com.daking.sports.activity.betting.BettingDetailActivity;
+import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.FootballGQRsp;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class BettingAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         ViewHolder viewHolder;
         mInflater = LayoutInflater.from(mcontext);//写在这里结局了动画还没加载完点击其他地方导致的bug？等待填充数据的时间验证
         if (view == null) {
@@ -59,25 +59,24 @@ public class BettingAdapter extends BaseAdapter {
             viewHolder.tv_5 = (TextView) view.findViewById(R.id.tv_5);
             viewHolder.tv_6 = (TextView) view.findViewById(R.id.tv_6);
             viewHolder.ll_betting = (LinearLayout) view.findViewById(R.id.rl_betting);
-            viewHolder.ll_betting.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(mcontext, BettingActivity.class);
-                    intent.putExtra("","");
-                    mcontext.startActivity(intent);
-                }
-            });
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-
         viewHolder.tv_1.setText(ifos.get(position).getM_League());
-        viewHolder.tv_2.setText("2");
-        viewHolder.tv_3.setText("3");
+        viewHolder.tv_2.setText("nomessage");
+        viewHolder.tv_3.setText("nomessage");
         viewHolder.tv_4.setText(ifos.get(position).getMB_Team());
         viewHolder.tv_5.setText(ifos.get(position).getTG_Team());
         viewHolder.tv_6.setText(ifos.get(position).getMB_Ball()+" : "+ifos.get(position).getTG_Ball());
+        viewHolder.ll_betting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mcontext, BettingDetailActivity.class);
+                intent.putExtra(SportsKey.MID,ifos.get(position).getMID());
+                mcontext.startActivity(intent);
+            }
+        });
         return view;
     }
 

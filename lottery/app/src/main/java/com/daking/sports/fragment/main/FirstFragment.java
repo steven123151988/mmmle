@@ -14,7 +14,6 @@ import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.GetBannerData;
-import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.MainIndexRsp;
@@ -175,7 +174,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                 if (null==serviceFragment){
                     serviceFragment=new ServiceFragment();
                 }
-                ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_SIX,serviceFragment);
+                ((MainActivity)getActivity()).showFragmentViews(SportsKey.TYPE_SIX,serviceFragment);
                 break;
             case R.id.ll_betting_sportd://点击体育赛事
                 gtotoBetting();
@@ -203,7 +202,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      */
     private void gtotoBetting() {
         ((MainActivity)getActivity()).goBetting(SportsKey.FOOTBALL,"");
-        ((MainActivity)getActivity()).showFragmentViews(SportsId.TYPE_TWO,bettingFragment);
+        ((MainActivity)getActivity()).showFragmentViews(SportsKey.TYPE_TWO,bettingFragment);
     }
 
     /**

@@ -150,4 +150,9 @@
     <string name="football_betting">足球投注</string>
     <string name="basketball_betting">篮球投注</string>
     <string name="volleyball_betting">排球投注</string>
+    <string name="bet_success">下注成功!</string>
+    <string name="bet_error">下注失败，请重新尝试!</string>
+    <string name="betting_finish">赛事已关闭！</string>
+    <string name="init_money">0.00</string>
+
 </resources>

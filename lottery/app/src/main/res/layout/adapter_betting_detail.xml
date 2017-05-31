@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="@dimen/dimen_20"
-            android:text="A"
+            android:text="D"
             android:textSize="14dp" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="B"
+            android:text="E"
             android:textSize="16sp" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="C"
+            android:text="F"
             android:textColor="@color/red_84201e"
             android:textSize="14sp" />
 

@@ -151,7 +151,7 @@ public class ExplosionField extends View {
             ViewGroup parent = (ViewGroup) root;
             for (int i = 0; i < parent.getChildCount(); i++) {
                 reset(parent.getChildAt(i));
-//                Log.e("=======parent.getChildAt(i)========",i+""+parent.getChildAt(i));
+//                Log4LongMsg.e("=======parent.getChildAt(i)========",i+""+parent.getChildAt(i));
             }
         } else {
             root.setScaleX(1);

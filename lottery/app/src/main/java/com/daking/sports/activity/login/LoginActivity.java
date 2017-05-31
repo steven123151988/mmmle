@@ -3,12 +3,10 @@ package com.daking.sports.activity.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
@@ -44,6 +42,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private TextView tv_center;
     private Gson gson;
     private PersonalDataRsp personalDataRsp;
+    private SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +111,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                 @Override
                                 public void run() {
                                     //展示失败消息
-                                    new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                                            .setTitleText(getString(R.string.loginerr))
-                                            .setContentText(getString(R.string.system_error))
-                                            .show();
+                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
+                                    sweetAlertDialog.setTitleText(getString(R.string.loginerr));
+                                    sweetAlertDialog.setContentText(getString(R.string.system_error));
+                                    sweetAlertDialog.show();
                                 }
                             });
 
@@ -128,10 +127,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                 @Override
                                 public void run() {
                                     //展示登录成功消息
-                                    new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
-                                            .setTitleText(getString(R.string.loginsuccss))
-                                            .setContentText(LoginRsp.getMsg())
-                                            .show();
+                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_TWO);
+                                    sweetAlertDialog.setTitleText(getString(R.string.loginsuccss));
+                                    sweetAlertDialog.setContentText(LoginRsp.getMsg());
+                                    sweetAlertDialog.show();
 
                                     initPersonData();
 
@@ -140,6 +139,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
+                                            dismissDialog();
                                             startActivity(new Intent(mContext, MainActivity.class));
                                             finish();
                                         }
@@ -151,10 +151,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                 @Override
                                 public void run() {
                                     //展示失败消息
-                                    new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                                            .setTitleText(getString(R.string.loginerr))
-                                            .setContentText(LoginRsp.getIfo())
-                                            .show();
+                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
+                                    sweetAlertDialog.setTitleText(getString(R.string.loginerr));
+                                    sweetAlertDialog.setContentText(LoginRsp.getIfo());
+                                    sweetAlertDialog.show();
                                 }
                             });
 
@@ -174,8 +174,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private void initPersonData() {
 
         RequestBody requestBody = new FormBody.Builder()
-                .add("fnName", "MData")
-                .add("uid", SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
+                .add(SportsKey.FNNAME, "MData")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -211,9 +211,18 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
+    /**
+     * 关闭对话框
+     */
+    private void dismissDialog() {
+        if (null != sweetAlertDialog && sweetAlertDialog.isShowing()) {
+            sweetAlertDialog.dismiss();
+        }
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        dismissDialog();
     }
 }

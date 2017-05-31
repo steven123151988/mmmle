@@ -63,11 +63,6 @@ public class BallFragment extends BaseFragment {
             type = getArguments().getString(SportsKey.TYPE);
         }
 
-        getballmsg(ball, type);
-
-        //每隔着5秒刷新一次
-        timer = new Timer();
-        timer.schedule(new MyTask(), 0, 10000);
         LogUtil.e("===BallFragment==type=======" + ball + type);
         lv_betting = (ListView) view.findViewById(R.id.lv_betting);
 
@@ -86,6 +81,26 @@ public class BallFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //每隔着5秒刷新一次
+        timer = new Timer();
+        timer.schedule(new MyTask(), 0, 10000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        timer.cancel();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+    }
+
     class MyTask extends TimerTask {
         @Override
         public void run() {
@@ -93,6 +108,12 @@ public class BallFragment extends BaseFragment {
         }
     }
 
+
+    /**
+     * 获取球类列表信息
+     * @param ball
+     * @param type
+     */
     private void getballmsg(String ball, String type) {
         if (null == ball || null == type) {
             return;
@@ -128,30 +149,30 @@ public class BallFragment extends BaseFragment {
                         @Override
                         public void run() {
                             switch(footballGQRsp.getCode()){
-                                case 0:
+                                case SportsKey.TYPE_ZERO:
                                     bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo());
                                     lv_betting.setAdapter(bettingAdapter);
                                     bettingAdapter.notifyDataSetChanged();
                                     break;
-                                case 9:
+                                case SportsKey.TYPE_NINE:
                                     getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                                case 11:
+                                case SportsKey.TYPE_ELEVEN:
                                     getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                                case 7:
+                                case SportsKey.TYPE_SEVEN:
                                     ToastUtil.show(getActivity(),footballGQRsp.getMsg());
                                     break;
-                                case 8:
+                                case SportsKey.TYPE_EIGHT:
                                     ToastUtil.show(getActivity(),footballGQRsp.getMsg());
                                     break;
-                                case 1000:
+                                case SportsKey.TYPE_1000:
                                     mPullToRefreshView.setVisibility(View.GONE);
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     break;
-                                case 1001:
+                                case SportsKey.TYPE_1001:
                                     mPullToRefreshView.setVisibility(View.GONE);
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     break;
-                                case 1002:
+                                case SportsKey.TYPE_1002:
                                     mPullToRefreshView.setVisibility(View.GONE);
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     break;
@@ -168,9 +189,7 @@ public class BallFragment extends BaseFragment {
         });
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        timer.cancel();
-    }
+
+
+
 }

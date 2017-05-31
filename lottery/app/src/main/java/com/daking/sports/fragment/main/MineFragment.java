@@ -2,12 +2,9 @@ package com.daking.sports.fragment.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
@@ -19,7 +16,6 @@ import com.daking.sports.activity.mine.PswManagerActivity;
 import com.daking.sports.activity.mine.TakeOutMoneyActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
-import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
@@ -30,7 +26,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -103,7 +98,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                 if (null == serviceFragment) {
                     serviceFragment = new ServiceFragment();
                 }
-                ((MainActivity) getActivity()).showFragmentViews(SportsId.TYPE_SIX, serviceFragment);
+                ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_SIX, serviceFragment);
                 break;
             case R.id.rl_7:
                 //退出登录
@@ -150,7 +145,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                                         firstFragment = new FirstFragment();
                                     }
                                     SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
-                                    ((MainActivity) getActivity()).showFragmentViews(SportsId.TYPE_ONE, firstFragment);
+                                    ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
                                     ToastUtil.show(getActivity(), loginRsp.getIfo());
                                     break;
                                 case 6:

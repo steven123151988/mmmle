@@ -51,8 +51,6 @@
 
                 <include layout="@layout/main_bottom" />
             </LinearLayout>
-
-
         </android.support.design.widget.CoordinatorLayout>
 
         <!--左侧导航菜单-->

@@ -25,7 +25,6 @@ import com.daking.sports.R;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
-import com.daking.sports.base.SportsId;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.main.BettingFragment;
 import com.daking.sports.fragment.main.FirstFragment;
@@ -162,11 +161,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         @Override
                         public void run() {
                             switch (mainMenuRsp.getCode()){
-                                case 0:
+                                case SportsKey.TYPE_ZERO:
                                     //得到接口数据才能赋值，不然报空
 //                                    setNavigationViewItemClickListener();
                                     break;
-                                case 10 :
+                                case SportsKey.TYPE_TEN:
                                     ToastUtil.show(mContext,"暂时没有您选择的赛事！");
                                     break;
                             }
@@ -204,26 +203,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.ll_betting:
                 mToolbar.setTitle(getString(R.string.betting));
                 goBetting(SportsKey.FOOTBALL, "");
-                showFragmentViews(SportsId.TYPE_TWO, bettingFragment);
+                showFragmentViews(SportsKey.TYPE_TWO, bettingFragment);
                 break;
             case R.id.ll_score:
                 if (null == scoreFragment) {
                     scoreFragment = new ScoreFragment();
                 }
-                showFragmentViews(SportsId.TYPE_THREE, scoreFragment);
+                showFragmentViews(SportsKey.TYPE_THREE, scoreFragment);
                 break;
             case R.id.ll_prize:
                 if (null == prizeFragment) {
                     prizeFragment = new PrizeFragment();
                 }
-                showFragmentViews(SportsId.TYPE_FOUR, prizeFragment);
+                showFragmentViews(SportsKey.TYPE_FOUR, prizeFragment);
                 break;
             case R.id.ll_mine:
                 setAnimation();
                 if (null == mineFragment) {
                     mineFragment = new MineFragment();
                 }
-                showFragmentViews(SportsId.TYPE_FIVE, mineFragment);
+                showFragmentViews(SportsKey.TYPE_FIVE, mineFragment);
                 break;
         }
     }
@@ -260,7 +259,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (null == firstFragment) {
             firstFragment = new FirstFragment();
         }
-        showFragmentViews(SportsId.TYPE_ONE, firstFragment);
+        showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
     }
 
     /**
@@ -289,7 +288,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      */
     private void switchViewByType(int type) {
         switch (type) {
-            case SportsId.TYPE_ONE:
+            case SportsKey.TYPE_ONE:
                 mToolbar.setTitle(getString(R.string.app_name));
                 mIvHome.setImageResource(R.mipmap.main_main);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
@@ -302,7 +301,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_TWO:
+            case SportsKey.TYPE_TWO:
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -314,7 +313,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_THREE:
+            case SportsKey.TYPE_THREE:
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score);
@@ -326,7 +325,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_FOUR:
+            case SportsKey.TYPE_FOUR:
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -338,7 +337,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvPrize.setTextColor(getResources().getColor(R.color.red_84201e));
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
-            case SportsId.TYPE_FIVE:
+            case SportsKey.TYPE_FIVE:
                 mToolbar.setTitle(getString(R.string.personal_center));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
@@ -351,7 +350,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvPrize.setTextColor(getResources().getColor(R.color.white_ffffff));
                 mTvMime.setTextColor(getResources().getColor(R.color.red_84201e));
                 break;
-            case SportsId.TYPE_SIX:
+            case SportsKey.TYPE_SIX:
                 mToolbar.setTitle(getString(R.string.sports_service));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting_notselcet);
@@ -447,7 +446,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         bundle.putString(SportsKey.BALL, ball);
         bundle.putString(SportsKey.TYPE, type);
         bettingFragment.setArguments(bundle);
-        showFragmentViews(SportsId.TYPE_TWO, bettingFragment);
+        showFragmentViews(SportsKey.TYPE_TWO, bettingFragment);
     }
 
 

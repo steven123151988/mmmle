@@ -1,8 +1,5 @@
 package com.daking.sports.base;
 
-/**
- * Created by Steven on 2017/4/28.
- */
 
 public class SportsAPI {
     public static final String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
@@ -13,6 +10,10 @@ public class SportsAPI {
     public static final String HOME_INDEX="home/index"; //主页数据
     public static final String HOME_MENU="home/main_menu"; //主页菜单数据
     public static final String MATCH_LIST="home/match_list";//赛事盘口资料
+    public static final String GET_MATCH="home/get_match";//赛事详情
+
+
+
 
     public static final String GET_DATA="member/account/mem_data.php";//获取会员资料
     public static final String MODIFY_PSW="/app/member/account/forget_psw.php";//忘记密码
