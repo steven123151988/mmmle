@@ -39,6 +39,7 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
     private ImageView iv_back;
     private PopupWindow popupWindow;
     private View popView;
+    private TextView tv_score_A,tv_score_B;
     private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K;
     private Button btn_confirm_bet;
     private EditText et_input_money;
@@ -49,6 +50,8 @@ public class BettingActivity extends BaseActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_betting);
+        tv_score_A=fuck(R.id.tv_score_A);
+        tv_score_B=fuck(R.id.tv_score_B);
 
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);

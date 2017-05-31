@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.betting.BallFragment;
@@ -20,6 +21,7 @@ import com.daking.sports.fragment.betting.ShixunFragment;
 import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
+import java.text.BreakIterator;
 
 /**
  * 投注面页
@@ -82,12 +84,15 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_football:
+                ((MainActivity)getActivity()).setToolbar(getString(R.string.football_betting));
                 getballView(SportsKey.FOOTBALL, "");
                 break;
             case R.id.ll_basketball:
+                ((MainActivity)getActivity()).setToolbar(getString(R.string.basketball_betting));
                 getballView(SportsKey.BASKETBALL, "");
                 break;
             case R.id.ll_shixun:
+                ((MainActivity)getActivity()).setToolbar(getString(R.string.volleyball_betting));
                 ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 ll_shixun.setBackgroundColor(getResources().getColor(R.color.red_84201e));
@@ -105,22 +110,24 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void getballView(String ball, String type) {
-        if (ball.equals(SportsKey.FOOTBALL)) {
-            ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-            ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-            ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-            tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
-            tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
-            tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-        } else {
-            ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-            ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-            ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-            tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
-            tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
-            tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
+        switch(ball){
+            case SportsKey.FOOTBALL:
+                ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+                ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
+                tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
+                tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
+                break;
+            case SportsKey.BASKETBALL:
+                ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+                ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
+                tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
+                tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
+                break;
         }
-
         setBallMessage(ball, type);
         showView(ballFragment);
     }

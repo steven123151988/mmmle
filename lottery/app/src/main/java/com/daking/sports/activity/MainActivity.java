@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -78,7 +77,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         initTitlebar();
         initView();
-
     }
 
     @Override
@@ -96,14 +94,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mDrawerLayout = fuck(R.id.drawer_layout);
         mNavigationView = fuck(R.id.navigation_view);
         //左侧的头部文件
-        View navigation_header = LayoutInflater.from(this).inflate(R.layout.navigation_header, null);
+        View navigation_header = LayoutInflater.from(mContext).inflate(R.layout.navigation_header, null);
         mNavigationView.addHeaderView(navigation_header);
         tv_username = (TextView) navigation_header.findViewById(R.id.tv_username);
-        tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME, "leying"));
+        tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME,getString(R.string.app_name)));
         mToolbar.setTitle(getString(R.string.app_name));
         //这句一定要在下面几句之前调用，不然就会出现点击无反应
         setSupportActionBar(mToolbar);
-//        setNavigationViewItemClickListener();
+        setNavigationViewItemClickListener();
         //ActionBarDrawerToggle配合Toolbar，实现Toolbar上菜单按钮开关效果。
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
@@ -129,6 +127,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.ll_mine).setOnClickListener(this);
         findViewById(R.id.ll_score).setOnClickListener(this);
         findViewById(R.id.ll_prize).setOnClickListener(this);
+
         getFistView();
     }
 
@@ -165,19 +164,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                             switch (mainMenuRsp.getCode()){
                                 case 0:
                                     //得到接口数据才能赋值，不然报空
-                                    setNavigationViewItemClickListener();
+//                                    setNavigationViewItemClickListener();
                                     break;
                                 case 10 :
                                     ToastUtil.show(mContext,"暂时没有您选择的赛事！");
                                     break;
                             }
-
                         }
                     });
-
-
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -208,6 +202,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 getFistView();
                 break;
             case R.id.ll_betting:
+                mToolbar.setTitle(getString(R.string.betting));
                 goBetting(SportsKey.FOOTBALL, "");
                 showFragmentViews(SportsId.TYPE_TWO, bettingFragment);
                 break;
@@ -250,6 +245,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     /**
+     * fragment设置Toolbar的名称
+     * @param Toolbar
+     */
+    public void setToolbar(String Toolbar) {
+        if (null!=mToolbar){
+            mToolbar.setTitle(Toolbar);
+        }
+    }
+    /**
      * 获取APP的第一个界面
      */
     private void getFistView() {
@@ -268,7 +272,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             View view = findViewById(R.id.view_fragment);
             //这个是计算宽高最大值
             int finalRadius = Math.max(view.getWidth(), view.getHeight());
-            Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2, view.getHeight() / 2, 0, finalRadius);
+            Animator animator = ViewAnimationUtils.createCircularReveal(view, view.getWidth() / 2,
+                    view.getHeight() / 2, 0, finalRadius);
             animator.setInterpolator(new AccelerateInterpolator());
             //设置画圆的时间
             animator.setDuration(500);
@@ -298,8 +303,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvMime.setTextColor(getResources().getColor(R.color.white_ffffff));
                 break;
             case SportsId.TYPE_TWO:
-                //TODO  mToolbar chong
-//                mToolbar.setTitle(getString(R.string.betting));
                 mIvHome.setImageResource(R.mipmap.main_main_notselect);
                 mIvBetting.setImageResource(R.mipmap.main_betting);
                 mIvScore.setImageResource(R.mipmap.main_score_notselect);
@@ -385,21 +388,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         getFistView();
                         break;
                     case R.id.navigation_football_dan:
-                        mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
+                        mToolbar.setTitle(getString(R.string.football_dan));
+//                        mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
                         goBetting(SportsKey.FOOTBALL, SportsKey.JRSS);
 
                         break;
                     case R.id.navigation_football_gun:
-                        mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
+//                        mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
+                        mToolbar.setTitle(getString(R.string.football_gun));
                         goBetting(SportsKey.FOOTBALL, SportsKey.GQ);
 
                         break;
                     case R.id.navigation_basketball_dan:
-                        mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
+//                        mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
+                        mToolbar.setTitle(getString(R.string.basketball_dan));
                         goBetting(SportsKey.BASKETBALL, SportsKey.JRSS);
                         break;
                     case R.id.navigation_basketball_gun:
-                        mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
+                        mToolbar.setTitle(getString(R.string.basketball_gun));
+//                        mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
                         goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
                     case R.id.navigation_ag:

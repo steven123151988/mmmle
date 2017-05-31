@@ -1,17 +1,21 @@
 package com.daking.sports.fragment.betting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.BettingAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.FootballGQRsp;
+import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
@@ -42,10 +46,16 @@ public class BallFragment extends BaseFragment {
     private FootballGQRsp footballGQRsp;
     private Gson gson = new Gson();
     private Timer timer;
+    private ImageView iv_system_error;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_football, null);
+        iv_system_error=(ImageView) view.findViewById(R.id.iv_system_error);
+        iv_system_error.setVisibility(View.GONE);
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setVisibility(view.VISIBLE);
+
         if (null != getArguments().getString(SportsKey.BALL)) {
             ball = getArguments().getString(SportsKey.BALL);
         }
@@ -58,10 +68,9 @@ public class BallFragment extends BaseFragment {
         //每隔着5秒刷新一次
         timer = new Timer();
         timer.schedule(new MyTask(), 0, 10000);
-
         LogUtil.e("===BallFragment==type=======" + ball + type);
         lv_betting = (ListView) view.findViewById(R.id.lv_betting);
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
+
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -112,6 +121,9 @@ public class BallFragment extends BaseFragment {
                 LogUtil.e("========getballmsg==========" + message);
                 try {
                     footballGQRsp = gson.fromJson(message, FootballGQRsp.class);
+                    if (null==footballGQRsp){
+                        return;
+                    }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -121,6 +133,10 @@ public class BallFragment extends BaseFragment {
                                     lv_betting.setAdapter(bettingAdapter);
                                     bettingAdapter.notifyDataSetChanged();
                                     break;
+                                case 9:
+                                    getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                                case 11:
+                                    getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                                 case 7:
                                     ToastUtil.show(getActivity(),footballGQRsp.getMsg());
                                     break;
@@ -128,13 +144,16 @@ public class BallFragment extends BaseFragment {
                                     ToastUtil.show(getActivity(),footballGQRsp.getMsg());
                                     break;
                                 case 1000:
-                                    ToastUtil.show(getActivity(),footballGQRsp.getMsg());
+                                    mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                                 case 1001:
-                                    ToastUtil.show(getActivity(),footballGQRsp.getMsg());
+                                    mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                                 case 1002:
-                                    ToastUtil.show(getActivity(),footballGQRsp.getMsg());
+                                    mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                             }
 
@@ -153,6 +172,5 @@ public class BallFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         timer.cancel();
-        LogUtil.e("============onDestroy===============");
     }
 }

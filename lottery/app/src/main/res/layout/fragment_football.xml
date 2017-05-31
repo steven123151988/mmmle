@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.yalantis.phoenix.PullToRefreshView
+        android:visibility="gone"
         android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,9 +15,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:divider="@null" />
+            android:divider="@color/red_84201e"
+            android:dividerHeight="1dp" />
 
     </com.yalantis.phoenix.PullToRefreshView>
+
+    <ImageView
+        android:id="@+id/iv_system_error"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/system_errors"
+        />
 
 
 </LinearLayout>

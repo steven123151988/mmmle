@@ -46,7 +46,6 @@
     <string name="regist_money_psw_confirm">提款必须认证，务必记住</string>
     <string name="regist_email">邮箱</string>
     <string name="sports_betting">体育投注</string>
-
     <string name="sports_help">存取帮助</string>
     <string name="sports_service">在线客服</string>
     <string name="baccarat">百家乐</string>
@@ -147,4 +146,8 @@
     <string name="ag">真人视讯</string>
     <string name="lottery">彩票游戏</string>
     <string name="personal_center">个人中心</string>
+    <string name="system_error">系统异常，请稍后登陆！</string>
+    <string name="football_betting">足球投注</string>
+    <string name="basketball_betting">篮球投注</string>
+    <string name="volleyball_betting">排球投注</string>
 </resources>

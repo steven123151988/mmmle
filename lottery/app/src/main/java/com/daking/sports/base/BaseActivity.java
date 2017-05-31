@@ -1,26 +1,15 @@
 package com.daking.sports.base;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
-
-
 import com.daking.sports.view.CustomProgressDialog;
 import com.umeng.analytics.MobclickAgent;
 
-import java.util.List;
-
-
 public class BaseActivity extends AppCompatActivity {
     public Context mContext;
-    private String className;
     private CustomProgressDialog dialog;
 
     @Override

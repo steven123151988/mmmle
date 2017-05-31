@@ -106,6 +106,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                         LogUtil.e("===============login=========" + message);
                         gson = new Gson();
                         LoginRsp = gson.fromJson(message, LoginRsp.class);
+                        //返回信息解析失败，提示系统异常、
+                        if (null == LoginRsp) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //展示失败消息
+                                    new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+                                            .setTitleText(getString(R.string.loginerr))
+                                            .setContentText(getString(R.string.system_error))
+                                            .show();
+                                }
+                            });
+
+                            return;
+                        }
                         if (LoginRsp.getCode() == 0) {
                             SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
                             SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
@@ -194,5 +209,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         if (!SharePreferencesUtil.getString(mContext, SportsKey.UID, "0").equals("0")) {
             super.onBackPressed();
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
