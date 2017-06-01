@@ -161,13 +161,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                 case SportsKey.TYPE_ZERO://成功
                                     //// TODO: 2017/5/31
                                     break;
-//                                case SportsKey.TYPE_NINE:
-//                                    startActivity(new Intent(mContext, LoginActivity.class));
-//                                    break;
+                                case SportsKey.TYPE_NINE:
+                                    startActivity(new Intent(mContext, LoginActivity.class));
+                                    break;
                                 case SportsKey.TYPE_ELEVEN:
                                     startActivity(new Intent(mContext, LoginActivity.class));
                                     break;
-                                case SportsKey.TYPE_NINE://12赛事关闭
+                                case SportsKey.TYPE_TWELVE://12赛事关闭
                                     sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
                                     sweetAlertDialog.setTitleText("Sorry...");
                                     sweetAlertDialog.setContentText(getString(R.string.betting_finish));
@@ -188,7 +188,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             }
                         }
                     });
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -275,14 +274,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         sweetAlertDialog.show();
                         mExplosionField = ExplosionField.attach2Window(this);
                         mExplosionField.addListener(popView.findViewById(R.id.main_pop));
-                        dismisspopviw();
                     } else {
                         sweetAlertDialog = new SweetAlertDialog(this, SportsKey.TYPE_ONE);
                         sweetAlertDialog.setTitleText("Sorry...");
                         sweetAlertDialog.setContentText(getString(R.string.bet_error));
                         sweetAlertDialog.show();
-                        dismisspopviw();
                     }
+                    dismisspopviw();
                 }
                 break;
             case R.id.iv_right:
@@ -306,7 +304,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      */
     private void dismissDialog() {
         if (null != sweetAlertDialog && sweetAlertDialog.isShowing()) {
-            sweetAlertDialog.dismiss();
+            sweetAlertDialog.cancel();
         }
     }
 

@@ -47,6 +47,7 @@ public class BallFragment extends BaseFragment {
     private Gson gson = new Gson();
     private Timer timer;
     private ImageView iv_system_error;
+    private   int m=3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -159,21 +160,34 @@ public class BallFragment extends BaseFragment {
                                 case SportsKey.TYPE_ELEVEN:
                                     getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                                 case SportsKey.TYPE_SEVEN:
-                                    ToastUtil.show(getActivity(),footballGQRsp.getMsg());
+                                    mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setVisibility(View.VISIBLE);
+                                     m++;
+                                    if (m%2==1){
+                                        iv_system_error.setImageResource(R.drawable.konglong4);
+                                    }
+                                    if (m%2==0){
+                                        iv_system_error.setImageResource(R.drawable.konglong1);
+                                    }
                                     break;
                                 case SportsKey.TYPE_EIGHT:
-                                    ToastUtil.show(getActivity(),footballGQRsp.getMsg());
+                                    mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setImageResource(R.drawable.konglong4);
+                                    iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                                 case SportsKey.TYPE_1000:
                                     mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setImageResource(R.mipmap.system_errors);
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                                 case SportsKey.TYPE_1001:
                                     mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setBackground(getResources().getDrawable(R.mipmap.system_errors));
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                                 case SportsKey.TYPE_1002:
                                     mPullToRefreshView.setVisibility(View.GONE);
+                                    iv_system_error.setBackground(getResources().getDrawable(R.mipmap.system_errors));
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     break;
                             }

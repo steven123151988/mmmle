@@ -105,60 +105,46 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                         LogUtil.e("===============login=========" + message);
                         gson = new Gson();
                         LoginRsp = gson.fromJson(message, LoginRsp.class);
-                        //返回信息解析失败，提示系统异常、
-                        if (null == LoginRsp) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //返回信息解析失败，提示系统异常、
+                                if (null == LoginRsp) {
                                     //展示失败消息
                                     sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
                                     sweetAlertDialog.setTitleText(getString(R.string.loginerr));
                                     sweetAlertDialog.setContentText(getString(R.string.system_error));
                                     sweetAlertDialog.show();
+                                    return;
                                 }
-                            });
-
-                            return;
-                        }
-                        if (LoginRsp.getCode() == 0) {
-                            SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
-                            SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+                                if (LoginRsp.getCode() == 0) {
+                                    SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
+                                    SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
                                     //展示登录成功消息
                                     sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_TWO);
                                     sweetAlertDialog.setTitleText(getString(R.string.loginsuccss));
                                     sweetAlertDialog.setContentText(LoginRsp.getMsg());
                                     sweetAlertDialog.show();
-
-                                    initPersonData();
-
                                     //延迟5秒关闭
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            dismissDialog();
+                                            dismissDialogs();
                                             startActivity(new Intent(mContext, MainActivity.class));
                                             finish();
                                         }
                                     }, 2500);
-                                }
-                            });
-                        } else {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
+                                } else {
                                     //展示失败消息
                                     sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
                                     sweetAlertDialog.setTitleText(getString(R.string.loginerr));
                                     sweetAlertDialog.setContentText(LoginRsp.getIfo());
                                     sweetAlertDialog.show();
                                 }
-                            });
+                            }
+                        });
 
-                        }
                     } catch (Exception e) {
                         LogUtil.e("========login==============" + e);
                     }
@@ -168,41 +154,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     }
 
 
-    /**
-     * 获取个人信息
-     */
-    private void initPersonData() {
-
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "MData")
-                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
-                .build();
-
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.GET_DATA)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    gson = new Gson();
-                    String message = response.body().string();
-                    LogUtil.e("==========initPersonData===========" + message);
-                    personalDataRsp = gson.fromJson(message, PersonalDataRsp.class);
-                    SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, personalDataRsp.getIfo().getUserName());
-                } catch (Exception e) {
-                    LogUtil.e("========initPersonData==============" + e);
-                }
-            }
-        });
-    }
 
     @Override
     public void onBackPressed() {
@@ -214,15 +165,15 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     /**
      * 关闭对话框
      */
-    private void dismissDialog() {
+    private void dismissDialogs() {
         if (null != sweetAlertDialog && sweetAlertDialog.isShowing()) {
-            sweetAlertDialog.dismiss();
+            sweetAlertDialog.cancel();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dismissDialog();
+        dismissDialogs();
     }
 }

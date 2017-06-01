@@ -1,5 +1,7 @@
 package com.daking.sports.util;
 
+import android.util.Log;
+
 /**
  * Created by 18 on 2017/5/31.
  * 使用Log来显示调试信息,因为log在实现上每个message有4k字符长度限制
@@ -20,7 +22,7 @@ public class Log4LongMsg {
                 sub = str.substring(index, maxLength);
             }
             index += maxLength;
-            LogUtil.e(sub.trim());
+            Log.e("sports==*>",sub.trim());
         }
     }
 }

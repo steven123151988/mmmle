@@ -154,5 +154,4 @@
     <string name="bet_error">下注失败，请重新尝试!</string>
     <string name="betting_finish">赛事已关闭！</string>
     <string name="init_money">0.00</string>
-
 </resources>

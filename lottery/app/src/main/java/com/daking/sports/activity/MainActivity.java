@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
@@ -60,7 +62,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MineFragment mineFragment;
     private ImageView mIvHome, mIvBetting, mIvMine, mIvPrize, mIvScore;
     private TextView mTvHome, mTvScore, mTvPrize, mTvBetting, mTvMime;
-    private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
     private TextView tv_username;
     private DrawerLayout mDrawerLayout;//侧边菜单视图
     private ActionBarDrawerToggle mDrawerToggle;  //菜单开关
@@ -69,6 +70,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MenuItem mPreMenuItem;
     private MainMenuRsp mainMenuRsp;
     private long mClickTime;
+    private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +97,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //左侧的头部文件
         View navigation_header = LayoutInflater.from(mContext).inflate(R.layout.navigation_header, null);
         mNavigationView.addHeaderView(navigation_header);
+        //设置字体和图片的颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mNavigationView.setItemTextColor(mContext.getResources().getColorStateList(R.color.navigationview_color, null));
+            mNavigationView.setItemIconTintList(mContext.getResources().getColorStateList(R.color.navigationview_color, null));
+        }
+
         tv_username = (TextView) navigation_header.findViewById(R.id.tv_username);
-        tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME,getString(R.string.app_name)));
+        tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME, getString(R.string.app_name)));
         mToolbar.setTitle(getString(R.string.app_name));
         //这句一定要在下面几句之前调用，不然就会出现点击无反应
         setSupportActionBar(mToolbar);
@@ -160,13 +168,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            switch (mainMenuRsp.getCode()){
+                            switch (mainMenuRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     //得到接口数据才能赋值，不然报空
 //                                    setNavigationViewItemClickListener();
                                     break;
+                                case SportsKey.TYPE_NINE:
+                                    startActivity(new Intent(mContext, LoginActivity.class));
+                                    break;
                                 case SportsKey.TYPE_TEN:
-                                    ToastUtil.show(mContext,"暂时没有您选择的赛事！");
+                                    ToastUtil.show(mContext, "暂时没有您选择的赛事！");
                                     break;
                             }
                         }
@@ -245,13 +256,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * fragment设置Toolbar的名称
+     *
      * @param Toolbar
      */
     public void setToolbar(String Toolbar) {
-        if (null!=mToolbar){
+        if (null != mToolbar) {
             mToolbar.setTitle(Toolbar);
         }
     }
+
     /**
      * 获取APP的第一个界面
      */
@@ -367,15 +380,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-
     /**
      * 左侧空间点击事件的监听
      */
     private void setNavigationViewItemClickListener() {
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 if (null != mPreMenuItem) {
@@ -409,7 +419,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
                     case R.id.navigation_ag:
-                        mToolbar.setTitle(getString(R.string.ag) + "(" + mainMenuRsp.getIfo().getZrsx_nums() + ")");
+                        mToolbar.setTitle(getString(R.string.ag));
+//                        mToolbar.setTitle(getString(R.string.ag) + "(" + mainMenuRsp.getIfo().getZrsx_nums() + ")");
                         Intent intent = new Intent(mContext, WebViewActivity.class);
                         intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
                         intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
@@ -429,6 +440,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         });
     }
+
     /**
      * 进入下注面页
      *
@@ -448,7 +460,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         bettingFragment.setArguments(bundle);
         showFragmentViews(SportsKey.TYPE_TWO, bettingFragment);
     }
-
 
 
     @Override

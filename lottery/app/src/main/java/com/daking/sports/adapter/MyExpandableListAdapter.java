@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daking.sports.R;
@@ -106,7 +103,6 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
             viewHolder.tv_5=(TextView) view.findViewById(R.id.tv_5);
             viewHolder.tv_6=(TextView) view.findViewById(R.id.tv_6);
             viewHolder.tv_7=(TextView) view.findViewById(R.id.tv_7);
-
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();

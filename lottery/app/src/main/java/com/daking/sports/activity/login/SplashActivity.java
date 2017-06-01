@@ -21,6 +21,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SplashActivity extends BaseActivity {
     private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
+    private SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,31 +29,30 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         //先判断网络情况,可以的话走下去，不可以的话提示网络有问题
-       if (checkNetworkState()){
-           //只适配SDK大于16的手机
-           if (sdk_version > 15) {
-               //延迟5秒关闭
-               Handler handler = new Handler();
-               handler.postDelayed(new Runnable() {
-                   @Override
-                   public void run() {
-                       initLogType();
-                       finish();
-                   }
-               }, 2500);
-           } else {
-               new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                       .setTitleText(getString(R.string.loginerr))
-                       .setContentText("APP支持安卓最低版本为4.0")
-                       .show();
-           }
-       }else{
-           new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                   .setTitleText(getString(R.string.loginerr))
-                   .setContentText("网络连接有问题，请检查！")
-                   .show();
-       }
-
+        if (checkNetworkState()) {
+            //只适配SDK大于16的手机
+            if (sdk_version > 15) {
+                //延迟5秒关闭
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        initLogType();
+                        finish();
+                    }
+                }, 2500);
+            } else {
+                sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
+                sweetAlertDialog.setTitleText(getString(R.string.loginerr));
+                sweetAlertDialog.setContentText("APP支持安卓最低版本为4.0");
+                sweetAlertDialog.show();
+            }
+        } else {
+            sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
+            sweetAlertDialog.setTitleText(getString(R.string.loginerr));
+            sweetAlertDialog.setContentText("网络连接有问题，请检查！");
+            sweetAlertDialog.show();
+        }
 
 
     }
@@ -70,6 +70,7 @@ public class SplashActivity extends BaseActivity {
 
     /**
      * 检测网络是否连接
+     *
      * @return
      */
     private boolean checkNetworkState() {
@@ -82,5 +83,20 @@ public class SplashActivity extends BaseActivity {
         }
         return flag;
     }
+    /**
+     * 关闭对话框
+     */
+    private void dismissDialog() {
+        if (null != sweetAlertDialog && sweetAlertDialog.isShowing()) {
+            sweetAlertDialog.cancel();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dismissDialog();
+    }
+
 
 }
