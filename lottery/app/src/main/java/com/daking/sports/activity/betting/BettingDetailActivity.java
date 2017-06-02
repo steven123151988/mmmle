@@ -2,7 +2,6 @@ package com.daking.sports.activity.betting;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.ImageFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,14 +20,12 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.MainActivity;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.MyExpandableListAdapter;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BettingDetailRsp;
-import com.daking.sports.util.Log4LongMsg;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
@@ -149,7 +146,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String message = response.body().string();
-                    Log4LongMsg.write(message);
+                    LogUtil.e(message);
                     bettingDetailRsp = gosn.fromJson(message, BettingDetailRsp.class);
                     if (null == bettingDetailRsp) {
                         return;

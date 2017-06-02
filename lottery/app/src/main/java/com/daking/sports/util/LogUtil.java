@@ -6,7 +6,7 @@ import android.util.Log;
  * Log管理类
  */
 public class LogUtil {
-    private static final String TAG = "sports===>";
+    private static final String TAG = "sports**=>";
     public final static int LOG_LEVEL_DEBUG = 2;
     public final static int LOG_LEVEL_TEST = 1;
     public final static int LOG_LEVEL_RELEASE = 0;
@@ -22,9 +22,15 @@ public class LogUtil {
         LogUtil.level = level;
         if (LogUtil.level > 0) {
             LogUtil.e("lotteryandsports日志级别为：" + (LogUtil.level == 1 ? "测试" : "开发"));
+        }else {
+            LogUtil.e("lotteryandsports日志级别为：正式");
         }
     }
 
+    /**
+     * 获得APP的日志级别
+     * @return
+     */
     public static int getLevel() {
         return level;
     }
@@ -33,58 +39,30 @@ public class LogUtil {
         if (level <= LOG_LEVEL_RELEASE)
             return;
         else if (level == LOG_LEVEL_TEST) {
-            Log.e(TAG, msg);
+            write(msg);
             return;
         } else if (level == LOG_LEVEL_DEBUG) {
-            Log.e(TAG, msg);
+            write(msg);
         }
     }
 
-    public static void w(String msg) {
-
-        if (level <= LOG_LEVEL_RELEASE)
-            return;
-        else if (level == LOG_LEVEL_TEST) {
-            Log.i(TAG, msg);
-            return;
-        } else if (level == LOG_LEVEL_DEBUG) {
-            Log.w(TAG, msg);
+    public  static void write(String str) {
+        str = str.trim();
+        int index = 0;
+        int maxLength =4000;
+        String sub;
+        while (index < str.length()) {
+            // java的字符不允许指定超过总的长度end
+            if (str.length() <= index + maxLength) {
+                //  str＝str.substring(int beginIndex);截取掉str从首字母起长度为beginIndex的字符串，将剩余字符串赋值给str；
+                sub = str.substring(index);
+            } else {
+                //str＝str.substring(int beginIndex，int endIndex);截取str中从beginIndex开始至endIndex结束时的字符串，并将其赋值给str;
+                sub = str.substring(index,index+maxLength);
+            }
+            index += maxLength;
+            Log.e(TAG,sub.trim());
         }
     }
 
-    public static void d(String msg) {
-
-        if (level <= LOG_LEVEL_RELEASE)
-            return;
-        else if (level == LOG_LEVEL_TEST) {
-            Log.i(TAG, msg);
-            return;
-        } else if (level == LOG_LEVEL_DEBUG) {
-            Log.d(TAG, msg);
-        }
-    }
-
-    public static void v(String msg) {
-
-        if (level <= LOG_LEVEL_RELEASE)
-            return;
-        else if (level == LOG_LEVEL_TEST) {
-            Log.i(TAG, msg);
-            return;
-        } else if (level == LOG_LEVEL_DEBUG) {
-            Log.v(TAG, msg);
-        }
-    }
-
-    public static void i(String msg) {
-
-        if (level <= LOG_LEVEL_RELEASE)
-            return;
-        else if (level == LOG_LEVEL_TEST) {
-            Log.i(TAG, msg);
-            return;
-        } else if (level == LOG_LEVEL_DEBUG) {
-            Log.i(TAG, msg);
-        }
-    }
 }

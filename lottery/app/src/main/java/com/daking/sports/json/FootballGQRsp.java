@@ -8,16 +8,17 @@ import java.util.List;
  */
 
 public class FootballGQRsp implements Serializable {
+
     /**
-     * member : {"ID":"12247","Oid":"e254c983766e79120dfera9","Online":"1","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-05-29","LoginTime":"2017-05-29 21:42:39","OnlineTime":"2017-05-29 21:42:39","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
+     * member : {"ID":"12247","Oid":"4f548e597a6e79120dfera7","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-02","LoginTime":"2017-06-02 02:13:50","OnlineTime":"2017-06-02 02:13:50","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
      * ball : football
-     * type : gq
-     * ft_nums : 6
+     * type :
+     * ft_nums : 99
      * bk_nums : 10
      * zrsx_nums : 8
      * pt_nums : 5
      * code : 0
-     * ifo : [{"MID":"2761954","M_Time":"08:15p","M_Start":"2017-05-29 20:15:00","M_League":"阿根廷甲组联赛","MB_Team":"沙士菲","TG_Team":"基尔梅斯","M_LetB_RB":"0 / 0.5","M_LetB":"0.5 / 1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.65","MB_Win_Rate_RB":"3.1","TG_Win_Rate":"5","TG_Win_Rate_RB":"9","now_play":"78||2H^33","mpid":"55632"},{"MID":"2761956","M_Time":"08:15p","M_Start":"2017-05-29 20:15:00","M_League":"阿根廷甲组联赛","MB_Team":"沙士菲","TG_Team":"基尔梅斯","M_LetB_RB":"0.5","M_LetB":"1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","now_play":"78||2H^33","mpid":null},{"MID":"2764136","M_Time":"08:15p","M_Start":"2017-05-29 20:15:00","M_League":"阿根廷甲组联赛","MB_Team":"沙士菲","TG_Team":"基尔梅斯","M_LetB_RB":"0","M_LetB":"0.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","now_play":"78||2H^33","mpid":null},{"MID":"2764138","M_Time":"08:15p","M_Start":"2017-05-29 20:15:00","M_League":"阿根廷甲组联赛","MB_Team":"沙士菲 -角球数","TG_Team":"基尔梅斯 -角球数","M_LetB_RB":"","M_LetB":"","MB_Ball":"6","TG_Ball":"1","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","now_play":"78||2H^33","mpid":null},{"MID":"2764630","M_Time":"08:30p","M_Start":"2017-05-29 20:30:00","M_League":"哥伦比亚乙组联赛-附加赛","MB_Team":"佩雷拉","TG_Team":"库库塔","M_LetB_RB":"0 / 0.5","M_LetB":"1","MB_Ball":"1","TG_Ball":"1","MB_Win_Rate":"1.51","MB_Win_Rate_RB":"2.19","TG_Win_Rate":"5.7","TG_Win_Rate_RB":"4.9","now_play":"58||2H^13","mpid":null}]
+     * ifo : [{"MID":"2773066","RB_Show":"0","M_Time":"04:15a","M_Start":"2017-06-02 04:15:00","M_League":"澳洲维多利亚国家超级联赛U20","MB_Team":"墨尔本骑士U20","TG_Team":"班特列U20","M_LetB_RB":"","M_LetB":"1.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.25","MB_Win_Rate_RB":"0","TG_Win_Rate":"7.4","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769810","RB_Show":"0","M_Time":"04:15a","M_Start":"2017-06-02 04:15:00","M_League":"澳洲维多利亚国家超级联赛U20","MB_Team":"欧克莱卡诺U20","TG_Team":"墨尔本港鲨鱼U20","M_LetB_RB":"","M_LetB":"1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.48","MB_Win_Rate_RB":"0","TG_Win_Rate":"4.7","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769830","RB_Show":"0","M_Time":"06:30a","M_Start":"2017-06-02 06:30:00","M_League":"澳洲维多利亚国家超级联赛","MB_Team":"墨尔本骑士","TG_Team":"班特列","M_LetB_RB":"","M_LetB":"0.5 / 1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"3.65","MB_Win_Rate_RB":"0","TG_Win_Rate":"1.78","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769826","RB_Show":"0","M_Time":"06:30a","M_Start":"2017-06-02 06:30:00","M_League":"澳洲维多利亚国家超级联赛","MB_Team":"欧克莱卡诺","TG_Team":"墨尔本港鲨鱼","M_LetB_RB":"","M_LetB":"1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.59","MB_Win_Rate_RB":"0","TG_Win_Rate":"4.6","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769828","RB_Show":"0","M_Time":"06:30a","M_Start":"2017-06-02 06:30:00","M_League":"澳洲维多利亚国家超级联赛","MB_Team":"欧克莱卡诺","TG_Team":"墨尔本港鲨鱼","M_LetB_RB":"","M_LetB":"","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"","now_play":"","mpid":null}]
      */
 
     private MemberBean member;
@@ -27,17 +28,8 @@ public class FootballGQRsp implements Serializable {
     private int bk_nums;
     private int zrsx_nums;
     private String pt_nums;
-    private String msg;
     private int code;
     private List<IfoBean> ifo;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public MemberBean getMember() {
         return member;
@@ -114,8 +106,8 @@ public class FootballGQRsp implements Serializable {
     public static class MemberBean {
         /**
          * ID : 12247
-         * Oid : e254c983766e79120dfera9
-         * Online : 1
+         * Oid : 4f548e597a6e79120dfera7
+         * Online : 0
          * Language : zh-cn
          * UserName : xiaobao
          * Money : 0
@@ -133,9 +125,9 @@ public class FootballGQRsp implements Serializable {
          * Status : 0
          * Send : 0
          * BetType : 0
-         * LoginDate : 2017-05-29
-         * LoginTime : 2017-05-29 21:42:39
-         * OnlineTime : 2017-05-29 21:42:39
+         * LoginDate : 2017-06-02
+         * LoginTime : 2017-06-02 02:13:50
+         * OnlineTime : 2017-06-02 02:13:50
          * LogoutTime : 0000-00-00 00:00:00
          * AddDate : 2017-03-12 01:34:59
          * EditDate : 2017-03-12
@@ -969,25 +961,28 @@ public class FootballGQRsp implements Serializable {
 
     public static class IfoBean {
         /**
-         * MID : 2761954
-         * M_Time : 08:15p
-         * M_Start : 2017-05-29 20:15:00
-         * M_League : 阿根廷甲组联赛
-         * MB_Team : 沙士菲
-         * TG_Team : 基尔梅斯
-         * M_LetB_RB : 0 / 0.5
-         * M_LetB : 0.5 / 1
+         * MID : 2773066
+         * RB_Show : 0
+         * M_Time : 04:15a
+         * M_Start : 2017-06-02 04:15:00
+         * M_League : 澳洲维多利亚国家超级联赛U20
+         * MB_Team : 墨尔本骑士U20
+         * TG_Team : 班特列U20
+         * M_LetB_RB :
+         * M_LetB : 1.5
          * MB_Ball : 0
          * TG_Ball : 0
-         * MB_Win_Rate : 1.65
-         * MB_Win_Rate_RB : 3.1
-         * TG_Win_Rate : 5
-         * TG_Win_Rate_RB : 9
-         * now_play : 78||2H^33
-         * mpid : 55632
+         * MB_Win_Rate : 1.25
+         * MB_Win_Rate_RB : 0
+         * TG_Win_Rate : 7.4
+         * TG_Win_Rate_RB : 0
+         * Play : N
+         * now_play :
+         * mpid : null
          */
 
         private String MID;
+        private String RB_Show;
         private String M_Time;
         private String M_Start;
         private String M_League;
@@ -1001,8 +996,9 @@ public class FootballGQRsp implements Serializable {
         private String MB_Win_Rate_RB;
         private String TG_Win_Rate;
         private String TG_Win_Rate_RB;
+        private String Play;
         private String now_play;
-        private String mpid;
+        private Object mpid;
 
         public String getMID() {
             return MID;
@@ -1010,6 +1006,14 @@ public class FootballGQRsp implements Serializable {
 
         public void setMID(String MID) {
             this.MID = MID;
+        }
+
+        public String getRB_Show() {
+            return RB_Show;
+        }
+
+        public void setRB_Show(String RB_Show) {
+            this.RB_Show = RB_Show;
         }
 
         public String getM_Time() {
@@ -1116,6 +1120,14 @@ public class FootballGQRsp implements Serializable {
             this.TG_Win_Rate_RB = TG_Win_Rate_RB;
         }
 
+        public String getPlay() {
+            return Play;
+        }
+
+        public void setPlay(String Play) {
+            this.Play = Play;
+        }
+
         public String getNow_play() {
             return now_play;
         }
@@ -1124,11 +1136,11 @@ public class FootballGQRsp implements Serializable {
             this.now_play = now_play;
         }
 
-        public String getMpid() {
+        public Object getMpid() {
             return mpid;
         }
 
-        public void setMpid(String mpid) {
+        public void setMpid(Object mpid) {
             this.mpid = mpid;
         }
     }

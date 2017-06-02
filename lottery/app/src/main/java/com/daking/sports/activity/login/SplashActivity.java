@@ -31,7 +31,7 @@ public class SplashActivity extends BaseActivity {
         //先判断网络情况,可以的话走下去，不可以的话提示网络有问题
         if (checkNetworkState()) {
             //只适配SDK大于16的手机
-            if (sdk_version > 15) {
+            if (sdk_version>15) {
                 //延迟5秒关闭
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -42,19 +42,33 @@ public class SplashActivity extends BaseActivity {
                     }
                 }, 2500);
             } else {
-                sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-                sweetAlertDialog.setTitleText(getString(R.string.loginerr));
-                sweetAlertDialog.setContentText("APP支持安卓最低版本为4.0");
-                sweetAlertDialog.show();
+                showDialog(mContext,getString(R.string.app_support_lowest_sdk));
+
             }
         } else {
-            sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-            sweetAlertDialog.setTitleText(getString(R.string.loginerr));
-            sweetAlertDialog.setContentText("网络连接有问题，请检查！");
-            sweetAlertDialog.show();
+            showDialog(mContext, getString(R.string.net_error));
         }
 
 
+    }
+
+    /**
+     * 提示错误信息
+     * @param mContext
+     * @param text
+     */
+    private void showDialog(Context mContext, String text) {
+        if (null == sweetAlertDialog) {
+            sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
+            sweetAlertDialog.setTitleText(getString(R.string.loginerr));
+            sweetAlertDialog.setContentText(text);
+            sweetAlertDialog.show();
+        } else {
+            if (!sweetAlertDialog.isShowing()){
+                sweetAlertDialog.setContentText(text);
+                sweetAlertDialog.show();
+            }
+        }
     }
 
     /**
@@ -97,6 +111,4 @@ public class SplashActivity extends BaseActivity {
         super.onDestroy();
         dismissDialog();
     }
-
-
 }

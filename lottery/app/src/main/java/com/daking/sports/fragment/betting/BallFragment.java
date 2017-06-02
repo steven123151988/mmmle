@@ -15,10 +15,8 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.FootballGQRsp;
-import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
-import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -47,12 +45,12 @@ public class BallFragment extends BaseFragment {
     private Gson gson = new Gson();
     private Timer timer;
     private ImageView iv_system_error;
-    private   int m=3;
+    private int m = 3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_football, null);
-        iv_system_error=(ImageView) view.findViewById(R.id.iv_system_error);
+        iv_system_error = (ImageView) view.findViewById(R.id.iv_system_error);
         iv_system_error.setVisibility(View.GONE);
         mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setVisibility(view.VISIBLE);
@@ -86,20 +84,30 @@ public class BallFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         //每隔着5秒刷新一次
-        timer = new Timer();
+        if (null == timer) {
+            timer = new Timer();
+        }
         timer.schedule(new MyTask(), 0, 10000);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        timer.cancel();
+        timerCancle();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        timerCancle();
+    }
+
+    private void timerCancle() {
+        if (null != timer) {
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
     }
 
     class MyTask extends TimerTask {
@@ -112,6 +120,7 @@ public class BallFragment extends BaseFragment {
 
     /**
      * 获取球类列表信息
+     *
      * @param ball
      * @param type
      */
@@ -140,16 +149,16 @@ public class BallFragment extends BaseFragment {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
-                LogUtil.e("========getballmsg==========" + message);
+                LogUtil.e(message);
                 try {
                     footballGQRsp = gson.fromJson(message, FootballGQRsp.class);
-                    if (null==footballGQRsp){
+                    if (null == footballGQRsp) {
                         return;
                     }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            switch(footballGQRsp.getCode()){
+                            switch (footballGQRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo());
                                     lv_betting.setAdapter(bettingAdapter);
@@ -162,11 +171,11 @@ public class BallFragment extends BaseFragment {
                                 case SportsKey.TYPE_SEVEN:
                                     mPullToRefreshView.setVisibility(View.GONE);
                                     iv_system_error.setVisibility(View.VISIBLE);
-                                     m++;
-                                    if (m%2==1){
+                                    m++;
+                                    if (m % 2 == 1) {
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                     }
-                                    if (m%2==0){
+                                    if (m % 2 == 0) {
                                         iv_system_error.setImageResource(R.drawable.konglong1);
                                     }
                                     break;
@@ -202,8 +211,6 @@ public class BallFragment extends BaseFragment {
             }
         });
     }
-
-
 
 
 }

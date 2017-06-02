@@ -8,7 +8,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -39,7 +38,6 @@ import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
-
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -102,7 +100,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mNavigationView.setItemTextColor(mContext.getResources().getColorStateList(R.color.navigationview_color, null));
             mNavigationView.setItemIconTintList(mContext.getResources().getColorStateList(R.color.navigationview_color, null));
         }
-
         tv_username = (TextView) navigation_header.findViewById(R.id.tv_username);
         tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME, getString(R.string.app_name)));
         mToolbar.setTitle(getString(R.string.app_name));

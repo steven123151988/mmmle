@@ -21,12 +21,14 @@ public class SportsKey {
     public static final int TYPE_1000 = 1000;
     public static final int TYPE_1001 = 1001;
     public static final int TYPE_1002 = 1002;
+    public static final String USER_NAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String LANGUAGE = "langx";
     public static final String WEBVIEW_TITLE = "webviewTitle";
     public static final String WEBVIEW_URL = "webviewUrl";
     public static final String UID = "uid";
     public static final String FNNAME = "fnName";
     public static final String PAY_TIME = "paytime";
-    public static final String USER_NAME = "username";
     public static final String BALL = "ball";
     public static final String TYPE = "type";
     public static final String FOOTBALL = "football";

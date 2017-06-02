@@ -7,24 +7,24 @@
 
         <item
             android:id="@+id/navigation_item_home"
-            android:icon="@drawable/iconfont_home"
+            android:icon="@drawable/home_left"
             android:title="首页" />
         <item
             android:id="@+id/navigation_football_dan"
             android:checked="true"
-            android:icon="@drawable/iconfont_source"
+            android:icon="@drawable/football_left"
             android:title="@string/football_dan" />
         <item
             android:id="@+id/navigation_football_gun"
-            android:icon="@drawable/iconfont_blog"
+            android:icon="@drawable/football_left"
             android:title="@string/football_gun" />
         <item
             android:id="@+id/navigation_basketball_dan"
-            android:icon="@drawable/iconfont_custom_view"
+            android:icon="@drawable/basketball_left"
             android:title="@string/basketball_dan" />
         <item
             android:id="@+id/navigation_basketball_gun"
-            android:icon="@drawable/iconfont_custom_view"
+            android:icon="@drawable/basketball_left"
             android:title="@string/basketball_gun" />
 
         <item android:title="其他">
@@ -32,13 +32,13 @@
                 <item
                     android:id="@+id/navigation_ag"
                     android:checkable="true"
-                    android:icon="@drawable/iconfont_skin"
+                    android:icon="@drawable/ag_left"
                     android:title="@string/ag" />
 
                 <item
                     android:id="@+id/navigation_lottery"
                     android:checkable="true"
-                    android:icon="@drawable/iconfont_about"
+                    android:icon="@drawable/lottery_left"
                     android:title="@string/lottery" />
             </menu>
         </item>

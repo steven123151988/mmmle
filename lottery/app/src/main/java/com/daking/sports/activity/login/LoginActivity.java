@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,7 +44,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private TextView tv_center;
     private Gson gson;
     private PersonalDataRsp personalDataRsp;
-    private SweetAlertDialog sweetAlertDialog;
+    private SweetAlertDialog sweetAlertDialog_success, sweetAlertDialog_fail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,19 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         setContentView(R.layout.activity_login);
         et_account = (EditText) findViewById(R.id.et_account);
         et_psw = (EditText) findViewById(R.id.et_psw);
+        //不然用户按回车键
+        et_account.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                return (event.getKeyCode() == KeyEvent.KEYCODE_ENTER);
+            }
+        });
+        et_psw.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                return (event.getKeyCode() == KeyEvent.KEYCODE_ENTER);
+            }
+        });
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
         tv_center.setText(getString(R.string.login));
@@ -81,10 +96,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             ToastUtil.show(mContext, getResources().getString(R.string.accountisempty));
         } else {
             RequestBody requestBody = new FormBody.Builder()
-                    .add("username", account)
-                    .add("password", psw)
+                    .add(SportsKey.USER_NAME, account)
+                    .add(SportsKey.PASSWORD, psw)
                     .add(SportsKey.FNNAME, "lg")
-                    .add("langx", "zh-cn")
+                    .add(SportsKey.LANGUAGE, "zh-cn")
                     .build();
 
             final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -96,13 +111,21 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             okHttpClient.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            sweetAlertDialog_fail();
+                        }
+                    });
+
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
                         String message = response.body().string();
-                        LogUtil.e("===============login=========" + message);
+                        LogUtil.e("=======login===onResponse===" + message);
                         gson = new Gson();
                         LoginRsp = gson.fromJson(message, LoginRsp.class);
                         runOnUiThread(new Runnable() {
@@ -111,20 +134,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                 //返回信息解析失败，提示系统异常、
                                 if (null == LoginRsp) {
                                     //展示失败消息
-                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-                                    sweetAlertDialog.setTitleText(getString(R.string.loginerr));
-                                    sweetAlertDialog.setContentText(getString(R.string.system_error));
-                                    sweetAlertDialog.show();
+                                    sweetAlertDialog_fail();
                                     return;
                                 }
                                 if (LoginRsp.getCode() == 0) {
                                     SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
                                     SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
-                                    //展示登录成功消息
-                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_TWO);
-                                    sweetAlertDialog.setTitleText(getString(R.string.loginsuccss));
-                                    sweetAlertDialog.setContentText(LoginRsp.getMsg());
-                                    sweetAlertDialog.show();
+                                    //展示成功的对话框
+                                    sweetAlertDialog_success();
                                     //延迟5秒关闭
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
@@ -137,10 +154,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     }, 2500);
                                 } else {
                                     //展示失败消息
-                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-                                    sweetAlertDialog.setTitleText(getString(R.string.loginerr));
-                                    sweetAlertDialog.setContentText(LoginRsp.getIfo());
-                                    sweetAlertDialog.show();
+                                    sweetAlertDialog_fail();
                                 }
                             }
                         });
@@ -153,6 +167,38 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
+    /**
+     * 展示成功的dialog
+     */
+    private void sweetAlertDialog_success() {
+        if (null == sweetAlertDialog_success) {
+            //展示登录成功消息
+            sweetAlertDialog_success = new SweetAlertDialog(mContext, SportsKey.TYPE_TWO);
+            sweetAlertDialog_success.setTitleText(getString(R.string.loginsuccss));
+            sweetAlertDialog_success.setContentText(LoginRsp.getMsg());
+            sweetAlertDialog_success.show();
+        } else {
+            if (!sweetAlertDialog_success.isShowing()) {
+                sweetAlertDialog_success.show();
+            }
+        }
+    }
+
+    /**
+     * 展示失败的提示框
+     */
+    private void sweetAlertDialog_fail() {
+        if (null == sweetAlertDialog_fail) {
+            sweetAlertDialog_fail = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
+            sweetAlertDialog_fail.setTitleText(getString(R.string.loginerr));
+            sweetAlertDialog_fail.setContentText(getString(R.string.system_error));
+            sweetAlertDialog_fail.show();
+        } else {
+            if (!sweetAlertDialog_fail.isShowing()) {
+                sweetAlertDialog_fail.show();
+            }
+        }
+    }
 
 
     @Override
@@ -166,8 +212,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
      * 关闭对话框
      */
     private void dismissDialogs() {
-        if (null != sweetAlertDialog && sweetAlertDialog.isShowing()) {
-            sweetAlertDialog.cancel();
+        if (null != sweetAlertDialog_success && sweetAlertDialog_success.isShowing()) {
+            sweetAlertDialog_success.cancel();
+        }
+        if (null != sweetAlertDialog_fail && sweetAlertDialog_fail.isShowing()) {
+            sweetAlertDialog_fail.cancel();
         }
     }
 
