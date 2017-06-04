@@ -37,7 +37,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
 
     <application
-        android:name=".application.SportsApplication"
+        android:name="com.daking.sports.application.SportsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -46,7 +46,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.login.SplashActivity"
+            android:name="com.daking.sports.activity.login.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,56 +56,57 @@
         </activity>
         <activity
             android:launchMode="singleTask"
-            android:name=".activity.MainActivity"
+            android:name="com.daking.sports.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.UnclearedActivity"
+            android:name="com.daking.sports.activity.mine.UnclearedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.TodayClearedActivity"
+            android:name="com.daking.sports.activity.mine.TodayClearedActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.QuietActivity"
+            android:name="com.daking.sports.activity.mine.QuietActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.PersonalActivity"
+            android:name="com.daking.sports.activity.mine.PersonalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.PswManagerActivity"
+            android:name="com.daking.sports.activity.mine.PswManagerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.login.RegistActivity"
+            android:name="com.daking.sports.activity.login.RegistActivity"
             android:screenOrientation="portrait"
        />
         <activity
-            android:name=".activity.login.LoginActivity"
+            android:name="com.daking.sports.activity.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.webview.WebViewActivity"
+            android:name="com.daking.sports.activity.webview.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.PayActivity"
+            android:name="com.daking.sports.activity.mine.PayActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.DepositRecordsActivity"
+            android:name="com.daking.sports.activity.mine.DepositRecordsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.TakeOutMoneyActivity"
+            android:name="com.daking.sports.activity.mine.TakeOutMoneyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.mine.BettingRecordsActivity"
+            android:name="com.daking.sports.activity.mine.BettingRecordsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.betting.BettingDetailActivity"
+            android:name="com.daking.sports.activity.betting.BettingDetailActivity"
             android:screenOrientation="portrait" />
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="590822838630f5268000128c" />
         <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="d99cb6bdef34b524eca48dfc1323eb3f"/>
+        <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="leying" />
-
+            android:value="ruiyin" />
     </application>
 
 </manifest>

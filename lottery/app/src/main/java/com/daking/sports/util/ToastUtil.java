@@ -1,7 +1,6 @@
 package com.daking.sports.util;
 
 import android.content.Context;
-import android.os.Looper;
 import android.widget.Toast;
 
 

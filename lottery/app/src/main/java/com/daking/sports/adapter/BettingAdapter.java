@@ -24,15 +24,17 @@ public class BettingAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
     private List<FootballGQRsp.IfoBean> ifos;
+    private String ball;
 
-    public BettingAdapter(Context context, List<FootballGQRsp.IfoBean> ifo) {
+    public BettingAdapter(Context context, List<FootballGQRsp.IfoBean> ifo, String ball) {
         this.mcontext = context;
-        this.ifos=ifo;
+        this.ifos = ifo;
+        this.ball = ball;
     }
 
     @Override
     public int getCount() {
-        return null==ifos?0:ifos.size();
+        return null == ifos ? 0 : ifos.size();
     }
 
     @Override
@@ -68,19 +70,22 @@ public class BettingAdapter extends BaseAdapter {
         viewHolder.tv_3.setText("nomessage");
         viewHolder.tv_4.setText(ifos.get(position).getMB_Team());
         viewHolder.tv_5.setText(ifos.get(position).getTG_Team());
-        viewHolder.tv_6.setText(ifos.get(position).getMB_Ball()+" : "+ifos.get(position).getTG_Ball());
+        viewHolder.tv_6.setText(ifos.get(position).getMB_Ball() + " : " + ifos.get(position).getTG_Ball());
+        final String ballteam = ifos.get(position).getMB_Team() + " VS " + ifos.get(position).getTG_Team();
         viewHolder.ll_betting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mcontext, BettingDetailActivity.class);
-                intent.putExtra(SportsKey.MID,ifos.get(position).getMID());
+                Intent intent = new Intent(mcontext, BettingDetailActivity.class);
+                intent.putExtra(SportsKey.MID, ifos.get(position).getMID());
+                intent.putExtra(SportsKey.BALL_TEAM, ballteam);
+                intent.putExtra(SportsKey.BALL, ball);
                 mcontext.startActivity(intent);
             }
         });
         return view;
     }
 
-    class ViewHolder {
+   private class ViewHolder {
         TextView tv_1;
         TextView tv_2;
         TextView tv_3;

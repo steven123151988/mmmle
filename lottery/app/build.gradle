@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.daking.lottery"
+        applicationId "com.daking.sports"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -42,4 +42,5 @@ dependencies {
     compile 'cn.pedant.sweetalert:library:1.3'
     compile 'com.android.support:design:25.3.1'
     compile 'de.hdodenhof:circleimageview:1.3.0'
+    compile project(':PushSDK')
 }

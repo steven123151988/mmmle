@@ -36,4 +36,5 @@ public class SportsKey {
     public static final String JRSS = "jrss";
     public static final String GQ = "gq";
     public static final String MID = "mid";
+    public static final String BALL_TEAM = "ballteam";
 }

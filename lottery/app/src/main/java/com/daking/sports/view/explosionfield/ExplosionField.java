@@ -28,8 +28,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
-import com.daking.sports.util.LogUtil;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

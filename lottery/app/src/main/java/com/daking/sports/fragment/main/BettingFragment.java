@@ -21,7 +21,6 @@ import com.daking.sports.fragment.betting.ShixunFragment;
 import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
-import java.text.BreakIterator;
 
 /**
  * 投注面页

@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
-import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -418,10 +417,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     case R.id.navigation_ag:
                         mToolbar.setTitle(getString(R.string.ag));
 //                        mToolbar.setTitle(getString(R.string.ag) + "(" + mainMenuRsp.getIfo().getZrsx_nums() + ")");
-                        Intent intent = new Intent(mContext, WebViewActivity.class);
-                        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
-                        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
-                        startActivity(intent);
+//                        Intent intent = new Intent(mContext, WebViewActivity.class);
+//                        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
+//                        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
+//                        startActivity(intent);
                         break;
                     case R.id.navigation_lottery:
                         mToolbar.setTitle(getString(R.string.lottery) + "(" + mainMenuRsp.getIfo().getPt_nums() + ")");

@@ -9,9 +9,10 @@
     <include layout="@layout/title_image_text_text" />
 
     <LinearLayout
+        android:id="@+id/ll_ball"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bg_00001_pad"
+        android:background="@mipmap/football_bg"
         android:orientation="vertical">
 
         <FrameLayout
@@ -26,6 +27,7 @@
                 android:src="@mipmap/betting_ing" />
 
             <LinearLayout
+                  android:layout_marginBottom="@dimen/dimen_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

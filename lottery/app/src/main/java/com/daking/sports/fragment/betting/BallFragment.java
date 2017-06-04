@@ -15,6 +15,7 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.FootballGQRsp;
+import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.google.gson.Gson;
@@ -40,12 +41,15 @@ public class BallFragment extends BaseFragment {
     private BettingAdapter bettingAdapter;
     private PullToRefreshView mPullToRefreshView;
     private ListView lv_betting;
-    private String ball, type;
+    public String ball;
+    public String type;
     private FootballGQRsp footballGQRsp;
     private Gson gson = new Gson();
     private Timer timer;
     private ImageView iv_system_error;
     private int m = 3;
+    private AbsListViewCompat.OnScrollCallback onScrollCallback;
+    private int listview_position = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +65,6 @@ public class BallFragment extends BaseFragment {
         if (null != getArguments().getString(SportsKey.TYPE)) {
             type = getArguments().getString(SportsKey.TYPE);
         }
-
         LogUtil.e("===BallFragment==type=======" + ball + type);
         lv_betting = (ListView) view.findViewById(R.id.lv_betting);
 
@@ -124,7 +127,7 @@ public class BallFragment extends BaseFragment {
      * @param ball
      * @param type
      */
-    private void getballmsg(String ball, String type) {
+    private void getballmsg(final String ball, String type) {
         if (null == ball || null == type) {
             return;
         }
@@ -144,6 +147,7 @@ public class BallFragment extends BaseFragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                LogUtil.e("=======e===============" + e);
             }
 
             @Override
@@ -152,22 +156,37 @@ public class BallFragment extends BaseFragment {
                 LogUtil.e(message);
                 try {
                     footballGQRsp = gson.fromJson(message, FootballGQRsp.class);
-                    if (null == footballGQRsp) {
-                        return;
-                    }
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            if (null == footballGQRsp) {
+                                mPullToRefreshView.setVisibility(View.GONE);
+                                iv_system_error.setVisibility(View.VISIBLE);
+                                iv_system_error.setImageResource(R.drawable.konglong1);
+                                return;
+                            }
                             switch (footballGQRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-                                    bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo());
+                                    bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo(), ball);
                                     lv_betting.setAdapter(bettingAdapter);
                                     bettingAdapter.notifyDataSetChanged();
+                                    lv_betting.setSelection(listview_position);
+                                    AbsListViewCompat absListViewCompat = new AbsListViewCompat();
+                                    absListViewCompat.setScrollView(lv_betting);
+                                    onScrollCallback = new AbsListViewCompat.OnScrollCallback() {
+                                        @Override
+                                        public void onScrollChanged(int state, int direction, int position) {
+                                            listview_position = position;
+                                        }
+                                    };
+                                    absListViewCompat.setOnScrollCallback(onScrollCallback);
                                     break;
                                 case SportsKey.TYPE_NINE:
                                     getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                                    break;
                                 case SportsKey.TYPE_ELEVEN:
                                     getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                                    break;
                                 case SportsKey.TYPE_SEVEN:
                                     mPullToRefreshView.setVisibility(View.GONE);
                                     iv_system_error.setVisibility(View.VISIBLE);

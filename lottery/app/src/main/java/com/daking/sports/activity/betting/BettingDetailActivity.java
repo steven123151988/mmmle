@@ -3,8 +3,10 @@ package com.daking.sports.activity.betting;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -65,13 +68,17 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private Gson gosn = new Gson();
     private BettingDetailRsp bettingDetailRsp;
     private SweetAlertDialog sweetAlertDialog;
+    private LinearLayout ll_ball;
+    private String ball,ballteam;
 
     @Override
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_betting);
         mid = getIntent().getStringExtra(SportsKey.MID);
-        LogUtil.e("=====mid======" + mid);
+        ball = getIntent().getStringExtra(SportsKey.BALL);
+        ballteam=getIntent().getStringExtra(SportsKey.BALL_TEAM);
         initView();
     }
 
@@ -83,13 +90,32 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initView() {
-        tv_score_A = fuck(R.id.tv_score_A);
-        tv_score_B = fuck(R.id.tv_score_B);
-
+        ll_ball = fuck(R.id.ll_ball);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
-        tv_center.setText("足球");
+        switch (ball) {
+            case SportsKey.FOOTBALL:
+                ll_ball.setBackground(getResources().getDrawable(R.mipmap.football_bg, null));
+                if (null==ballteam){
+                    tv_center.setText(getString(R.string.football));
+                }else{
+                    tv_center.setText(ballteam);
+                }
+
+                break;
+            case SportsKey.BASKETBALL:
+                ll_ball.setBackground(getResources().getDrawable(R.mipmap.basketball_bg, null));
+                if (null==ballteam){
+                    tv_center.setText(getString(R.string.basketball));
+                }else{
+                    tv_center.setText(ballteam);
+                }
+                break;
+        }
+        tv_score_A = fuck(R.id.tv_score_A);
+        tv_score_B = fuck(R.id.tv_score_B);
 
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setVisibility(View.VISIBLE);
@@ -124,7 +150,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 获取赛事的详细信息
      */
     private void getBettingDetail() {
-        LogUtil.e("======uid=========" + SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"));
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "selmatch")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
@@ -311,4 +336,5 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         dismisspopviw();
         dismissDialog();
     }
+
 }

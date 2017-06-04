@@ -1,7 +1,6 @@
 package com.daking.sports.activity.mine;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,16 +11,11 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
-import com.daking.sports.base.SportsKey;
-import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
-import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ToastUtil;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
