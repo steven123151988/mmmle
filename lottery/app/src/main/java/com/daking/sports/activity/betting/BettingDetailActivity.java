@@ -23,6 +23,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.MainActivity;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.MyExpandableListAdapter;
 import com.daking.sports.base.BaseActivity;
@@ -69,7 +70,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private BettingDetailRsp bettingDetailRsp;
     private SweetAlertDialog sweetAlertDialog;
     private LinearLayout ll_ball;
-    private String ball,ballteam;
+    private String ball, ballteam;
 
     @Override
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -78,7 +79,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_betting);
         mid = getIntent().getStringExtra(SportsKey.MID);
         ball = getIntent().getStringExtra(SportsKey.BALL);
-        ballteam=getIntent().getStringExtra(SportsKey.BALL_TEAM);
+        ballteam = getIntent().getStringExtra(SportsKey.BALL_TEAM);
         initView();
     }
 
@@ -98,18 +99,18 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         switch (ball) {
             case SportsKey.FOOTBALL:
                 ll_ball.setBackground(getResources().getDrawable(R.mipmap.football_bg, null));
-                if (null==ballteam){
+                if (null == ballteam) {
                     tv_center.setText(getString(R.string.football));
-                }else{
+                } else {
                     tv_center.setText(ballteam);
                 }
 
                 break;
             case SportsKey.BASKETBALL:
                 ll_ball.setBackground(getResources().getDrawable(R.mipmap.basketball_bg, null));
-                if (null==ballteam){
+                if (null == ballteam) {
                     tv_center.setText(getString(R.string.basketball));
-                }else{
+                } else {
                     tv_center.setText(ballteam);
                 }
                 break;
@@ -294,8 +295,16 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         sweetAlertDialog.setTitleText(getString(R.string.bet_success));
                         sweetAlertDialog.setContentText("最高可得" + redf.format(can_win_money) + "彩金！");
                         sweetAlertDialog.show();
-                        mExplosionField = ExplosionField.attach2Window(this);
-                        mExplosionField.addListener(popView.findViewById(R.id.main_pop));
+
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
+                                mExplosionField.addListener(popView.findViewById(R.id.main_pop));
+                            }
+                        }, 350);
+
                     } else {
                         sweetAlertDialog = new SweetAlertDialog(this, SportsKey.TYPE_ONE);
                         sweetAlertDialog.setTitleText("Sorry...");
@@ -316,7 +325,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * popview消失
      */
     private void dismisspopviw() {
-        if (null != popupWindow && popupWindow.isShowing()) {
+        if (null != popupWindow) {
             popupWindow.dismiss();
         }
     }
@@ -325,7 +334,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 关闭对话框
      */
     private void dismissDialog() {
-        if (null != sweetAlertDialog && sweetAlertDialog.isShowing()) {
+        if (null != sweetAlertDialog) {
             sweetAlertDialog.cancel();
         }
     }

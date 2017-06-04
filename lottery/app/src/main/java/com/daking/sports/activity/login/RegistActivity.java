@@ -157,13 +157,22 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
-                LogUtil.e("===============message=========" + message);
+                LogUtil.e("===============gotoRegist=========" + message);
                 Gson gson = new Gson();
                 loginRsp = gson.fromJson(message, LoginRsp.class);
-                if (loginRsp.getCode() == 0) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (null==loginRsp){
+                            //展示失败消息
+                            new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+                                    .setTitleText(getString(R.string.error))
+                                    .setContentText(getString(R.string.system_error))
+                                    .show();
+                            return;
+                        }
+                        if (loginRsp.getCode() == 0) {
+
                             //展示注册成功消息
                             new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText(getString(R.string.register_success))
@@ -178,24 +187,15 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                                     finish();
                                 }
                             }, 1000);
-
-                        }
-                    });
-
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                        } else {
                             //展示失败消息
                             new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
                                     .setTitleText(getString(R.string.regist_err))
                                     .setContentText(loginRsp.getIfo())
                                     .show();
                         }
-                    });
-
-                }
-
+                    }
+                });
             }
         });
     }

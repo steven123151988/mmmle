@@ -46,6 +46,8 @@
                 android:src="@mipmap/login_account" />
 
             <EditText
+                android:inputType="number"
+                android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ_@.-"
                 android:id="@+id/et_account"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

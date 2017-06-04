@@ -70,6 +70,7 @@
                 android:hint="@string/regist_psw_length"
                 android:maxLength="15"
                 android:maxLines="1"
+                android:password="true"
                 android:textSize="@dimen/dimen_14" />
 
         </LinearLayout>
@@ -100,6 +101,7 @@
                 android:hint="@string/regist_psw_length"
                 android:maxLength="15"
                 android:maxLines="1"
+                android:password="true"
                 android:textSize="@dimen/dimen_14" />
 
         </LinearLayout>

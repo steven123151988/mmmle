@@ -35,21 +35,21 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- *   购彩面页
+ * 购彩面页
  */
 public class FirstFragment extends BaseFragment implements View.OnClickListener {
     private BettingFragment bettingFragment;
     private ServiceFragment serviceFragment;
-    private   MainIndexRsp mainIndexRsp;
-    private Intent  intent;
+    private MainIndexRsp mainIndexRsp;
+    private Intent intent;
     private View view;
-    private TextView tv_A,tv_B,tv_C,tv_D,tv_E,tv_F;
+    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         view = inflater.inflate(R.layout.fragment_first, null);
-         initView();
+        view = inflater.inflate(R.layout.fragment_first, null);
+        initView();
         return view;
     }
 
@@ -61,12 +61,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         banner.update(GetBannerData.getBannerData());
         //跑马灯的逻辑
         runhorseLight();
-        tv_A= (TextView) view.findViewById(R.id.tv_A);
-        tv_B= (TextView) view.findViewById(R.id.tv_B);
-        tv_C= (TextView) view.findViewById(R.id.tv_C);
-        tv_D= (TextView) view.findViewById(R.id.tv_D);
-        tv_E= (TextView) view.findViewById(R.id.tv_E);
-        tv_F= (TextView) view.findViewById(R.id.tv_F);
+        tv_A = (TextView) view.findViewById(R.id.tv_A);
+        tv_B = (TextView) view.findViewById(R.id.tv_B);
+        tv_C = (TextView) view.findViewById(R.id.tv_C);
+        tv_D = (TextView) view.findViewById(R.id.tv_D);
+        tv_E = (TextView) view.findViewById(R.id.tv_E);
+        tv_F = (TextView) view.findViewById(R.id.tv_F);
         //按钮点击
         view.findViewById(R.id.ll_betting_top).setOnClickListener(this);
         view.findViewById(R.id.ll_reallyperson).setOnClickListener(this);
@@ -77,7 +77,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         view.findViewById(R.id.ll_roulette).setOnClickListener(this);
         view.findViewById(R.id.ll_betting_sportd).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
-        intent=new Intent();
+        intent = new Intent();
     }
 
     private void initHomeIndex() {
@@ -99,36 +99,40 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
                 LogUtil.e("===============initHomeIndex=========" + message);
-                 Gson gson=new Gson();
-                try{
-                    mainIndexRsp=gson.fromJson(message,MainIndexRsp.class);
-                    if (mainIndexRsp.getCode()==9){
-                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                        return;
-                    }
-                    if (mainIndexRsp.getCode()==0){
-                           //修改UI必须在主线程
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
-                                tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
-                                tv_C.setText(mainIndexRsp.getIfo().getM_League());
-                                tv_D.setText(mainIndexRsp.getIfo().getMB_Ball()+" : "+mainIndexRsp.getIfo().getTG_Ball());
-                                tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
-                                tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
+                Gson gson = new Gson();
+                try {
+                    mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (null==mainIndexRsp){
+                                return;
                             }
-                        });
-                    }
-                }
-                catch (Exception e){
+                            switch (mainIndexRsp.getCode()){
+                                case SportsKey.TYPE_ZERO:
+                                    //修改UI必须在主线程
+                                    tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
+                                    tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
+                                    tv_C.setText(mainIndexRsp.getIfo().getM_League());
+                                    tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
+                                    tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
+                                    tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
+                                    break;
+                                case SportsKey.TYPE_NINE:
+                                    getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                                    break;
+                            }
+
+                        }
+                    });
+
+                } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                 }
             }
         });
     }
-
 
 
     @Override
@@ -138,11 +142,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         runhorseLight();
         initHomeIndex();
     }
+
     /**
-     *     跑马灯的逻辑
+     * 跑马灯的逻辑
      */
     private void runhorseLight() {
-        MarqueeView marqueeView = (MarqueeView)view.findViewById(R.id.tv_marquee);
+        MarqueeView marqueeView = (MarqueeView) view.findViewById(R.id.tv_marquee);
         marqueeView.setFocusable(true);
         marqueeView.requestFocus();
         marqueeView.setText(getResources().getString(R.string.horseRacelamp));//设置文本
@@ -157,24 +162,24 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.ll_betting_top: //下注
                 gtotoBetting();
-            break;
+                break;
             case R.id.ll_reallyperson: //AG真人视频
                 gotoAG();
                 break;
             case R.id.ll_sports_help://帮助
-                intent=new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.news));
-                intent.putExtra(SportsKey.WEBVIEW_URL,  SportsAPI.HELP);
+                intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.news));
+                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.HELP);
                 startActivity(intent);
                 break;
             case R.id.ll_service:  //客服
-                if (null==serviceFragment){
-                    serviceFragment=new ServiceFragment();
+                if (null == serviceFragment) {
+                    serviceFragment = new ServiceFragment();
                 }
-                ((MainActivity)getActivity()).showFragmentViews(SportsKey.TYPE_SIX,serviceFragment);
+                ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_SIX, serviceFragment);
                 break;
             case R.id.ll_betting_sportd://点击体育赛事
                 gtotoBetting();
@@ -189,9 +194,9 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                 gotoAG();
                 break;
             case R.id.ll_news://更多新闻
-                intent=new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.news));
-                intent.putExtra(SportsKey.WEBVIEW_URL,  SportsAPI.NEWS);
+                intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.news));
+                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.NEWS);
                 startActivity(intent);
                 break;
         }
@@ -201,16 +206,16 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      * 跳转到下注面页
      */
     private void gtotoBetting() {
-        ((MainActivity)getActivity()).goBetting(SportsKey.FOOTBALL,"");
-        ((MainActivity)getActivity()).showFragmentViews(SportsKey.TYPE_TWO,bettingFragment);
+        ((MainActivity) getActivity()).goBetting(SportsKey.FOOTBALL, "");
+        ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_TWO, bettingFragment);
     }
 
     /**
      * 跳转到AG真人视频面页
      */
     private void gotoAG() {
-        intent=new Intent(getActivity(), WebViewActivity.class);
-        intent.putExtra(SportsKey.WEBVIEW_TITLE,getResources().getString(R.string.ag));
+        intent = new Intent(getActivity(), WebViewActivity.class);
+        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
 //      intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.BASE_URL+ SportsAPI.AG);
         intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
         startActivity(intent);
