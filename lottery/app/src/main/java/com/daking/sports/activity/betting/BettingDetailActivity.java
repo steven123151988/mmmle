@@ -32,6 +32,7 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BettingDetailRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.daking.sports.view.explosionfield.ExplosionField;
 import com.google.gson.Gson;
@@ -68,7 +69,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private String mid;
     private Gson gosn = new Gson();
     private BettingDetailRsp bettingDetailRsp;
-    private SweetAlertDialog sweetAlertDialog;
     private LinearLayout ll_ball;
     private String ball, ballteam;
 
@@ -175,6 +175,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     LogUtil.e(message);
                     bettingDetailRsp = gosn.fromJson(message, BettingDetailRsp.class);
                     if (null == bettingDetailRsp) {
+                        ShowDialogUtil.showSystemFail(mContext);
                         return;
                     }
                     runOnUiThread(new Runnable() {
@@ -191,16 +192,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     startActivity(new Intent(mContext, LoginActivity.class));
                                     break;
                                 case SportsKey.TYPE_TWELVE://12赛事关闭
-                                    sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-                                    sweetAlertDialog.setTitleText("Sorry...");
-                                    sweetAlertDialog.setContentText(getString(R.string.betting_finish));
-                                    sweetAlertDialog.show();
+                                    ShowDialogUtil.showFailDialog(mContext,"Sorry...",getString(R.string.betting_finish));
                                     //延迟2秒关闭
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            dismissDialog();
+                                            ShowDialogUtil.dismissDialogs();
                                             finish();
                                         }
                                     }, 2000);
@@ -291,11 +289,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     //请求接口
                     if (true) {
                         //write success view
-                        sweetAlertDialog = new SweetAlertDialog(this, SportsKey.TYPE_TWO);
-                        sweetAlertDialog.setTitleText(getString(R.string.bet_success));
-                        sweetAlertDialog.setContentText("最高可得" + redf.format(can_win_money) + "彩金！");
-                        sweetAlertDialog.show();
-
+                        ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.bet_success),"最高可得" + redf.format(can_win_money) + "彩金！");
                         Handler handler=new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -306,10 +300,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         }, 350);
 
                     } else {
-                        sweetAlertDialog = new SweetAlertDialog(this, SportsKey.TYPE_ONE);
-                        sweetAlertDialog.setTitleText("Sorry...");
-                        sweetAlertDialog.setContentText(getString(R.string.bet_error));
-                        sweetAlertDialog.show();
+                        ShowDialogUtil.showFailDialog(mContext,getString(R.string.sorry),getString(R.string.bet_error));
                     }
                     dismisspopviw();
                 }
@@ -330,20 +321,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    /**
-     * 关闭对话框
-     */
-    private void dismissDialog() {
-        if (null != sweetAlertDialog) {
-            sweetAlertDialog.cancel();
-        }
-    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         dismisspopviw();
-        dismissDialog();
+        ShowDialogUtil.dismissDialogs();
     }
 
 }

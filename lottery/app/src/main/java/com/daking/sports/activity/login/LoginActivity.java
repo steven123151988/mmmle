@@ -19,6 +19,7 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
@@ -41,7 +42,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private LoginRsp LoginRsp;
     private TextView tv_center;
     private Gson gson;
-    private SweetAlertDialog sweetAlertDialog_success, sweetAlertDialog_fail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            sweetAlertDialog_fail(getString(R.string.system_error));
+                            ShowDialogUtil.showSystemFail(mContext);
                         }
                     });
 
@@ -131,27 +132,27 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                 //返回信息解析失败，提示系统异常、
                                 if (null == LoginRsp) {
                                     //展示失败消息
-                                    sweetAlertDialog_fail(getString(R.string.system_error));
+                                    ShowDialogUtil.showSystemFail(mContext);
                                     return;
                                 }
                                 if (LoginRsp.getCode() == 0) {
                                     SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
                                     SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
                                     //展示成功的对话框
-                                    sweetAlertDialog_success();
+                                    ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.loginsuccss),LoginRsp.getMsg());
                                     //延迟5秒关闭
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            dismissDialogs();
+                                            ShowDialogUtil.dismissDialogs();
                                             startActivity(new Intent(mContext, MainActivity.class));
                                             finish();
                                         }
                                     }, 2500);
                                 } else {
                                     //展示失败消息
-                                    sweetAlertDialog_fail(LoginRsp.getIfo());
+                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr),LoginRsp.getIfo());
                                 }
                             }
                         });
@@ -164,32 +165,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
-    /**
-     * 展示成功的dialog
-     */
-    private void sweetAlertDialog_success() {
-        //展示登录成功消息
-        if (null != sweetAlertDialog_success) {
-            sweetAlertDialog_success.cancel();
-        }
-        sweetAlertDialog_success = new SweetAlertDialog(mContext, SportsKey.TYPE_TWO);
-        sweetAlertDialog_success.setTitleText(getString(R.string.loginsuccss));
-        sweetAlertDialog_success.setContentText(LoginRsp.getMsg());
-        sweetAlertDialog_success.show();
-    }
 
-    /**
-     * 展示失败的提示框
-     */
-    private void sweetAlertDialog_fail(String msg) {
-        if (null != sweetAlertDialog_fail) {
-            sweetAlertDialog_fail.cancel();
-        }
-        sweetAlertDialog_fail = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-        sweetAlertDialog_fail.setTitleText(getString(R.string.loginerr));
-        sweetAlertDialog_fail.setContentText(msg);
-        sweetAlertDialog_fail.show();
-    }
+
+
 
 
     @Override
@@ -199,17 +177,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
-    /**
-     * 关闭对话框
-     */
-    private void dismissDialogs() {
-        if (null != sweetAlertDialog_success) {
-            sweetAlertDialog_success.cancel();
-        }
-        if (null != sweetAlertDialog_fail) {
-            sweetAlertDialog_fail.cancel();
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -219,6 +186,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dismissDialogs();
+        ShowDialogUtil.dismissDialogs();
     }
 }

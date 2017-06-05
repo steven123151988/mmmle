@@ -5,6 +5,7 @@ public class SportsAPI {
     public static final String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
     public static final String BASE_URL="http://sport.api.lebole5.com/";
     public static final String REGIST="member/reg/mem_reg.php";//注册
+    public static final String CHECK_USER="member/register/chk_user";//检查用户名称
     public static final String LOGIN="login/login";//登陆
     public static final String LOGIN_OUT="login/loginout";//登出
     public static final String HOME_INDEX="home/index"; //主页数据

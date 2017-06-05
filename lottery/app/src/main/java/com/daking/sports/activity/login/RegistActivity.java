@@ -1,8 +1,11 @@
 package com.daking.sports.activity.login;
 
+
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -11,10 +14,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
+import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.mingle.entity.MenuEntity;
@@ -60,6 +66,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private RelativeLayout rl;
     private ImageView iv_back;
     private LoginRsp loginRsp;
+    private Gson gson=new Gson();
+    private SweetAlertDialog sweetAlertDialog_fail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +77,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setVisibility(View.VISIBLE);
         iv_back.setOnClickListener(this);
-        et_account = (EditText) findViewById(R.id.et_account);
         et_psw = (EditText) findViewById(R.id.et_psw);
         et_psw2 = (EditText) findViewById(R.id.et_psw2);
         et_name = (EditText) findViewById(R.id.et_name);
@@ -85,9 +92,65 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         rl = (RelativeLayout) findViewById(R.id.rl);
     }
 
+    /**
+     * 检查用户名是否可用
+     */
+    private void checkUser() {
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, "chk_user")
+                .add(SportsKey.USER_NAME, account)
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.CHECK_USER)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                LogUtil.e("=======e===============" + e);
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String message = response.body().string();
+                LogUtil.e(message);
+                try {
+                    loginRsp = gson.fromJson(message, LoginRsp.class);
+                    if(null==loginRsp){
+                        new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
+                                .setTitleText(getString(R.string.error))
+                                .setContentText(getString(R.string.system_error))
+                                .show();
+                        return;
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch(loginRsp.getCode()){
+                                case SportsKey.TYPE_ZERO:
+                                    //用户名可用
+                                    break;
+                                default:
+                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.error),loginRsp.getIfo());
+                                    break;
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+
+                }
+            }
+        });
+    }
+
 
     private void regist() {
         account = et_account.getText().toString().replace(" ", "");
+        checkUser();
         psw = et_psw.getText().toString().replace(" ", "");
         psw2 = et_psw2.getText().toString().replace(" ", "");
         name = et_name.getText().toString().replace(" ", "");
@@ -165,20 +228,12 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                     public void run() {
                         if (null==loginRsp){
                             //展示失败消息
-                            new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                                    .setTitleText(getString(R.string.error))
-                                    .setContentText(getString(R.string.system_error))
-                                    .show();
+                            ShowDialogUtil.showSystemFail(mContext);
                             return;
                         }
                         if (loginRsp.getCode() == 0) {
-
                             //展示注册成功消息
-                            new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE)
-                                    .setTitleText(getString(R.string.register_success))
-                                    .setContentText(loginRsp.getMsg())
-                                    .show();
-
+                            ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.register_success),loginRsp.getMsg());
                             //延迟5秒关闭
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
@@ -189,16 +244,14 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                             }, 1000);
                         } else {
                             //展示失败消息
-                            new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                                    .setTitleText(getString(R.string.regist_err))
-                                    .setContentText(loginRsp.getIfo())
-                                    .show();
+                            ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.regist_err),loginRsp.getIfo());
                         }
                     }
                 });
             }
         });
     }
+
 
 
     private void setupRecyclerView() {
@@ -295,4 +348,12 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
         }
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShowDialogUtil.dismissDialogs();
+    }
+
 }

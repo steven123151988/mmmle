@@ -157,4 +157,5 @@
     <string name="app_support_lowest_sdk">APP支持安卓最低版本为4.0</string>
     <string name="net_error">网络连接有问题，请检查</string>
     <string name="error">错误</string>
+    <string name="sorry">Sorry...</string>
 </resources>

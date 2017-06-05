@@ -12,6 +12,7 @@ import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -21,7 +22,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SplashActivity extends BaseActivity {
     private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
-    private SweetAlertDialog sweetAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,31 +42,16 @@ public class SplashActivity extends BaseActivity {
                     }
                 }, 2500);
             } else {
-                showDialog(mContext, getString(R.string.app_support_lowest_sdk));
-
+                ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr), getString(R.string.app_support_lowest_sdk));
             }
         } else {
-            showDialog(mContext, getString(R.string.net_error));
+            ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr),getString(R.string.net_error));
         }
 
 
     }
 
-    /**
-     * 提示错误信息
-     *
-     * @param mContext
-     * @param text
-     */
-    private void showDialog(Context mContext, String text) {
-        if (null != sweetAlertDialog) {
-            sweetAlertDialog.cancel();
-        }
-        sweetAlertDialog = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-        sweetAlertDialog.setTitleText(getString(R.string.loginerr));
-        sweetAlertDialog.setContentText(text);
-        sweetAlertDialog.show();
-    }
+
 
     /**
      * 查看登陆状态，若UID为空就要去登陆
@@ -95,18 +80,11 @@ public class SplashActivity extends BaseActivity {
         return flag;
     }
 
-    /**
-     * 关闭对话框
-     */
-    private void dismissDialog() {
-        if (null != sweetAlertDialog) {
-            sweetAlertDialog.cancel();
-        }
-    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dismissDialog();
+        ShowDialogUtil.dismissDialogs();
     }
 }
