@@ -53,6 +53,7 @@ public class ShowDialogUtil {
      * @param message
      */
     public static void showFailDialog(Context mContext,String title,String message){
+        LogUtil.e("=========showFailDialog============"+mContext+"L"+title+"L"+message);
         if (null==mContext||null==title||null==message){
             return;
         }

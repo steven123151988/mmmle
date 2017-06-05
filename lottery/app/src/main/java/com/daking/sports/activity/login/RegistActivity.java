@@ -1,13 +1,17 @@
 package com.daking.sports.activity.login;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,6 +43,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.filter;
+
 /**
  * 注册面页
  */
@@ -66,8 +72,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private RelativeLayout rl;
     private ImageView iv_back;
     private LoginRsp loginRsp;
-    private Gson gson=new Gson();
-    private SweetAlertDialog sweetAlertDialog_fail;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +82,28 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setVisibility(View.VISIBLE);
         iv_back.setOnClickListener(this);
+        et_account = (EditText) findViewById(R.id.et_account);
         et_psw = (EditText) findViewById(R.id.et_psw);
         et_psw2 = (EditText) findViewById(R.id.et_psw2);
         et_name = (EditText) findViewById(R.id.et_name);
+        //强制输入汉字
+        InputFilter filter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if (!isChinese(source.charAt(i))) {
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+        et_name.setFilters(new InputFilter[]{filter});
+
         et_birthday = (EditText) findViewById(R.id.et_birthday);
+        addTextWatchListener(et_birthday,8);
         et_money_psw = (EditText) findViewById(R.id.et_money_psw);
+        addTextWatchListener(et_money_psw,6);
         et_answer = (EditText) findViewById(R.id.et_answer);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
@@ -91,6 +113,50 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         findViewById(R.id.ll_checkquestion).setOnClickListener(this);
         rl = (RelativeLayout) findViewById(R.id.rl);
     }
+
+    /**
+     * 判定输入汉字
+     *
+     * @param c
+     * @return
+     */
+    public static boolean isChinese(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 设置监听
+     * @param editText
+     */
+    private void addTextWatchListener(EditText editText,final  int size) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String psw=s.toString();
+                if (psw.length()==size){
+                    closeKeyboard();
+                }
+            }
+        });
+    }
+
 
     /**
      * 检查用户名是否可用
@@ -110,30 +176,29 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                LogUtil.e("=======e===============" + e);
+                ShowDialogUtil.showSystemFail(mContext);
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String message = response.body().string();
                 LogUtil.e(message);
                 try {
                     loginRsp = gson.fromJson(message, LoginRsp.class);
-                    if(null==loginRsp){
-                        new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE)
-                                .setTitleText(getString(R.string.error))
-                                .setContentText(getString(R.string.system_error))
-                                .show();
-                        return;
-                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            switch(loginRsp.getCode()){
+                            if (null == loginRsp) {
+                                ShowDialogUtil.showSystemFail(mContext);
+                                return;
+                            }
+                            switch (loginRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-                                    //用户名可用
+                                    //用户名可用,直接去注册
+                                    gotoRegist();
                                     break;
                                 default:
-                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.error),loginRsp.getIfo());
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.error), loginRsp.getMsg());
                                     break;
                             }
                         }
@@ -150,14 +215,19 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
     private void regist() {
         account = et_account.getText().toString().replace(" ", "");
-        checkUser();
         psw = et_psw.getText().toString().replace(" ", "");
         psw2 = et_psw2.getText().toString().replace(" ", "");
         name = et_name.getText().toString().replace(" ", "");
         money_psw = et_money_psw.getText().toString().replace(" ", "");
         answer = et_answer.getText().toString().replace(" ", "");
         birthday = et_birthday.getText().toString().replace(" ", "");
-        if (!psw.equals(psw2)) {
+        if (TextUtils.isEmpty(account) || TextUtils.isEmpty(psw) || TextUtils.isEmpty(psw2)
+                || TextUtils.isEmpty(name) || TextUtils.isEmpty(money_psw)
+                || TextUtils.isEmpty(answer) || TextUtils.isEmpty(birthday)) {
+            ToastUtil.show(mContext, getResources().getString(R.string.regist_null));
+            return;
+        }
+        if (!psw.equals("") && !psw.equals(psw2)) {
             ToastUtil.show(mContext, "两次密码不匹配");
             return;
         }
@@ -169,15 +239,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             ToastUtil.show(mContext, "生日格式为8位数");
             return;
         }
-
-        if (TextUtils.isEmpty(account) || TextUtils.isEmpty(psw) || TextUtils.isEmpty(psw2)
-                || TextUtils.isEmpty(name) || TextUtils.isEmpty(money_psw)
-                || TextUtils.isEmpty(answer) || TextUtils.isEmpty(birthday)) {
-            ToastUtil.show(mContext, getResources().getString(R.string.regist_null));
-        } else {
-            gotoRegist();
-        }
-
+        checkUser();
     }
 
 
@@ -191,7 +253,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 .add("website", "android")
                 .add("website1", "android")
                 .add("reg", "3")
-                .add("intr", "daa88")  //代理账号
                 .add("username", account)//账号
                 .add("password", psw)//密码
                 .add("currency", "RMB")  //首选货币
@@ -214,44 +275,50 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                LogUtil.e("onFailure=" + e);
+                ShowDialogUtil.showSystemFail(mContext);
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String message = response.body().string();
-                LogUtil.e("===============gotoRegist=========" + message);
-                Gson gson = new Gson();
-                loginRsp = gson.fromJson(message, LoginRsp.class);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (null==loginRsp){
-                            //展示失败消息
-                            ShowDialogUtil.showSystemFail(mContext);
-                            return;
+                try {
+                    String message = response.body().string();
+                    LogUtil.e(message);
+                    Gson gson = new Gson();
+                    loginRsp = gson.fromJson(message, LoginRsp.class);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (null == loginRsp) {
+                                //展示失败消息
+                                ShowDialogUtil.showSystemFail(mContext);
+                                return;
+                            }
+                            if (loginRsp.getCode() == 0) {
+                                //展示注册成功消息
+                                ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
+                                //延迟5秒关闭
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ShowDialogUtil.dismissDialogs();
+                                        finish();
+                                    }
+                                }, 2500);
+                            } else {
+                                //展示失败消息
+                                ShowDialogUtil.showFailDialog(mContext, getString(R.string.regist_err), loginRsp.getIfo());
+                            }
                         }
-                        if (loginRsp.getCode() == 0) {
-                            //展示注册成功消息
-                            ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.register_success),loginRsp.getMsg());
-                            //延迟5秒关闭
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    finish();
-                                }
-                            }, 1000);
-                        } else {
-                            //展示失败消息
-                            ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.regist_err),loginRsp.getIfo());
-                        }
-                    }
-                });
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+
+                }
             }
         });
     }
-
 
 
     private void setupRecyclerView() {
@@ -343,9 +410,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 regist();
                 break;
             case R.id.ll_checkquestion:
-                setupRecyclerView();
+                    setupRecyclerView();
                 break;
-
         }
     }
 
@@ -356,4 +422,14 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         ShowDialogUtil.dismissDialogs();
     }
 
+    /**
+     * 关闭键盘
+     */
+    private void closeKeyboard() {
+        View view = getWindow().peekDecorView();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
 }

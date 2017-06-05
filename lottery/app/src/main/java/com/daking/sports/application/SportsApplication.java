@@ -52,8 +52,6 @@ public class SportsApplication extends Application  {
 
             @Override
             public void onFailure(String s, String s1) {
-                LogUtil.e("=======s======="+s);
-                LogUtil.e("=======s1======="+s1);
             }
         });
         //关闭推送日志输出

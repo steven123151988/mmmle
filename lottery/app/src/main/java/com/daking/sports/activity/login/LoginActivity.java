@@ -152,7 +152,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     }, 2500);
                                 } else {
                                     //展示失败消息
-                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr),LoginRsp.getIfo());
+                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr),LoginRsp.getMsg());
                                 }
                             }
                         });

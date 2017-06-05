@@ -42,10 +42,10 @@ public class SplashActivity extends BaseActivity {
                     }
                 }, 2500);
             } else {
-                ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr), getString(R.string.app_support_lowest_sdk));
+                ShowDialogUtil.showFailDialog(mContext,getString(R.string.error), getString(R.string.app_support_lowest_sdk));
             }
         } else {
-            ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr),getString(R.string.net_error));
+            ShowDialogUtil.showFailDialog(mContext,getString(R.string.error),getString(R.string.net_error));
         }
 
 
