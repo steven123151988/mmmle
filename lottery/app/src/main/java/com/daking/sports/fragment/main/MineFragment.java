@@ -20,6 +20,7 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
@@ -124,6 +125,12 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(getActivity());
+                    }
+                });
             }
 
             @Override

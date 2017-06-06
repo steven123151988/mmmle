@@ -19,6 +19,7 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.MainIndexRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.view.banner.BannerBaseView;
 import com.daking.sports.view.banner.MainBannerView;
 import com.dalong.marqueeview.MarqueeView;
@@ -93,6 +94,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(getActivity());
+                    }
+                });
             }
 
             @Override

@@ -30,7 +30,7 @@ public class ProgressDialogUtil {
         dialog.show();
     }
 
-    public void hideWaiting() {
+    public static void hideWaiting() {
         if (null != dialog) {
             dialog.dismiss();
             dialog = null;

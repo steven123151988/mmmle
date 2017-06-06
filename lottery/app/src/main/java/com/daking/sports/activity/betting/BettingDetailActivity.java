@@ -23,7 +23,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.MainActivity;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.MyExpandableListAdapter;
 import com.daking.sports.base.BaseActivity;
@@ -166,6 +165,12 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(mContext);
+                    }
+                });
             }
 
             @Override
@@ -174,13 +179,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     String message = response.body().string();
                     LogUtil.e(message);
                     bettingDetailRsp = gosn.fromJson(message, BettingDetailRsp.class);
-                    if (null == bettingDetailRsp) {
-                        ShowDialogUtil.showSystemFail(mContext);
-                        return;
-                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            if (null == bettingDetailRsp) {
+                                ShowDialogUtil.showSystemFail(mContext);
+                                return;
+                            }
                             switch (bettingDetailRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO://成功
                                     //// TODO: 2017/5/31

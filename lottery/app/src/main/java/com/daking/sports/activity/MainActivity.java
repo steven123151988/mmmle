@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,7 +34,9 @@ import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
 import com.daking.sports.json.MainMenuRsp;
 import com.daking.sports.util.LogUtil;
+import com.daking.sports.util.ProgressDialogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
@@ -152,6 +155,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(mContext);
+                    }
+                });
             }
 
             @Override
@@ -165,6 +174,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         @Override
                         public void run() {
                             switch (mainMenuRsp.getCode()) {
+
                                 case SportsKey.TYPE_ZERO:
                                     //得到接口数据才能赋值，不然报空
 //                                    setNavigationViewItemClickListener();

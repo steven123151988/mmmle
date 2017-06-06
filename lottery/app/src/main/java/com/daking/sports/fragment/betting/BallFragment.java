@@ -18,6 +18,7 @@ import com.daking.sports.json.FootballGQRsp;
 import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.google.gson.Gson;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -147,7 +148,12 @@ public class BallFragment extends BaseFragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                LogUtil.e("=======e===============" + e);
+               getActivity().runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       ShowDialogUtil.showSystemFail(getActivity());
+                   }
+               });
             }
 
             @Override

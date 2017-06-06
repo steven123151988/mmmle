@@ -176,7 +176,13 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                ShowDialogUtil.showSystemFail(mContext);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(mContext);
+                    }
+                });
+
             }
 
             @Override
@@ -275,7 +281,13 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                ShowDialogUtil.showSystemFail(mContext);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(mContext);
+                    }
+                });
+
             }
 
             @Override
