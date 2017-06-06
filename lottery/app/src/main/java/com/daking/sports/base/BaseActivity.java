@@ -9,8 +9,6 @@ import com.daking.sports.view.CustomProgressDialog;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 
-import static anet.channel.util.Utils.context;
-
 public class BaseActivity extends AppCompatActivity {
     public Context mContext;
     private CustomProgressDialog dialog;
@@ -18,7 +16,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PushAgent.getInstance(context).onAppStart();
+        PushAgent.getInstance(mContext).onAppStart();
         mContext = this;
     }
 
