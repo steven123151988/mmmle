@@ -96,8 +96,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             RequestBody requestBody = new FormBody.Builder()
                     .add(SportsKey.USER_NAME, account)
                     .add(SportsKey.PASSWORD, psw)
-                    .add(SportsKey.FNNAME, "lg")
-                    .add(SportsKey.LANGUAGE, "zh-cn")
+                    .add(SportsKey.FNNAME,SportsKey.LOGIN)
+                    .add(SportsKey.LANGUAGE,SportsKey.ZH_CN)
                     .build();
 
             final okhttp3.Request request = new okhttp3.Request.Builder()

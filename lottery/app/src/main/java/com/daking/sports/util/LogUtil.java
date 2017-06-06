@@ -21,9 +21,9 @@ public class LogUtil {
     public static void setLevel(int level) {
         LogUtil.level = level;
         if (LogUtil.level > 0) {
-            LogUtil.e("lotteryandsports日志级别为：" + (LogUtil.level == 1 ? "测试" : "开发"));
+            LogUtil.e(TAG+"日志级别为：" + (LogUtil.level == 1 ? "测试" : "开发"));
         }else {
-            LogUtil.e("lotteryandsports日志级别为：正式");
+            LogUtil.e(TAG+"日志级别为：正式");
         }
     }
 
@@ -54,10 +54,12 @@ public class LogUtil {
         while (index < str.length()) {
             // java的字符不允许指定超过总的长度end
             if (str.length() <= index + maxLength) {
-                //  str＝str.substring(int beginIndex);截取掉str从首字母起长度为beginIndex的字符串，将剩余字符串赋值给str；
+                //  str＝str.substring(int beginIndex);
+                // 截取掉str从首字母起长度为beginIndex的字符串，将剩余字符串赋值给str；
                 sub = str.substring(index);
             } else {
-                //str＝str.substring(int beginIndex，int endIndex);截取str中从beginIndex开始至endIndex结束时的字符串，并将其赋值给str;
+                //str＝str.substring(int beginIndex，int endIndex);
+                // 截取str中从beginIndex开始至endIndex结束时的字符串，并将其赋值给str;
                 sub = str.substring(index,index+maxLength);
             }
             index += maxLength;

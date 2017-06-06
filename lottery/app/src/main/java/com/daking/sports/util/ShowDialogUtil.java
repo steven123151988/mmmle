@@ -34,7 +34,7 @@ public class ShowDialogUtil {
      * @param message
      */
     public static void showSuccessDialog(Context mContext,String title,String message){
-        if (null==mContext||null==title||null==message){
+        if (null==mContext){
             return;
         }
         if (null != sweetAlertDialog_success) {
@@ -53,8 +53,7 @@ public class ShowDialogUtil {
      * @param message
      */
     public static void showFailDialog(Context mContext,String title,String message){
-        LogUtil.e("=========showFailDialog============"+mContext+"L"+title+"L"+message);
-        if (null==mContext||null==title||null==message){
+        if (null==mContext){
             return;
         }
         if (null != sweetAlertDialog_fail) {
@@ -64,7 +63,6 @@ public class ShowDialogUtil {
         sweetAlertDialog_fail.setTitleText(title);
         sweetAlertDialog_fail.setContentText(message);
         sweetAlertDialog_fail.show();
-
     }
 
     /**

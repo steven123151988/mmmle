@@ -42,7 +42,6 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private FirstFragment firstFragment;
     private LoginRsp loginRsp;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal, null);
@@ -112,8 +111,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
      */
     private void loginout() {
         RequestBody requestBody = new FormBody.Builder()
-                .add("fnName", "lgout")
-                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
+                .add(SportsKey.FNNAME, SportsKey.LOGIN_OUT)
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -140,16 +139,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         @Override
                         public void run() {
                             switch (loginRsp.getCode()) {
-                                case 0:
+                                case SportsKey.TYPE_ZERO:
                                     if (null == firstFragment) {
                                         firstFragment = new FirstFragment();
                                     }
                                     SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
                                     ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
-                                    ToastUtil.show(getActivity(), loginRsp.getIfo());
+                                    ToastUtil.show(getActivity(), loginRsp.getMsg());
                                     break;
-                                case 6:
-                                    ToastUtil.show(getActivity(), loginRsp.getIfo());
+                                case SportsKey.TYPE_SIX:
+                                    ToastUtil.show(getActivity(), loginRsp.getMsg());
                                     break;
                             }
                         }
