@@ -39,7 +39,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -52,7 +51,7 @@ import okhttp3.Response;
  */
 
 public class BettingDetailActivity extends BaseActivity implements View.OnClickListener {
-    private ExpandableListView lv_betting;
+    private ExpandableListView lv_expandableListView;
     private MyExpandableListAdapter myExpandableListAdapter;
     private TextView tv_center;
     private ImageView iv_back;
@@ -120,16 +119,9 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setVisibility(View.VISIBLE);
         iv_back.setOnClickListener(this);
-        lv_betting = (ExpandableListView) findViewById(R.id.lv_betting);
-        lv_betting.setGroupIndicator(null);
-        myExpandableListAdapter = new MyExpandableListAdapter(mContext);
-        lv_betting.setAdapter(myExpandableListAdapter);
-        //让2级菜单全部展开
-        for (int i = 0; i < 3; i++) {
-            lv_betting.expandGroup(i);
-        }
-
-        lv_betting.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        lv_expandableListView = (ExpandableListView) findViewById(R.id.lv_expandableListView);
+        lv_expandableListView.setGroupIndicator(null);
+        lv_expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 if (null == popupWindow) {
@@ -188,7 +180,15 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             }
                             switch (bettingDetailRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO://成功
-                                    //// TODO: 2017/5/31
+                                    if(null!=bettingDetailRsp.getIfo().getBetmsg()){
+                                        myExpandableListAdapter = new MyExpandableListAdapter(mContext,bettingDetailRsp);
+                                        lv_expandableListView.setAdapter(myExpandableListAdapter);
+                                        //让2级菜单全部展开
+                                        int size= myExpandableListAdapter.getGroupCount();
+                                        for(int i = 0; i <size; i++){
+                                            lv_expandableListView.expandGroup(i);
+                                        }
+                                    }
                                     break;
                                 case SportsKey.TYPE_NINE:
                                     startActivity(new Intent(mContext, LoginActivity.class));

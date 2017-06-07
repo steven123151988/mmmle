@@ -14,12 +14,9 @@ public class SportsAPI {
     public static final String GET_MATCH="home/get_match";//赛事详情
 
 
-
-
     public static final String GET_DATA="member/account/mem_data.php";//获取会员资料
     public static final String MODIFY_PSW="/app/member/account/forget_psw.php";//忘记密码
     public static final String GET_PAY_URL="member/YeePay/register.php";//获取支付链接
-
     public static final String NEWS="http://hg0909.com/index.php/Help/promotion";
     public static final String AG ="http://gci.6686.me:81/magingame/NewPlaza31/?pid=C39&stamp=1494492228780";
     public static final String HELP="http://hg0909.com/index.php/Help";

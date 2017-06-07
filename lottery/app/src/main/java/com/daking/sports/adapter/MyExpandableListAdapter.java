@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.json.BettingDetailRsp;
+
+import java.util.List;
 
 
 /**
@@ -19,11 +22,16 @@ import com.daking.sports.R;
 public class MyExpandableListAdapter implements ExpandableListAdapter {
     private LayoutInflater mInflater;
     private Context mContext;
+    private BettingDetailRsp bettingDetailRsp;
+    private List<BettingDetailRsp.IfoBean.BetmsgBean> betmsg;
+    private List<BettingDetailRsp.IfoBean.BetmsgBean.OddsBean> odds;
 
-    public MyExpandableListAdapter(Context context) {
+    public MyExpandableListAdapter(Context context, BettingDetailRsp bettingDetailRsp) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
+        this.bettingDetailRsp = bettingDetailRsp;
     }
+
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
 
@@ -36,32 +44,32 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return 5;
+        return null == bettingDetailRsp.getIfo().getBetmsg() ? 0 : bettingDetailRsp.getIfo().getBetmsg().size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 2;
+        return null == bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getOdds() ? 0 : bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getOdds().size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return null;
+        return groupPosition;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return null;
+        return childPosition;
     }
 
     @Override
     public long getGroupId(int groupPosition) {
-        return 0;
+        return groupPosition;
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return 0;
+        return childPosition;
     }
 
     @Override
@@ -73,15 +81,16 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View view, ViewGroup parent) {
         TitleViewHolder viewHolder = null;
         if (view == null) {
-            viewHolder=new TitleViewHolder();
+            viewHolder = new TitleViewHolder();
             view = mInflater.inflate(R.layout.adapter_betting_title, null);
-            viewHolder.iv_arrow=(ImageView) view.findViewById(R.id.iv_arrow);
-            viewHolder.tv_title=(TextView) view.findViewById(R.id.tv_title);
+            viewHolder.iv_arrow = (ImageView) view.findViewById(R.id.iv_arrow);
+            viewHolder.tv_title = (TextView) view.findViewById(R.id.tv_title);
             view.setTag(viewHolder);
         } else {
             viewHolder = (TitleViewHolder) view.getTag();
         }
-
+        betmsg = bettingDetailRsp.getIfo().getBetmsg();
+        viewHolder.tv_title.setText(betmsg.get(groupPosition).getTitle());
         if (isExpanded) {
             viewHolder.iv_arrow.setImageResource(R.mipmap.arrow_up);
         } else {
@@ -92,25 +101,31 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
-       ViewHolder viewHolder = null;
+        ViewHolder viewHolder = null;
         if (view == null) {
-            viewHolder=new ViewHolder();
+            viewHolder = new ViewHolder();
             view = mInflater.inflate(R.layout.adapter_betting_detail, null);
-            viewHolder.tv_1=(TextView) view.findViewById(R.id.tv_1);
-            viewHolder.tv_2=(TextView) view.findViewById(R.id.tv_2);
-            viewHolder.tv_3=(TextView) view.findViewById(R.id.tv_3);
-            viewHolder.tv_4=(TextView) view.findViewById(R.id.tv_4);
-            viewHolder.tv_5=(TextView) view.findViewById(R.id.tv_5);
-            viewHolder.tv_6=(TextView) view.findViewById(R.id.tv_6);
-            viewHolder.tv_7=(TextView) view.findViewById(R.id.tv_7);
+            viewHolder.tv_1 = (TextView) view.findViewById(R.id.tv_1);
+            viewHolder.tv_2 = (TextView) view.findViewById(R.id.tv_2);
+            viewHolder.tv_3 = (TextView) view.findViewById(R.id.tv_3);
+            viewHolder.tv_4 = (TextView) view.findViewById(R.id.tv_4);
+            viewHolder.tv_5 = (TextView) view.findViewById(R.id.tv_5);
+            viewHolder.tv_6 = (TextView) view.findViewById(R.id.tv_6);
+            viewHolder.tv_7 = (TextView) view.findViewById(R.id.tv_7);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
+        odds= bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getOdds();
+        viewHolder.tv_1.setText(odds.get(childPosition).getMb_odds());
+        viewHolder.tv_2.setText("13");
+        viewHolder.tv_3.setText("13");
         return view;
     }
 
-    /** ExpandableListView 如果子条目需要响应click事件,必需返回true */
+    /**
+     * ExpandableListView 如果子条目需要响应click事件,必需返回true
+     */
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
@@ -146,12 +161,12 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
         return 0;
     }
 
-    class TitleViewHolder {
+    private class TitleViewHolder {
         TextView tv_title;
         ImageView iv_arrow;
     }
 
-    class ViewHolder{
+    private class ViewHolder {
         TextView tv_1;
         TextView tv_2;
         TextView tv_3;
