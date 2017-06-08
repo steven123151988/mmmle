@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_pop"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/main_pop"
     android:background="@color/white_ffffff"
     android:orientation="vertical">
 
@@ -41,6 +41,7 @@
                 android:textSize="@dimen/dimen_16" />
 
             <TextView
+
                 android:id="@+id/tv_center_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A"
+            android:textColor="@color/black_333333"
             android:textSize="@dimen/dimen_14"
 
             />
@@ -96,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_5"
             android:text="B"
+            android:textColor="@color/black_333333"
             android:textSize="@dimen/dimen_14"
 
             />
@@ -111,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="C"
+                android:textColor="@color/black_333333"
                 android:textSize="@dimen/dimen_14"
 
                 />
@@ -127,6 +131,7 @@
                 />
 
             <TextView
+                android:textColor="@color/black_333333"
                 android:id="@+id/tv_E"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,6 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F"
+                android:textColor="@color/black_333333"
                 android:textSize="@dimen/dimen_14"
 
                 />
@@ -158,6 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="G"
+                android:textColor="@color/black_333333"
                 android:textSize="@dimen/dimen_14"
 
                 />
@@ -191,11 +198,12 @@
             android:layout_marginTop="@dimen/dimen_5">
 
             <EditText
+                android:textColor="@color/black_333333"
                 android:id="@+id/et_input_money"
-                android:background="@drawable/editsharp"
                 android:layout_width="@dimen/dimen_100"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:background="@drawable/editsharp"
                 android:gravity="center"
                 android:hint="@string/history_total"
                 android:inputType="number"
@@ -210,6 +218,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:textColor="@color/black_333333"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/can_win_total"
@@ -234,7 +243,7 @@
             android:orientation="horizontal">
 
             <TextView
-
+                android:textColor="@color/black_333333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/betting_once_atleast"
@@ -258,6 +267,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/black_333333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/betting_once_atmost"

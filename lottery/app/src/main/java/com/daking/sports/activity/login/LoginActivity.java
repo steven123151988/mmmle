@@ -38,7 +38,7 @@ import okhttp3.Response;
  */
 public class LoginActivity extends BaseActivity implements OnClickListener {
     private EditText et_account, et_psw;
-    private String account, psw;
+    private String account, psw, message;
     private LoginRsp LoginRsp;
     private TextView tv_center;
     private Gson gson;
@@ -96,8 +96,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
             RequestBody requestBody = new FormBody.Builder()
                     .add(SportsKey.USER_NAME, account)
                     .add(SportsKey.PASSWORD, psw)
-                    .add(SportsKey.FNNAME,SportsKey.LOGIN)
-                    .add(SportsKey.LANGUAGE,SportsKey.ZH_CN)
+                    .add(SportsKey.FNNAME, SportsKey.LOGIN)
+                    .add(SportsKey.LANGUAGE, SportsKey.ZH_CN)
                     .build();
 
             final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -121,14 +121,15 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    try {
-                        String message = response.body().string();
-                        LogUtil.e("=======login===onResponse===" + message);
-                        gson = new Gson();
-                        LoginRsp = gson.fromJson(message, LoginRsp.class);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+
+                    message = response.body().string();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("=======login===onResponse===" + message);
+                                gson = new Gson();
+                                LoginRsp = gson.fromJson(message, LoginRsp.class);
                                 //返回信息解析失败，提示系统异常、
                                 if (null == LoginRsp) {
                                     //展示失败消息
@@ -139,7 +140,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     SharePreferencesUtil.addString(mContext, SportsKey.UID, LoginRsp.getIfo());
                                     SharePreferencesUtil.addString(mContext, SportsKey.USER_NAME, account);
                                     //展示成功的对话框
-                                    ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.loginsuccss),LoginRsp.getMsg());
+                                    ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.loginsuccss), LoginRsp.getMsg());
                                     //延迟5秒关闭
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
@@ -152,22 +153,18 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     }, 2500);
                                 } else {
                                     //展示失败消息
-                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.loginerr),LoginRsp.getMsg());
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.loginerr), LoginRsp.getMsg());
                                 }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(mContext);
                             }
-                        });
-
-                    } catch (Exception e) {
-                        LogUtil.e("========login==============" + e);
-                    }
+                        }
+                    });
                 }
             });
         }
     }
-
-
-
-
 
 
     @Override

@@ -1,17 +1,17 @@
 package com.daking.sports.json;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 18 on 2017/5/31.
  */
 
-public class BettingDetailRsp {
-
+public class BettingDetailRsp implements Serializable {
     /**
-     * member : {"ID":"12247","Oid":"4ae91fa7506e79120dfera6","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-06","LoginTime":"2017-06-06 03:44:45","OnlineTime":"2017-06-06 03:44:45","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
+     * member : {"ID":"12247","Oid":"2ae5c820fc6e79120dfera7","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-08","LoginTime":"2017-06-08 01:08:43","OnlineTime":"2017-06-08 01:08:43","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
      * code : 0
-     * ifo : {"MID":"2775702","MB_Team":"甘拿斯亚(后备)","TG_Team":"班菲特(后备)","MB_MID":"20446","TG_MID":"20445","ShowTypeR":"C","ShowTypeRB":"C","ShowTypeHB":"C","ShowTypeHRB":"","type_nums":7,"mpid":"56293","video_url":"http://ftv.livepotv.com/embedPlayer?pid=56293","ball":"football","score_m1":"","score_mh":"","score_m2":"","score_t1":"","score_th":"","score_t2":"","MB_Ball":"0","TG_Ball":"0","betmsg":[{"type":"M","title":"全场独赢","odds":[{"mb_odds":"2.80"},{"tg_odds":"2.15"},{"tie_odds":"3.40"}]},{"type":"R","title":"全场让球","odds":[{"mb_odds":"0.92"},{"tg_odds":"0.94"},{"mb_let":""},{"tg_let":"0 / 0.5"}]},{"type":"OU","title":"全场大小","odds":[{"mb_odds":"0.77"},{"tg_odds":"1.07"},{"big":"大 O2.5"},{"small":"小 U2.5"}]},{"type":"EO","title":"总分：单/双","odds":[{"single":"1.94"},{"double":"1.93"}]},{"type":"HM","title":"半场独赢","odds":[{"mb_odds":"3.40"},{"tg_odds":"2.67"},{"tie_odds":"2.22"}]},{"type":"HR","title":"半场让球","odds":[{"mb_odds":"1.13"},{"tg_odds":"0.74"},{"mb_let":""},{"tg_let":"0"}]},{"type":"HOU","title":"半场大小","odds":[{"mb_odds":"0.75"},{"tg_odds":"1.09"},{"big":"大 O1"},{"small":"小 U1"}]}]}
+     * ifo : {"MID":"2778362","MB_Team":"主场 -星期四-2场赛事","TG_Team":"客场 -星期四-2场赛事","type_nums":7,"mpid":"","video_url":"","ball":"football","score_m1":"","score_mh":"","score_m2":"","score_t1":"","score_th":"","score_t2":"","MB_Ball":"0","TG_Ball":"0","gq":false,"betmsg":[{"type":"M","title":"全场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.34","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.28","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"4.30","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"R","title":"全场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"1.03","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.89","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"OU","title":"全场大小","data":[{"team":"大","mid":"O4","rate":"0.97","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U4","rate":"0.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]},{"type":"EO","title":"总分：单/双","data":[{"team":"单","mid":"","rate":"1.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=ODD"},{"team":"双","mid":"","rate":"1.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=EVEN"}]},{"type":"HM","title":"半场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.66","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.64","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"2.73","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"HR","title":"半场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"0.96","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"HOU","title":"半场大小","data":[{"team":"大","mid":"O1.5 / 2","rate":"1.05","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U1.5 / 2","rate":"0.85","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]}]}
      */
 
     private MemberBean member;
@@ -45,7 +45,7 @@ public class BettingDetailRsp {
     public static class MemberBean {
         /**
          * ID : 12247
-         * Oid : 4ae91fa7506e79120dfera6
+         * Oid : 2ae5c820fc6e79120dfera7
          * Online : 0
          * Language : zh-cn
          * UserName : xiaobao
@@ -64,9 +64,9 @@ public class BettingDetailRsp {
          * Status : 0
          * Send : 0
          * BetType : 0
-         * LoginDate : 2017-06-06
-         * LoginTime : 2017-06-06 03:44:45
-         * OnlineTime : 2017-06-06 03:44:45
+         * LoginDate : 2017-06-08
+         * LoginTime : 2017-06-08 01:08:43
+         * OnlineTime : 2017-06-08 01:08:43
          * LogoutTime : 0000-00-00 00:00:00
          * AddDate : 2017-03-12 01:34:59
          * EditDate : 2017-03-12
@@ -900,18 +900,12 @@ public class BettingDetailRsp {
 
     public static class IfoBean {
         /**
-         * MID : 2775702
-         * MB_Team : 甘拿斯亚(后备)
-         * TG_Team : 班菲特(后备)
-         * MB_MID : 20446
-         * TG_MID : 20445
-         * ShowTypeR : C
-         * ShowTypeRB : C
-         * ShowTypeHB : C
-         * ShowTypeHRB :
+         * MID : 2778362
+         * MB_Team : 主场 -星期四-2场赛事
+         * TG_Team : 客场 -星期四-2场赛事
          * type_nums : 7
-         * mpid : 56293
-         * video_url : http://ftv.livepotv.com/embedPlayer?pid=56293
+         * mpid :
+         * video_url :
          * ball : football
          * score_m1 :
          * score_mh :
@@ -921,18 +915,13 @@ public class BettingDetailRsp {
          * score_t2 :
          * MB_Ball : 0
          * TG_Ball : 0
-         * betmsg : [{"type":"M","title":"全场独赢","odds":[{"mb_odds":"2.80"},{"tg_odds":"2.15"},{"tie_odds":"3.40"}]},{"type":"R","title":"全场让球","odds":[{"mb_odds":"0.92"},{"tg_odds":"0.94"},{"mb_let":""},{"tg_let":"0 / 0.5"}]},{"type":"OU","title":"全场大小","odds":[{"mb_odds":"0.77"},{"tg_odds":"1.07"},{"big":"大 O2.5"},{"small":"小 U2.5"}]},{"type":"EO","title":"总分：单/双","odds":[{"single":"1.94"},{"double":"1.93"}]},{"type":"HM","title":"半场独赢","odds":[{"mb_odds":"3.40"},{"tg_odds":"2.67"},{"tie_odds":"2.22"}]},{"type":"HR","title":"半场让球","odds":[{"mb_odds":"1.13"},{"tg_odds":"0.74"},{"mb_let":""},{"tg_let":"0"}]},{"type":"HOU","title":"半场大小","odds":[{"mb_odds":"0.75"},{"tg_odds":"1.09"},{"big":"大 O1"},{"small":"小 U1"}]}]
+         * gq : false
+         * betmsg : [{"type":"M","title":"全场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.34","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.28","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"4.30","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"R","title":"全场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"1.03","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.89","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"OU","title":"全场大小","data":[{"team":"大","mid":"O4","rate":"0.97","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U4","rate":"0.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]},{"type":"EO","title":"总分：单/双","data":[{"team":"单","mid":"","rate":"1.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=ODD"},{"team":"双","mid":"","rate":"1.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=EVEN"}]},{"type":"HM","title":"半场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.66","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.64","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"2.73","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"HR","title":"半场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"0.96","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"HOU","title":"半场大小","data":[{"team":"大","mid":"O1.5 / 2","rate":"1.05","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U1.5 / 2","rate":"0.85","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]}]
          */
 
         private String MID;
         private String MB_Team;
         private String TG_Team;
-        private String MB_MID;
-        private String TG_MID;
-        private String ShowTypeR;
-        private String ShowTypeRB;
-        private String ShowTypeHB;
-        private String ShowTypeHRB;
         private int type_nums;
         private String mpid;
         private String video_url;
@@ -945,6 +934,7 @@ public class BettingDetailRsp {
         private String score_t2;
         private String MB_Ball;
         private String TG_Ball;
+        private boolean gq;
         private List<BetmsgBean> betmsg;
 
         public String getMID() {
@@ -969,54 +959,6 @@ public class BettingDetailRsp {
 
         public void setTG_Team(String TG_Team) {
             this.TG_Team = TG_Team;
-        }
-
-        public String getMB_MID() {
-            return MB_MID;
-        }
-
-        public void setMB_MID(String MB_MID) {
-            this.MB_MID = MB_MID;
-        }
-
-        public String getTG_MID() {
-            return TG_MID;
-        }
-
-        public void setTG_MID(String TG_MID) {
-            this.TG_MID = TG_MID;
-        }
-
-        public String getShowTypeR() {
-            return ShowTypeR;
-        }
-
-        public void setShowTypeR(String ShowTypeR) {
-            this.ShowTypeR = ShowTypeR;
-        }
-
-        public String getShowTypeRB() {
-            return ShowTypeRB;
-        }
-
-        public void setShowTypeRB(String ShowTypeRB) {
-            this.ShowTypeRB = ShowTypeRB;
-        }
-
-        public String getShowTypeHB() {
-            return ShowTypeHB;
-        }
-
-        public void setShowTypeHB(String ShowTypeHB) {
-            this.ShowTypeHB = ShowTypeHB;
-        }
-
-        public String getShowTypeHRB() {
-            return ShowTypeHRB;
-        }
-
-        public void setShowTypeHRB(String ShowTypeHRB) {
-            this.ShowTypeHRB = ShowTypeHRB;
         }
 
         public int getType_nums() {
@@ -1115,6 +1057,14 @@ public class BettingDetailRsp {
             this.TG_Ball = TG_Ball;
         }
 
+        public boolean isGq() {
+            return gq;
+        }
+
+        public void setGq(boolean gq) {
+            this.gq = gq;
+        }
+
         public List<BetmsgBean> getBetmsg() {
             return betmsg;
         }
@@ -1127,12 +1077,12 @@ public class BettingDetailRsp {
             /**
              * type : M
              * title : 全场独赢
-             * odds : [{"mb_odds":"2.80"},{"tg_odds":"2.15"},{"tie_odds":"3.40"}]
+             * data : [{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.34","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.28","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"4.30","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]
              */
 
             private String type;
             private String title;
-            private List<OddsBean> odds;
+            private List<DataBean> data;
 
             public String getType() {
                 return type;
@@ -1150,47 +1100,57 @@ public class BettingDetailRsp {
                 this.title = title;
             }
 
-            public List<OddsBean> getOdds() {
-                return odds;
+            public List<DataBean> getData() {
+                return data;
             }
 
-            public void setOdds(List<OddsBean> odds) {
-                this.odds = odds;
+            public void setData(List<DataBean> data) {
+                this.data = data;
             }
 
-            public static class OddsBean {
+            public static class DataBean {
                 /**
-                 * mb_odds : 2.80
-                 * tg_odds : 2.15
-                 * tie_odds : 3.40
+                 * team : 主场 -星期四-2场赛事
+                 * mid :
+                 * rate : 2.34
+                 * para : gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944
                  */
 
-                private String mb_odds;
-                private String tg_odds;
-                private String tie_odds;
+                private String team;
+                private String mid;
+                private String rate;
+                private String para;
 
-                public String getMb_odds() {
-                    return mb_odds;
+                public String getTeam() {
+                    return team;
                 }
 
-                public void setMb_odds(String mb_odds) {
-                    this.mb_odds = mb_odds;
+                public void setTeam(String team) {
+                    this.team = team;
                 }
 
-                public String getTg_odds() {
-                    return tg_odds;
+                public String getMid() {
+                    return mid;
                 }
 
-                public void setTg_odds(String tg_odds) {
-                    this.tg_odds = tg_odds;
+                public void setMid(String mid) {
+                    this.mid = mid;
                 }
 
-                public String getTie_odds() {
-                    return tie_odds;
+                public String getRate() {
+                    return rate;
                 }
 
-                public void setTie_odds(String tie_odds) {
-                    this.tie_odds = tie_odds;
+                public void setRate(String rate) {
+                    this.rate = rate;
+                }
+
+                public String getPara() {
+                    return para;
+                }
+
+                public void setPara(String para) {
+                    this.para = para;
                 }
             }
         }

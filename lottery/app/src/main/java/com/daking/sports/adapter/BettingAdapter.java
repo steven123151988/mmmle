@@ -24,12 +24,13 @@ public class BettingAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
     private List<FootballGQRsp.IfoBean> ifos;
-    private String ball;
+    private String ball,type;
 
-    public BettingAdapter(Context context, List<FootballGQRsp.IfoBean> ifo, String ball) {
+    public BettingAdapter(Context context, List<FootballGQRsp.IfoBean> ifo, String ball,String type) {
         this.mcontext = context;
         this.ifos = ifo;
         this.ball = ball;
+        this.type=type;
     }
 
     @Override
@@ -79,6 +80,7 @@ public class BettingAdapter extends BaseAdapter {
                 intent.putExtra(SportsKey.MID, ifos.get(position).getMID());
                 intent.putExtra(SportsKey.BALL_TEAM, ballteam);
                 intent.putExtra(SportsKey.BALL, ball);
+                intent.putExtra(SportsKey.TYPE, type);
                 mcontext.startActivity(intent);
             }
         });

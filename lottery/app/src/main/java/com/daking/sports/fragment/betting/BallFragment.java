@@ -42,8 +42,7 @@ public class BallFragment extends BaseFragment {
     private BettingAdapter bettingAdapter;
     private PullToRefreshView mPullToRefreshView;
     private ListView lv_betting;
-    public String ball;
-    public String type;
+    private String ball,balltype;
     private FootballGQRsp footballGQRsp;
     private Gson gson = new Gson();
     private Timer timer;
@@ -64,9 +63,9 @@ public class BallFragment extends BaseFragment {
             ball = getArguments().getString(SportsKey.BALL);
         }
         if (null != getArguments().getString(SportsKey.TYPE)) {
-            type = getArguments().getString(SportsKey.TYPE);
+            balltype = getArguments().getString(SportsKey.TYPE);
         }
-        LogUtil.e("===BallFragment==type=======" + ball + type);
+        LogUtil.e("===BallFragment==type=======" + ball + balltype);
         lv_betting = (ListView) view.findViewById(R.id.lv_betting);
 
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -76,7 +75,7 @@ public class BallFragment extends BaseFragment {
                     @Override
                     public void run() {
                         mPullToRefreshView.setRefreshing(false);
-                        getballmsg(ball, type);
+                        getballmsg(ball, balltype);
                     }
                 }, 1000);
             }
@@ -117,7 +116,7 @@ public class BallFragment extends BaseFragment {
     class MyTask extends TimerTask {
         @Override
         public void run() {
-            getballmsg(ball, type);
+            getballmsg(ball, balltype);
         }
     }
 
@@ -173,7 +172,7 @@ public class BallFragment extends BaseFragment {
                             }
                             switch (footballGQRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-                                    bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo(), ball);
+                                    bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo(), ball,balltype);
                                     lv_betting.setAdapter(bettingAdapter);
                                     bettingAdapter.notifyDataSetChanged();
                                     lv_betting.setSelection(listview_position);

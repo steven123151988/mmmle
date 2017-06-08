@@ -24,7 +24,7 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
     private Context mContext;
     private BettingDetailRsp bettingDetailRsp;
     private List<BettingDetailRsp.IfoBean.BetmsgBean> betmsg;
-    private List<BettingDetailRsp.IfoBean.BetmsgBean.OddsBean> odds;
+    private List<BettingDetailRsp.IfoBean.BetmsgBean.DataBean> dataBeen;
 
     public MyExpandableListAdapter(Context context, BettingDetailRsp bettingDetailRsp) {
         mContext = context;
@@ -49,7 +49,8 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return null == bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getOdds() ? 0 : bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getOdds().size();
+        return null == bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getData() ?
+                0 : bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getData().size();
     }
 
     @Override
@@ -108,18 +109,15 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
             viewHolder.tv_1 = (TextView) view.findViewById(R.id.tv_1);
             viewHolder.tv_2 = (TextView) view.findViewById(R.id.tv_2);
             viewHolder.tv_3 = (TextView) view.findViewById(R.id.tv_3);
-            viewHolder.tv_4 = (TextView) view.findViewById(R.id.tv_4);
-            viewHolder.tv_5 = (TextView) view.findViewById(R.id.tv_5);
-            viewHolder.tv_6 = (TextView) view.findViewById(R.id.tv_6);
-            viewHolder.tv_7 = (TextView) view.findViewById(R.id.tv_7);
+
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        odds= bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getOdds();
-        viewHolder.tv_1.setText(odds.get(childPosition).getMb_odds());
-        viewHolder.tv_2.setText("13");
-        viewHolder.tv_3.setText("13");
+        dataBeen= bettingDetailRsp.getIfo().getBetmsg().get(groupPosition).getData();
+        viewHolder.tv_1.setText(dataBeen.get(childPosition).getTeam());
+        viewHolder.tv_2.setText(dataBeen.get(childPosition).getMid());
+        viewHolder.tv_3.setText(dataBeen.get(childPosition).getRate());
         return view;
     }
 

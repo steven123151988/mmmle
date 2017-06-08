@@ -40,4 +40,10 @@ public class SportsKey {
     public static final String LOGIN_OUT = "lgout";
     public static final String LOGIN = "lg";
     public static final String ZH_CN = "zh-cn";
+    public static final String MONEY = "money";
+    public static final String PARA = "para";
+    public static final String ORDER = "order";
+    public static final String CHECK_ORDER = "chk_order";
+
+
 }

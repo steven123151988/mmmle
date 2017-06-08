@@ -29,6 +29,7 @@ import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BettingDetailRsp;
+import com.daking.sports.json.GetOrderMsgRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -58,7 +59,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private PopupWindow popupWindow;
     private View popView;
     private TextView tv_score_A, tv_score_B;
-    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K;
+    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K;  //对话框的textview
     private Button btn_confirm_bet;
     private EditText et_input_money;
     private double can_win_money;
@@ -67,8 +68,18 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private String mid;
     private Gson gosn = new Gson();
     private BettingDetailRsp bettingDetailRsp;
+    private BettingDetailRsp.IfoBean.BetmsgBean BetmsgBean;
     private LinearLayout ll_ball;
-    private String ball, ballteam;
+    private String ball, ballteam, type;
+    private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;  //头部的球数据
+    private Double rate;
+    private int money;
+    private GetOrderMsgRsp getOrderMsgRsp;
+    private Handler handler;
+    private String message;
+    private String if_GQ;
+    private int bet_position;
+
 
     @Override
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -77,6 +88,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_betting);
         mid = getIntent().getStringExtra(SportsKey.MID);
         ball = getIntent().getStringExtra(SportsKey.BALL);
+        type = getIntent().getStringExtra(SportsKey.TYPE);
         ballteam = getIntent().getStringExtra(SportsKey.BALL_TEAM);
         initView();
     }
@@ -115,7 +127,14 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         }
         tv_score_A = fuck(R.id.tv_score_A);
         tv_score_B = fuck(R.id.tv_score_B);
-
+        tv_mb_A = fuck(R.id.tv_mb_A);
+        tv_mb_B = fuck(R.id.tv_mb_B);
+        tv_mb_C = fuck(R.id.tv_mb_C);
+        tv_mb_D = fuck(R.id.tv_mb_D);
+        tv_tg_A = fuck(R.id.tv_tg_A);
+        tv_tg_B = fuck(R.id.tv_tg_B);
+        tv_tg_C = fuck(R.id.tv_tg_C);
+        tv_tg_D = fuck(R.id.tv_tg_D);
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setVisibility(View.VISIBLE);
         iv_back.setOnClickListener(this);
@@ -124,15 +143,10 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         lv_expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                if (null == popupWindow) {
-                    showPopwindow();
-                } else {
-                    if (popupWindow.isShowing()) {
-                        popupWindow.dismiss();
-                    } else {
-                        showPopwindow();
-                    }
-                }
+                //请求下注接口获得展示的信息
+                BetmsgBean = bettingDetailRsp.getIfo().getBetmsg().get(groupPosition);
+                bet_position = childPosition;
+                getOrder(bet_position);
                 return true;
             }
         });
@@ -180,14 +194,24 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             }
                             switch (bettingDetailRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO://成功
-                                    if(null!=bettingDetailRsp.getIfo().getBetmsg()){
-                                        myExpandableListAdapter = new MyExpandableListAdapter(mContext,bettingDetailRsp);
+                                    if (null != bettingDetailRsp.getIfo().getBetmsg()) {
+                                        myExpandableListAdapter = new MyExpandableListAdapter(mContext, bettingDetailRsp);
                                         lv_expandableListView.setAdapter(myExpandableListAdapter);
                                         //让2级菜单全部展开
-                                        int size= myExpandableListAdapter.getGroupCount();
-                                        for(int i = 0; i <size; i++){
+                                        int size = myExpandableListAdapter.getGroupCount();
+                                        for (int i = 0; i < size; i++) {
                                             lv_expandableListView.expandGroup(i);
                                         }
+                                        tv_score_A.setText(bettingDetailRsp.getIfo().getMB_Ball());
+                                        tv_score_B.setText(bettingDetailRsp.getIfo().getTG_Ball());
+                                        tv_mb_A.setText(bettingDetailRsp.getIfo().getScore_m1());
+                                        tv_mb_B.setText(bettingDetailRsp.getIfo().getScore_mh());
+                                        tv_mb_C.setText(bettingDetailRsp.getIfo().getScore_m2());
+                                        tv_mb_D.setText(bettingDetailRsp.getIfo().getMB_Ball());
+                                        tv_mb_A.setText(bettingDetailRsp.getIfo().getScore_t1());
+                                        tv_tg_B.setText(bettingDetailRsp.getIfo().getScore_th());
+                                        tv_tg_C.setText(bettingDetailRsp.getIfo().getScore_t2());
+                                        tv_tg_D.setText(bettingDetailRsp.getIfo().getTG_Ball());
                                     }
                                     break;
                                 case SportsKey.TYPE_NINE:
@@ -197,9 +221,9 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     startActivity(new Intent(mContext, LoginActivity.class));
                                     break;
                                 case SportsKey.TYPE_TWELVE://12赛事关闭
-                                    ShowDialogUtil.showFailDialog(mContext,"Sorry...",getString(R.string.betting_finish));
+                                    ShowDialogUtil.showFailDialog(mContext, "Sorry...", getString(R.string.betting_finish));
                                     //延迟2秒关闭
-                                    Handler handler = new Handler();
+                                    handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -228,7 +252,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     /**
      * 展示下注的的提示框
      */
-    private void showPopwindow() {
+    private void showPopwindow(GetOrderMsgRsp getOrderMsgRsp) {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         popView = inflater.inflate(R.layout.betting_billonline, null);
         tv_A = (TextView) popView.findViewById(R.id.tv_A);
@@ -242,6 +266,19 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         tv_I = (TextView) popView.findViewById(R.id.tv_I);
         tv_J = (TextView) popView.findViewById(R.id.tv_J);
         tv_K = (TextView) popView.findViewById(R.id.tv_K);
+        tv_A.setText(getOrderMsgRsp.getIfo().getMenu() + "[" + getOrderMsgRsp.getIfo().getM_menu() + "]");
+        tv_B.setText(getOrderMsgRsp.getIfo().getM_League());
+        tv_C.setText(getOrderMsgRsp.getIfo().getMB_Team());
+        tv_D.setText(getOrderMsgRsp.getIfo().getSigns());
+        tv_E.setText(getOrderMsgRsp.getIfo().getTG_Team());
+        tv_F.setText(getOrderMsgRsp.getIfo().getM_Place());
+        tv_G.setText("@");
+        rate = Double.parseDouble(getOrderMsgRsp.getIfo().getM_Rate());
+        tv_H.setText(getOrderMsgRsp.getIfo().getM_Rate());
+        tv_I.setText(getOrderMsgRsp.getIfo().getGMIN_SINGLE());
+        tv_J.setText(getOrderMsgRsp.getIfo().getGmax());
+
+
         popView.findViewById(R.id.iv_right).setOnClickListener(this);
         et_input_money = (EditText) popView.findViewById(R.id.et_input_money);
         //监听输入算出可赢得钱
@@ -257,8 +294,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
-                    int money = Integer.parseInt(s.toString());
-                    can_win_money = money * 5.1222222;
+                    money = Integer.parseInt(s.toString());
+                    can_win_money = money * rate;
                     tv_K.setText(redf.format(can_win_money));
                 } else {
                     tv_K.setText(getString(R.string.init_money));
@@ -291,29 +328,245 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 if (TextUtils.isEmpty(et_input_money.getText().toString())) {
                     ToastUtil.show(mContext, getString(R.string.type_in_betting_money));
                 } else {
-                    //请求接口
-                    if (true) {
-                        //write success view
-                        ShowDialogUtil.showSuccessDialog(mContext,getString(R.string.bet_success),"最高可得" + redf.format(can_win_money) + "彩金！");
-                        Handler handler=new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
-                                mExplosionField.addListener(popView.findViewById(R.id.main_pop));
-                            }
-                        }, 350);
+                    if (null != getOrderMsgRsp) {
 
-                    } else {
-                        ShowDialogUtil.showFailDialog(mContext,getString(R.string.sorry),getString(R.string.bet_error));
+                        int MIN = Integer.parseInt(getOrderMsgRsp.getIfo().getGMIN_SINGLE());
+                        int MAX = Integer.parseInt(getOrderMsgRsp.getIfo().getGmax());
+                        if (money < MIN) {
+                            ToastUtil.show(mContext, "赛事最小投注额为" + MIN);
+                        }
+                        if (money > MAX) {
+                            ToastUtil.show(mContext, "赛事最大投注额为" + MAX);
+                        }
+                        if (MIN <= money && money <= MAX) {
+                            getBetting();
+                        }
+
                     }
-                    dismisspopviw();
+
                 }
                 break;
             case R.id.iv_right:
                 dismisspopviw();
                 break;
         }
+
+    }
+
+
+    /**
+     * 请求接口下注信息
+     */
+    private void getOrder(int childPosition) {
+
+        if (type.equals(SportsKey.GQ)) {
+            if_GQ = "0";
+        } else {
+            if_GQ = "1";
+        }
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, SportsKey.ORDER)
+                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
+                .add(SportsKey.BALL, ball)
+                .add(SportsKey.TYPE, BetmsgBean.getType())
+                .add(SportsKey.MONEY, String.valueOf(money))
+                .add(SportsKey.PARA, BetmsgBean.getData().get(childPosition).getPara())
+                .add(SportsKey.GQ, if_GQ)
+                .build();
+        LogUtil.e("============SportsKey.ORDER===" + SportsKey.ORDER);
+        LogUtil.e("============SportsKey.ORDER===" + ball);
+        LogUtil.e("============SportsKey.ORDER===" + BetmsgBean.getType());
+        LogUtil.e("============SportsKey.ORDER===" + String.valueOf(money));
+        LogUtil.e("============SportsKey.ORDER===" + BetmsgBean.getData().get(childPosition).getPara());
+        LogUtil.e("============SportsKey.ORDER===" + SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"));
+        LogUtil.e("============SportsKey.ORDER===" + if_GQ);
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.GET_ORDER)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(mContext);
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e("===========messageR===" + message);
+                            getOrderMsgRsp = gosn.fromJson(message, GetOrderMsgRsp.class);
+                            if (null == getOrderMsgRsp) {
+                                ShowDialogUtil.showSystemFail(mContext);
+                                return;
+                            }
+                            switch (getOrderMsgRsp.getCode()) {
+                                case SportsKey.TYPE_ZERO:
+
+                                    if (null == popupWindow) {
+                                        showPopwindow(getOrderMsgRsp);
+                                    } else {
+                                        if (popupWindow.isShowing()) {
+                                            popupWindow.dismiss();
+                                        } else {
+                                            showPopwindow(getOrderMsgRsp);
+                                        }
+                                    }
+                                    break;
+                                case SportsKey.TYPE_NINE:
+                                    startActivity(new Intent(mContext, LoginActivity.class));
+                                    break;
+                                case SportsKey.TYPE_ELEVEN:
+                                    startActivity(new Intent(mContext, LoginActivity.class));
+                                    break;
+                                case SportsKey.TYPE_TWELVE://12赛事关闭
+                                    ShowDialogUtil.showFailDialog(mContext, "Sorry...", getString(R.string.betting_finish));
+                                    //延迟2秒关闭
+                                    handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ShowDialogUtil.dismissDialogs();
+                                            finish();
+                                        }
+                                    }, 2000);
+                                    break;
+                                default:
+                                    ShowDialogUtil.showFailDialog(mContext, "Sorry...", getOrderMsgRsp.getMsg());
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        } finally {
+
+                        }
+
+
+                    }
+                });
+
+
+            }
+        });
+
+
+    }
+
+    /**
+     * 最后下注
+     */
+    private void getBetting() {
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, SportsKey.CHECK_ORDER)
+                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
+                .add(SportsKey.BALL, ball)
+                .add(SportsKey.TYPE, getOrderMsgRsp.getIfo().getType())
+                .add(SportsKey.MONEY, String.valueOf(money))
+                .add(SportsKey.PARA, getOrderMsgRsp.getIfo().getJson_paras())
+                .add(SportsKey.GQ, if_GQ)
+                .build();
+        LogUtil.e("============SportsKey.ORDER===" + SportsKey.CHECK_ORDER);
+        LogUtil.e("============SportsKey.ORDER===" + SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"));
+        LogUtil.e("============SportsKey.ORDER===" + ball);
+        LogUtil.e("============SportsKey.ORDER===" + String.valueOf(money));
+        LogUtil.e("============SportsKey.ORDER===" + getOrderMsgRsp.getIfo().getJson_paras());
+        LogUtil.e("============SportsKey.ORDER===" + if_GQ);
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.FINISH_ORDER)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(mContext);
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e("===========messageR===" + message);
+//                            return;
+//                            getOrderMsgRsp = gosn.fromJson(message, GetOrderMsgRsp.class);
+//                            if (null == getOrderMsgRsp) {
+//                                ShowDialogUtil.showSystemFail(mContext);
+//                                return;
+//                            }
+//                            switch (getOrderMsgRsp.getCode()) {
+//                                case SportsKey.TYPE_ZERO:
+//                                    //write success view
+//                                    ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.bet_success), "最高可得" + redf.format(can_win_money) + "彩金！");
+//                                    handler = new Handler();
+//                                    handler.postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
+//                                            mExplosionField.addListener(popView.findViewById(R.id.main_pop));
+//                                        }
+//                                    }, 350);
+//                                    dismisspopviw();
+//                                    break;
+//                                case SportsKey.TYPE_NINE:
+//                                    startActivity(new Intent(mContext, LoginActivity.class));
+//                                    break;
+//                                case SportsKey.TYPE_ELEVEN:
+//                                    startActivity(new Intent(mContext, LoginActivity.class));
+//                                    break;
+//                                case SportsKey.TYPE_TWELVE://12赛事关闭
+//                                    ShowDialogUtil.showFailDialog(mContext, "Sorry...", getString(R.string.betting_finish));
+//                                    //延迟2秒关闭
+//                                    handler = new Handler();
+//                                    handler.postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            ShowDialogUtil.dismissDialogs();
+//                                            finish();
+//                                        }
+//                                    }, 2000);
+//                                    break;
+//                                default:
+//                                    ShowDialogUtil.showFailDialog(mContext, "Sorry...", getOrderMsgRsp.getMsg());
+//                                    break;
+//                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        } finally {
+
+                        }
+
+
+                    }
+                });
+
+
+            }
+        });
+
 
     }
 
@@ -327,12 +580,15 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         dismisspopviw();
         ShowDialogUtil.dismissDialogs();
+        if (null != handler) {
+            handler.removeCallbacksAndMessages(null);
+        }
+
     }
 
 }

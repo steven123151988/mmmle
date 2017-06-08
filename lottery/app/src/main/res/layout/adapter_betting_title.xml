@@ -11,12 +11,13 @@
         android:padding="@dimen/dimen_20">
 
         <TextView
+            android:textColor="@color/black_333333"
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="123"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_16" />
 
         <ImageView
             android:id="@+id/iv_arrow"
