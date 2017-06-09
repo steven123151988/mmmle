@@ -9,16 +9,17 @@ import java.util.List;
 
 public class FootballGQRsp implements Serializable {
 
+
     /**
-     * member : {"ID":"12247","Oid":"4f548e597a6e79120dfera7","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-02","LoginTime":"2017-06-02 02:13:50","OnlineTime":"2017-06-02 02:13:50","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
-     * ball : football
+     * member : {"ID":"4988","Oid":"3c7a7dc5880c3cc2b229ra4","Online":"1","Language":"zh-cn","UserName":"aadmin","Money":"6126","Money2":"5505","Credit":"14410","Alias":"流枫","contory":"您的手机号码","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-09","LoginTime":"2017-06-09 03:05:58","OnlineTime":"2017-06-09 03:05:58","LogoutTime":"2016-09-20 12:57:41","AddDate":"2016-02-27 01:46:05","EditDate":"2016-02-27","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"流川枫名称","Bank_Account":"123654789012360000","bank":"中国建设银行","E_Mail":"1111","Phone":"","Notes":"","Withdrawal_Passwd":"1111","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"5abd06d6f6ef0e022e11b8a41f57ebda","ctime":"10","ttime":"2","cmoney":"13401.00","tmoney":"200.00","level_id":"1","agopen":"1","agpan":"C39A","cpopen":"0","gd_cpopen":"1","mgopen":"1","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
+     * ball : basketball
      * type :
-     * ft_nums : 99
-     * bk_nums : 10
+     * ft_nums : 69
+     * bk_nums : 11
      * zrsx_nums : 8
      * pt_nums : 5
      * code : 0
-     * ifo : [{"MID":"2773066","RB_Show":"0","M_Time":"04:15a","M_Start":"2017-06-02 04:15:00","M_League":"澳洲维多利亚国家超级联赛U20","MB_Team":"墨尔本骑士U20","TG_Team":"班特列U20","M_LetB_RB":"","M_LetB":"1.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.25","MB_Win_Rate_RB":"0","TG_Win_Rate":"7.4","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769810","RB_Show":"0","M_Time":"04:15a","M_Start":"2017-06-02 04:15:00","M_League":"澳洲维多利亚国家超级联赛U20","MB_Team":"欧克莱卡诺U20","TG_Team":"墨尔本港鲨鱼U20","M_LetB_RB":"","M_LetB":"1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.48","MB_Win_Rate_RB":"0","TG_Win_Rate":"4.7","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769830","RB_Show":"0","M_Time":"06:30a","M_Start":"2017-06-02 06:30:00","M_League":"澳洲维多利亚国家超级联赛","MB_Team":"墨尔本骑士","TG_Team":"班特列","M_LetB_RB":"","M_LetB":"0.5 / 1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"3.65","MB_Win_Rate_RB":"0","TG_Win_Rate":"1.78","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769826","RB_Show":"0","M_Time":"06:30a","M_Start":"2017-06-02 06:30:00","M_League":"澳洲维多利亚国家超级联赛","MB_Team":"欧克莱卡诺","TG_Team":"墨尔本港鲨鱼","M_LetB_RB":"","M_LetB":"1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.59","MB_Win_Rate_RB":"0","TG_Win_Rate":"4.6","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":null},{"MID":"2769828","RB_Show":"0","M_Time":"06:30a","M_Start":"2017-06-02 06:30:00","M_League":"澳洲维多利亚国家超级联赛","MB_Team":"欧克莱卡诺","TG_Team":"墨尔本港鲨鱼","M_LetB_RB":"","M_LetB":"","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"","now_play":"","mpid":null}]
+     * ifo : [{"MID":"2173271","RB_Show":"0","M_Time":"03:00a","M_Start":"2017-06-09 03:00:00","M_League":"紐西蘭國家籃球聯賽","MB_Team":"塔拉納基發電機","TG_Team":"霍克灣鹰","M_LetB_RB":"","M_LetB":"1.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"03:00a","result":"未开始","video_url":""},{"MID":"2173272","RB_Show":"0","M_Time":"03:00a","M_Start":"2017-06-09 03:00:00","M_League":"紐西蘭國家籃球聯賽","MB_Team":"塔拉納基發電機<font color=gray> - (上半)<\/font>","TG_Team":"霍克灣鹰<font color=gray> - (上半)<\/font>","M_LetB_RB":"","M_LetB":"1","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"03:00a","result":"未开始","video_url":""},{"MID":"2173274","RB_Show":"0","M_Time":"03:00a","M_Start":"2017-06-09 03:00:00","M_League":"紐西蘭國家籃球聯賽","MB_Team":"塔拉納基發電機<font color=gray> - (第1節)<\/font>","TG_Team":"霍克灣鹰<font color=gray> - (第1節)<\/font>","M_LetB_RB":"","M_LetB":"0.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"03:00a","result":"未开始","video_url":""},{"MID":"2173355","RB_Show":"0","M_Time":"01:00p","M_Start":"2017-06-09 13:00:00","M_League":"法國籃球甲級聯賽","MB_Team":"史特拉斯堡","TG_Team":"艾斯維爾里昂維勒班","M_LetB_RB":"","M_LetB":"5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"01:00p","result":"未开始","video_url":""},{"MID":"2173376","RB_Show":"0","M_Time":"01:00p","M_Start":"2017-06-09 13:00:00","M_League":"土耳其籃球超級聯賽","MB_Team":"費內巴切","TG_Team":"比錫達斯","M_LetB_RB":"","M_LetB":"10","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"01:00p","result":"未开始","video_url":""},{"MID":"2173152","RB_Show":"0","M_Time":"02:30p","M_Start":"2017-06-09 14:30:00","M_League":"西班牙籃球甲級聯賽","MB_Team":"皇家馬德里","TG_Team":"瓦倫西亞","M_LetB_RB":"","M_LetB":"7","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"02:30p","result":"未开始","video_url":""},{"MID":"2173131","RB_Show":"0","M_Time":"08:30p","M_Start":"2017-06-09 20:30:00","M_League":"阿根廷全國籃球聯賽","MB_Team":"基爾梅斯","TG_Team":"費羅卡利爾","M_LetB_RB":"","M_LetB":"6.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.4","MB_Win_Rate_RB":"0","TG_Win_Rate":"2.88","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"08:30p","result":"未开始","video_url":""},{"MID":"2173124","RB_Show":"0","M_Time":"08:30p","M_Start":"2017-06-09 20:30:00","M_League":"阿根廷全國籃球聯賽","MB_Team":"瑞加塔斯","TG_Team":"肯考迪亞學生俱樂部","M_LetB_RB":"","M_LetB":"6","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.35","MB_Win_Rate_RB":"0","TG_Win_Rate":"3.1","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"08:30p","result":"未开始","video_url":""},{"MID":"2172697","RB_Show":"0","M_Time":"09:00p","M_Start":"2017-06-09 21:00:00","M_League":"NBA總決賽","MB_Team":"克里夫蘭騎士","TG_Team":"金州勇士","M_LetB_RB":"","M_LetB":"5.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"2.82","MB_Win_Rate_RB":"0","TG_Win_Rate":"1.43","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"09:00p","result":"未开始","video_url":""},{"MID":"2172704","RB_Show":"0","M_Time":"09:00p","M_Start":"2017-06-09 21:00:00","M_League":"NBA總決賽","MB_Team":"克里夫蘭騎士","TG_Team":"金州勇士","M_LetB_RB":"","M_LetB":"4.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"09:00p","result":"未开始","video_url":""},{"MID":"2172711","RB_Show":"0","M_Time":"09:00p","M_Start":"2017-06-09 21:00:00","M_League":"NBA總決賽","MB_Team":"克里夫蘭騎士","TG_Team":"金州勇士","M_LetB_RB":"","M_LetB":"6.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"0","MB_Win_Rate_RB":"0","TG_Win_Rate":"0","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"09:00p","result":"未开始","video_url":""},{"MID":"2172698","RB_Show":"0","M_Time":"09:00p","M_Start":"2017-06-09 21:00:00","M_League":"NBA總決賽","MB_Team":"克里夫蘭騎士<font color=gray> - (上半)<\/font>","TG_Team":"金州勇士<font color=gray> - (上半)<\/font>","M_LetB_RB":"","M_LetB":"3.5","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"2.43","MB_Win_Rate_RB":"0","TG_Win_Rate":"1.54","TG_Win_Rate_RB":"0","Play":"N","now_play":"","mpid":"","course":"","stime":"09:00p","result":"未开始","video_url":""}]
      */
 
     private MemberBean member;
@@ -105,16 +106,16 @@ public class FootballGQRsp implements Serializable {
 
     public static class MemberBean {
         /**
-         * ID : 12247
-         * Oid : 4f548e597a6e79120dfera7
-         * Online : 0
+         * ID : 4988
+         * Oid : 3c7a7dc5880c3cc2b229ra4
+         * Online : 1
          * Language : zh-cn
-         * UserName : xiaobao
-         * Money : 0
-         * Money2 : 0
-         * Credit : 0
-         * Alias : 测试
-         * contory : 您所在的城市
+         * UserName : aadmin
+         * Money : 6126
+         * Money2 : 5505
+         * Credit : 14410
+         * Alias : 流枫
+         * contory : 您的手机号码
          * Sports : 0
          * Lottery : 0
          * Points : 0
@@ -125,12 +126,12 @@ public class FootballGQRsp implements Serializable {
          * Status : 0
          * Send : 0
          * BetType : 0
-         * LoginDate : 2017-06-02
-         * LoginTime : 2017-06-02 02:13:50
-         * OnlineTime : 2017-06-02 02:13:50
-         * LogoutTime : 0000-00-00 00:00:00
-         * AddDate : 2017-03-12 01:34:59
-         * EditDate : 2017-03-12
+         * LoginDate : 2017-06-09
+         * LoginTime : 2017-06-09 03:05:58
+         * OnlineTime : 2017-06-09 03:05:58
+         * LogoutTime : 2016-09-20 12:57:41
+         * AddDate : 2016-02-27 01:46:05
+         * EditDate : 2016-02-27
          * LoginIP : 122.55.4.242
          * Url : .http://bet365test.lebole5.com/
          * Agents : daa888
@@ -138,13 +139,13 @@ public class FootballGQRsp implements Serializable {
          * Corprator : baa888
          * Super : aaa888
          * Admin : raadmin888
-         * Bank_Address :
-         * Bank_Account :
-         * bank :
-         * E_Mail : 马尼拉
+         * Bank_Address : 流川枫名称
+         * Bank_Account : 123654789012360000
+         * bank : 中国建设银行
+         * E_Mail : 1111
          * Phone :
          * Notes :
-         * Withdrawal_Passwd : 0000
+         * Withdrawal_Passwd : 1111
          * Address :
          * Reg : 1
          * ratio : 1
@@ -174,17 +175,17 @@ public class FootballGQRsp implements Serializable {
          * OP_P_Scene : 500000
          * FS_FS_Bet : 50000
          * FS_FS_Scene : 500000
-         * md5psw : c294db97b3ca9115fe875aeb9e488c67
-         * ctime : 0
-         * ttime : 0
-         * cmoney : 0.00
-         * tmoney : 0.00
-         * level_id : 0
-         * agopen : 0
+         * md5psw : 5abd06d6f6ef0e022e11b8a41f57ebda
+         * ctime : 10
+         * ttime : 2
+         * cmoney : 13401.00
+         * tmoney : 200.00
+         * level_id : 1
+         * agopen : 1
          * agpan : C39A
          * cpopen : 0
-         * gd_cpopen : 0
-         * mgopen : 0
+         * gd_cpopen : 1
+         * mgopen : 1
          * blacklist : 0
          * ptopen : 1
          * FT_RE_Scene : 500000
@@ -961,24 +962,28 @@ public class FootballGQRsp implements Serializable {
 
     public static class IfoBean {
         /**
-         * MID : 2773066
+         * MID : 2173271
          * RB_Show : 0
-         * M_Time : 04:15a
-         * M_Start : 2017-06-02 04:15:00
-         * M_League : 澳洲维多利亚国家超级联赛U20
-         * MB_Team : 墨尔本骑士U20
-         * TG_Team : 班特列U20
+         * M_Time : 03:00a
+         * M_Start : 2017-06-09 03:00:00
+         * M_League : 紐西蘭國家籃球聯賽
+         * MB_Team : 塔拉納基發電機
+         * TG_Team : 霍克灣鹰
          * M_LetB_RB :
          * M_LetB : 1.5
          * MB_Ball : 0
          * TG_Ball : 0
-         * MB_Win_Rate : 1.25
+         * MB_Win_Rate : 0
          * MB_Win_Rate_RB : 0
-         * TG_Win_Rate : 7.4
+         * TG_Win_Rate : 0
          * TG_Win_Rate_RB : 0
          * Play : N
          * now_play :
-         * mpid : null
+         * mpid :
+         * course :
+         * stime : 03:00a
+         * result : 未开始
+         * video_url :
          */
 
         private String MID;
@@ -998,7 +1003,11 @@ public class FootballGQRsp implements Serializable {
         private String TG_Win_Rate_RB;
         private String Play;
         private String now_play;
-        private Object mpid;
+        private String mpid;
+        private String course;
+        private String stime;
+        private String result;
+        private String video_url;
 
         public String getMID() {
             return MID;
@@ -1136,12 +1145,44 @@ public class FootballGQRsp implements Serializable {
             this.now_play = now_play;
         }
 
-        public Object getMpid() {
+        public String getMpid() {
             return mpid;
         }
 
-        public void setMpid(Object mpid) {
+        public void setMpid(String mpid) {
             this.mpid = mpid;
+        }
+
+        public String getCourse() {
+            return course;
+        }
+
+        public void setCourse(String course) {
+            this.course = course;
+        }
+
+        public String getStime() {
+            return stime;
+        }
+
+        public void setStime(String stime) {
+            this.stime = stime;
+        }
+
+        public String getResult() {
+            return result;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+
+        public String getVideo_url() {
+            return video_url;
+        }
+
+        public void setVideo_url(String video_url) {
+            this.video_url = video_url;
         }
     }
 }

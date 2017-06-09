@@ -67,8 +67,8 @@ public class BettingAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.tv_1.setText(ifos.get(position).getM_League());
-        viewHolder.tv_2.setText("nomessage");
-        viewHolder.tv_3.setText("nomessage");
+        viewHolder.tv_2.setText(ifos.get(position).getCourse());
+        viewHolder.tv_3.setText(ifos.get(position).getStime());
         viewHolder.tv_4.setText(ifos.get(position).getMB_Team());
         viewHolder.tv_5.setText(ifos.get(position).getTG_Team());
         viewHolder.tv_6.setText(ifos.get(position).getMB_Ball() + " : " + ifos.get(position).getTG_Ball());

@@ -138,38 +138,41 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             public void onResponse(Call call, Response response) throws IOException {
                 message = response.body().string();
                 //到主线程上更新UI
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            LogUtil.e("===============loginout=========" + message);
-                            Gson gson = new Gson();
-                            loginRsp = gson.fromJson(message, LoginRsp.class);
-                            if (null == loginRsp) {
+                if (null!= getActivity()){
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("===============loginout=========" + message);
+                                Gson gson = new Gson();
+                                loginRsp = gson.fromJson(message, LoginRsp.class);
+                                if (null == loginRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (loginRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        if (null == firstFragment) {
+                                            firstFragment = new FirstFragment();
+                                        }
+                                        SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
+                                        ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
+                                        ToastUtil.show(getActivity(), loginRsp.getMsg());
+                                        break;
+                                    case SportsKey.TYPE_SIX:
+                                        ToastUtil.show(getActivity(), loginRsp.getMsg());
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());
-                                return;
+                            } finally {
                             }
-                            switch (loginRsp.getCode()) {
-                                case SportsKey.TYPE_ZERO:
-                                    if (null == firstFragment) {
-                                        firstFragment = new FirstFragment();
-                                    }
-                                    SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
-                                    ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
-                                    ToastUtil.show(getActivity(), loginRsp.getMsg());
-                                    break;
-                                case SportsKey.TYPE_SIX:
-                                    ToastUtil.show(getActivity(), loginRsp.getMsg());
-                                    break;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ShowDialogUtil.showSystemFail(getActivity());
-                        } finally {
-                        }
 
-                    }
-                });
+                        }
+                    });
+
+                }
 
             }
         });

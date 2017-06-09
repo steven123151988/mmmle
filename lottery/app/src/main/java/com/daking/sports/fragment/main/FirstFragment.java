@@ -105,41 +105,44 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 message = response.body().string();
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            LogUtil.e("===============initHomeIndex=========" + message);
-                            Gson gson = new Gson();
-                            mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
-                            if (null == mainIndexRsp) {
+                if (null!= getActivity()){
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("===============initHomeIndex=========" + message);
+                                Gson gson = new Gson();
+                                mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
+                                if (null == mainIndexRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (mainIndexRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        //修改UI必须在主线程
+                                        tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
+                                        tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
+                                        tv_C.setText(mainIndexRsp.getIfo().getM_League());
+                                        tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
+                                        tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
+                                        tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
+                                        break;
+                                    case SportsKey.TYPE_NINE:
+                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());
-                                return;
-                            }
-                            switch (mainIndexRsp.getCode()) {
-                                case SportsKey.TYPE_ZERO:
-                                    //修改UI必须在主线程
-                                    tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
-                                    tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
-                                    tv_C.setText(mainIndexRsp.getIfo().getM_League());
-                                    tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
-                                    tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
-                                    tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
-                                    break;
-                                case SportsKey.TYPE_NINE:
-                                    getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                                    break;
+                            } finally {
                             }
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ShowDialogUtil.showSystemFail(getActivity());
-                        } finally {
+
                         }
+                    });
 
-
-                    }
-                });
+                }
 
             }
         });

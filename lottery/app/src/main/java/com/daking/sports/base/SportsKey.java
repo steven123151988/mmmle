@@ -43,8 +43,13 @@ public class SportsKey {
     public static final String MONEY = "money";
     public static final String PARA = "para";
     public static final String ORDER = "order";
-    public static final String CHECK_ORDER = "chk_order";
     public static final String TOKEN = "token";
+    public static final String CHECK_ORDER = "chk_order";
+    public static final String DATE_START = "date_start";
+    public static final String DATE_END = "date_end";
+    public static final String PAGE = "page";
+
+
 
 
 }

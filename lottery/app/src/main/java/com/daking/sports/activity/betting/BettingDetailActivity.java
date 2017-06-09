@@ -186,7 +186,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         try {
-                            LogUtil.e("====getBettingDetail======="+message2);
+                            LogUtil.e("====getBettingDetail=======" + message2);
                             bettingDetailRsp = gosn.fromJson(message2, BettingDetailRsp.class);
                             if (null == bettingDetailRsp) {
                                 ShowDialogUtil.showSystemFail(mContext);
@@ -282,7 +282,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         tv_I.setText(getOrderMsgRsp.getIfo().getGMIN_SINGLE());
         tv_J.setText(getOrderMsgRsp.getIfo().getGmax());
 
-
         popView.findViewById(R.id.iv_right).setOnClickListener(this);
         et_input_money = (EditText) popView.findViewById(R.id.et_input_money);
         //监听输入算出可赢得钱
@@ -339,7 +338,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             ToastUtil.show(mContext, getString(R.string.bet_min) + MIN);
                         }
                         if (money > MAX) {
-                            ToastUtil.show(mContext,getString(R.string.bet_max)+ MAX);
+                            ToastUtil.show(mContext, getString(R.string.bet_max) + MAX);
                         }
                         if (MIN <= money && money <= MAX) {
                             getBetting();
@@ -416,7 +415,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             }
                             switch (getOrderMsgRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-
                                     if (null == popupWindow) {
                                         showPopwindow(getOrderMsgRsp);
                                     } else {
@@ -446,7 +444,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     }, 2000);
                                     break;
                                 default:
-                                    ShowDialogUtil.showFailDialog(mContext,  getString(R.string.sorry), getOrderMsgRsp.getMsg());
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getOrderMsgRsp.getMsg());
                                     break;
                             }
 
@@ -456,15 +454,11 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         } finally {
 
                         }
-
-
                     }
                 });
 
-
             }
         });
-
 
     }
 
@@ -482,7 +476,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 .build();
         LogUtil.e("======getBetting======FNNAME===" + SportsKey.CHECK_ORDER);
         LogUtil.e("============uid===" + SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"));
-        LogUtil.e("===========token==="+ getOrderMsgRsp.getIfo().getToken());
+        LogUtil.e("===========token===" + getOrderMsgRsp.getIfo().getToken());
         LogUtil.e("===========money===" + String.valueOf(money));
         LogUtil.e("============getJson_paras===" + getOrderMsgRsp.getIfo().getJson_paras());
         LogUtil.e("============if_GQ===" + if_GQ);
@@ -560,16 +554,10 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         } finally {
 
                         }
-
-
                     }
                 });
-
-
             }
         });
-
-
     }
 
     /**
@@ -590,7 +578,5 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         if (null != handler) {
             handler.removeCallbacksAndMessages(null);
         }
-
     }
-
 }
