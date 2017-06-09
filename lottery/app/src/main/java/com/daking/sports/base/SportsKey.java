@@ -44,6 +44,7 @@ public class SportsKey {
     public static final String PARA = "para";
     public static final String ORDER = "order";
     public static final String CHECK_ORDER = "chk_order";
+    public static final String TOKEN = "token";
 
 
 }

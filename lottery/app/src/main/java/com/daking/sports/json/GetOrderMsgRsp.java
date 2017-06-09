@@ -84,6 +84,15 @@ public class GetOrderMsgRsp implements Serializable {
         private String ball;
         private String str;
         private String json_paras;
+        private String token;
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
+        }
 
         public String getClassX() {
             return classX;

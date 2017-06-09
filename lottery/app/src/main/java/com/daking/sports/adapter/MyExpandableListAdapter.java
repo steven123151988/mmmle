@@ -168,9 +168,5 @@ public class MyExpandableListAdapter implements ExpandableListAdapter {
         TextView tv_1;
         TextView tv_2;
         TextView tv_3;
-        TextView tv_4;
-        TextView tv_5;
-        TextView tv_6;
-        TextView tv_7;
     }
 }

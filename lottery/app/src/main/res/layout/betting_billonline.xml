@@ -83,6 +83,8 @@
         android:padding="@dimen/dimen_20">
 
         <TextView
+            android:maxEms="10"
+            android:maxLines="1"
             android:id="@+id/tv_A"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,6 +95,8 @@
             />
 
         <TextView
+            android:maxEms="10"
+            android:maxLines="1"
             android:id="@+id/tv_B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +114,8 @@
             android:orientation="horizontal">
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_C"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,6 +126,8 @@
                 />
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,6 +139,8 @@
                 />
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:textColor="@color/black_333333"
                 android:id="@+id/tv_E"
                 android:layout_width="wrap_content"
@@ -149,6 +159,8 @@
             android:orientation="horizontal">
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_F"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,6 +171,8 @@
                 />
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_G"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -170,6 +184,8 @@
                 />
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_H"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -250,6 +266,8 @@
                 android:textSize="@dimen/dimen_14" />
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_I"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -274,6 +292,8 @@
                 android:textSize="@dimen/dimen_14" />
 
             <TextView
+                android:maxEms="10"
+                android:maxLines="1"
                 android:id="@+id/tv_J"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

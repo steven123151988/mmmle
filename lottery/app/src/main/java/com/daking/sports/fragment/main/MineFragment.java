@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                         try {
                             LogUtil.e("===============loginout=========" + message);
                             Gson gson = new Gson();
-                            loginRsp = gson.fromJson(message, loginRsp.getClass());
+                            loginRsp = gson.fromJson(message, LoginRsp.class);
                             if (null == loginRsp) {
                                 ShowDialogUtil.showSystemFail(getActivity());
                                 return;

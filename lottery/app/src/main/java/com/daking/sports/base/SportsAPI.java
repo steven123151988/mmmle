@@ -13,7 +13,9 @@ public class SportsAPI {
     public static final String MATCH_LIST="home/match_list";//赛事盘口资料
     public static final String GET_MATCH="home/get_match";//赛事详情
     public static final String GET_ORDER="gqp/site_gqp/ajax_order";//请求下注信息
-    public static final String FINISH_ORDER="gqp/site_gqp/finish _order";//下注结算
+    public static final String FINISH_ORDER="gqp/site_gqp/finish_order";//下单结算
+    public static final String BET_HISTORY="member/member/bet_beting";//投注记录
+
 
     public static final String GET_DATA="member/account/mem_data.php";//获取会员资料
     public static final String MODIFY_PSW="/app/member/account/forget_psw.php";//忘记密码

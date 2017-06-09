@@ -17,6 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:maxEms="10"
+            android:maxLines="1"
             android:text="A"
             android:textColor="@color/black_333333"
             android:textSize="14dp" />
@@ -26,6 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:maxEms="10"
+            android:maxLines="1"
             android:text="B"
             android:textColor="@color/black_333333"
             android:textSize="16sp" />
@@ -33,9 +37,12 @@
         <TextView
             android:id="@+id/tv_3"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dimen_20"
+            android:maxEms="10"
+            android:maxLines="1"
             android:text="C"
             android:textColor="@color/red_84201e"
             android:textSize="14sp" />
