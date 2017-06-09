@@ -42,6 +42,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     private TextView tv_name;
     private FirstFragment firstFragment;
     private LoginRsp loginRsp;
+    private String message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,16 +136,19 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String message = response.body().string();
-                LogUtil.e("===============loginout=========" + message);
-                try {
-                    loginRsp = new LoginRsp();
-                    Gson gson = new Gson();
-                    loginRsp = gson.fromJson(message, loginRsp.getClass());
-                    //到主线程上更新UI
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                message = response.body().string();
+                //到主线程上更新UI
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e("===============loginout=========" + message);
+                            Gson gson = new Gson();
+                            loginRsp = gson.fromJson(message, loginRsp.getClass());
+                            if (null == loginRsp) {
+                                ShowDialogUtil.showSystemFail(getActivity());
+                                return;
+                            }
                             switch (loginRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     if (null == firstFragment) {
@@ -158,12 +162,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
                                     ToastUtil.show(getActivity(), loginRsp.getMsg());
                                     break;
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        } finally {
                         }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                }
+
+                    }
+                });
+
             }
         });
     }

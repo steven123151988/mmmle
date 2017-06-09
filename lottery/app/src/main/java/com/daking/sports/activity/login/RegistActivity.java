@@ -73,6 +73,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private ImageView iv_back;
     private LoginRsp loginRsp;
     private Gson gson = new Gson();
+    private String message, message2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +102,9 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         et_name.setFilters(new InputFilter[]{filter});
 
         et_birthday = (EditText) findViewById(R.id.et_birthday);
-        addTextWatchListener(et_birthday,8);
+        addTextWatchListener(et_birthday, 8);
         et_money_psw = (EditText) findViewById(R.id.et_money_psw);
-        addTextWatchListener(et_money_psw,6);
+        addTextWatchListener(et_money_psw, 6);
         et_answer = (EditText) findViewById(R.id.et_answer);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
@@ -135,9 +136,10 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
     /**
      * 设置监听
+     *
      * @param editText
      */
-    private void addTextWatchListener(EditText editText,final  int size) {
+    private void addTextWatchListener(EditText editText, final int size) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -149,8 +151,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void afterTextChanged(Editable s) {
-                String psw=s.toString();
-                if (psw.length()==size){
+                String psw = s.toString();
+                if (psw.length() == size) {
                     closeKeyboard();
                 }
             }
@@ -187,13 +189,14 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String message = response.body().string();
-                LogUtil.e(message);
-                try {
-                    loginRsp = gson.fromJson(message, LoginRsp.class);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                message = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e(message);
+                            loginRsp = gson.fromJson(message, LoginRsp.class);
+
                             if (null == loginRsp) {
                                 ShowDialogUtil.showSystemFail(mContext);
                                 return;
@@ -207,13 +210,18 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                                     ShowDialogUtil.showFailDialog(mContext, getString(R.string.error), loginRsp.getMsg());
                                     break;
                             }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
 
-                }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        } finally {
+
+                        }
+
+                    }
+                });
+
+
             }
         });
     }
@@ -292,14 +300,15 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String message = response.body().string();
-                    LogUtil.e(message);
-                    Gson gson = new Gson();
-                    loginRsp = gson.fromJson(message, LoginRsp.class);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                message2 = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e(message2);
+                            Gson gson = new Gson();
+                            loginRsp = gson.fromJson(message2, LoginRsp.class);
+
                             if (null == loginRsp) {
                                 //展示失败消息
                                 ShowDialogUtil.showSystemFail(mContext);
@@ -321,13 +330,17 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                                 //展示失败消息
                                 ShowDialogUtil.showFailDialog(mContext, getString(R.string.regist_err), loginRsp.getIfo());
                             }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
 
-                }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        } finally {
+
+                        }
+                    }
+                });
+
+
             }
         });
     }
@@ -422,7 +435,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 regist();
                 break;
             case R.id.ll_checkquestion:
-                    setupRecyclerView();
+                setupRecyclerView();
                 break;
         }
     }

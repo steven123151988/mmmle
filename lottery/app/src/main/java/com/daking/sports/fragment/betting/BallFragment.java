@@ -42,7 +42,7 @@ public class BallFragment extends BaseFragment {
     private BettingAdapter bettingAdapter;
     private PullToRefreshView mPullToRefreshView;
     private ListView lv_betting;
-    private String ball,balltype;
+    private String ball, balltype;
     private FootballGQRsp footballGQRsp;
     private Gson gson = new Gson();
     private Timer timer;
@@ -50,6 +50,7 @@ public class BallFragment extends BaseFragment {
     private int m = 3;
     private AbsListViewCompat.OnScrollCallback onScrollCallback;
     private int listview_position = 0;
+    private String message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -147,23 +148,23 @@ public class BallFragment extends BaseFragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-               getActivity().runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-                       ShowDialogUtil.showSystemFail(getActivity());
-                   }
-               });
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showSystemFail(getActivity());
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String message = response.body().string();
-                LogUtil.e(message);
-                try {
-                    footballGQRsp = gson.fromJson(message, FootballGQRsp.class);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                message = response.body().string();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e(message);
+                            footballGQRsp = gson.fromJson(message, FootballGQRsp.class);
                             if (null == footballGQRsp) {
                                 mPullToRefreshView.setVisibility(View.GONE);
                                 iv_system_error.setVisibility(View.VISIBLE);
@@ -172,7 +173,7 @@ public class BallFragment extends BaseFragment {
                             }
                             switch (footballGQRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-                                    bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo(), ball,balltype);
+                                    bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo(), ball, balltype);
                                     lv_betting.setAdapter(bettingAdapter);
                                     bettingAdapter.notifyDataSetChanged();
                                     lv_betting.setSelection(listview_position);
@@ -225,13 +226,19 @@ public class BallFragment extends BaseFragment {
                                     break;
                             }
 
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
 
-                }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        } finally {
+
+                        }
+
+
+                    }
+                });
+
+
             }
         });
     }

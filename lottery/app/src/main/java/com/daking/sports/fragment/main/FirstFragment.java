@@ -45,7 +45,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private Intent intent;
     private View view;
     private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F;
-
+    private String message;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,18 +104,19 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String message = response.body().string();
-                LogUtil.e("===============initHomeIndex=========" + message);
-                Gson gson = new Gson();
-                try {
-                    mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (null==mainIndexRsp){
+                message = response.body().string();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e("===============initHomeIndex=========" + message);
+                            Gson gson = new Gson();
+                            mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
+                            if (null == mainIndexRsp) {
+                                ShowDialogUtil.showSystemFail(getActivity());
                                 return;
                             }
-                            switch (mainIndexRsp.getCode()){
+                            switch (mainIndexRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     //修改UI必须在主线程
                                     tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
@@ -130,13 +131,16 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                     break;
                             }
 
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        } finally {
                         }
-                    });
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                }
+
+                    }
+                });
+
             }
         });
     }

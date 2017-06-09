@@ -76,7 +76,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private int money;
     private GetOrderMsgRsp getOrderMsgRsp;
     private Handler handler;
-    private String message;
+    private String message, message2;
     private String if_GQ;
     private int bet_position;
 
@@ -181,13 +181,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String message = response.body().string();
-                    LogUtil.e(message);
-                    bettingDetailRsp = gosn.fromJson(message, BettingDetailRsp.class);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                message2 = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e(message2);
+                            bettingDetailRsp = gosn.fromJson(message2, BettingDetailRsp.class);
                             if (null == bettingDetailRsp) {
                                 ShowDialogUtil.showSystemFail(mContext);
                                 return;
@@ -236,14 +236,18 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     finish();
                                     break;
                             }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        } finally {
+
                         }
-                    });
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
+                    }
+                });
 
-                }
+
             }
         });
     }
