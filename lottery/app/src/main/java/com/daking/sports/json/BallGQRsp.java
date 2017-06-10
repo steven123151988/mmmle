@@ -7,7 +7,7 @@ import java.util.List;
  * Created by 18 on 2017/5/30.
  */
 
-public class FootballGQRsp implements Serializable {
+public class BallGQRsp implements Serializable {
 
 
     /**
@@ -278,6 +278,7 @@ public class FootballGQRsp implements Serializable {
         private String FT_RE_Scene;
         private String AliPayOpen;
         private String WeiPayOpen;
+
 
         public String getID() {
             return ID;
@@ -1008,6 +1009,15 @@ public class FootballGQRsp implements Serializable {
         private String stime;
         private String result;
         private String video_url;
+        private String gq;
+
+        public String getGq() {
+            return gq;
+        }
+
+        public void setGq(String gq) {
+            this.gq = gq;
+        }
 
         public String getMID() {
             return MID;

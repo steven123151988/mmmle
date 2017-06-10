@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.activity.betting.BettingDetailActivity;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.json.FootballGQRsp;
+import com.daking.sports.json.BallGQRsp;
 
 import java.util.List;
 
@@ -23,14 +23,13 @@ import java.util.List;
 public class BettingAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
-    private List<FootballGQRsp.IfoBean> ifos;
-    private String ball,type;
+    private List<BallGQRsp.IfoBean> ifos;
+    private String ball;
 
-    public BettingAdapter(Context context, List<FootballGQRsp.IfoBean> ifo, String ball,String type) {
+    public BettingAdapter(Context context, List<BallGQRsp.IfoBean> ifo, String ball) {
         this.mcontext = context;
         this.ifos = ifo;
         this.ball = ball;
-        this.type=type;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class BettingAdapter extends BaseAdapter {
                 intent.putExtra(SportsKey.MID, ifos.get(position).getMID());
                 intent.putExtra(SportsKey.BALL_TEAM, ballteam);
                 intent.putExtra(SportsKey.BALL, ball);
-                intent.putExtra(SportsKey.TYPE, type);
+                intent.putExtra(SportsKey.TYPE, ifos.get(position).getGq());
                 mcontext.startActivity(intent);
             }
         });

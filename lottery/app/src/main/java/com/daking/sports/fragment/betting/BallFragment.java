@@ -14,7 +14,7 @@ import com.daking.sports.adapter.BettingAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.json.FootballGQRsp;
+import com.daking.sports.json.BallGQRsp;
 import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 import com.yalantis.phoenix.PullToRefreshView;
 
 import java.io.IOException;
-import java.util.IllegalFormatCodePointException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,7 +43,7 @@ public class BallFragment extends BaseFragment {
     private PullToRefreshView mPullToRefreshView;
     private ListView lv_betting;
     private String ball, balltype;
-    private FootballGQRsp footballGQRsp;
+    private BallGQRsp ballGQRsp;
     private Gson gson = new Gson();
     private Timer timer;
     private ImageView iv_system_error;
@@ -164,17 +163,17 @@ public class BallFragment extends BaseFragment {
                         @Override
                         public void run() {
                             try {
-                                LogUtil.e(message);
-                                footballGQRsp = gson.fromJson(message, FootballGQRsp.class);
-                                if (null == footballGQRsp) {
+                                LogUtil.e("=====getballmsg====="+message);
+                                ballGQRsp = gson.fromJson(message, BallGQRsp.class);
+                                if (null == ballGQRsp) {
                                     mPullToRefreshView.setVisibility(View.GONE);
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     iv_system_error.setImageResource(R.drawable.konglong1);
                                     return;
                                 }
-                                switch (footballGQRsp.getCode()) {
+                                switch (ballGQRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
-                                        bettingAdapter = new BettingAdapter(getActivity(), footballGQRsp.getIfo(), ball, balltype);
+                                        bettingAdapter = new BettingAdapter(getActivity(), ballGQRsp.getIfo(), ball);
                                         lv_betting.setAdapter(bettingAdapter);
                                         bettingAdapter.notifyDataSetChanged();
                                         lv_betting.setSelection(listview_position);

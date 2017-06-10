@@ -54,8 +54,9 @@ import okhttp3.Response;
 public class BettingDetailActivity extends BaseActivity implements View.OnClickListener {
     private ExpandableListView lv_expandableListView;
     private MyExpandableListAdapter myExpandableListAdapter;
+    private LinearLayout ll_title_basketball, ll_title_football;
     private TextView tv_center;
-    private ImageView iv_back;
+    private ImageView iv_back, iv_betting_bg;
     private PopupWindow popupWindow;
     private View popView;
     private TextView tv_score_A, tv_score_B;
@@ -70,14 +71,15 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private BettingDetailRsp bettingDetailRsp;
     private BettingDetailRsp.IfoBean.BetmsgBean BetmsgBean;
     private LinearLayout ll_ball;
-    private String ball, ballteam, type;
-    private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;  //头部的球数据
+    private String ball, ballteam,type;
+    private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;  //足球头部的球数据
+    private TextView tv_basketball_mb1, tv_basketball_mb2, tv_basketball_mb3, tv_basketball_mb4, tv_basketball_mb5, tv_basketball_mb6, tv_basketball_mb7,tv_jiashi;
+    private TextView tv_basketball_tg1, tv_basketball_tg2, tv_basketball_tg3, tv_basketball_tg4, tv_basketball_tg5, tv_basketball_tg6, tv_basketball_tg7;
     private Double rate;
     private int money;
     private GetOrderMsgRsp getOrderMsgRsp;
     private Handler handler;
     private String message, message2;
-    private String if_GQ;
     private int bet_position;
 
 
@@ -90,6 +92,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         ball = getIntent().getStringExtra(SportsKey.BALL);
         type = getIntent().getStringExtra(SportsKey.TYPE);
         ballteam = getIntent().getStringExtra(SportsKey.BALL_TEAM);
+        LogUtil.e("=======ball==========="+ball+"==="+type);
         initView();
     }
 
@@ -106,6 +109,9 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         ll_ball = fuck(R.id.ll_ball);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
+        ll_title_basketball = fuck(R.id.ll_title_basketball);//篮球头部球类信息
+        ll_title_football = fuck(R.id.ll_title_football);//足球头部球类信息
+        iv_betting_bg = fuck(R.id.iv_betting_bg);
         switch (ball) {
             case SportsKey.FOOTBALL:
                 ll_ball.setBackground(getResources().getDrawable(R.mipmap.football_bg, null));
@@ -114,7 +120,17 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 } else {
                     tv_center.setText(ballteam);
                 }
-
+                ll_title_football.setVisibility(View.VISIBLE);
+                ll_title_basketball.setVisibility(View.GONE);
+                //足球球类数据
+                tv_mb_A = fuck(R.id.tv_mb_A);
+                tv_mb_B = fuck(R.id.tv_mb_B);
+                tv_mb_C = fuck(R.id.tv_mb_C);
+                tv_mb_D = fuck(R.id.tv_mb_D);
+                tv_tg_A = fuck(R.id.tv_tg_A);
+                tv_tg_B = fuck(R.id.tv_tg_B);
+                tv_tg_C = fuck(R.id.tv_tg_C);
+                tv_tg_D = fuck(R.id.tv_tg_D);
                 break;
             case SportsKey.BASKETBALL:
                 ll_ball.setBackground(getResources().getDrawable(R.mipmap.basketball_bg, null));
@@ -123,18 +139,41 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 } else {
                     tv_center.setText(ballteam);
                 }
+                ll_title_football.setVisibility(View.GONE);
+                ll_title_basketball.setVisibility(View.VISIBLE);
+                //篮球球类数据
+                tv_jiashi=fuck(R.id.tv_jiashi);
+                tv_basketball_mb1 = fuck(R.id.tv_basketball_mb1);
+                tv_basketball_mb2 = fuck(R.id.tv_basketball_mb2);
+                tv_basketball_mb3 = fuck(R.id.tv_basketball_mb3);
+                tv_basketball_mb4 = fuck(R.id.tv_basketball_mb4);
+                tv_basketball_mb5 = fuck(R.id.tv_basketball_mb5);
+                tv_basketball_mb6 = fuck(R.id.tv_basketball_mb6);
+                tv_basketball_mb7 = fuck(R.id.tv_basketball_mb7);
+                tv_basketball_tg1 = fuck(R.id.tv_basketball_tg1);
+                tv_basketball_tg2 = fuck(R.id.tv_basketball_tg2);
+                tv_basketball_tg3 = fuck(R.id.tv_basketball_tg3);
+                tv_basketball_tg4 = fuck(R.id.tv_basketball_tg4);
+                tv_basketball_tg5 = fuck(R.id.tv_basketball_tg5);
+                tv_basketball_tg6 = fuck(R.id.tv_basketball_tg6);
+                tv_basketball_tg7 = fuck(R.id.tv_basketball_tg7);
                 break;
         }
+
+        // 根据赛事类型选择头部显示的图片
+        switch (type) {
+            case SportsKey.TYPE_ONE+"":
+                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_notstart, null));
+                break;
+            case SportsKey.TYPE_ZERO+"":
+                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_ing, null));
+                break;
+        }
+
+
         tv_score_A = fuck(R.id.tv_score_A);
         tv_score_B = fuck(R.id.tv_score_B);
-        tv_mb_A = fuck(R.id.tv_mb_A);
-        tv_mb_B = fuck(R.id.tv_mb_B);
-        tv_mb_C = fuck(R.id.tv_mb_C);
-        tv_mb_D = fuck(R.id.tv_mb_D);
-        tv_tg_A = fuck(R.id.tv_tg_A);
-        tv_tg_B = fuck(R.id.tv_tg_B);
-        tv_tg_C = fuck(R.id.tv_tg_C);
-        tv_tg_D = fuck(R.id.tv_tg_D);
+
         iv_back = (ImageView) findViewById(R.id.iv_back);
         iv_back.setVisibility(View.VISIBLE);
         iv_back.setOnClickListener(this);
@@ -204,14 +243,42 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                         }
                                         tv_score_A.setText(bettingDetailRsp.getIfo().getMB_Ball());
                                         tv_score_B.setText(bettingDetailRsp.getIfo().getTG_Ball());
-                                        tv_mb_A.setText(bettingDetailRsp.getIfo().getScore_m1());
-                                        tv_mb_B.setText(bettingDetailRsp.getIfo().getScore_mh());
-                                        tv_mb_C.setText(bettingDetailRsp.getIfo().getScore_m2());
-                                        tv_mb_D.setText(bettingDetailRsp.getIfo().getMB_Ball());
-                                        tv_mb_A.setText(bettingDetailRsp.getIfo().getScore_t1());
-                                        tv_tg_B.setText(bettingDetailRsp.getIfo().getScore_th());
-                                        tv_tg_C.setText(bettingDetailRsp.getIfo().getScore_t2());
-                                        tv_tg_D.setText(bettingDetailRsp.getIfo().getTG_Ball());
+                                        switch (ball) {
+                                            case SportsKey.FOOTBALL:
+                                                tv_mb_A.setText(bettingDetailRsp.getIfo().getScore_m1());
+                                                tv_mb_B.setText(bettingDetailRsp.getIfo().getScore_mh());
+                                                tv_mb_C.setText(bettingDetailRsp.getIfo().getScore_m2());
+                                                tv_mb_D.setText(bettingDetailRsp.getIfo().getMB_Ball());
+                                                tv_tg_A.setText(bettingDetailRsp.getIfo().getScore_t1());
+                                                tv_tg_B.setText(bettingDetailRsp.getIfo().getScore_th());
+                                                tv_tg_C.setText(bettingDetailRsp.getIfo().getScore_t2());
+                                                tv_tg_D.setText(bettingDetailRsp.getIfo().getTG_Ball());
+                                                break;
+                                            case SportsKey.BASKETBALL:
+                                                tv_basketball_mb1.setText(bettingDetailRsp.getIfo().getScore_m1());
+                                                tv_basketball_mb2.setText(bettingDetailRsp.getIfo().getScore_m2());
+                                                tv_basketball_mb3.setText(bettingDetailRsp.getIfo().getScore_mh());
+                                                tv_basketball_mb4.setText(bettingDetailRsp.getIfo().getScore_m3());
+                                                tv_basketball_mb5.setText(bettingDetailRsp.getIfo().getScore_m4());
+
+                                                tv_basketball_mb7.setText(bettingDetailRsp.getIfo().getMB_Ball());
+                                                tv_basketball_tg1.setText(bettingDetailRsp.getIfo().getScore_t1());
+                                                tv_basketball_tg2.setText(bettingDetailRsp.getIfo().getScore_t2());
+                                                tv_basketball_tg3.setText(bettingDetailRsp.getIfo().getScore_th());
+                                                tv_basketball_tg4.setText(bettingDetailRsp.getIfo().getScore_t3());
+                                                tv_basketball_tg5.setText(bettingDetailRsp.getIfo().getScore_t4());
+                                                tv_basketball_tg7.setText(bettingDetailRsp.getIfo().getTG_Ball());
+                                                if (bettingDetailRsp.getIfo().getScore_tot().equals("-")){
+                                                    tv_basketball_tg6.setVisibility(View.GONE);
+                                                    tv_basketball_mb6.setVisibility(View.GONE);
+                                                    tv_jiashi.setVisibility(View.GONE);
+                                                }else{
+                                                    tv_basketball_mb6.setText(bettingDetailRsp.getIfo().getScore_mot());
+                                                    tv_basketball_tg6.setText(bettingDetailRsp.getIfo().getScore_tot());
+                                                }
+                                                break;
+                                        }
+
                                     }
                                     break;
                                 case SportsKey.TYPE_NINE:
@@ -221,7 +288,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     startActivity(new Intent(mContext, LoginActivity.class));
                                     break;
                                 case SportsKey.TYPE_TWELVE://12赛事关闭
-                                    ShowDialogUtil.showFailDialog(mContext, "Sorry...", getString(R.string.betting_finish));
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.betting_finish));
                                     //延迟2秒关闭
                                     handler = new Handler();
                                     handler.postDelayed(new Runnable() {
@@ -233,7 +300,21 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     }, 2000);
                                     break;
                                 default:
-                                    finish();
+                                    if (null != bettingDetailRsp.getMsg()) {
+                                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), bettingDetailRsp.getMsg());
+                                        if (null==handler){
+                                            handler = new Handler();
+                                        }
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ShowDialogUtil.dismissDialogs();
+                                                finish();
+                                            }
+                                        }, 2000);
+                                    } else {
+                                        ShowDialogUtil.showSystemFail(mContext);
+                                    }
                                     break;
                             }
 
@@ -361,12 +442,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      */
     private void getOrder(int childPosition) {
 
-        if (type.equals(SportsKey.GQ)) {
-            if_GQ = "1";
-        } else {
-            if_GQ = "0";
-        }
-
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.ORDER)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
@@ -374,7 +449,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 .add(SportsKey.TYPE, BetmsgBean.getType())
                 .add(SportsKey.MONEY, String.valueOf(money))
                 .add(SportsKey.PARA, BetmsgBean.getData().get(childPosition).getPara())
-                .add(SportsKey.GQ, if_GQ)
+                .add(SportsKey.GQ, type)
                 .build();
         LogUtil.e("============getOrder===" + SportsKey.ORDER);
         LogUtil.e("============ball===" + ball);
@@ -382,7 +457,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         LogUtil.e("============money===" + String.valueOf(money));
         LogUtil.e("============getPara===" + BetmsgBean.getData().get(childPosition).getPara());
         LogUtil.e("============uid===" + SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"));
-        LogUtil.e("===========if_GQ===" + if_GQ);
+        LogUtil.e("===========if_GQ===" + type);
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(SportsAPI.BASE_URL + SportsAPI.GET_ORDER)
                 .post(requestBody)
@@ -472,14 +547,14 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 .add(SportsKey.TOKEN, getOrderMsgRsp.getIfo().getToken())
                 .add(SportsKey.MONEY, String.valueOf(money))
                 .add(SportsKey.PARA, getOrderMsgRsp.getIfo().getJson_paras())
-                .add(SportsKey.GQ, if_GQ)
+                .add(SportsKey.GQ, type)
                 .build();
         LogUtil.e("======getBetting======FNNAME===" + SportsKey.CHECK_ORDER);
         LogUtil.e("============uid===" + SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"));
         LogUtil.e("===========token===" + getOrderMsgRsp.getIfo().getToken());
         LogUtil.e("===========money===" + String.valueOf(money));
         LogUtil.e("============getJson_paras===" + getOrderMsgRsp.getIfo().getJson_paras());
-        LogUtil.e("============if_GQ===" + if_GQ);
+        LogUtil.e("============if_GQ===" + type);
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(SportsAPI.BASE_URL + SportsAPI.FINISH_ORDER)
                 .post(requestBody)

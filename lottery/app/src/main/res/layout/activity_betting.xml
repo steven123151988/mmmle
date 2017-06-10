@@ -21,15 +21,16 @@
             android:layout_marginTop="@dimen/dimen_30">
 
             <ImageView
+                android:id="@+id/iv_betting_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@mipmap/betting_ing" />
+                />
 
             <LinearLayout
-                  android:layout_marginBottom="@dimen/dimen_30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_30"
                 android:orientation="horizontal">
 
                 <TextView
@@ -71,8 +72,13 @@
             </LinearLayout>
         </FrameLayout>
 
-        <include layout="@layout/betting_front_football" />
+        <include
+            layout="@layout/betting_front_football"
+            android:visibility="gone" />
 
+        <include
+            layout="@layout/betting_front_basketball"
+            android:visibility="gone" />
     </LinearLayout>
 
     <ExpandableListView

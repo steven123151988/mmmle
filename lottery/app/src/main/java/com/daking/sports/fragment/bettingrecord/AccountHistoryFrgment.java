@@ -1,6 +1,5 @@
 package com.daking.sports.fragment.bettingrecord;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.login.LoginActivity;
-import com.daking.sports.adapter.BettingAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.json.FootballGQRsp;
-import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;

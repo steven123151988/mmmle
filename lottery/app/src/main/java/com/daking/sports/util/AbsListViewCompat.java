@@ -97,7 +97,7 @@ public class AbsListViewCompat<T extends AbsListView> {
                     case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                         int position = getPosition();
                         firstViewScrollY = getFirstViewScrollY();
-                        LogUtil.e("==========position========== : " + position + " firstViewScrollY : " + firstViewScrollY);
+//                        LogUtil.e("==========position========== : " + position + " firstViewScrollY : " + firstViewScrollY);
                         callback.onScrollChanged(OnScrollCallback.STATE_STOPPED, OnScrollCallback.SCROLL_DIRECTION_NOTHING, position);
                         break;
                     //手指在滑动
@@ -127,28 +127,28 @@ public class AbsListViewCompat<T extends AbsListView> {
                 View childAt = scrollView.getChildAt(0);
                 int[] location = new int[2];
                 childAt.getLocationOnScreen(location);
-                LogUtil.e("firstVisibleItem= " + firstVisibleItem + " , y=" + location[1]);
+//                LogUtil.e("firstVisibleItem= " + firstVisibleItem + " , y=" + location[1]);
                 int direction = OnScrollCallback.SCROLL_DIRECTION_NOTHING;
                 int state = OnScrollCallback.STATE_SCROLLING;
                 if (firstVisibleItem != lastVisibleItem) {
                     if (firstVisibleItem > lastVisibleItem) {
-                        LogUtil.e("向上滑动");
+//                        LogUtil.e("向上滑动");
                         direction = OnScrollCallback.SCROLL_DIRECTION_UP;
                     } else if (firstVisibleItem < lastVisibleItem) {
-                        LogUtil.e("向下滑动");
+//                        LogUtil.e("向下滑动");
                         direction = OnScrollCallback.SCROLL_DIRECTION_DOWN;
                     }
                     lastVisibleItem = firstVisibleItem;
                     mTouchY = location[1];
                 } else {
                     if (mTouchY > location[1]) {
-                        LogUtil.e("->向上滑动");
+//                        LogUtil.e("->向上滑动");
                         direction = OnScrollCallback.SCROLL_DIRECTION_UP;
                     } else if (mTouchY < location[1]) {
-                        LogUtil.e("->向下滑动");
+//                        LogUtil.e("->向下滑动");
                         direction = OnScrollCallback.SCROLL_DIRECTION_DOWN;
                     } else {
-                        LogUtil.e("->未滑动");
+//                        LogUtil.e("->未滑动");
                         state = OnScrollCallback.STATE_STOPPED;
                     }
                     mTouchY = location[1];

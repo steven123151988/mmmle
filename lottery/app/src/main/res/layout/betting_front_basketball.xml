@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:Android="http://schemas.android.com/tools"
+    android:id="@+id/ll_title_basketball"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dimen_50"
+    android:layout_marginTop="@dimen/dimen_1"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,10 +15,11 @@
         android:orientation="horizontal">
 
         <TextView
+            Android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="zhudui"
+            android:text="主队  "
             android:textColor="@color/white_ffffff"
             android:textSize="@dimen/dimen_14"
             android:visibility="invisible" />
@@ -27,7 +30,8 @@
             android:layout_weight="1"
             android:text="1"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +39,8 @@
             android:layout_weight="1"
             android:text="2"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +48,8 @@
             android:layout_weight="1"
             android:text="半场"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +57,8 @@
             android:layout_weight="1"
             android:text="3"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +66,18 @@
             android:layout_weight="1"
             android:text="4"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
+        <TextView
+            android:id="@+id/tv_jiashi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="加时"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +85,8 @@
             android:layout_weight="1"
             android:text="总分"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
 
     </LinearLayout>
@@ -85,55 +104,77 @@
             android:layout_weight="1"
             android:text="主队"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_basketball_mb1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_basketball_mb2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_basketball_mb3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_basketball_mb4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_basketball_mb5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
         <TextView
+            android:id="@+id/tv_basketball_mb6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14" />
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
+        <TextView
+            android:id="@+id/tv_basketball_mb7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-"
+            android:textColor="@color/white_ffffff"
+            android:textSize="@dimen/dimen_14"
+            Android:gravity="center" />
 
 
     </LinearLayout>
@@ -145,6 +186,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_20"
@@ -157,56 +199,77 @@
                 android:layout_weight="1"
                 android:text="客队"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
             <TextView
+                android:id="@+id/tv_basketball_tg1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
             <TextView
+                android:id="@+id/tv_basketball_tg2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
             <TextView
+                android:id="@+id/tv_basketball_tg3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
             <TextView
+                android:id="@+id/tv_basketball_tg4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
             <TextView
+                android:id="@+id/tv_basketball_tg5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
             <TextView
+                android:id="@+id/tv_basketball_tg6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14" />
-
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
+            <TextView
+                android:id="@+id/tv_basketball_tg7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="-"
+                android:textColor="@color/white_ffffff"
+                android:textSize="@dimen/dimen_14"
+                Android:gravity="center" />
 
         </LinearLayout>
     </LinearLayout>

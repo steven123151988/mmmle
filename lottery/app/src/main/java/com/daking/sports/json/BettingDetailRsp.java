@@ -8,15 +8,25 @@ import java.util.List;
  */
 
 public class BettingDetailRsp implements Serializable {
+
     /**
-     * member : {"ID":"12247","Oid":"2ae5c820fc6e79120dfera7","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-08","LoginTime":"2017-06-08 01:08:43","OnlineTime":"2017-06-08 01:08:43","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
+     * member : {"ID":"12247","Oid":"d5b6503abd6e79120dfera3","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-09","LoginTime":"2017-06-09 22:32:51","OnlineTime":"2017-06-09 22:32:51","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
      * code : 0
-     * ifo : {"MID":"2778362","MB_Team":"主场 -星期四-2场赛事","TG_Team":"客场 -星期四-2场赛事","type_nums":7,"mpid":"","video_url":"","ball":"football","score_m1":"","score_mh":"","score_m2":"","score_t1":"","score_th":"","score_t2":"","MB_Ball":"0","TG_Ball":"0","gq":false,"betmsg":[{"type":"M","title":"全场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.34","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.28","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"4.30","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"R","title":"全场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"1.03","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.89","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"OU","title":"全场大小","data":[{"team":"大","mid":"O4","rate":"0.97","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U4","rate":"0.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]},{"type":"EO","title":"总分：单/双","data":[{"team":"单","mid":"","rate":"1.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=ODD"},{"team":"双","mid":"","rate":"1.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=EVEN"}]},{"type":"HM","title":"半场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.66","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.64","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"2.73","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"HR","title":"半场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"0.96","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"HOU","title":"半场大小","data":[{"team":"大","mid":"O1.5 / 2","rate":"1.05","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U1.5 / 2","rate":"0.85","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]}]}
+     * ifo : {"MB_LetB_Rate":"0.92","TG_LetB_Rate":"0.92","MB_Dime_Rate":"0.90","TG_Dime_Rate":"0.90","MB_LetB_Rate_H":"0.91","TG_LetB_Rate_H":"0.89","MB_Dime_Rate_H":"0.92","TG_Dime_Rate_H":"0.88","MB_LetB_Rate_RB":"0.00","TG_LetB_Rate_RB":"0.00","MB_Dime_Rate_RB":"0.00","TG_Dime_Rate_RB":"0.00","MB_LetB_Rate_RB_H":"0.91","TG_LetB_Rate_RB_H":"0.92","MB_Dime_Rate_RB_H":"0.89","TG_Dime_Rate_RB_H":"0.88","MID":"2173341","MB_Team":"高科通布里易三倉","TG_Team":"鄧肯猛龍","MB_Ball":"0","TG_Ball":"0","type_nums":5,"mpid":"","video_url":"","gq":false,"ball":"basketball","score_m1":"","score_m2":"","score_m3":"","score_m4":"","score_mh":"","score_mot":"","score_t1":"","score_t2":"","score_t3":"","score_t4":"","score_th":"","score_tot":"","betmsg":[{"type":"R","title":"让分","data":[{"team":"高科通布里易三倉","mid":"24.5","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=H&gnum=50074&stong=H"},{"team":"鄧肯猛龍","mid":"","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=C&gnum=50073&stong=H"}]},{"type":"OU","title":"总分：大/小","data":[{"team":"大","mid":"O188.5","rate":"0.90","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=C&gnum=50073"},{"team":"小","mid":"U188.5","rate":"0.90","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=H&gnum=50074"}]},{"type":"EO","title":" 总分：单/双","data":[{"team":"单","mid":"","rate":"1.93","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&rtype=ODD"},{"team":"双","mid":"","rate":"1.93","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&rtype=EVEN"}]},{"type":"OUH","title":"高科通布里易三倉 得分：大/小","data":[{"team":"大","mid":"O106.5","rate":"0.91","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUH&type=O"},{"team":"小","mid":"U106.5","rate":"0.89","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUH&type=U"}]},{"type":"OUH","title":"鄧肯猛龍 得分：大/小","data":[{"team":"大","mid":"O82","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUC&type=O"},{"team":"小","mid":"U82","rate":"0.88"," para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUC&type=U"}]}]}
      */
 
     private MemberBean member;
     private int code;
     private IfoBean ifo;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public MemberBean getMember() {
         return member;
@@ -45,7 +55,7 @@ public class BettingDetailRsp implements Serializable {
     public static class MemberBean {
         /**
          * ID : 12247
-         * Oid : 2ae5c820fc6e79120dfera7
+         * Oid : d5b6503abd6e79120dfera3
          * Online : 0
          * Language : zh-cn
          * UserName : xiaobao
@@ -64,9 +74,9 @@ public class BettingDetailRsp implements Serializable {
          * Status : 0
          * Send : 0
          * BetType : 0
-         * LoginDate : 2017-06-08
-         * LoginTime : 2017-06-08 01:08:43
-         * OnlineTime : 2017-06-08 01:08:43
+         * LoginDate : 2017-06-09
+         * LoginTime : 2017-06-09 22:32:51
+         * OnlineTime : 2017-06-09 22:32:51
          * LogoutTime : 0000-00-00 00:00:00
          * AddDate : 2017-03-12 01:34:59
          * EditDate : 2017-03-12
@@ -900,42 +910,214 @@ public class BettingDetailRsp implements Serializable {
 
     public static class IfoBean {
         /**
-         * MID : 2778362
-         * MB_Team : 主场 -星期四-2场赛事
-         * TG_Team : 客场 -星期四-2场赛事
-         * type_nums : 7
-         * mpid :
-         * video_url :
-         * ball : football
-         * score_m1 :
-         * score_mh :
-         * score_m2 :
-         * score_t1 :
-         * score_th :
-         * score_t2 :
+         * MB_LetB_Rate : 0.92
+         * TG_LetB_Rate : 0.92
+         * MB_Dime_Rate : 0.90
+         * TG_Dime_Rate : 0.90
+         * MB_LetB_Rate_H : 0.91
+         * TG_LetB_Rate_H : 0.89
+         * MB_Dime_Rate_H : 0.92
+         * TG_Dime_Rate_H : 0.88
+         * MB_LetB_Rate_RB : 0.00
+         * TG_LetB_Rate_RB : 0.00
+         * MB_Dime_Rate_RB : 0.00
+         * TG_Dime_Rate_RB : 0.00
+         * MB_LetB_Rate_RB_H : 0.91
+         * TG_LetB_Rate_RB_H : 0.92
+         * MB_Dime_Rate_RB_H : 0.89
+         * TG_Dime_Rate_RB_H : 0.88
+         * MID : 2173341
+         * MB_Team : 高科通布里易三倉
+         * TG_Team : 鄧肯猛龍
          * MB_Ball : 0
          * TG_Ball : 0
+         * type_nums : 5
+         * mpid :
+         * video_url :
          * gq : false
-         * betmsg : [{"type":"M","title":"全场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.34","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.28","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"4.30","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"R","title":"全场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"1.03","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.89","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"OU","title":"全场大小","data":[{"team":"大","mid":"O4","rate":"0.97","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U4","rate":"0.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]},{"type":"EO","title":"总分：单/双","data":[{"team":"单","mid":"","rate":"1.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=ODD"},{"team":"双","mid":"","rate":"1.93","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&rtype=EVEN"}]},{"type":"HM","title":"半场独赢","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.66","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.64","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"2.73","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]},{"type":"HR","title":"半场让球","data":[{"team":"主场 -星期四-2场赛事","mid":"","rate":"0.96","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944&stong=C"},{"team":"客场 -星期四-2场赛事","mid":"0","rate":"0.94","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943&stong=C"}]},{"type":"HOU","title":"半场大小","data":[{"team":"大","mid":"O1.5 / 2","rate":"1.05","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"小","mid":"U1.5 / 2","rate":"0.85","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"}]}]
+         * ball : basketball
+         * score_m1 :
+         * score_m2 :
+         * score_m3 :
+         * score_m4 :
+         * score_mh :
+         * score_mot :
+         * score_t1 :
+         * score_t2 :
+         * score_t3 :
+         * score_t4 :
+         * score_th :
+         * score_tot :
+         * betmsg : [{"type":"R","title":"让分","data":[{"team":"高科通布里易三倉","mid":"24.5","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=H&gnum=50074&stong=H"},{"team":"鄧肯猛龍","mid":"","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=C&gnum=50073&stong=H"}]},{"type":"OU","title":"总分：大/小","data":[{"team":"大","mid":"O188.5","rate":"0.90","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=C&gnum=50073"},{"team":"小","mid":"U188.5","rate":"0.90","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=H&gnum=50074"}]},{"type":"EO","title":" 总分：单/双","data":[{"team":"单","mid":"","rate":"1.93","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&rtype=ODD"},{"team":"双","mid":"","rate":"1.93","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&rtype=EVEN"}]},{"type":"OUH","title":"高科通布里易三倉 得分：大/小","data":[{"team":"大","mid":"O106.5","rate":"0.91","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUH&type=O"},{"team":"小","mid":"U106.5","rate":"0.89","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUH&type=U"}]},{"type":"OUH","title":"鄧肯猛龍 得分：大/小","data":[{"team":"大","mid":"O82","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUC&type=O"},{"team":"小","mid":"U82","rate":"0.88"," para":"gid=2173341&uid=d5b6503abd6e79120dfera3&wtype=OUC&type=U"}]}]
          */
 
+        private String MB_LetB_Rate;
+        private String TG_LetB_Rate;
+        private String MB_Dime_Rate;
+        private String TG_Dime_Rate;
+        private String MB_LetB_Rate_H;
+        private String TG_LetB_Rate_H;
+        private String MB_Dime_Rate_H;
+        private String TG_Dime_Rate_H;
+        private String MB_LetB_Rate_RB;
+        private String TG_LetB_Rate_RB;
+        private String MB_Dime_Rate_RB;
+        private String TG_Dime_Rate_RB;
+        private String MB_LetB_Rate_RB_H;
+        private String TG_LetB_Rate_RB_H;
+        private String MB_Dime_Rate_RB_H;
+        private String TG_Dime_Rate_RB_H;
         private String MID;
         private String MB_Team;
         private String TG_Team;
+        private String MB_Ball;
+        private String TG_Ball;
         private int type_nums;
         private String mpid;
         private String video_url;
+        private boolean gq;
         private String ball;
         private String score_m1;
-        private String score_mh;
         private String score_m2;
+        private String score_m3;
+        private String score_m4;
+        private String score_mh;
+        private String score_mot;
         private String score_t1;
-        private String score_th;
         private String score_t2;
-        private String MB_Ball;
-        private String TG_Ball;
-        private boolean gq;
+        private String score_t3;
+        private String score_t4;
+        private String score_th;
+        private String score_tot;
         private List<BetmsgBean> betmsg;
+
+        public String getMB_LetB_Rate() {
+            return MB_LetB_Rate;
+        }
+
+        public void setMB_LetB_Rate(String MB_LetB_Rate) {
+            this.MB_LetB_Rate = MB_LetB_Rate;
+        }
+
+        public String getTG_LetB_Rate() {
+            return TG_LetB_Rate;
+        }
+
+        public void setTG_LetB_Rate(String TG_LetB_Rate) {
+            this.TG_LetB_Rate = TG_LetB_Rate;
+        }
+
+        public String getMB_Dime_Rate() {
+            return MB_Dime_Rate;
+        }
+
+        public void setMB_Dime_Rate(String MB_Dime_Rate) {
+            this.MB_Dime_Rate = MB_Dime_Rate;
+        }
+
+        public String getTG_Dime_Rate() {
+            return TG_Dime_Rate;
+        }
+
+        public void setTG_Dime_Rate(String TG_Dime_Rate) {
+            this.TG_Dime_Rate = TG_Dime_Rate;
+        }
+
+        public String getMB_LetB_Rate_H() {
+            return MB_LetB_Rate_H;
+        }
+
+        public void setMB_LetB_Rate_H(String MB_LetB_Rate_H) {
+            this.MB_LetB_Rate_H = MB_LetB_Rate_H;
+        }
+
+        public String getTG_LetB_Rate_H() {
+            return TG_LetB_Rate_H;
+        }
+
+        public void setTG_LetB_Rate_H(String TG_LetB_Rate_H) {
+            this.TG_LetB_Rate_H = TG_LetB_Rate_H;
+        }
+
+        public String getMB_Dime_Rate_H() {
+            return MB_Dime_Rate_H;
+        }
+
+        public void setMB_Dime_Rate_H(String MB_Dime_Rate_H) {
+            this.MB_Dime_Rate_H = MB_Dime_Rate_H;
+        }
+
+        public String getTG_Dime_Rate_H() {
+            return TG_Dime_Rate_H;
+        }
+
+        public void setTG_Dime_Rate_H(String TG_Dime_Rate_H) {
+            this.TG_Dime_Rate_H = TG_Dime_Rate_H;
+        }
+
+        public String getMB_LetB_Rate_RB() {
+            return MB_LetB_Rate_RB;
+        }
+
+        public void setMB_LetB_Rate_RB(String MB_LetB_Rate_RB) {
+            this.MB_LetB_Rate_RB = MB_LetB_Rate_RB;
+        }
+
+        public String getTG_LetB_Rate_RB() {
+            return TG_LetB_Rate_RB;
+        }
+
+        public void setTG_LetB_Rate_RB(String TG_LetB_Rate_RB) {
+            this.TG_LetB_Rate_RB = TG_LetB_Rate_RB;
+        }
+
+        public String getMB_Dime_Rate_RB() {
+            return MB_Dime_Rate_RB;
+        }
+
+        public void setMB_Dime_Rate_RB(String MB_Dime_Rate_RB) {
+            this.MB_Dime_Rate_RB = MB_Dime_Rate_RB;
+        }
+
+        public String getTG_Dime_Rate_RB() {
+            return TG_Dime_Rate_RB;
+        }
+
+        public void setTG_Dime_Rate_RB(String TG_Dime_Rate_RB) {
+            this.TG_Dime_Rate_RB = TG_Dime_Rate_RB;
+        }
+
+        public String getMB_LetB_Rate_RB_H() {
+            return MB_LetB_Rate_RB_H;
+        }
+
+        public void setMB_LetB_Rate_RB_H(String MB_LetB_Rate_RB_H) {
+            this.MB_LetB_Rate_RB_H = MB_LetB_Rate_RB_H;
+        }
+
+        public String getTG_LetB_Rate_RB_H() {
+            return TG_LetB_Rate_RB_H;
+        }
+
+        public void setTG_LetB_Rate_RB_H(String TG_LetB_Rate_RB_H) {
+            this.TG_LetB_Rate_RB_H = TG_LetB_Rate_RB_H;
+        }
+
+        public String getMB_Dime_Rate_RB_H() {
+            return MB_Dime_Rate_RB_H;
+        }
+
+        public void setMB_Dime_Rate_RB_H(String MB_Dime_Rate_RB_H) {
+            this.MB_Dime_Rate_RB_H = MB_Dime_Rate_RB_H;
+        }
+
+        public String getTG_Dime_Rate_RB_H() {
+            return TG_Dime_Rate_RB_H;
+        }
+
+        public void setTG_Dime_Rate_RB_H(String TG_Dime_Rate_RB_H) {
+            this.TG_Dime_Rate_RB_H = TG_Dime_Rate_RB_H;
+        }
 
         public String getMID() {
             return MID;
@@ -959,6 +1141,22 @@ public class BettingDetailRsp implements Serializable {
 
         public void setTG_Team(String TG_Team) {
             this.TG_Team = TG_Team;
+        }
+
+        public String getMB_Ball() {
+            return MB_Ball;
+        }
+
+        public void setMB_Ball(String MB_Ball) {
+            this.MB_Ball = MB_Ball;
+        }
+
+        public String getTG_Ball() {
+            return TG_Ball;
+        }
+
+        public void setTG_Ball(String TG_Ball) {
+            this.TG_Ball = TG_Ball;
         }
 
         public int getType_nums() {
@@ -985,6 +1183,14 @@ public class BettingDetailRsp implements Serializable {
             this.video_url = video_url;
         }
 
+        public boolean isGq() {
+            return gq;
+        }
+
+        public void setGq(boolean gq) {
+            this.gq = gq;
+        }
+
         public String getBall() {
             return ball;
         }
@@ -1001,6 +1207,30 @@ public class BettingDetailRsp implements Serializable {
             this.score_m1 = score_m1;
         }
 
+        public String getScore_m2() {
+            return score_m2;
+        }
+
+        public void setScore_m2(String score_m2) {
+            this.score_m2 = score_m2;
+        }
+
+        public String getScore_m3() {
+            return score_m3;
+        }
+
+        public void setScore_m3(String score_m3) {
+            this.score_m3 = score_m3;
+        }
+
+        public String getScore_m4() {
+            return score_m4;
+        }
+
+        public void setScore_m4(String score_m4) {
+            this.score_m4 = score_m4;
+        }
+
         public String getScore_mh() {
             return score_mh;
         }
@@ -1009,12 +1239,12 @@ public class BettingDetailRsp implements Serializable {
             this.score_mh = score_mh;
         }
 
-        public String getScore_m2() {
-            return score_m2;
+        public String getScore_mot() {
+            return score_mot;
         }
 
-        public void setScore_m2(String score_m2) {
-            this.score_m2 = score_m2;
+        public void setScore_mot(String score_mot) {
+            this.score_mot = score_mot;
         }
 
         public String getScore_t1() {
@@ -1025,14 +1255,6 @@ public class BettingDetailRsp implements Serializable {
             this.score_t1 = score_t1;
         }
 
-        public String getScore_th() {
-            return score_th;
-        }
-
-        public void setScore_th(String score_th) {
-            this.score_th = score_th;
-        }
-
         public String getScore_t2() {
             return score_t2;
         }
@@ -1041,28 +1263,36 @@ public class BettingDetailRsp implements Serializable {
             this.score_t2 = score_t2;
         }
 
-        public String getMB_Ball() {
-            return MB_Ball;
+        public String getScore_t3() {
+            return score_t3;
         }
 
-        public void setMB_Ball(String MB_Ball) {
-            this.MB_Ball = MB_Ball;
+        public void setScore_t3(String score_t3) {
+            this.score_t3 = score_t3;
         }
 
-        public String getTG_Ball() {
-            return TG_Ball;
+        public String getScore_t4() {
+            return score_t4;
         }
 
-        public void setTG_Ball(String TG_Ball) {
-            this.TG_Ball = TG_Ball;
+        public void setScore_t4(String score_t4) {
+            this.score_t4 = score_t4;
         }
 
-        public boolean isGq() {
-            return gq;
+        public String getScore_th() {
+            return score_th;
         }
 
-        public void setGq(boolean gq) {
-            this.gq = gq;
+        public void setScore_th(String score_th) {
+            this.score_th = score_th;
+        }
+
+        public String getScore_tot() {
+            return score_tot;
+        }
+
+        public void setScore_tot(String score_tot) {
+            this.score_tot = score_tot;
         }
 
         public List<BetmsgBean> getBetmsg() {
@@ -1075,9 +1305,9 @@ public class BettingDetailRsp implements Serializable {
 
         public static class BetmsgBean {
             /**
-             * type : M
-             * title : 全场独赢
-             * data : [{"team":"主场 -星期四-2场赛事","mid":"","rate":"2.34","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944"},{"team":"客场 -星期四-2场赛事","mid":"","rate":"2.28","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=C&gnum=40943"},{"team":"和局","mid":"","rate":"4.30","para":"gid=2778362&uid=2ae5c820fc6e79120dfera7&type=N&gnum=40943"}]
+             * type : R
+             * title : 让分
+             * data : [{"team":"高科通布里易三倉","mid":"24.5","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=H&gnum=50074&stong=H"},{"team":"鄧肯猛龍","mid":"","rate":"0.92","para":"gid=2173341&uid=d5b6503abd6e79120dfera3&type=C&gnum=50073&stong=H"}]
              */
 
             private String type;
@@ -1110,10 +1340,10 @@ public class BettingDetailRsp implements Serializable {
 
             public static class DataBean {
                 /**
-                 * team : 主场 -星期四-2场赛事
-                 * mid :
-                 * rate : 2.34
-                 * para : gid=2778362&uid=2ae5c820fc6e79120dfera7&type=H&gnum=40944
+                 * team : 高科通布里易三倉
+                 * mid : 24.5
+                 * rate : 0.92
+                 * para : gid=2173341&uid=d5b6503abd6e79120dfera3&type=H&gnum=50074&stong=H
                  */
 
                 private String team;
