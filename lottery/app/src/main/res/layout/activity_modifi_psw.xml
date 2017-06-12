@@ -163,7 +163,7 @@
                     android:layout_marginTop="@dimen/dimen_30"
                     android:background="@color/red_84201e"
                     android:gravity="center"
-                    android:text="@string/affirm"
+                    android:text="@string/make_sure_change_account_pwd"
                     android:textColor="@color/white_ffffff"
                     android:textSize="@dimen/dimen_18" />
 
@@ -307,6 +307,7 @@
                 </RelativeLayout>
 
                 <Button
+
                     android:layout_marginBottom="@dimen/dimen_50"
                     android:id="@+id/btn_money_confirm"
                     android:layout_width="match_parent"
@@ -316,7 +317,7 @@
                     android:layout_marginTop="@dimen/dimen_30"
                     android:background="@color/red_84201e"
                     android:gravity="center"
-                    android:text="@string/affirm"
+                    android:text="@string/make_sure_change_money_pwd"
                     android:textColor="@color/white_ffffff"
                     android:textSize="@dimen/dimen_18" />
             </LinearLayout>

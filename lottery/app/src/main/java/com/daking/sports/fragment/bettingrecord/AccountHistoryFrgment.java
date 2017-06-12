@@ -50,7 +50,7 @@ public class AccountHistoryFrgment extends BaseFragment {
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.BET_HISTORY)
+                .url(SportsAPI.BASE_URL + SportsAPI.BET_BETTING)
                 .post(requestBody)
                 .build();
 

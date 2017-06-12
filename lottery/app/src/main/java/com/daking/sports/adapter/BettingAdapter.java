@@ -70,7 +70,7 @@ public class BettingAdapter extends BaseAdapter {
         viewHolder.tv_3.setText(ifos.get(position).getStime());
         viewHolder.tv_4.setText(ifos.get(position).getMB_Team());
         viewHolder.tv_5.setText(ifos.get(position).getTG_Team());
-        viewHolder.tv_6.setText(ifos.get(position).getMB_Ball() + " : " + ifos.get(position).getTG_Ball());
+        viewHolder.tv_6.setText(ifos.get(position).getResult());
         final String ballteam = ifos.get(position).getMB_Team() + " VS " + ifos.get(position).getTG_Team();
         viewHolder.ll_betting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class BettingAdapter extends BaseAdapter {
         return view;
     }
 
-   private class ViewHolder {
+    private class ViewHolder {
         TextView tv_1;
         TextView tv_2;
         TextView tv_3;

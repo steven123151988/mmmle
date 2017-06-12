@@ -14,7 +14,13 @@ public class SportsAPI {
     public static final String GET_MATCH="home/get_match";//赛事详情
     public static final String GET_ORDER="gqp/site_gqp/ajax_order";//请求下注信息
     public static final String FINISH_ORDER="gqp/site_gqp/finish_order";//下单结算
-    public static final String BET_HISTORY="member/member/bet_beting";//投注记录
+    public static final String BET_BETTING="member/member/bet_beting";//投注记录
+    public static final String CHANGE_PWD="member/member/change_pwd";//修改密码
+
+
+
+
+
 
 
     public static final String GET_DATA="member/account/mem_data.php";//获取会员资料

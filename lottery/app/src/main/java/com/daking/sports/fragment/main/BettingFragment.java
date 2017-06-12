@@ -90,19 +90,19 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
                 ((MainActivity)getActivity()).setToolbar(getString(R.string.basketball_betting));
                 getballView(SportsKey.BASKETBALL, "");
                 break;
-            case R.id.ll_shixun:
-                ((MainActivity)getActivity()).setToolbar(getString(R.string.volleyball_betting));
-                ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                ll_shixun.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-                tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
-                tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
-                tv_shixun.setTextColor(getResources().getColor(R.color.white_ffffff));
-                if (null == shixunFragment) {
-                    shixunFragment = new ShixunFragment();
-                }
-                showView(shixunFragment);
-                break;
+//            case R.id.ll_shixun:
+//                ((MainActivity)getActivity()).setToolbar(getString(R.string.volleyball_betting));
+//                ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+//                ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+//                ll_shixun.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+//                tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
+//                tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
+//                tv_shixun.setTextColor(getResources().getColor(R.color.white_ffffff));
+//                if (null == shixunFragment) {
+//                    shixunFragment = new ShixunFragment();
+//                }
+//                showView(shixunFragment);
+//                break;
         }
     }
 

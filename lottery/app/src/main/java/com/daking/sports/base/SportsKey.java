@@ -48,6 +48,8 @@ public class SportsKey {
     public static final String DATE_START = "date_start";
     public static final String DATE_END = "date_end";
     public static final String PAGE = "page";
+    public static final String OLD_PWD = "oldpwd";
+    public static final String BEW_PWD = "newpwd";
 
 
 

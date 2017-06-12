@@ -160,4 +160,13 @@
     <string name="sorry">Sorry...</string>
     <string name="bet_min">赛事最小投注额为</string>
     <string name="bet_max">赛事最大投注额为</string>
+    <string name="rate_error">赔率异常,请选择其他赛事下注</string>
+    <string name="money_justnow"> 目前余额: </string>
+    <string name="account_not_same">两次输入的账户密码不一致！</string>
+    <string name="change_success">修改成功</string>
+    <string name="make_sure_change_money_pwd">确认修改提款密码</string>
+    <string name="make_sure_change_account_pwd">确认修改账户密码</string>
+
+
+
 </resources>
