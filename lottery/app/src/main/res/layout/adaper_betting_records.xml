@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dimen_20"
+    android:layout_marginRight="@dimen/dimen_20"
+    android:background="@color/white_ffffff"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="A"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+
+    <TextView
+        android:id="@+id/tv_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="B"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+    <TextView
+
+        android:id="@+id/tv_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="C"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+    <TextView
+        android:id="@+id/tv_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="D"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+    <TextView
+        android:id="@+id/tv_E"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="E"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+    <TextView
+        android:id="@+id/tv_F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="F"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+    <TextView
+        android:id="@+id/tv_G"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="G"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+    <TextView
+        android:id="@+id/tv_H"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_5"
+        android:text="H"
+        android:textColor="@color/black_333333"
+        android:textSize="@dimen/dimen_14" />
+
+</LinearLayout>

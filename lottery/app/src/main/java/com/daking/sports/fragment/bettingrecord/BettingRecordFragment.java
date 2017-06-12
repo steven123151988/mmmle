@@ -6,10 +6,11 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.daking.sports.R;
-import com.daking.sports.activity.betting.BettingDetailActivity;
 import com.daking.sports.activity.login.LoginActivity;
+import com.daking.sports.adapter.BettingRecordAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -17,11 +18,13 @@ import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
-import com.daking.sports.view.explosionfield.ExplosionField;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 
+import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+import cn.bingoogolapple.refreshlayout.BGARefreshViewHolder;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -33,22 +36,57 @@ import okhttp3.Response;
  * Created by 18steven on 2017/6/12. 球类的下注记录
  */
 
-public class BettingRecordFragment extends BaseFragment {
+public class BettingRecordFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private String ball;
     private String message;
-    private BettingRecordRsp bettingRecordRsp;
-    private Gson gson=new Gson();
+    private Gson gson = new Gson();
     private Handler handler;
+    private BettingRecordRsp bettingRecordRsp;
+    private BettingRecordAdapter adapter;
+    private ListView lv_records;
+    private BGARefreshLayout mRefreshLayout;
+    private int page = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_football, null);
+        View view = inflater.inflate(R.layout.fragment_records, null);
         if (null != getArguments().getString(SportsKey.BALL)) {
             ball = getArguments().getString(SportsKey.BALL);
         }
+        mRefreshLayout = (BGARefreshLayout) view.findViewById(R.id.refreshLayout);
+        lv_records = (ListView) view.findViewById(R.id.listview);
         LogUtil.e("=========ball=====" + ball);
-        getHistory(ball);
+        getBettingRecords(ball, page);
+        initRefreshLayout(mRefreshLayout);
         return view;
+    }
+
+    private void initRefreshLayout(BGARefreshLayout refreshLayout) {
+
+        // 为BGARefreshLayout 设置代理
+        mRefreshLayout.setDelegate(this);
+        // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
+        BGARefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(getActivity(), true);
+        // 设置下拉刷新和上拉加载更多的风格
+        mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
+
+
+        // 为了增加下拉刷新头部和加载更多的通用性，提供了以下可选配置选项  -------------START
+        // 设置正在加载更多时不显示加载更多控件
+        mRefreshLayout.setIsShowLoadingMoreView(true);
+        // 设置正在加载更多时的文本
+        refreshViewHolder.setLoadingMoreText("zhengza");
+        // 设置整个加载更多控件的背景颜色资源 id
+//        refreshViewHolder.setLoadMoreBackgroundColorRes(getResources().getColor(R.color.white_ffffff));
+//        // 设置整个加载更多控件的背景 drawable 资源 id
+//        refreshViewHolder.setLoadMoreBackgroundDrawableRes(loadMoreBackgroundDrawableRes);
+//        // 设置下拉刷新控件的背景颜色资源 id
+//        refreshViewHolder.setRefreshViewBackgroundColorRes(refreshViewBackgroundColorRes);
+//        // 设置下拉刷新控件的背景 drawable 资源 id
+//        refreshViewHolder.setRefreshViewBackgroundDrawableRes(refreshViewBackgroundDrawableRes);
+        // 设置自定义头部视图（也可以不用设置）     参数1：自定义头部视图（例如广告位）， 参数2：上拉加载更多是否可用
+//        mRefreshLayout.setCustomHeaderView(null, true);
+        // 可选配置  -------------END
     }
 
 
@@ -58,7 +96,7 @@ public class BettingRecordFragment extends BaseFragment {
         ShowDialogUtil.dismissDialogs();
     }
 
-    private void getHistory(String ball) {
+    private void getBettingRecords(final String ball, int page) {
 
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "betlist")
@@ -78,6 +116,7 @@ public class BettingRecordFragment extends BaseFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mRefreshLayout.endRefreshing();
                         ShowDialogUtil.showSystemFail(getActivity());
                     }
                 });
@@ -85,37 +124,37 @@ public class BettingRecordFragment extends BaseFragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+
                 message = response.body().string();
                 if (null != getActivity()) {
-                    LogUtil.e("====getHistory===========" + message);
-                    bettingRecordRsp=gson.fromJson(message,BettingRecordRsp.class);
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            LogUtil.e("====getBettingRecords===========" + message);
+                            bettingRecordRsp = gson.fromJson(message, BettingRecordRsp.class);
+                            mRefreshLayout.endRefreshing();
+                            mRefreshLayout.endLoadingMore();
                             try {
+                                if (null == bettingRecordRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
                                 switch (bettingRecordRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
-//                                    bettingAdapter = new BettingAdapter(getActivity(), ballGQRsp.getIfo(), ball);
-//                                    lv_betting.setAdapter(bettingAdapter);
-//                                    bettingAdapter.notifyDataSetChanged();
+                                        adapter = new BettingRecordAdapter(getActivity(), bettingRecordRsp, ball);
+                                        lv_records.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                                         break;
                                     case SportsKey.TYPE_NINETEEN:
-                                      ShowDialogUtil.showFailDialog(getActivity(),getString(R.string.sorry),bettingRecordRsp.getMsg());
-                                        if (null == handler) {
-                                            handler = new Handler();
-                                        }
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                               ShowDialogUtil.dismissDialogs();
-                                            }
-                                        }, 2000);
+                                        //TODO  没记录  设置图
+
                                         break;
                                     default:
-                                        ShowDialogUtil.showFailDialog(getActivity(),getString(R.string.sorry),bettingRecordRsp.getMsg());
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), bettingRecordRsp.getMsg());
                                         break;
                                 }
 
@@ -132,7 +171,40 @@ public class BettingRecordFragment extends BaseFragment {
         });
 
 
+    }
+
+
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        beginRefreshing();
+        page = 1;
+        getBettingRecords(ball, page);
+
 
     }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        page++;
+//        beginLoadingMore();
+        if (page<=bettingRecordRsp.getPages()){
+            LogUtil.e("======page=========" + page);
+            getBettingRecords(ball, page);
+        }
+
+
+        return true;
+    }
+
+    // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在 activity 的 onStart 方法中调用，自动进入正在刷新状态获取最新数据
+    public void beginRefreshing() {
+        mRefreshLayout.beginRefreshing();
+    }
+
+    // 通过代码方式控制进入加载更多状态
+    public void beginLoadingMore() {
+        mRefreshLayout.beginLoadingMore();
+    }
+
 
 }

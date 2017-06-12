@@ -8,16 +8,61 @@ import java.util.List;
 
 public class BettingRecordRsp {
 
+
     /**
      * ball : football
+     * pnums : 10
+     * total_nums : 2
+     * pages : 1
+     * cpage : 1
      * code : 0
-     * ifo : [{"BetTime":"06月11日,22:48:07","ID":"OU58660182","BetType":"滚球独赢","Middle":"美国国家足球超级联赛<br>[72616]vs[72615]<br>里弗赛德科拉&nbsp;&nbsp;<FONT COLOR=#0000BB><b>VS.<\/b><\/FONT>&nbsp;&nbsp;南加利福尼亚&nbsp;&nbsp;<FONT color=red><b>0:0<\/b><\/FONT><br><FONT color=#cc0000>里弗赛德科拉<\/FONT>&nbsp;@&nbsp;<FONT color=#cc0000><b>2.64<\/b><\/FONT>","BetScore":"11","Gwin":"18.04","Status":"未结算"},{"BetTime":"06月05日,22:47:32","ID":"OU58304223","BetType":"让球","Middle":"国际足联联合会杯2017(在俄罗斯)<br>[60002]vs[60001]<br>俄罗斯&nbsp;&nbsp;<FONT COLOR=#0000BB><b>1.5<\/b><\/FONT>&nbsp;&nbsp;纽西兰<br><FONT color=blue>俄罗斯<\/FONT>&nbsp;@&nbsp;<FONT color=blue><b>1.02<\/b><\/FONT>","BetScore":"10","Gwin":"10.2","Status":"未结算"}]
+     * ifo : [{"BetTime":"06月11日,22:48:07","ID":"OU58660182","BetType":"滚球独赢","Middle":"美国国家足球超级联赛[72616]vs[72615]<br>里弗赛德科拉  <b>VS.  南加利福尼亚  0:0里弗赛德科拉 @ <b>2.64","BetScore":"11","Gwin":"18.04","Status":"未结算"},{"BetTime":"06月05日,22:47:32","ID":"OU58304223","BetType":"让球","Middle":"国际足联联合会杯2017(在俄罗斯)[60002]vs[60001]<br>俄罗斯  <b>1.5  纽西兰俄罗斯 @ <b>1.02","BetScore":"10","Gwin":"10.2","Status":"未结算"}]
      */
 
     private String ball;
+    private int pnums;
+    private int total_nums;
+    private int pages;
+    private int cpage;
     private int code;
-    private List<IfoBean> ifo;
     private String msg;
+    private List<IfoBean> ifo;
+
+    public String getBall() {
+        return ball;
+    }
+
+    public void setBall(String ball) {
+        this.ball = ball;
+    }
+
+    public int getPnums() {
+        return pnums;
+    }
+
+    public void setPnums(int pnums) {
+        this.pnums = pnums;
+    }
+
+    public int getTotal_nums() {
+        return total_nums;
+    }
+
+    public void setTotal_nums(int total_nums) {
+        this.total_nums = total_nums;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public int getCpage() {
+        return cpage;
+    }
 
     public String getMsg() {
         return msg;
@@ -27,12 +72,8 @@ public class BettingRecordRsp {
         this.msg = msg;
     }
 
-    public String getBall() {
-        return ball;
-    }
-
-    public void setBall(String ball) {
-        this.ball = ball;
+    public void setCpage(int cpage) {
+        this.cpage = cpage;
     }
 
     public int getCode() {
@@ -56,7 +97,7 @@ public class BettingRecordRsp {
          * BetTime : 06月11日,22:48:07
          * ID : OU58660182
          * BetType : 滚球独赢
-         * Middle : 美国国家足球超级联赛<br>[72616]vs[72615]<br>里弗赛德科拉&nbsp;&nbsp;<FONT COLOR=#0000BB><b>VS.</b></FONT>&nbsp;&nbsp;南加利福尼亚&nbsp;&nbsp;<FONT color=red><b>0:0</b></FONT><br><FONT color=#cc0000>里弗赛德科拉</FONT>&nbsp;@&nbsp;<FONT color=#cc0000><b>2.64</b></FONT>
+         * Middle : 美国国家足球超级联赛[72616]vs[72615]<br>里弗赛德科拉  <b>VS.  南加利福尼亚  0:0里弗赛德科拉 @ <b>2.64
          * BetScore : 11
          * Gwin : 18.04
          * Status : 未结算

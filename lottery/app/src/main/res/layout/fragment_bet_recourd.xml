@@ -13,6 +13,7 @@
             android:id="@+id/ll_football"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_1"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -30,7 +31,8 @@
                 android:layout_gravity="center"
                 android:paddingBottom="@dimen/dimen_5"
                 android:text="@string/football"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/dimen_16"
+                android:visibility="gone" />
 
 
         </LinearLayout>
@@ -39,6 +41,7 @@
             android:id="@+id/ll_basketball"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_1"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -56,7 +59,8 @@
                 android:layout_gravity="center"
                 android:paddingBottom="@dimen/dimen_5"
                 android:text="@string/basketball"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/dimen_16"
+                android:visibility="gone" />
 
 
         </LinearLayout>

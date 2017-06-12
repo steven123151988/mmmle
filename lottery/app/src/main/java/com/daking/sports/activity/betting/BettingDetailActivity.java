@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -60,7 +61,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private PopupWindow popupWindow;
     private View popView;
     private TextView tv_score_A, tv_score_B;
-    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K,tv_center_down;  //对话框的textview
+    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K, tv_center_down;  //对话框的textview
     private Button btn_confirm_bet;
     private EditText et_input_money;
     private double can_win_money;
@@ -131,7 +132,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         iv_betting_bg = fuck(R.id.iv_betting_bg);
         switch (ball) {
             case SportsKey.FOOTBALL:
-                ll_ball.setBackground(getResources().getDrawable(R.mipmap.football_bg, null));
+                ll_ball.setBackground(ContextCompat.getDrawable(mContext, R.mipmap.football_bg));
                 if (null == ballteam) {
                     tv_center.setText(getString(R.string.football));
                 } else {
@@ -150,7 +151,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 tv_tg_D = fuck(R.id.tv_tg_D);
                 break;
             case SportsKey.BASKETBALL:
-                ll_ball.setBackground(getResources().getDrawable(R.mipmap.basketball_bg, null));
+                ll_ball.setBackground(ContextCompat.getDrawable(mContext, R.mipmap.basketball_bg));
                 if (null == ballteam) {
                     tv_center.setText(getString(R.string.basketball));
                 } else {
@@ -180,10 +181,12 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         // 根据赛事类型选择头部显示的图片
         switch (balltype) {
             case SportsKey.TYPE_ONE + "":
-                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_ing, null));
+//                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_ing, null));
+                iv_betting_bg.setBackground(ContextCompat.getDrawable(mContext, R.mipmap.betting_ing));
                 break;
             case SportsKey.TYPE_ZERO + "":
-                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_notstart, null));
+//                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_notstart, null));
+                iv_betting_bg.setBackground(ContextCompat.getDrawable(mContext, R.mipmap.betting_notstart));
                 break;
         }
 
@@ -379,7 +382,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         tv_I = (TextView) popView.findViewById(R.id.tv_I);
         tv_J = (TextView) popView.findViewById(R.id.tv_J);
         tv_K = (TextView) popView.findViewById(R.id.tv_K);
-        tv_center_down=  (TextView)popView.findViewById(R.id.tv_center_down);
+        tv_center_down = (TextView) popView.findViewById(R.id.tv_center_down);
         tv_A.setText(getOrderMsgRsp.getIfo().getMenu() + "[" + getOrderMsgRsp.getIfo().getM_menu() + "]");
         tv_B.setText(getOrderMsgRsp.getIfo().getM_League());
         tv_C.setText(getOrderMsgRsp.getIfo().getMB_Team());
@@ -391,8 +394,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         tv_H.setText(getOrderMsgRsp.getIfo().getM_Rate());
         tv_I.setText(getOrderMsgRsp.getIfo().getGMIN_SINGLE());
         tv_J.setText(getOrderMsgRsp.getIfo().getGmax());
-        if (null!=bettingDetailRsp.getMember().getMoney()){
-            tv_center_down.setText(getString(R.string.money_justnow)+bettingDetailRsp.getMember().getMoney());
+        if (null != bettingDetailRsp.getMember().getMoney()) {
+            tv_center_down.setText(getString(R.string.money_justnow) + bettingDetailRsp.getMember().getMoney());
         }
         popView.findViewById(R.id.iv_right).setOnClickListener(this);
         et_input_money = (EditText) popView.findViewById(R.id.et_input_money);
@@ -627,11 +630,11 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-//                                            ShowDialogUtil.dismissDialogs();
+                                            ShowDialogUtil.dismissDialogs();
                                             mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
                                             mExplosionField.addListener(popView.findViewById(R.id.main_pop));
                                         }
-                                    }, 500);
+                                    }, 1500);
                                     dismisspopviw();
                                     break;
                                 case SportsKey.TYPE_NINE:

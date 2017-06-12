@@ -51,7 +51,6 @@ public class BallFragment extends BaseFragment {
     private AbsListViewCompat.OnScrollCallback onScrollCallback;
     private int listview_position = 0;
     private String message;
-    private Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -105,9 +104,6 @@ public class BallFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         timerCancle();
-        if (null!=handler){
-            handler.removeCallbacksAndMessages(null);
-        }
 
     }
 
@@ -206,19 +202,8 @@ public class BallFragment extends BaseFragment {
                                         break;
                                     case SportsKey.TYPE_EIGHT:
                                         mPullToRefreshView.setVisibility(View.GONE);
-                                        iv_system_error.setImageResource(R.drawable.konglong4);
+                                        iv_system_error.setImageResource(R.drawable.konglong1);
                                         iv_system_error.setVisibility(View.VISIBLE);
-                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), ballGQRsp.getMsg());
-                                        //延迟2秒关闭
-                                        if (null == handler) {
-                                            handler = new Handler();
-                                        }
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                ShowDialogUtil.dismissDialogs();
-                                            }
-                                        }, 2500);
                                         break;
                                     case SportsKey.TYPE_1000:
                                         mPullToRefreshView.setVisibility(View.GONE);
