@@ -156,9 +156,8 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
      */
     private void getPayUrl() {
         RequestBody requestBody = new FormBody.Builder()
-                .add("fnName", "pay_m")
-                .add("langx", "zh-cn")
-                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
+                .add(SportsKey.FNNAME, "income")
+                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()

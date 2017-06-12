@@ -18,6 +18,7 @@ public class SportsKey {
     public static final int TYPE_TEN = 10;
     public static final int TYPE_ELEVEN = 11;
     public static final int TYPE_TWELVE = 12;
+    public static final int TYPE_NINETEEN = 19;
     public static final int TYPE_1000 = 1000;
     public static final int TYPE_1001 = 1001;
     public static final int TYPE_1002 = 1002;

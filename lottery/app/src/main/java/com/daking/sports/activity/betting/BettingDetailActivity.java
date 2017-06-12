@@ -627,10 +627,11 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
+//                                            ShowDialogUtil.dismissDialogs();
                                             mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
                                             mExplosionField.addListener(popView.findViewById(R.id.main_pop));
                                         }
-                                    }, 350);
+                                    }, 500);
                                     dismisspopviw();
                                     break;
                                 case SportsKey.TYPE_NINE:

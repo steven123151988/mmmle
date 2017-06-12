@@ -24,7 +24,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by 18 on 2017/5/11. 账户历史面页
+ * Created by 18 on 2017/5/11. 账户历史
  */
 
 public class AccountHistoryFrgment extends BaseFragment {
@@ -42,11 +42,12 @@ public class AccountHistoryFrgment extends BaseFragment {
     private void getHistory() {
 
         RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "bet_his")
+                .add(SportsKey.FNNAME, "betlist")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add(SportsKey.DATE_START, "2017-06-01")
-                .add(SportsKey.DATE_END, "2017-06-08")
-                .add(SportsKey.PAGE, "1")
+//                .add(SportsKey.DATE_START, "2017-06-01")
+//                .add(SportsKey.DATE_END, "2017-06-08")
+//                .add(SportsKey.PAGE, "1")
+                .add(SportsKey.BALL, "basketball")
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
