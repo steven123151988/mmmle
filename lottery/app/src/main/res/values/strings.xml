@@ -167,6 +167,8 @@
     <string name="make_sure_change_money_pwd">确认修改提款密码</string>
     <string name="make_sure_change_account_pwd">确认修改账户密码</string>
     <string name="sucess_congratulations">Congratulations...</string>
+    <string name="income_records">存款记录</string>
+    <string name="takeout_records">取款记录</string>
 
 
 </resources>

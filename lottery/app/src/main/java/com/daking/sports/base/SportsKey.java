@@ -59,6 +59,8 @@ public class SportsKey {
 
     public static final String BANK_NAME = "bankname";
     public static final String BANK_NUM = "banknum";
+    public static final String QUERY_DATE = "query_date";
+
 
 
 

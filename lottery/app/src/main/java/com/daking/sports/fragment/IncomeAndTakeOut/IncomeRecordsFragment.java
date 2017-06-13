@@ -1,0 +1,124 @@
+package com.daking.sports.fragment.IncomeAndTakeOut;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.daking.sports.R;
+import com.daking.sports.adapter.IncomeAdapter;
+import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsAPI;
+import com.daking.sports.base.SportsKey;
+import com.daking.sports.util.LogUtil;
+import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+/**
+ * Created by steven on 2017/6/13.存款记录
+ */
+
+public class IncomeRecordsFragment extends BaseFragment {
+    private  View view;
+    private ListView lv_income_records;
+    private IncomeAdapter adapter;
+    private String message;
+    private Gson gson=new Gson();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_income_records, null);
+        lv_income_records=(ListView) view.findViewById(R.id.lv_income_records);
+        getIncomeData();
+        return view;
+    }
+
+    private void getIncomeData() {
+        adapter=new IncomeAdapter(getActivity());
+        lv_income_records.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        getIncomeRecords();
+
+
+    }
+    private void getIncomeRecords() {
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, "capital")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add(SportsKey.TYPE, "deposit")
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.MEM_CAPITAL_FLOW)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("====getIncomeRecords===========" + message);
+//                                accountHistoryRsp = gson.fromJson(message, AccountHistoryRsp.class);
+//                                if (null == accountHistoryRsp) {
+//                                    ShowDialogUtil.showSystemFail(getActivity());
+//                                    return;
+//                                }
+//                                switch (accountHistoryRsp.getCode()) {
+//                                    case SportsKey.TYPE_ZERO:
+//                                        accountHistoryAdapter = new AccountHistoryAdapter(getActivity(), accountHistoryRsp);
+//                                        lv_history.setAdapter(accountHistoryAdapter);
+//                                        accountHistoryAdapter.notifyDataSetChanged();
+//                                        break;
+//                                    case SportsKey.TYPE_NINETEEN:
+//                                        //没记录
+//
+//                                        break;
+//                                }
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(getActivity());
+                            } finally {
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+}

@@ -22,7 +22,7 @@ public class SportsAPI {
     public static final String MEM_ONLINE="member/member/mem_online";//在线提款
     public static final String MEM_ONLINE_POST="member/member/mem_online_post";//在线提款
     public static final String CHANGE_BANK_INFO="member/member/chg_info";//添加更改账户
-
+    public static final String MEM_CAPITAL_FLOW="member/member/mem_capital_flow";
 
 
     public static final String NEWS="http://hg0909.com/index.php/Help/promotion";

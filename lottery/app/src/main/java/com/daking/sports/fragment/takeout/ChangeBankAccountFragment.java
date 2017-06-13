@@ -200,11 +200,11 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
                                             @Override
                                             public void run() {
                                                 ShowDialogUtil.dismissDialogs();
-
+                                                ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
                                             }
                                         }, 2000);
 
-                                        ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
+
                                         break;
                                     default:
                                         ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), loginRsp.getMsg());

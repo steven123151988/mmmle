@@ -8,27 +8,22 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.daking.sports.R;
-import com.daking.sports.json.AccountHistoryRsp;
 
 /**
  * Created by Administrator on 2017/6/13.
  */
 
-public class AccountHistoryAdapter extends BaseAdapter {
-    private Context mcontext;
-    private AccountHistoryRsp accountHistoryRsp;
+public class IncomeAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
+    private Context mcontext;
 
-
-    public AccountHistoryAdapter(Context mcontext,AccountHistoryRsp accountHistoryRsp) {
-        this.mcontext = mcontext;
-        this.accountHistoryRsp = accountHistoryRsp;
+    public IncomeAdapter(Context context) {
+        mcontext = context;
     }
-
 
     @Override
     public int getCount() {
-        return null==accountHistoryRsp?0:accountHistoryRsp.getIfo().size();
+        return 0;
     }
 
     @Override
@@ -43,23 +38,26 @@ public class AccountHistoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-       ViewHolder viewHolder;
+
+        ViewHolder viewHolder;
         mInflater = LayoutInflater.from(mcontext);
         if (view == null) {
-            view = mInflater.inflate(R.layout.adapter_account_history, null);
+            view = mInflater.inflate(R.layout.adapter_income_records, null);
             viewHolder = new ViewHolder();
             viewHolder.tv_A = (TextView) view.findViewById(R.id.tv_A);
             viewHolder.tv_B = (TextView) view.findViewById(R.id.tv_B);
             viewHolder.tv_C = (TextView) view.findViewById(R.id.tv_C);
             viewHolder.tv_D = (TextView) view.findViewById(R.id.tv_D);
+            viewHolder.tv_E= (TextView) view.findViewById(R.id.tv_E);
+            viewHolder.tv_F = (TextView) view.findViewById(R.id.tv_F);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.tv_A.setText(accountHistoryRsp.getIfo().get(position).getDate());
-        viewHolder.tv_B.setText(accountHistoryRsp.getIfo().get(position).getBetscore()+"");
-        viewHolder.tv_C.setText(accountHistoryRsp.getIfo().get(position).getVgold()+"");
-        viewHolder.tv_D.setText(accountHistoryRsp.getIfo().get(position).getM_result()+"");
+//        viewHolder.tv_A.setText(accountHistoryRsp.getIfo().get(position).getDate());
+//        viewHolder.tv_B.setText(accountHistoryRsp.getIfo().get(position).getBetscore() + "");
+//        viewHolder.tv_C.setText(accountHistoryRsp.getIfo().get(position).getVgold() + "");
+//        viewHolder.tv_D.setText(accountHistoryRsp.getIfo().get(position).getM_result() + "");
         return view;
     }
 
@@ -68,7 +66,8 @@ public class AccountHistoryAdapter extends BaseAdapter {
         TextView tv_B;
         TextView tv_C;
         TextView tv_D;
+        TextView tv_E;
+        TextView tv_F;
 
     }
-
 }

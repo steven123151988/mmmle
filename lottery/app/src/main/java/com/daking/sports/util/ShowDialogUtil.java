@@ -22,7 +22,7 @@ public class ShowDialogUtil {
             sweetAlertDialog_fail.cancel();
         }
         sweetAlertDialog_fail = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
-        sweetAlertDialog_fail.setTitleText(mContext.getString(R.string.error));
+        sweetAlertDialog_fail.setTitleText(mContext.getString(R.string.sorry));
         sweetAlertDialog_fail.setContentText(mContext.getString(R.string.system_error));
         sweetAlertDialog_fail.show();
     }

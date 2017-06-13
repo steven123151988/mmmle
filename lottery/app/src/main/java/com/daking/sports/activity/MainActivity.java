@@ -403,25 +403,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         getFistView();
                         break;
                     case R.id.navigation_football_dan:
-                        mToolbar.setTitle(getString(R.string.football_dan));
-//                        mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
+//                        mToolbar.setTitle(getString(R.string.football_dan));
+                        mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
                         goBetting(SportsKey.FOOTBALL, SportsKey.JRSS);
 
                         break;
                     case R.id.navigation_football_gun:
-//                        mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
-                        mToolbar.setTitle(getString(R.string.football_gun));
+                        mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
+//                        mToolbar.setTitle(getString(R.string.football_gun));
                         goBetting(SportsKey.FOOTBALL, SportsKey.GQ);
 
                         break;
                     case R.id.navigation_basketball_dan:
-//                        mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
-                        mToolbar.setTitle(getString(R.string.basketball_dan));
+                        mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
+//                        mToolbar.setTitle(getString(R.string.basketball_dan));
                         goBetting(SportsKey.BASKETBALL, SportsKey.JRSS);
                         break;
                     case R.id.navigation_basketball_gun:
-                        mToolbar.setTitle(getString(R.string.basketball_gun));
-//                        mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
+//                        mToolbar.setTitle(getString(R.string.basketball_gun));
+                        mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
                         goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
                     case R.id.navigation_ag:

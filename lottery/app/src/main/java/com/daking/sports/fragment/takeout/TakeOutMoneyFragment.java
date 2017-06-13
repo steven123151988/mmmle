@@ -9,10 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.mine.TakeOutMoneyActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.json.MemOnlineRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -36,9 +38,9 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
     private EditText et_takeoutmoney_psw, et_money;
     private String takeoutmoney_psw, money;
     private TextView tv_tabkeout_bank, tv_takeout_num, tv_takeout_name;
-    private String bankname, banknum, username;
-    private String message;
     private LoginRsp loginRsp;
+    private String message;
+    private MemOnlineRsp memonlineRsp;
     private Gson gson = new Gson();
 
     @Override
@@ -50,20 +52,82 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
         tv_takeout_num = (TextView) view.findViewById(R.id.tv_takeout_num);//银行号码
         tv_takeout_name = (TextView) view.findViewById(R.id.tv_takeout_name);//账户名
         view.findViewById(R.id.btn_confirm_pay).setOnClickListener(this);
-        if (null != getArguments().getString(SportsKey.BANK_NAME)) {
-            bankname = getArguments().getString(SportsKey.BANK_NAME);
-        }
-
-        if (null != getArguments().getString(SportsKey.BANK_NUM)) {
-            banknum = getArguments().getString(SportsKey.BANK_NUM);
-        }
-        if (null != getArguments().getString(SportsKey.USER_NAME)) {
-            username = getArguments().getString(SportsKey.USER_NAME);
-        }
-        tv_tabkeout_bank.setText(bankname);
-        tv_takeout_num.setText(banknum);
-        tv_takeout_name.setText(username);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOutMoney();
+    }
+
+    private void getOutMoney() {
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, "withdrawals")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.MEM_ONLINE)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e("======getOutMoney========" + message);
+                            memonlineRsp = gson.fromJson(message, MemOnlineRsp.class);
+                            if (null == memonlineRsp) {
+                                ShowDialogUtil.showSystemFail(getActivity());
+                                return;
+                            }
+                            switch (memonlineRsp.getCode()) {
+                                case SportsKey.TYPE_ZERO:
+                                    if (memonlineRsp.getIfo().getBank_Account().equals("")) {
+                                        ((TakeOutMoneyActivity) getActivity()).addBankAccount();
+                                    } else {
+                                        tv_tabkeout_bank.setText(memonlineRsp.getIfo().getBank());
+                                        tv_takeout_num.setText(memonlineRsp.getIfo().getBank_Account());
+                                        tv_takeout_name.setText(memonlineRsp.getIfo().getAlias());
+                                        ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
+                                    }
+                                    break;
+                                default:
+                                    ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), memonlineRsp.getMsg());
+                                    break;
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    }
+                });
+            }
+        });
     }
 
 
