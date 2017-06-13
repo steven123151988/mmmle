@@ -22,6 +22,7 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.PayStypeRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.mingle.entity.MenuEntity;
@@ -31,6 +32,7 @@ import com.mingle.sweetpick.SweetSheet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import okhttp3.Call;
@@ -50,7 +52,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     private Gson gson;
     private Button btn_confirm_pay;
     private EditText et_money;
-    private String money;
+    private int money;
     private PayStypeRsp payStypeRsp;
     private List list_name;
     private SweetSheet mSweetSheet;
@@ -58,7 +60,9 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     private MenuEntity menuEntity;
     private TextView tv_type;
     private String type;
-    private int choose_position;
+    private int choose_position = 1;
+    private String message;
+    private int min, max;//能充值的最大值最小值
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,49 +83,10 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         switch (v.getId()) {
             case R.id.rl_choose_type://选择充值方式
                 getPayUrl();
-                if (null == list_name) {
-                    ToastUtil.show(getActivity(), "暂无有效的充值方式");
-                    return;
-                }
-                final ArrayList<MenuEntity> list = new ArrayList<>();
-                for (int i = 0; i < list_name.size(); i++) {
-                    menuEntity = new MenuEntity();
-                    menuEntity.iconId = R.mipmap.company_income;
-                    menuEntity.titleColor = 0xff000000;
-                    menuEntity.title = (CharSequence) list_name.get(i);
-                    list.add(menuEntity);
-                }
-                // SweetSheet 控件,根据 rl 确认位置
-                mSweetSheet = new SweetSheet(rl);
-                //设置数据源 (数据源支持设置 list 数组,也支持从菜单中获取)
-                mSweetSheet.setMenuList(list);
-                //根据设置不同的 Delegate 来显示不同的风格.
-                mSweetSheet.setDelegate(new RecyclerViewDelegate(true));
-                //根据设置不同Effect 来显示背景效果BlurEffect:模糊效果.DimEffect 变暗效果
-                mSweetSheet.setBackgroundEffect(new BlurEffect(8));
-                //设置点击事件
-                mSweetSheet.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onItemClick(int position, MenuEntity menuEntity) {
-                        choose_position = position;
-                        //即时改变当前项的颜色
-                        list.get(position).titleColor = 0xff5823ff;
-                        ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
-                        type = menuEntity.title.toString();
-                        tv_type.setText(type);
-                        //根据返回值, true 会关闭 SweetSheet ,false 则不会.
-                        return true;
-                    }
-                });
-
-                if (!mSweetSheet.isShow()) {
-                    mSweetSheet.toggle();
-                }
                 break;
 
             case R.id.btn_confirm_pay:
-                money = et_money.getText().toString().replace(" ", "");
-                if (TextUtils.isEmpty(money)) {
+                if (TextUtils.isEmpty(et_money.getText().toString().replace(" ", ""))) {
                     ToastUtil.show(getActivity(), getString(R.string.please_typein_money));
                     return;
                 }
@@ -129,37 +94,55 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                     ToastUtil.show(getActivity(), getString(R.string.please_choose_pay_type));
                     return;
                 }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            if (payStypeRsp.getCode() == 0) {
-                                ll_first_view.setVisibility(View.GONE);
-                                mWebView.setVisibility(View.VISIBLE);
-                                initWebview(payStypeRsp.getIfo().get(choose_position).getUrl());
-                            } else {
-                                ll_first_view.setVisibility(View.VISIBLE);
-                                mWebView.setVisibility(View.GONE);
+                money = Integer.parseInt(et_money.getText().toString().replace(" ", ""));
+                if (null != payStypeRsp) {
+                    max = Integer.parseInt(payStypeRsp.getIfo().get(choose_position).getMax());
+                    min = Integer.parseInt(payStypeRsp.getIfo().get(choose_position).getMin());
+                }
+                if (money < min) {
+                    ToastUtil.show(getActivity(), "该支付方式最小充值金额为" + min);
+                    return;
+                }
+                if (money > max) {
+                    ToastUtil.show(getActivity(), "该支付方式最小充值金额为" + max);
+                    return;
+                }
+                if (money >= min && money <= max) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                if (payStypeRsp.getCode() == 0) {
+                                    ll_first_view.setVisibility(View.GONE);
+                                    mWebView.setVisibility(View.VISIBLE);
+                                    initWebview(payStypeRsp.getIfo().get(choose_position).getUrl());
+                                } else {
+                                    ll_first_view.setVisibility(View.VISIBLE);
+                                    mWebView.setVisibility(View.GONE);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
-                });
+                    });
+                }
+
+
                 break;
 
         }
     }
+
 
     /**
      * 获取支付链接
      */
     private void getPayUrl() {
         RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "income")
-                .add("uid", SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add(SportsKey.FNNAME, SportsKey.INCOME)
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
                 .build();
-
+        LogUtil.e("=======UID====="+SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"));
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(SportsAPI.BASE_URL + SportsAPI.GET_PAY_URL)
                 .post(requestBody)
@@ -169,25 +152,93 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String msg = response.body().string();
-                LogUtil.e("=====getPayUrl=========" + msg);
-                gson = new Gson();
-                if (null != msg) {
-                    try {
-                        payStypeRsp = gson.fromJson(msg, PayStypeRsp.class);
-                        list_name = new ArrayList<>();
-                        int size = payStypeRsp.getIfo().size();
-                        for (int i = 0; i < size; i++) {
-                            list_name.add(payStypeRsp.getIfo().get(i).getDspname());
-                        }
-                    } catch (Exception e) {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("=====getPayUrl=========" + message);
+                                gson = new Gson();
+                                payStypeRsp = gson.fromJson(message, PayStypeRsp.class);
+                                if (null == payStypeRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (payStypeRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        list_name = new ArrayList<>();
+                                        int size = payStypeRsp.getIfo().size();
+                                        for (int i = 0; i < size; i++) {
+                                            list_name.add(payStypeRsp.getIfo().get(i).getTitle());
+                                        }
+                                        if (null == list_name) {
+                                            ToastUtil.show(getActivity(), "暂无有效的充值方式");
+                                            return;
+                                        }
+                                        final ArrayList<MenuEntity> list = new ArrayList<>();
+                                        for (int i = 0; i < list_name.size(); i++) {
+                                            menuEntity = new MenuEntity();
+                                            menuEntity.iconId = R.mipmap.company_income;
+                                            menuEntity.titleColor = 0xff000000;
+                                            menuEntity.title = (CharSequence) list_name.get(i);
+                                            list.add(menuEntity);
+                                        }
+                                        // SweetSheet 控件,根据 rl 确认位置
+                                        mSweetSheet = new SweetSheet(rl);
+                                        //设置数据源 (数据源支持设置 list 数组,也支持从菜单中获取)
+                                        mSweetSheet.setMenuList(list);
+                                        //根据设置不同的 Delegate 来显示不同的风格.
+                                        mSweetSheet.setDelegate(new RecyclerViewDelegate(true));
+                                        //根据设置不同Effect 来显示背景效果BlurEffect:模糊效果.DimEffect 变暗效果
+                                        mSweetSheet.setBackgroundEffect(new BlurEffect(8));
+                                        //设置点击事件
+                                        mSweetSheet.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
+                                            @Override
+                                            public boolean onItemClick(int position, MenuEntity menuEntity) {
+                                                choose_position = position;
+                                                //即时改变当前项的颜色
+                                                list.get(position).titleColor = 0xff5823ff;
+                                                ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
+                                                type = menuEntity.title.toString();
 
-                    }
+                                                tv_type.setText(type);
+                                                //根据返回值, true 会关闭 SweetSheet ,false 则不会.
+                                                return true;
+                                            }
+                                        });
+
+                                        if (!mSweetSheet.isShow()) {
+                                            mSweetSheet.toggle();
+                                        }
+                                        break;
+                                    default:
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), payStypeRsp.getMsg());
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(getActivity());
+                            } finally {
+
+                            }
+
+                        }
+                    });
                 }
+
 
             }
 
@@ -224,4 +275,10 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         mWebView.loadUrl(url);
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ShowDialogUtil.dismissDialogs();
+    }
 }

@@ -9,23 +9,15 @@ import java.util.List;
 
 public class PayStypeRsp implements Serializable {
 
+
     /**
      * code : 0
-     * ifo : [{"dsp":true,"paytype":"outline","dspname":"在线支付","url":"http://pay.mingzc2.com/onlinepay/payonline.php","Period":0,"payid":"55"},{"dsp":true,"paytype":"company","dspname":"公司入款","url":"http://sport.api.lebole5.com/remittance.php","Period":0,"payid":"92,79,77,91"},{"dsp":true,"paytype":"ali","dspname":"支付宝入款","url":"http://sport.api.lebole5.com/alipay.php","Period":0,"payid":"115"}]
-     * msg :   尊敬的会员们，本公司因业务需要，暂时停止使用工商银行(朱文香)(王银)农业银行(潘小芳)(杜小琴)（杨籽妤）中国银行（赵瑞红）招商银行（万克宝），若存款到已停止使用的账号，我们将不予受理，有带来不便，敬请谅解，谢谢！
+     * ifo : [{"ID":"88","title":"支付宝支付1","url":"http://pay.kaluan.top/payfunction/YinBaoZFSXAli.php","min":"100","max":"5000","bank_code":"ALIPAY"},{"ID":"88","title":"支付宝支付1","url":"http://pay.kaluan.top/payfunction/YinBaoZFSXAli.php","min":"100","max":"5000","bank_code":"ALIPAY"},{"ID":"84","title":"微信支付3","url":"http://pay.128365365.tv/Beeepay/weixin.php","min":"100","max":"1000","bank_code":"WEIXIN"},{"ID":"85","title":"支付宝支付4","url":"http://pay.128365365.tv/Beeepay/alipay.php","min":"100","max":"1000","bank_code":"ALIPAY"},{"ID":"90","title":"微信支付5","url":"http://pay.kaluan.top/payfunction/YinBaoZFSX.php","min":"100","max":"5000","bank_code":"WEIXIN"}]
      */
 
     private int code;
-    private String msg;
     private List<IfoBean> ifo;
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
+    private String msg;
 
     public String getMsg() {
         return msg;
@@ -33,6 +25,14 @@ public class PayStypeRsp implements Serializable {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public List<IfoBean> getIfo() {
@@ -45,43 +45,35 @@ public class PayStypeRsp implements Serializable {
 
     public static class IfoBean {
         /**
-         * dsp : true
-         * paytype : outline
-         * dspname : 在线支付
-         * url : http://pay.mingzc2.com/onlinepay/payonline.php
-         * Period : 0
-         * payid : 55
+         * ID : 88
+         * title : 支付宝支付1
+         * url : http://pay.kaluan.top/payfunction/YinBaoZFSXAli.php
+         * min : 100
+         * max : 5000
+         * bank_code : ALIPAY
          */
 
-        private boolean dsp;
-        private String paytype;
-        private String dspname;
+        private String ID;
+        private String title;
         private String url;
-        private int Period;
-        private String payid;
+        private String min;
+        private String max;
+        private String bank_code;
 
-        public boolean isDsp() {
-            return dsp;
+        public String getID() {
+            return ID;
         }
 
-        public void setDsp(boolean dsp) {
-            this.dsp = dsp;
+        public void setID(String ID) {
+            this.ID = ID;
         }
 
-        public String getPaytype() {
-            return paytype;
+        public String getTitle() {
+            return title;
         }
 
-        public void setPaytype(String paytype) {
-            this.paytype = paytype;
-        }
-
-        public String getDspname() {
-            return dspname;
-        }
-
-        public void setDspname(String dspname) {
-            this.dspname = dspname;
+        public void setTitle(String title) {
+            this.title = title;
         }
 
         public String getUrl() {
@@ -92,20 +84,28 @@ public class PayStypeRsp implements Serializable {
             this.url = url;
         }
 
-        public int getPeriod() {
-            return Period;
+        public String getMin() {
+            return min;
         }
 
-        public void setPeriod(int Period) {
-            this.Period = Period;
+        public void setMin(String min) {
+            this.min = min;
         }
 
-        public String getPayid() {
-            return payid;
+        public String getMax() {
+            return max;
         }
 
-        public void setPayid(String payid) {
-            this.payid = payid;
+        public void setMax(String max) {
+            this.max = max;
+        }
+
+        public String getBank_code() {
+            return bank_code;
+        }
+
+        public void setBank_code(String bank_code) {
+            this.bank_code = bank_code;
         }
     }
 }

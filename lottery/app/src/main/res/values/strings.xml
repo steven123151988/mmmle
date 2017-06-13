@@ -146,7 +146,7 @@
     <string name="ag">真人视讯</string>
     <string name="lottery">彩票游戏</string>
     <string name="personal_center">个人中心</string>
-    <string name="system_error">系统异常，请稍后登陆！</string>
+    <string name="system_error">系统异常，请稍后尝试！</string>
     <string name="football_betting">足球投注</string>
     <string name="basketball_betting">篮球投注</string>
     <string name="volleyball_betting">排球投注</string>
@@ -166,7 +166,7 @@
     <string name="change_success">修改成功</string>
     <string name="make_sure_change_money_pwd">确认修改提款密码</string>
     <string name="make_sure_change_account_pwd">确认修改账户密码</string>
-
+    <string name="sucess_congratulations">Congratulations...</string>
 
 
 </resources>

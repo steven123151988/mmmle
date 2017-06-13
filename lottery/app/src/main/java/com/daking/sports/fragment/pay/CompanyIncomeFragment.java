@@ -1,4 +1,5 @@
 package com.daking.sports.fragment.pay;
+import android.content.pm.ProviderInfo;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +12,13 @@ import android.widget.Toast;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
+import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
+import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.view.wheel.TimeSelectUtil;
+import com.google.gson.Gson;
 import com.mingle.entity.MenuEntity;
 import com.mingle.sweetpick.BlurEffect;
 import com.mingle.sweetpick.DimEffect;
@@ -27,6 +31,13 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by 18 on 2017/5/7. 公司入款
@@ -44,6 +55,8 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private StringBuilder sb;
     private List<String> stringList;
     private MenuEntity menuEntity;
+    private String message;
+    private Gson gson=new Gson();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +94,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 }
                 break;
             case R.id.btn_confirm_pay:
-                money = et_money.getText().toString().replace(" ", "");        //入款金额
-                String time= SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME,"");//汇款时间
-
+                companypost();
                 break;
 
 
@@ -155,7 +166,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         }
     }
 
-    /**\
+    /**
      *   选择银行入款账号
      */
     private void setupViewpager() {
@@ -174,6 +185,68 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         if (!mSweetSheet2.isShow()) {
             mSweetSheet2.toggle();
         }
+    }
+
+
+    /**
+     * 公司入款
+     */
+    private void companypost() {
+        money = et_money.getText().toString().replace(" ", "");        //入款金额
+        String time= SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME,"");//汇款时间
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, SportsKey.COMPANY_POST)
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add("IntoBank","")
+                .add("v_amount", money)
+                .add("ctime", time)
+                .add("IntoType", "")
+                .add("v_name", "")
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.GET_PAY_URL)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(getActivity());
+                            } finally {
+
+                            }
+
+                        }
+                    });
+                }
+
+
+            }
+
+        });
     }
 
 
