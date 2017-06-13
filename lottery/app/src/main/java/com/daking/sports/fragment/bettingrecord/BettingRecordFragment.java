@@ -75,7 +75,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
         // 设置正在加载更多时不显示加载更多控件
         mRefreshLayout.setIsShowLoadingMoreView(true);
         // 设置正在加载更多时的文本
-        refreshViewHolder.setLoadingMoreText("zhengza");
+        refreshViewHolder.setLoadingMoreText("正在加载中");
         // 设置整个加载更多控件的背景颜色资源 id
 //        refreshViewHolder.setLoadMoreBackgroundColorRes(getResources().getColor(R.color.white_ffffff));
 //        // 设置整个加载更多控件的背景 drawable 资源 id
@@ -97,11 +97,15 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     }
 
     private void getBettingRecords(final String ball, int page) {
-
+        LogUtil.e("======page=========" + page);
+        if (page>1){
+            beginLoadingMore();
+        }
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "betlist")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
                 .add(SportsKey.BALL, ball)
+                .add(SportsKey.PAGE, page+"")
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -132,8 +136,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                         public void run() {
                             LogUtil.e("====getBettingRecords===========" + message);
                             bettingRecordRsp = gson.fromJson(message, BettingRecordRsp.class);
-                            mRefreshLayout.endRefreshing();
-                            mRefreshLayout.endLoadingMore();
+                            stopView();
                             try {
                                 if (null == bettingRecordRsp) {
                                     ShowDialogUtil.showSystemFail(getActivity());
@@ -174,6 +177,8 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     }
 
 
+
+
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         beginRefreshing();
@@ -186,9 +191,9 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         page++;
-//        beginLoadingMore();
+
+
         if (page<=bettingRecordRsp.getPages()){
-            LogUtil.e("======page=========" + page);
             getBettingRecords(ball, page);
         }
 
@@ -204,6 +209,14 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     // 通过代码方式控制进入加载更多状态
     public void beginLoadingMore() {
         mRefreshLayout.beginLoadingMore();
+    }
+
+    /**
+     * 停止动画
+     */
+    private void stopView() {
+        mRefreshLayout.endRefreshing();
+        mRefreshLayout.endLoadingMore();
     }
 
 

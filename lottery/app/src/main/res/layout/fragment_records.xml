@@ -15,6 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
+            android:divider="@color/red_84201e"
+            android:dividerHeight="1dp"
             android:overScrollMode="never"
             android:scrollbars="none" />
 

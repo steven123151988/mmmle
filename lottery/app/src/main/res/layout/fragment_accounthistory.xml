@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/gray_d4d4d4">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_1"
+    android:background="@color/gray_4c4c4c"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_dddddd"
+        android:background="@color/white_ffffff"
         android:orientation="horizontal"
         android:padding="@dimen/dimen_10">
 
@@ -16,21 +17,21 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/dimen_16"
-                android:text="@string/history_date" />
+                android:text="@string/history_date"
+                android:textSize="@dimen/dimen_16" />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -38,14 +39,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/dimen_16"
-                android:text="@string/history_total" />
+                android:text="@string/history_total"
+                android:textSize="@dimen/dimen_16" />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -53,8 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/dimen_16"
-                android:text="@string/history_total_can" />
+                android:text="@string/history_total_can"
+                android:textSize="@dimen/dimen_16" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,17 +68,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/dimen_16"
-                android:text="@string/history_win_or_lose" />
+                android:text="@string/history_win_or_lose"
+                android:textSize="@dimen/dimen_16" />
         </LinearLayout>
 
 
     </LinearLayout>
-    <ListView
 
+    <ListView
         android:id="@+id/lv_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_1"
 
         />
 </LinearLayout>

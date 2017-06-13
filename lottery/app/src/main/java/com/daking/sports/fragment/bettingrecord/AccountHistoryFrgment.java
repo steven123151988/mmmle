@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.daking.sports.R;
+import com.daking.sports.adapter.AccountHistoryAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.AccountHistoryRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -30,6 +33,9 @@ import okhttp3.Response;
 public class AccountHistoryFrgment extends BaseFragment {
     private ListView lv_history;
     private String message;
+    private AccountHistoryAdapter accountHistoryAdapter;
+    private AccountHistoryRsp accountHistoryRsp;
+    private Gson gson = new Gson();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,16 +48,12 @@ public class AccountHistoryFrgment extends BaseFragment {
     private void getHistory() {
 
         RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "betlist")
+                .add(SportsKey.FNNAME, "bet_his")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-//                .add(SportsKey.DATE_START, "2017-06-01")
-//                .add(SportsKey.DATE_END, "2017-06-08")
-//                .add(SportsKey.PAGE, "1")
-                .add(SportsKey.BALL, "basketball")
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.BET_BETTING)
+                .url(SportsAPI.BASE_URL + SportsAPI.BET_HIS)
                 .post(requestBody)
                 .build();
 
@@ -59,12 +61,14 @@ public class AccountHistoryFrgment extends BaseFragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ShowDialogUtil.showSystemFail(getActivity());
-                    }
-                });
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
             }
 
             @Override
@@ -75,7 +79,25 @@ public class AccountHistoryFrgment extends BaseFragment {
                         @Override
                         public void run() {
                             try {
-                               LogUtil.e("====getHistory==========="+message);
+                                LogUtil.e("====getHistory===========" + message);
+                                accountHistoryRsp = gson.fromJson(message, AccountHistoryRsp.class);
+                                if (null == accountHistoryRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (accountHistoryRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        accountHistoryAdapter = new AccountHistoryAdapter(getActivity(), accountHistoryRsp);
+                                        lv_history.setAdapter(accountHistoryAdapter);
+                                        accountHistoryAdapter.notifyDataSetChanged();
+                                        break;
+                                    case SportsKey.TYPE_NINETEEN:
+                                        //没记录
+
+                                        break;
+                                }
+
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());
