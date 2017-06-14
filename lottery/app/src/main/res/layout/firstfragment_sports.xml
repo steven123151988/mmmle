@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:src="@mipmap/hg6686_41" />
+                android:src="@mipmap/football_1001" />
 
             <TextView
                 android:id="@+id/tv_A"
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_10"
-                android:src="@mipmap/hg6686_41" />
+                android:src="@mipmap/football_1002" />
 
             <TextView
                 android:id="@+id/tv_E"

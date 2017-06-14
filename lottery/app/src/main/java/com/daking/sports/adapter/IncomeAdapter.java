@@ -60,9 +60,10 @@ public class IncomeAdapter extends BaseAdapter {
         viewHolder.tv_A.setText(mincomeRep.getIfo().get(position).getID());
         viewHolder.tv_B.setText(mincomeRep.getIfo().get(position).getDate());
         viewHolder.tv_C.setText(mincomeRep.getIfo().get(position).getGold());
-        viewHolder.tv_D.setText(mincomeRep.getIfo().get(position).getRemark());
-        viewHolder.tv_E.setText(mincomeRep.getIfo().get(position).getType());
-        viewHolder.tv_F.setText(mincomeRep.getIfo().get(position).getStatus());
+        viewHolder.tv_D.setText(mincomeRep.getIfo().get(position).getType());
+        viewHolder.tv_E.setText(mincomeRep.getIfo().get(position).getStatus());
+        viewHolder.tv_F.setText(mincomeRep.getIfo().get(position).getRemark());
+
         return view;
     }
 

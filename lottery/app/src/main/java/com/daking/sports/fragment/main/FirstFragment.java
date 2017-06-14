@@ -185,7 +185,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.ll_sports_help://帮助
                 intent = new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.news));
+                intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.sports_help));
                 intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.HELP);
                 startActivity(intent);
                 break;

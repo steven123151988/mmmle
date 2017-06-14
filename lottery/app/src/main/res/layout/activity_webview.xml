@@ -5,7 +5,6 @@
     android:orientation="vertical" >
 
     <include
-        android:visibility="gone"
         layout="@layout/title_image_text_text"/>
     
     <WebView 

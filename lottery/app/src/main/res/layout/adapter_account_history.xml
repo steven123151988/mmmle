@@ -6,50 +6,49 @@
     android:orientation="horizontal">
 
     <TextView
-
-        android:padding="@dimen/dimen_5"
         android:id="@+id/tv_A"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:layout_weight="1.5"
         android:background="@color/white_ffffff"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_5"
         android:textColor="@color/black_333333"
         android:textSize="14sp" />
 
     <TextView
-        android:layout_marginLeft="@dimen/dimen_1"
-        android:padding="@dimen/dimen_5"
         android:id="@+id/tv_B"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/dimen_1"
         android:layout_weight="1"
         android:background="@color/white_ffffff"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_5"
         android:textColor="@color/black_333333"
         android:textSize="14sp" />
 
     <TextView
-        android:layout_marginLeft="@dimen/dimen_1"
-        android:padding="@dimen/dimen_5"
         android:id="@+id/tv_C"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/dimen_1"
         android:layout_weight="1"
         android:background="@color/white_ffffff"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_5"
         android:textColor="@color/black_333333"
         android:textSize="14sp" />
 
     <TextView
-        android:layout_marginLeft="@dimen/dimen_1"
-        android:padding="@dimen/dimen_5"
         android:id="@+id/tv_D"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/dimen_1"
         android:layout_weight="1"
         android:background="@color/white_ffffff"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dimen_5"
         android:textColor="@color/black_333333"
         android:textSize="14sp" />
 

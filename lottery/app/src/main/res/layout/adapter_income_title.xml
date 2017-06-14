@@ -22,7 +22,7 @@
             android:text="@string/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             />
 
         <TextView
@@ -32,12 +32,7 @@
             android:layout_weight="1"
             android:text="@string/sum" />
 
-        <TextView
-            android:gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/bank" />
+
 
         <TextView
             android:gravity="center_horizontal"
@@ -51,6 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/state"  />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/bank" />
 
     </LinearLayout>
 </LinearLayout>

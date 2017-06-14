@@ -5,11 +5,19 @@ package com.daking.sports.view.banner;
  */
 public class BaseBannerBean {
     private String url;
-    public BaseBannerBean(String url){
-        this.url =  url;
-    }
-    public BaseBannerBean(){
+    private int position;
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public BaseBannerBean(String url,int position) {
+        this.url = url;
+        this.position=position;
     }
 
     public String getUrl() {
@@ -19,4 +27,5 @@ public class BaseBannerBean {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

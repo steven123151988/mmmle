@@ -15,6 +15,7 @@ import com.daking.sports.json.AccountHistoryRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -93,7 +94,7 @@ public class AccountHistoryFrgment extends BaseFragment {
                                         break;
                                     case SportsKey.TYPE_NINETEEN:
                                         //没记录
-
+                                        ToastUtil.show(getActivity(),"暂时没有记录！");
                                         break;
                                 }
 

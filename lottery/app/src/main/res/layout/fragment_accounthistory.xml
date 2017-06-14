@@ -7,9 +7,10 @@
     android:orientation="vertical">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_ffffff"
+        android:background="@color/gray_e6e6e6"
         android:orientation="horizontal"
         android:padding="@dimen/dimen_10">
 

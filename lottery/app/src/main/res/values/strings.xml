@@ -77,7 +77,7 @@
     <string name="wateraccount">流水号</string>
     <string name="time">时间</string>
     <string name="sum">金额</string>
-    <string name="bank">银行</string>
+    <string name="bank">备注</string>
     <string name="style">方式</string>
     <string name="state">状态</string>
     <string name="success_money">本页汇款成功金额：</string>

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <include layout="@layout/adapter_takeout_title" />
+        <include layout="@layout/adapter_income_title" />
 
         <ListView
             android:id="@+id/lv_income_records"

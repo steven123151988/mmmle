@@ -1,7 +1,11 @@
 package com.daking.sports.view.banner;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -12,7 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
+import com.daking.sports.R;
+import com.daking.sports.activity.webview.WebViewActivity;
+import com.daking.sports.application.SportsApplication;
 import com.daking.sports.base.GetBannerData;
+import com.daking.sports.base.SportsAPI;
+import com.daking.sports.base.SportsKey;
+import com.daking.sports.util.LogUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -198,13 +208,27 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 		public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = new ImageView(getContext());
             final BaseBannerBean d = (BaseBannerBean) datas.get(position);
-			Picasso.with(context).load(d.getUrl()).into(imageView);
+			if (d.getPosition()==1){
+				imageView.setBackground(ContextCompat.getDrawable(SportsApplication.getInstance(), R.mipmap.ad1));
+			}
+			if (d.getPosition()==2){
+				imageView.setBackground(ContextCompat.getDrawable(SportsApplication.getInstance(), R.mipmap.ad2));
+			}
+			if (d.getPosition()==3){
+				imageView.setBackground(ContextCompat.getDrawable(SportsApplication.getInstance(), R.mipmap.ad3));
+			}
+//			Picasso.with(context).load(d.getUrl()).into(imageView);
 //			((ViewPager)container).addView(imageView, position);
 			((ViewPager)container).addView(imageView);
 			imageView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(context,d.getUrl(),Toast.LENGTH_LONG).show();
+					LogUtil.e("======== d.getUrl()="+ d.getUrl());
+					Intent intent=new Intent(SportsApplication.getInstance(), WebViewActivity.class);
+					intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.news));
+					intent.putExtra(SportsKey.WEBVIEW_URL, d.getUrl());
+					SportsApplication.getInstance().startActivity(intent);
+
 				}
 			});
             return imageView;
