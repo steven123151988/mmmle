@@ -74,7 +74,7 @@
     <string name="newpassword2">确认新密码</string>
     <string name="affirm">确认提交</string>
     <string name="depositrecords">存款记录</string>
-    <string name="wateraccount">汇款流水号</string>
+    <string name="wateraccount">流水号</string>
     <string name="time">时间</string>
     <string name="sum">金额</string>
     <string name="bank">银行</string>

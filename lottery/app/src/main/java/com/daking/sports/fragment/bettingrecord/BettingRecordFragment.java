@@ -18,6 +18,7 @@ import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -40,7 +41,6 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     private String ball;
     private String message;
     private Gson gson = new Gson();
-    private Handler handler;
     private BettingRecordRsp bettingRecordRsp;
     private BettingRecordAdapter adapter;
     private ListView lv_records;
@@ -62,15 +62,12 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     }
 
     private void initRefreshLayout(BGARefreshLayout refreshLayout) {
-
         // 为BGARefreshLayout 设置代理
         mRefreshLayout.setDelegate(this);
         // 设置下拉刷新和上拉加载更多的风格     参数1：应用程序上下文，参数2：是否具有上拉加载更多功能
         BGARefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(getActivity(), true);
         // 设置下拉刷新和上拉加载更多的风格
         mRefreshLayout.setRefreshViewHolder(refreshViewHolder);
-
-
         // 为了增加下拉刷新头部和加载更多的通用性，提供了以下可选配置选项  -------------START
         // 设置正在加载更多时不显示加载更多控件
         mRefreshLayout.setIsShowLoadingMoreView(true);
@@ -117,13 +114,16 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mRefreshLayout.endRefreshing();
-                        ShowDialogUtil.showSystemFail(getActivity());
-                    }
-                });
+                if (null!=getActivity()){
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            stopView();
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -154,7 +154,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                                         break;
                                     case SportsKey.TYPE_NINETEEN:
                                         //TODO  没记录  设置图
-
+                                        ToastUtil.show(getActivity(),"没有记录");
                                         break;
                                     default:
                                         ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), bettingRecordRsp.getMsg());
@@ -191,8 +191,6 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         page++;
-
-
         if (page<=bettingRecordRsp.getPages()){
             getBettingRecords(ball, page);
         }

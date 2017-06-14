@@ -92,40 +92,40 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
             public void onResponse(Call call, Response response) throws IOException {
                 message = response.body().string();
                 if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("======getOutMoney========" + message);
+                                memonlineRsp = gson.fromJson(message, MemOnlineRsp.class);
+                                if (null == memonlineRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (memonlineRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        if (memonlineRsp.getIfo().getBank_Account().equals("")) {
+                                            ((TakeOutMoneyActivity) getActivity()).addBankAccount();
+                                        } else {
+                                            tv_tabkeout_bank.setText(memonlineRsp.getIfo().getBank());
+                                            tv_takeout_num.setText(memonlineRsp.getIfo().getBank_Account());
+                                            tv_takeout_name.setText(memonlineRsp.getIfo().getAlias());
+                                            ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
+                                        }
+                                        break;
+                                    default:
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), memonlineRsp.getMsg());
+                                        break;
 
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            LogUtil.e("======getOutMoney========" + message);
-                            memonlineRsp = gson.fromJson(message, MemOnlineRsp.class);
-                            if (null == memonlineRsp) {
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());
-                                return;
                             }
-                            switch (memonlineRsp.getCode()) {
-                                case SportsKey.TYPE_ZERO:
-                                    if (memonlineRsp.getIfo().getBank_Account().equals("")) {
-                                        ((TakeOutMoneyActivity) getActivity()).addBankAccount();
-                                    } else {
-                                        tv_tabkeout_bank.setText(memonlineRsp.getIfo().getBank());
-                                        tv_takeout_num.setText(memonlineRsp.getIfo().getBank_Account());
-                                        tv_takeout_name.setText(memonlineRsp.getIfo().getAlias());
-                                        ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
-                                    }
-                                    break;
-                                default:
-                                    ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), memonlineRsp.getMsg());
-                                    break;
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ShowDialogUtil.showSystemFail(getActivity());
                         }
-                    }
-                });
+                    });
+                }
+
             }
         });
     }

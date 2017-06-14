@@ -11,9 +11,11 @@ import com.daking.sports.adapter.IncomeAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.IncomeRep;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -30,27 +32,22 @@ import okhttp3.Response;
  */
 
 public class IncomeRecordsFragment extends BaseFragment {
-    private  View view;
+    private View view;
     private ListView lv_income_records;
     private IncomeAdapter adapter;
     private String message;
-    private Gson gson=new Gson();
+    private Gson gson = new Gson();
+    private IncomeRep incomeRep;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_income_records, null);
-        lv_income_records=(ListView) view.findViewById(R.id.lv_income_records);
-        getIncomeData();
+        lv_income_records = (ListView) view.findViewById(R.id.lv_income_records);
+        getIncomeRecords();
         return view;
     }
 
-    private void getIncomeData() {
-        adapter=new IncomeAdapter(getActivity());
-        lv_income_records.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        getIncomeRecords();
 
-
-    }
     private void getIncomeRecords() {
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "capital")
@@ -86,24 +83,22 @@ public class IncomeRecordsFragment extends BaseFragment {
                         public void run() {
                             try {
                                 LogUtil.e("====getIncomeRecords===========" + message);
-//                                accountHistoryRsp = gson.fromJson(message, AccountHistoryRsp.class);
-//                                if (null == accountHistoryRsp) {
-//                                    ShowDialogUtil.showSystemFail(getActivity());
-//                                    return;
-//                                }
-//                                switch (accountHistoryRsp.getCode()) {
-//                                    case SportsKey.TYPE_ZERO:
-//                                        accountHistoryAdapter = new AccountHistoryAdapter(getActivity(), accountHistoryRsp);
-//                                        lv_history.setAdapter(accountHistoryAdapter);
-//                                        accountHistoryAdapter.notifyDataSetChanged();
-//                                        break;
-//                                    case SportsKey.TYPE_NINETEEN:
-//                                        //没记录
-//
-//                                        break;
-//                                }
-
-
+                                incomeRep = gson.fromJson(message, IncomeRep.class);
+                                if (null == incomeRep) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (incomeRep.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        adapter = new IncomeAdapter(getActivity(), incomeRep);
+                                        lv_income_records.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+                                        break;
+                                    case SportsKey.TYPE_NINETEEN:
+                                        //没记录
+                                        ToastUtil.show(getActivity(), "暂时没记录！");
+                                        break;
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());
@@ -120,5 +115,6 @@ public class IncomeRecordsFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ShowDialogUtil.dismissDialogs();
     }
 }

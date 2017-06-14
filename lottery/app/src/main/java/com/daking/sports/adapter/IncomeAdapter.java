@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.json.IncomeRep;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -16,14 +17,16 @@ import com.daking.sports.R;
 public class IncomeAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
+    private IncomeRep mincomeRep;
 
-    public IncomeAdapter(Context context) {
+    public IncomeAdapter(Context context,IncomeRep incomeRep) {
         mcontext = context;
+        mincomeRep=incomeRep;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return null==mincomeRep?0:mincomeRep.getIfo().size();
     }
 
     @Override
@@ -54,10 +57,12 @@ public class IncomeAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-//        viewHolder.tv_A.setText(accountHistoryRsp.getIfo().get(position).getDate());
-//        viewHolder.tv_B.setText(accountHistoryRsp.getIfo().get(position).getBetscore() + "");
-//        viewHolder.tv_C.setText(accountHistoryRsp.getIfo().get(position).getVgold() + "");
-//        viewHolder.tv_D.setText(accountHistoryRsp.getIfo().get(position).getM_result() + "");
+        viewHolder.tv_A.setText(mincomeRep.getIfo().get(position).getID());
+        viewHolder.tv_B.setText(mincomeRep.getIfo().get(position).getDate());
+        viewHolder.tv_C.setText(mincomeRep.getIfo().get(position).getGold());
+        viewHolder.tv_D.setText(mincomeRep.getIfo().get(position).getRemark());
+        viewHolder.tv_E.setText(mincomeRep.getIfo().get(position).getType());
+        viewHolder.tv_F.setText(mincomeRep.getIfo().get(position).getStatus());
         return view;
     }
 
