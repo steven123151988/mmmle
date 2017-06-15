@@ -2,8 +2,6 @@ package com.daking.sports.view.banner;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -13,17 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
 import com.daking.sports.R;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.application.SportsApplication;
 import com.daking.sports.base.GetBannerData;
-import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.util.LogUtil;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,7 +27,7 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 	/**
 	 * banner默认高宽比  height/width = 420/640
 	 */
-	private static final float BANNER_RATIO_DEFAULT = 0.599f;
+	private static final float BANNER_RATIO_DEFAULT = 0.45f;
 
 	/**
 	 * indicator默认高宽比  height/width = 26/750
@@ -55,7 +50,6 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 	private PagerAdapter mAdapter;
 	private Handler cutHandler;
 	private Runnable cutRunnable;
-	//private ResponseDataList bannerData;
 	private List<BaseBannerBean> bannerData;
 	private int cutIndex;
 	private Context context;

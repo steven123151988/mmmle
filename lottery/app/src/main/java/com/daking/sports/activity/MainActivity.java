@@ -40,6 +40,7 @@ import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -87,6 +88,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         MobclickAgent.onResume(this);
         //放在这边避免需要登录返回后没出事话左侧的点击事件
         initMainMenu();
+        //避免登录别的帐号名字没有更新
+        tv_username.setText(SharePreferencesUtil.getString(mContext, SportsKey.USER_NAME, getString(R.string.app_name)));
     }
 
 

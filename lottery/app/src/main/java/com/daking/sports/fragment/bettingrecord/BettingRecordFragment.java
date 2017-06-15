@@ -55,6 +55,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
         }
         mRefreshLayout = (BGARefreshLayout) view.findViewById(R.id.refreshLayout);
         lv_records = (ListView) view.findViewById(R.id.listview);
+        adapter = new BettingRecordAdapter(getActivity(), ball);
         LogUtil.e("=========ball=====" + ball);
         getBettingRecords(ball, page);
         initRefreshLayout(mRefreshLayout);
@@ -93,7 +94,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
         ShowDialogUtil.dismissDialogs();
     }
 
-    private void getBettingRecords(final String ball, int page) {
+    private void getBettingRecords(final String ball,final int page) {
         LogUtil.e("======page=========" + page);
         if (page>1){
             beginLoadingMore();
@@ -144,16 +145,16 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                                 }
                                 switch (bettingRecordRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
-                                        adapter = new BettingRecordAdapter(getActivity(), bettingRecordRsp, ball);
                                         lv_records.setAdapter(adapter);
+                                        adapter.resetData(page,bettingRecordRsp.getIfo());
                                         adapter.notifyDataSetChanged();
-
+                                        int position=SharePreferencesUtil.getInteger(getActivity(),SportsKey.RECORDS_POSITION,1);
+                                        lv_records.setSelection(position);
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                                         break;
                                     case SportsKey.TYPE_NINETEEN:
-                                        //TODO  没记录  设置图
                                         ToastUtil.show(getActivity(),"没有记录");
                                         break;
                                     default:
@@ -194,8 +195,6 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
         if (page<=bettingRecordRsp.getPages()){
             getBettingRecords(ball, page);
         }
-
-
         return true;
     }
 

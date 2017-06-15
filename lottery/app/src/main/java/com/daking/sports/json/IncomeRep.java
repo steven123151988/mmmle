@@ -26,6 +26,15 @@ public class IncomeRep implements Serializable {
     private int pages;
     private int code;
     private List<IfoBean> ifo;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public String getType() {
         return type;

@@ -46,24 +46,18 @@ public class SportsKey {
     public static final String ORDER = "order";
     public static final String TOKEN = "token";
     public static final String CHECK_ORDER = "chk_order";
-    public static final String DATE_START = "date_start";
-    public static final String DATE_END = "date_end";
     public static final String PAGE = "page";
     public static final String OLD_PWD = "oldpwd";
     public static final String BEW_PWD = "newpwd";
     public static final String INCOME = "income";
+    public static final String INCOME_POST = "income_post";
+    public static final String ID = "ID";
+    public static final String URL = "url";
+    public static final String BANK_CODE = "bank_code";
     public static final String COMPANY_POST = "company_post";
     public static final String BANK_ADDRESS = "bank_address";
     public static final String BANK_ACCOUNT = "band_account";
     public static final String CHG_BANK = "chg_bank";
-
-    public static final String BANK_NAME = "bankname";
-    public static final String BANK_NUM = "banknum";
-    public static final String QUERY_DATE = "query_date";
-
-
-
-
-
+    public static final String RECORDS_POSITION = "records_position";
 
 }

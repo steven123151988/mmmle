@@ -1,10 +1,12 @@
 package com.daking.sports.json;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/6/13.
  */
 
-public class MemOnlineRsp {
+public class MemOnlineRsp implements Serializable {
 
     /**
      * code : 0

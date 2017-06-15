@@ -8,7 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.json.IncomeRep;
+import com.daking.sports.util.SharePreferencesUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -17,16 +23,28 @@ import com.daking.sports.json.IncomeRep;
 public class IncomeAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
-    private IncomeRep mincomeRep;
+    private List<IncomeRep.IfoBean> mifo;
 
-    public IncomeAdapter(Context context,IncomeRep incomeRep) {
+    public IncomeAdapter(Context context) {
         mcontext = context;
-        mincomeRep=incomeRep;
     }
+
+    public void resetData(int page,List<IncomeRep.IfoBean> ifo) {
+        if (null ==mifo) {
+            mifo = new ArrayList<IncomeRep.IfoBean>();
+        }
+        mifo.addAll(ifo);
+        if (page == 1) {
+            SharePreferencesUtil.addInteger(mcontext, SportsKey.RECORDS_POSITION, 0);
+        }else {
+            SharePreferencesUtil.addInteger(mcontext, SportsKey.RECORDS_POSITION, mifo.size());
+        }
+    }
+
 
     @Override
     public int getCount() {
-        return null==mincomeRep?0:mincomeRep.getIfo().size();
+        return null==mifo?0:mifo.size();
     }
 
     @Override
@@ -57,12 +75,12 @@ public class IncomeAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.tv_A.setText(mincomeRep.getIfo().get(position).getID());
-        viewHolder.tv_B.setText(mincomeRep.getIfo().get(position).getDate());
-        viewHolder.tv_C.setText(mincomeRep.getIfo().get(position).getGold());
-        viewHolder.tv_D.setText(mincomeRep.getIfo().get(position).getType());
-        viewHolder.tv_E.setText(mincomeRep.getIfo().get(position).getStatus());
-        viewHolder.tv_F.setText(mincomeRep.getIfo().get(position).getRemark());
+        viewHolder.tv_A.setText(mifo.get(position).getID());
+        viewHolder.tv_B.setText(mifo.get(position).getDate());
+        viewHolder.tv_C.setText(mifo.get(position).getGold());
+        viewHolder.tv_D.setText(mifo.get(position).getType());
+        viewHolder.tv_E.setText(mifo.get(position).getStatus());
+        viewHolder.tv_F.setText(mifo.get(position).getRemark());
 
         return view;
     }

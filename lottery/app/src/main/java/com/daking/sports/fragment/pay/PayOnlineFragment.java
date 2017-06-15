@@ -19,6 +19,7 @@ import com.daking.sports.R;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.PayIncomeRsp;
 import com.daking.sports.json.PayStypeRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -31,6 +32,7 @@ import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
 
 import java.io.IOException;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
@@ -49,7 +51,6 @@ import okhttp3.Response;
 public class PayOnlineFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout ll_first_view;
     private WebView mWebView;
-    private Gson gson;
     private Button btn_confirm_pay;
     private EditText et_money;
     private int money;
@@ -63,6 +64,8 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     private int choose_position = 1;
     private String message;
     private int min, max;//能充值的最大值最小值
+    private PayIncomeRsp payIncomeRsp;
+    private Gson gson = new Gson();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -113,12 +116,9 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                         public void run() {
                             try {
                                 if (payStypeRsp.getCode() == 0) {
-                                    ll_first_view.setVisibility(View.GONE);
-                                    mWebView.setVisibility(View.VISIBLE);
-                                    initWebview(payStypeRsp.getIfo().get(choose_position).getUrl());
+                                    get3pay();
                                 } else {
-                                    ll_first_view.setVisibility(View.VISIBLE);
-                                    mWebView.setVisibility(View.GONE);
+                                    ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), payStypeRsp.getMsg());
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -142,7 +142,6 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                 .add(SportsKey.FNNAME, SportsKey.INCOME)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
                 .build();
-        LogUtil.e("=======UID====="+SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"));
         final okhttp3.Request request = new okhttp3.Request.Builder()
                 .url(SportsAPI.BASE_URL + SportsAPI.GET_PAY_URL)
                 .post(requestBody)
@@ -245,11 +244,80 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         });
     }
 
+    /**
+     * 请求第3方参数
+     */
+    private void get3pay() {
+        if (null == payStypeRsp) {
+            return;
+        }
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, SportsKey.INCOME_POST)
+                .add(SportsKey.ID, payStypeRsp.getIfo().get(choose_position).getID())
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add(SportsKey.MONEY, money + "")
+                .add(SportsKey.URL, payStypeRsp.getIfo().get(choose_position).getUrl())
+                .add(SportsKey.BANK_CODE, payStypeRsp.getIfo().get(choose_position).getBank_code())
+                .build();
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.INCOME_POST)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            LogUtil.e("=======message===========" + message);
+                            payIncomeRsp = gson.fromJson(message, PayIncomeRsp.class);
+                            if (null == payIncomeRsp) {
+                                ShowDialogUtil.showSystemFail(getActivity());
+                                return;
+                            }
+                            switch (payIncomeRsp.getCode()) {
+                                case SportsKey.TYPE_ZERO:
+                                    ll_first_view.setVisibility(View.GONE);
+                                    mWebView.setVisibility(View.VISIBLE);
+                                    String url = payIncomeRsp.getIfo().getUrl() + "?" + payIncomeRsp.getIfo().getParas();
+
+                                    initWebview(url);
+                                    break;
+                                default:
+                                    ll_first_view.setVisibility(View.VISIBLE);
+                                    mWebView.setVisibility(View.GONE);
+                                    ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), payIncomeRsp.getMsg());
+                                    break;
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 
     /**
      * 初始化webview
      */
     private void initWebview(String url) {
+        LogUtil.e("========url======" + url);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setUseWideViewPort(true);// 设置此属性，可任意比例缩放
         webSettings.setLoadWithOverviewMode(true);

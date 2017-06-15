@@ -1,4 +1,5 @@
 package com.daking.sports.fragment.pay;
+import android.content.Intent;
 import android.content.pm.ProviderInfo;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -8,23 +9,23 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.CompannyIncomeRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.util.ToastUtil;
 import com.daking.sports.view.wheel.TimeSelectUtil;
 import com.google.gson.Gson;
 import com.mingle.entity.MenuEntity;
 import com.mingle.sweetpick.BlurEffect;
-import com.mingle.sweetpick.DimEffect;
 import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
-import com.mingle.sweetpick.ViewPagerDelegate;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -47,8 +48,6 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private EditText et_money;
     private String money, type, time;
     private SweetSheet mSweetSheet;
-    private SweetSheet mSweetSheet2;
-    private SweetSheet mSweetSheet3;
     private RelativeLayout rl;
     private TextView tv_type;
     private TextView tv_time;
@@ -57,11 +56,16 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private MenuEntity menuEntity;
     private String message;
     private Gson gson=new Gson();
+    private CompannyIncomeRsp compannyIncomeRsp ;
+    private List list_name;
+    private TextView tv_card_name,tv_banknum,tv_bankname;
+    private int choose_position;
+    private EditText ed_card_ower;
+    private String card_ower_name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_companyincome, null);
-        view.findViewById(R.id.tv_check_bank).setOnClickListener(this);
         view.findViewById(R.id.tv_use_companyincome).setOnClickListener(this);
         view.findViewById(R.id.rl_bank).setOnClickListener(this);
         view.findViewById(R.id.rl_pay_time).setOnClickListener(this);
@@ -71,15 +75,29 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         et_money = (EditText) view.findViewById(R.id.et_money);
         rl = (RelativeLayout) view.findViewById(R.id.rl);
         tv_type = (TextView) view.findViewById(R.id.tv_type);
+        ed_card_ower=(EditText) view.findViewById(R.id.ed_card_ower);
+        tv_card_name=(TextView) view.findViewById(R.id.tv_card_name);
+        tv_banknum=(TextView) view.findViewById(R.id.tv_banknum);
+        tv_bankname=(TextView) view.findViewById(R.id.tv_bankname);
         return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //请求在线入款账户
+        getPayUrl("company");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_check_bank:
-                break;
             case R.id.tv_use_companyincome:
+             Intent   intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.company_income_h5));
+                intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.COMPANY_INCOME_H5);
+                startActivity(intent);
                 break;
             case R.id.rl_bank:
                 setupViewpager();
@@ -170,38 +188,66 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      *   选择银行入款账号
      */
     private void setupViewpager() {
-        mSweetSheet2 = new SweetSheet(rl);
-        //从menu 中设置数据源
-        mSweetSheet2.setMenuList(R.menu.menu_sweet);
-        mSweetSheet2.setDelegate(new ViewPagerDelegate());
-        mSweetSheet2.setBackgroundEffect(new DimEffect(0.5f));
-        mSweetSheet2.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
+        list_name = new ArrayList<>();
+        int size = compannyIncomeRsp.getIfo().size();
+
+        for (int i = 0; i < size; i++) {
+            list_name.add(compannyIncomeRsp.getIfo().get(i).getBank());
+        }
+        if (null == list_name) {
+            ToastUtil.show(getActivity(), "暂无有效的充值方式");
+            return;
+        }
+        final ArrayList<MenuEntity> list = new ArrayList<>();
+        for (int i = 0; i < list_name.size(); i++) {
+            menuEntity = new MenuEntity();
+            menuEntity.iconId = R.mipmap.company_income;
+            menuEntity.titleColor = 0xff000000;
+            menuEntity.title = (CharSequence) list_name.get(i);
+            list.add(menuEntity);
+        }
+        // SweetSheet 控件,根据 rl 确认位置
+        mSweetSheet = new SweetSheet(rl);
+        //设置数据源 (数据源支持设置 list 数组,也支持从菜单中获取)
+        mSweetSheet.setMenuList(list);
+        //根据设置不同的 Delegate 来显示不同的风格.
+        mSweetSheet.setDelegate(new RecyclerViewDelegate(true));
+        //根据设置不同Effect 来显示背景效果BlurEffect:模糊效果.DimEffect 变暗效果
+        mSweetSheet.setBackgroundEffect(new BlurEffect(8));
+        //设置点击事件
+        mSweetSheet.setOnMenuItemClickListener(new SweetSheet.OnMenuItemClickListener() {
             @Override
-            public boolean onItemClick(int position, MenuEntity menuEntity1) {
-                Toast.makeText(getActivity(), menuEntity1.title + "  " + position+"等待接口调试------", Toast.LENGTH_SHORT).show();
+            public boolean onItemClick(int position, MenuEntity menuEntity) {
+                choose_position = position;
+                //即时改变当前项的颜色
+                list.get(position).titleColor = 0xff5823ff;
+                ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
+                tv_card_name.setText(compannyIncomeRsp.getIfo().get(choose_position).getUserName());
+                tv_banknum.setText(compannyIncomeRsp.getIfo().get(choose_position).getBank_Account());
+                tv_bankname.setText(compannyIncomeRsp.getIfo().get(choose_position).getBank());
+                //根据返回值, true 会关闭 SweetSheet ,false 则不会.
                 return true;
             }
         });
-        if (!mSweetSheet2.isShow()) {
-            mSweetSheet2.toggle();
+
+        if (!mSweetSheet.isShow()) {
+            mSweetSheet.toggle();
         }
+
+
     }
 
 
+
+
     /**
-     * 公司入款
+     * 获取支付链接
      */
-    private void companypost() {
-        money = et_money.getText().toString().replace(" ", "");        //入款金额
-        String time= SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME,"");//汇款时间
+    private void getPayUrl(String type) {
         RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, SportsKey.COMPANY_POST)
+                .add(SportsKey.FNNAME, SportsKey.INCOME)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add("IntoBank","")
-                .add("v_amount", money)
-                .add("ctime", time)
-                .add("IntoType", "")
-                .add("v_name", "")
+                .add(SportsKey.TYPE, type)
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -231,7 +277,85 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                         @Override
                         public void run() {
                             try {
+                                LogUtil.e("=====getPayUrl=========" + message);
+                                gson = new Gson();
+                                compannyIncomeRsp=gson.fromJson(message,CompannyIncomeRsp.class);
+                                if (null == compannyIncomeRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (compannyIncomeRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
 
+                                        break;
+                                    default:
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), compannyIncomeRsp.getMsg());
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(getActivity());
+                            } finally {
+
+                            }
+
+                        }
+                    });
+                }
+
+
+            }
+
+        });
+    }
+
+    /**
+     * 公司入款
+     */
+    private void companypost() {
+        money = et_money.getText().toString().replace(" ", "");        //入款金额
+        card_ower_name=ed_card_ower.getText().toString().replace(" ", "");
+        String time= SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME,"");//汇款时间
+        String intoBank=compannyIncomeRsp.getIfo().get(choose_position).getBank()+"-"
+                +compannyIncomeRsp.getIfo().get(choose_position).getUserName()+"|"+compannyIncomeRsp.getIfo().get(choose_position).getID();
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, SportsKey.COMPANY_POST)
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add("IntoBank",intoBank)  //Bank-test122333|80
+                .add("v_amount", money)
+                .add("ctime", time)
+                .add("IntoType",type )
+                .add("v_name", card_ower_name)//还款方持卡人姓名
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.COMPANY_POST)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("======message========"+message);
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());

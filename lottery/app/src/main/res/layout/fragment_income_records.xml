@@ -9,12 +9,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <include layout="@layout/adapter_income_title" />
-
-        <ListView
-            android:layout_weight="1"
-            android:id="@+id/lv_income_records"
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_weight="1"
+                android:id="@+id/lv_income_records"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:divider="@color/red_84201e"
+                android:dividerHeight="1dp"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
     </LinearLayout>
 
     <!--<LinearLayout-->

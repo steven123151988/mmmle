@@ -12,10 +12,18 @@ public class MainIndexRsp  implements Serializable{
      * code : 0
      * ifo : {"MID":"2763252","M_Start":"2017-05-28 04:00:00","M_League":"罗马尼亚乙组联赛","MB_Team":"巴罗特斯缇","TG_Team":"普利塔力卡蒂米什瓦拉","M_LetB_RB":"","M_LetB":"0.5","MB_Ball":"3","TG_Ball":"2","MB_Win_Rate":"1.95","MB_Win_Rate_RB":"0","TG_Win_Rate":"2.91","TG_Win_Rate_RB":"0","mpid":null}
      */
-
+    private String notice;
     private MemberBean member;
     private int code;
     private IfoBean ifo;
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
+    }
 
     public MemberBean getMember() {
         return member;

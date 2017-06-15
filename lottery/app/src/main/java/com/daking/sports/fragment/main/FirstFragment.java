@@ -60,8 +60,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         BannerBaseView banner = new MainBannerView(getActivity());
         bannerContent.addView(banner);
         banner.update(GetBannerData.getBannerData());
-        //跑马灯的逻辑
-        runhorseLight();
+
         tv_A = (TextView) view.findViewById(R.id.tv_A);
         tv_B = (TextView) view.findViewById(R.id.tv_B);
         tv_C = (TextView) view.findViewById(R.id.tv_C);
@@ -79,6 +78,8 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         view.findViewById(R.id.ll_betting_sportd).setOnClickListener(this);
         view.findViewById(R.id.ll_news).setOnClickListener(this);
         intent = new Intent();
+        //跑马灯
+        runhorseLight();
     }
 
     private void initHomeIndex() {
@@ -94,12 +95,15 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ShowDialogUtil.showSystemFail(getActivity());
-                    }
-                });
+                if (null==getActivity()){
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+
             }
 
             @Override
@@ -117,6 +121,8 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                     ShowDialogUtil.showSystemFail(getActivity());
                                     return;
                                 }
+                                //跑马灯的逻辑
+                                runhorseLight();
                                 switch (mainIndexRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
                                         //修改UI必须在主线程
@@ -138,7 +144,6 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                             } finally {
                             }
 
-
                         }
                     });
 
@@ -153,8 +158,9 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("FirstFragment");
-        runhorseLight();
         initHomeIndex();
+
+
     }
 
     /**
@@ -164,7 +170,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         MarqueeView marqueeView = (MarqueeView) view.findViewById(R.id.tv_marquee);
         marqueeView.setFocusable(true);
         marqueeView.requestFocus();
-        marqueeView.setText(getResources().getString(R.string.horseRacelamp));//设置文本
+        if (null==mainIndexRsp){
+            return;
+        }
+        if (null!=mainIndexRsp.getNotice()){
+            marqueeView.setText(mainIndexRsp.getNotice());//设置文本
+        }
         marqueeView.startScroll(); //start
     }
 

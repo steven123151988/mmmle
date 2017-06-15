@@ -1,5 +1,6 @@
 package com.daking.sports.activity.betting;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -664,7 +665,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             }
 
                         } catch (Exception e) {
-                            e.printStackTrace();
+
+
                             ShowDialogUtil.showSystemFail(mContext);
                         } finally {
 

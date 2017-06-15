@@ -10,25 +10,41 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BettingRecordRsp;
+import com.daking.sports.util.SharePreferencesUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *   下注记录adapter
+ * 下注记录adapter
  */
 
-public class BettingRecordAdapter  extends BaseAdapter{
+public class BettingRecordAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private Context mcontext;
-    private BettingRecordRsp mbettingRecordRsp;
     private String ball;
+    private List<BettingRecordRsp.IfoBean> mifo;
 
-    public BettingRecordAdapter(Context context,BettingRecordRsp bettingRecordRsp,String ball){
-        mcontext=context;
-        mbettingRecordRsp=bettingRecordRsp;
-        this.ball=ball;
+    public BettingRecordAdapter(Context context, String ball) {
+        mcontext = context;
+        this.ball = ball;
     }
+
+    public void resetData(int page, List<BettingRecordRsp.IfoBean> ifo) {
+        if (null ==mifo) {
+            mifo = new ArrayList<BettingRecordRsp.IfoBean>();
+        }
+        mifo.addAll(ifo);
+        if (page == 1) {
+            SharePreferencesUtil.addInteger(mcontext, SportsKey.RECORDS_POSITION, 0);
+        }else {
+            SharePreferencesUtil.addInteger(mcontext, SportsKey.RECORDS_POSITION, mifo.size());
+        }
+    }
+
     @Override
     public int getCount() {
-        return null==mbettingRecordRsp?0:mbettingRecordRsp.getIfo().size();
+        return null ==mifo ? 0 : mifo.size();
     }
 
     @Override
@@ -62,23 +78,23 @@ public class BettingRecordAdapter  extends BaseAdapter{
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        switch (ball){
+        switch (ball) {
             case SportsKey.FOOTBALL:
-                viewHolder.tv_A.setText(mcontext.getString(R.string.football)+" [ "+mbettingRecordRsp.getIfo().get(position).getBetType()+" ]");
+                viewHolder.tv_A.setText(mcontext.getString(R.string.football) + " [ " + mifo.get(position).getBetType() + " ]");
                 break;
             case SportsKey.BASKETBALL:
-                viewHolder.tv_A.setText(mcontext.getString(R.string.basketball)+" [ "+mbettingRecordRsp.getIfo().get(position).getBetType()+" ]");
+                viewHolder.tv_A.setText(mcontext.getString(R.string.basketball) + " [ " + mifo.get(position).getBetType() + " ]");
                 break;
 
         }
-        viewHolder.tv_B.setText("时间："+mbettingRecordRsp.getIfo().get(position).getBetTime());
-        viewHolder.tv_C.setText("单号："+mbettingRecordRsp.getIfo().get(position).getID());
-        viewHolder.tv_D.setText(mbettingRecordRsp.getIfo().get(position).getMiddle().getLeag());
-        viewHolder.tv_E.setText(mbettingRecordRsp.getIfo().get(position).getMiddle().getMid());
-        viewHolder.tv_F.setText(mbettingRecordRsp.getIfo().get(position).getMiddle().getTeam());
-        viewHolder.tv_G.setText(mbettingRecordRsp.getIfo().get(position).getMiddle().getRate());
-        viewHolder.tv_H.setText("投注: "+mbettingRecordRsp.getIfo().get(position).getBetScore());
-        viewHolder.tv_I.setText("可赢: "+mbettingRecordRsp.getIfo().get(position).getGwin());
+        viewHolder.tv_B.setText("时间：" + mifo.get(position).getBetTime());
+        viewHolder.tv_C.setText("单号：" + mifo.get(position).getID());
+        viewHolder.tv_D.setText(mifo.get(position).getMiddle().getLeag());
+        viewHolder.tv_E.setText(mifo.get(position).getMiddle().getMid());
+        viewHolder.tv_F.setText(mifo.get(position).getMiddle().getTeam());
+        viewHolder.tv_G.setText(mifo.get(position).getMiddle().getRate());
+        viewHolder.tv_H.setText("投注: " + mifo.get(position).getBetScore());
+        viewHolder.tv_I.setText("可赢: " + mifo.get(position).getGwin());
         return view;
     }
 
