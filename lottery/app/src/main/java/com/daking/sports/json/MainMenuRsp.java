@@ -18,6 +18,15 @@ public class MainMenuRsp implements Serializable {
     private MemberBean member;
     private int code;
     private IfoBean ifo;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public MemberBean getMember() {
         return member;

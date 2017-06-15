@@ -217,10 +217,10 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 			imageView.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					LogUtil.e("======== d.getUrl()="+ d.getUrl());
 					Intent intent=new Intent(SportsApplication.getInstance(), WebViewActivity.class);
 					intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.news));
 					intent.putExtra(SportsKey.WEBVIEW_URL, d.getUrl());
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 					SportsApplication.getInstance().startActivity(intent);
 
 				}

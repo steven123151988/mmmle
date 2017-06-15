@@ -41,7 +41,7 @@
                     app:direction="left"
                     app:isRepeat="true"
                     app:marqueebackground="#FFFFFF"
-                    app:speed="5"
+                    app:speed="15"
                     app:startPoint="end"
                     app:textSize="16sp"
                     app:textcolor="#4c4c4c" />

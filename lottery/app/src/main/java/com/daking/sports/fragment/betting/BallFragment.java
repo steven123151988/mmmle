@@ -206,17 +206,17 @@ public class BallFragment extends BaseFragment {
                                         break;
                                     case SportsKey.TYPE_1000:
                                         mPullToRefreshView.setVisibility(View.GONE);
-                                        iv_system_error.setImageResource(R.mipmap.system_errors);
+                                        iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;
                                     case SportsKey.TYPE_1001:
                                         mPullToRefreshView.setVisibility(View.GONE);
-                                        iv_system_error.setBackground(getResources().getDrawable(R.mipmap.system_errors));
+                                        iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;
                                     case SportsKey.TYPE_1002:
                                         mPullToRefreshView.setVisibility(View.GONE);
-                                        iv_system_error.setBackground(getResources().getDrawable(R.mipmap.system_errors));
+                                        iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;
                                 }

@@ -68,7 +68,6 @@ public class AccountHistoryAdapter extends BaseAdapter {
         TextView tv_B;
         TextView tv_C;
         TextView tv_D;
-
     }
 
 }

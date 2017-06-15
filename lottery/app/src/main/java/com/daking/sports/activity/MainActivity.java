@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mToolbar.setTitle(getString(R.string.app_name));
         //这句一定要在下面几句之前调用，不然就会出现点击无反应
         setSupportActionBar(mToolbar);
-        setNavigationViewItemClickListener();
+//        setNavigationViewItemClickListener();
         //ActionBarDrawerToggle配合Toolbar，实现Toolbar上菜单按钮开关效果。
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
@@ -171,16 +171,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 String message = response.body().string();
                 LogUtil.e("===============initMainMenu=========" + message);
                 Gson gson = new Gson();
-                try {
-                    mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            switch (mainMenuRsp.getCode()) {
 
+                mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if (null == mainMenuRsp) {
+                                ShowDialogUtil.showSystemFail(mContext);
+                                return;
+                            }
+                            switch (mainMenuRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     //得到接口数据才能赋值，不然报空
-//                                    setNavigationViewItemClickListener();
+                                    setNavigationViewItemClickListener();
                                     break;
                                 case SportsKey.TYPE_NINE:
                                     startActivity(new Intent(mContext, LoginActivity.class));
@@ -188,14 +192,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                 case SportsKey.TYPE_TEN:
                                     ToastUtil.show(mContext, "暂时没有您选择的赛事！");
                                     break;
+                                default:
+                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.sorry),mainMenuRsp.getMsg());
+                                    break;
                             }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        } finally {
 
-                }
+                        }
+                    }
+                });
+
             }
         });
     }
@@ -406,34 +415,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         getFistView();
                         break;
                     case R.id.navigation_football_dan:
-//                        mToolbar.setTitle(getString(R.string.football_dan));
                         mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
                         goBetting(SportsKey.FOOTBALL, SportsKey.JRSS);
 
                         break;
                     case R.id.navigation_football_gun:
                         mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
-//                        mToolbar.setTitle(getString(R.string.football_gun));
                         goBetting(SportsKey.FOOTBALL, SportsKey.GQ);
 
                         break;
                     case R.id.navigation_basketball_dan:
                         mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
-//                        mToolbar.setTitle(getString(R.string.basketball_dan));
                         goBetting(SportsKey.BASKETBALL, SportsKey.JRSS);
                         break;
                     case R.id.navigation_basketball_gun:
-//                        mToolbar.setTitle(getString(R.string.basketball_gun));
                         mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
                         goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
                     case R.id.navigation_ag:
                         mToolbar.setTitle(getString(R.string.ag));
-//                        mToolbar.setTitle(getString(R.string.ag) + "(" + mainMenuRsp.getIfo().getZrsx_nums() + ")");
-//                        Intent intent = new Intent(mContext, WebViewActivity.class);
-//                        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
-//                        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
-//                        startActivity(intent);
                         break;
                     case R.id.navigation_lottery:
                         mToolbar.setTitle(getString(R.string.lottery) + "(" + mainMenuRsp.getIfo().getPt_nums() + ")");
