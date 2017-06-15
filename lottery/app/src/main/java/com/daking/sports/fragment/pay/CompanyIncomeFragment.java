@@ -1,4 +1,5 @@
 package com.daking.sports.fragment.pay;
+
 import android.content.Intent;
 import android.content.pm.ProviderInfo;
 import android.content.res.XmlResourceParser;
@@ -16,6 +17,7 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.CompannyIncomeRsp;
+import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -55,13 +57,14 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private List<String> stringList;
     private MenuEntity menuEntity;
     private String message;
-    private Gson gson=new Gson();
-    private CompannyIncomeRsp compannyIncomeRsp ;
+    private Gson gson = new Gson();
+    private CompannyIncomeRsp compannyIncomeRsp;
     private List list_name;
-    private TextView tv_card_name,tv_banknum,tv_bankname;
+    private TextView tv_card_name, tv_banknum, tv_bankname;
     private int choose_position;
     private EditText ed_card_ower;
     private String card_ower_name;
+    private LoginRsp LoginRsp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,10 +78,10 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         et_money = (EditText) view.findViewById(R.id.et_money);
         rl = (RelativeLayout) view.findViewById(R.id.rl);
         tv_type = (TextView) view.findViewById(R.id.tv_type);
-        ed_card_ower=(EditText) view.findViewById(R.id.ed_card_ower);
-        tv_card_name=(TextView) view.findViewById(R.id.tv_card_name);
-        tv_banknum=(TextView) view.findViewById(R.id.tv_banknum);
-        tv_bankname=(TextView) view.findViewById(R.id.tv_bankname);
+        ed_card_ower = (EditText) view.findViewById(R.id.ed_card_ower);
+        tv_card_name = (TextView) view.findViewById(R.id.tv_card_name);
+        tv_banknum = (TextView) view.findViewById(R.id.tv_banknum);
+        tv_bankname = (TextView) view.findViewById(R.id.tv_bankname);
         return view;
     }
 
@@ -94,7 +97,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_use_companyincome:
-             Intent   intent = new Intent(getActivity(), WebViewActivity.class);
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.company_income_h5));
                 intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.COMPANY_INCOME_H5);
                 startActivity(intent);
@@ -106,9 +109,9 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 setupRecyclerView();//listview样式
                 break;
             case R.id.rl_pay_time:
-                TimeSelectUtil timeSelectUtil=new  TimeSelectUtil();
-                if (null!=getActivity()&&null!=tv_time){
-                    timeSelectUtil.selectTime(getActivity(),tv_time);
+                TimeSelectUtil timeSelectUtil = new TimeSelectUtil();
+                if (null != getActivity() && null != tv_time) {
+                    timeSelectUtil.selectTime(getActivity(), tv_time);
                 }
                 break;
             case R.id.btn_confirm_pay:
@@ -124,7 +127,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      * 选择入款方式
      */
     private void setupRecyclerView() {
-        stringList=new ArrayList<>()  ;
+        stringList = new ArrayList<>();
         XmlResourceParser xrp = getResources().getXml(R.xml.paystype);
         try {
             while (xrp.getEventType() != XmlResourceParser.END_DOCUMENT) {
@@ -135,10 +138,10 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                     if (name.equals("customer")) {
                         // 判断标签名
                         sb = new StringBuilder();
-                        sb.append(xrp.getAttributeValue(0)) ;
+                        sb.append(xrp.getAttributeValue(0));
                         // 获取一个标签中的各个数据
                         stringList.add(sb.toString());
-                        LogUtil.e("==============="+sb.toString());
+                        LogUtil.e("===============" + sb.toString());
                     }
                 }
                 xrp.next();
@@ -185,7 +188,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     }
 
     /**
-     *   选择银行入款账号
+     * 选择银行入款账号
      */
     private void setupViewpager() {
         list_name = new ArrayList<>();
@@ -195,7 +198,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
             list_name.add(compannyIncomeRsp.getIfo().get(i).getBank());
         }
         if (null == list_name) {
-            ToastUtil.show(getActivity(), "暂无有效的充值方式");
+            ToastUtil.show(getActivity(), getString(R.string.do_not_have_type));
             return;
         }
         final ArrayList<MenuEntity> list = new ArrayList<>();
@@ -238,8 +241,6 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     }
 
 
-
-
     /**
      * 获取支付链接
      */
@@ -279,7 +280,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                             try {
                                 LogUtil.e("=====getPayUrl=========" + message);
                                 gson = new Gson();
-                                compannyIncomeRsp=gson.fromJson(message,CompannyIncomeRsp.class);
+                                compannyIncomeRsp = gson.fromJson(message, CompannyIncomeRsp.class);
                                 if (null == compannyIncomeRsp) {
                                     ShowDialogUtil.showSystemFail(getActivity());
                                     return;
@@ -314,17 +315,17 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      */
     private void companypost() {
         money = et_money.getText().toString().replace(" ", "");        //入款金额
-        card_ower_name=ed_card_ower.getText().toString().replace(" ", "");
-        String time= SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME,"");//汇款时间
-        String intoBank=compannyIncomeRsp.getIfo().get(choose_position).getBank()+"-"
-                +compannyIncomeRsp.getIfo().get(choose_position).getUserName()+"|"+compannyIncomeRsp.getIfo().get(choose_position).getID();
+        card_ower_name = ed_card_ower.getText().toString().replace(" ", "");
+        String time = SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME, "");//汇款时间
+        String intoBank = compannyIncomeRsp.getIfo().get(choose_position).getBank() + "-"
+                + compannyIncomeRsp.getIfo().get(choose_position).getUserName() + "|" + compannyIncomeRsp.getIfo().get(choose_position).getID();
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.COMPANY_POST)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add("IntoBank",intoBank)  //Bank-test122333|80
+                .add("IntoBank", intoBank)  //Bank-test122333|80
                 .add("v_amount", money)
                 .add("ctime", time)
-                .add("IntoType",type )
+                .add("IntoType", type)
                 .add("v_name", card_ower_name)//还款方持卡人姓名
                 .build();
 
@@ -355,7 +356,21 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                         @Override
                         public void run() {
                             try {
-                                LogUtil.e("======message========"+message);
+                                LogUtil.e("======message========" + message);
+                                LoginRsp = gson.fromJson(message, com.daking.sports.json.LoginRsp.class);
+                                if (null == LoginRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (LoginRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), LoginRsp.getIfo());
+                                        break;
+                                    default:
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), LoginRsp.getMsg());
+                                        break;
+                                }
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 ShowDialogUtil.showSystemFail(getActivity());
@@ -372,7 +387,6 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
 
         });
     }
-
 
 
 }

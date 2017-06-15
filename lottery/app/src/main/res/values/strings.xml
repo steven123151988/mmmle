@@ -170,6 +170,7 @@
     <string name="income_records">存款记录</string>
     <string name="takeout_records">取款记录</string>
     <string name="company_income_h5">公司入款说明</string>
-
+    <string name="confirm_income">确定充值</string>
+    <string name="do_not_have_type">暂无有效的充值方式</string>
 
 </resources>

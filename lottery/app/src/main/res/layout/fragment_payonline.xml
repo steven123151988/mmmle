@@ -121,7 +121,7 @@
             android:layout_marginTop="@dimen/dimen_100"
             android:background="@color/red_84201e"
             android:gravity="center"
-            android:text="@string/confirm_pay"
+            android:text="@string/confirm_income"
             android:textColor="@color/white_ffffff"
             android:textSize="@dimen/dimen_18" />
 

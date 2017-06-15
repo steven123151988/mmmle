@@ -11,10 +11,11 @@
         android:orientation="vertical">
 
         <ImageView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginTop="@dimen/dimen_10"
             android:src="@mipmap/getinmoney" />
 
         <RelativeLayout
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dimen_20"
+                android:layout_marginRight="@dimen/dimen_10"
                 android:text="@string/use_companyincome"
                 android:textColor="@color/white_ffffff"
                 android:textSize="@dimen/dimen_16"
@@ -247,9 +248,14 @@
                 android:textSize="@dimen/dimen_18" />
 
             <EditText
+                android:background="@null"
+                android:gravity="center"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:hint="银行入款需要填写"
                 android:id="@+id/ed_card_ower"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dimen_18"

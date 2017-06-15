@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
+import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.IncomeAndTakeOut.IncomeRecordsFragment;
-import com.daking.sports.fragment.IncomeAndTakeOut.TakeOutRecordsFragment;
 
 /**
  * Created by 18 on 2017/5/9. 存取款记录
@@ -24,7 +23,6 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
     private FragmentTransaction mFragmentTransaction;    // fragment事物
     private LinearLayout ll_incomerecords,ll_takeoutrecords;
     private IncomeRecordsFragment  incomeRecordsFragment;
-    private TakeOutRecordsFragment takeOutRecordsFragment;
     private TextView tv_center;
     private ImageView iv_back;
     private TextView tv_incomerecords,tv_takeoutrecords;
@@ -45,7 +43,13 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
         ll_incomerecords.setOnClickListener(this);
         ll_takeoutrecords=fuck(R.id.ll_takeoutrecords);
         ll_takeoutrecords.setOnClickListener(this);
-        setFirstView();
+
+        ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        tv_incomerecords.setTextColor(getResources().getColor(R.color.white_ffffff));
+        tv_takeoutrecords.setTextColor(getResources().getColor(R.color.black_08090b));
+        setBallMessage("deposit");
+        showFragmentViews(incomeRecordsFragment);
 
 
     }
@@ -59,17 +63,20 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.ll_incomerecords:
-                setFirstView();
+                ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+                ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                tv_incomerecords.setTextColor(getResources().getColor(R.color.white_ffffff));
+                tv_takeoutrecords.setTextColor(getResources().getColor(R.color.black_08090b));
+                setBallMessage("deposit");
+                showFragmentViews(incomeRecordsFragment);
                 break;
             case R.id.ll_takeoutrecords:
                 ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
                 ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 tv_takeoutrecords.setTextColor(getResources().getColor(R.color.white_ffffff));
                 tv_incomerecords.setTextColor(getResources().getColor(R.color.black_08090b));
-                if (null==takeOutRecordsFragment){
-                    takeOutRecordsFragment=new TakeOutRecordsFragment();
-                }
-                showFragmentViews(takeOutRecordsFragment);
+                setBallMessage("withdraw");
+                showFragmentViews(incomeRecordsFragment);
                 break;
 
 
@@ -78,19 +85,7 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
     }
 
 
-    /**
-     * 一进来展示的布局
-     */
-    private void setFirstView() {
-        ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        tv_incomerecords.setTextColor(getResources().getColor(R.color.white_ffffff));
-        tv_takeoutrecords.setTextColor(getResources().getColor(R.color.black_08090b));
-        if (null==incomeRecordsFragment){
-            incomeRecordsFragment=new IncomeRecordsFragment();
-        }
-        showFragmentViews(incomeRecordsFragment);
-    }
+
 
 
     /**
@@ -105,5 +100,22 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
             mFragmentTransaction.replace(R.id.view_fragment, fragment);
             mFragmentTransaction.commitAllowingStateLoss();
         }
+    }
+
+    /**
+     * 设置球的数据
+     *
+     * @param type
+     */
+    public void setBallMessage(String type) {
+        if (null == incomeRecordsFragment) {
+            incomeRecordsFragment = new IncomeRecordsFragment();
+        } else {
+            incomeRecordsFragment = null;
+            incomeRecordsFragment = new IncomeRecordsFragment();
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(SportsKey.TYPE, type);
+        incomeRecordsFragment.setArguments(bundle);
     }
 }

@@ -124,6 +124,8 @@
         android:orientation="vertical">
 
         <TextView
+            android:maxLength="7"
+            android:maxLines="2"
             android:id="@+id/tv_F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

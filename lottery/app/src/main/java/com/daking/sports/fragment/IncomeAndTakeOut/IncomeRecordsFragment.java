@@ -37,7 +37,7 @@ import okhttp3.Response;
  * Created by steven on 2017/6/13.存款记录
  */
 
-public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate  {
+public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate {
     private View view;
     private ListView lv_income_records;
     private IncomeAdapter adapter;
@@ -46,7 +46,8 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
     private IncomeRep incomeRep;
     private List<IncomeRep.IfoBean> ifo;
     private BGARefreshLayout mRefreshLayout;
-    private int page=1;
+    private int page = 1;
+    private String paytype;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,9 +56,13 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
         initRefreshLayout(mRefreshLayout);
         lv_income_records = (ListView) view.findViewById(R.id.lv_income_records);
         adapter = new IncomeAdapter(getActivity());
-        getIncomeRecords(1);
+        if (null != getArguments().getString(SportsKey.TYPE)) {
+            paytype = getArguments().getString(SportsKey.TYPE);
+        }
+        getIncomeRecords(paytype, 1);
         return view;
     }
+
     private void initRefreshLayout(BGARefreshLayout refreshLayout) {
         // 为BGARefreshLayout 设置代理
         mRefreshLayout.setDelegate(this);
@@ -84,16 +89,16 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
     }
 
 
-    private void getIncomeRecords(final int page) {
+    private void getIncomeRecords(String type, final int page) {
         LogUtil.e("======page=========" + page);
-        if (page>1){
+        if (page > 1) {
             beginLoadingMore();
         }
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "capital")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add(SportsKey.TYPE, "deposit")
-                .add(SportsKey.PAGE,page+"")
+                .add(SportsKey.TYPE, type)
+                .add(SportsKey.PAGE, page + "")
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
@@ -134,20 +139,20 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
                                 switch (incomeRep.getCode()) {
                                     case SportsKey.TYPE_ZERO:
                                         lv_income_records.setAdapter(adapter);
-                                        adapter.resetData(page,incomeRep.getIfo());
+                                        adapter.resetData(page, incomeRep.getIfo());
                                         adapter.notifyDataSetChanged();
-                                        int position=SharePreferencesUtil.getInteger(getActivity(),SportsKey.RECORDS_POSITION,1);
+                                        int position = SharePreferencesUtil.getInteger(getActivity(), SportsKey.RECORDS_POSITION, 1);
                                         lv_income_records.setSelection(position);
                                         break;
                                     case SportsKey.TYPE_NINE:
-                                      startActivity(new Intent(getActivity(), LoginActivity.class));
+                                        startActivity(new Intent(getActivity(), LoginActivity.class));
                                         break;
                                     case SportsKey.TYPE_NINETEEN:
                                         //没记录
                                         ToastUtil.show(getActivity(), "暂时没记录！");
                                         break;
                                     default:
-                                        ShowDialogUtil.showFailDialog(getActivity(),getString(R.string.sorry),incomeRep.getMsg());
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), incomeRep.getMsg());
                                         break;
                                 }
                             } catch (Exception e) {
@@ -168,22 +173,21 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
         super.onDestroy();
         ShowDialogUtil.dismissDialogs();
     }
+
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         beginRefreshing();
         page = 1;
-        getIncomeRecords( page);
-
-
+        getIncomeRecords(paytype, page);
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         page++;
-        if (page<=incomeRep.getPages()){
-            getIncomeRecords(page);
+        if (page <= incomeRep.getPages()) {
+            getIncomeRecords(paytype, page);
         }
-        return true;
+        return false;
     }
 
     // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在 activity 的 onStart 方法中调用，自动进入正在刷新状态获取最新数据
