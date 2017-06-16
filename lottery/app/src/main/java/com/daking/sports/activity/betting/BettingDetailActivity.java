@@ -83,6 +83,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private Handler handler;
     private String message, message2;
     private int bet_position;
+    private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
 
 
     @Override
@@ -632,8 +633,10 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                         @Override
                                         public void run() {
                                             ShowDialogUtil.dismissDialogs();
-                                            mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
-                                            mExplosionField.addListener(popView.findViewById(R.id.main_pop));
+                                            if (sdk_version>20){
+                                                mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
+                                                mExplosionField.addListener(popView.findViewById(R.id.main_pop));
+                                            }
                                         }
                                     }, 1500);
                                     dismisspopviw();

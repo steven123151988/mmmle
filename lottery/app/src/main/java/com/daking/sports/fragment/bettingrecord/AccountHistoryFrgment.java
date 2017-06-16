@@ -47,7 +47,6 @@ public class AccountHistoryFrgment extends BaseFragment {
     }
 
     private void getHistory() {
-
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "bet_his")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))

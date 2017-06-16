@@ -24,8 +24,6 @@ public class AccountHistoryAdapter extends BaseAdapter {
         this.mcontext = mcontext;
         this.accountHistoryRsp = accountHistoryRsp;
     }
-
-
     @Override
     public int getCount() {
         return null==accountHistoryRsp?0:accountHistoryRsp.getIfo().size();

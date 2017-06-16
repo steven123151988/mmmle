@@ -9,7 +9,7 @@
         android:id="@+id/tv_A"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:background="@color/white_ffffff"
         android:gravity="center_horizontal"
         android:padding="@dimen/dimen_5"

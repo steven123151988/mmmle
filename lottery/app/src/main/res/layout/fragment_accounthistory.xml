@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dimen_1"
-    android:background="@color/gray_4c4c4c"
+    android:background="@color/white_ffffff"
     android:orientation="vertical">
 
     <LinearLayout
@@ -81,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_1"
-
+        android:divider="@color/black_333333"
+        android:dividerHeight="1dp"
         />
 </LinearLayout>

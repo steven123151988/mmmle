@@ -15,6 +15,7 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.MemOnlineRsp;
+import com.daking.sports.util.AddEdiTextWatchListenerUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -47,6 +48,7 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_takeoutmoney, null);
         et_takeoutmoney_psw = (EditText) view.findViewById(R.id.et_takeoutmoney_psw);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_takeoutmoney_psw, 6);
         et_money = (EditText) view.findViewById(R.id.et_money);
         tv_tabkeout_bank = (TextView) view.findViewById(R.id.tv_tabkeout_bank);//银行
         tv_takeout_num = (TextView) view.findViewById(R.id.tv_takeout_num);//银行号码
@@ -60,6 +62,7 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
         super.onResume();
         getOutMoney();
     }
+
 
     private void getOutMoney() {
         RequestBody requestBody = new FormBody.Builder()

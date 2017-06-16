@@ -1,17 +1,13 @@
 package com.daking.sports.activity.login;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,6 +19,7 @@ import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.AddEdiTextWatchListenerUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.ToastUtil;
@@ -35,7 +32,6 @@ import com.mingle.sweetpick.SweetSheet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -43,7 +39,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.R.attr.filter;
 
 /**
  * 注册面页
@@ -102,9 +97,9 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         et_name.setFilters(new InputFilter[]{filter});
 
         et_birthday = (EditText) findViewById(R.id.et_birthday);
-        addTextWatchListener(et_birthday, 8);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_birthday, 8);
         et_money_psw = (EditText) findViewById(R.id.et_money_psw);
-        addTextWatchListener(et_money_psw, 6);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_money_psw,4);
         et_answer = (EditText) findViewById(R.id.et_answer);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
@@ -132,31 +127,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             return true;
         }
         return false;
-    }
-
-    /**
-     * 设置监听
-     *
-     * @param editText
-     */
-    private void addTextWatchListener(EditText editText, final int size) {
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String psw = s.toString();
-                if (psw.length() == size) {
-                    closeKeyboard();
-                }
-            }
-        });
     }
 
 
@@ -308,34 +278,33 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                             LogUtil.e(message2);
                             Gson gson = new Gson();
                             loginRsp = gson.fromJson(message2, LoginRsp.class);
-
                             if (null == loginRsp) {
                                 //展示失败消息
                                 ShowDialogUtil.showSystemFail(mContext);
                                 return;
                             }
-                            if (loginRsp.getCode() == 0) {
-                                //展示注册成功消息
-                                ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
-                                //延迟5秒关闭
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ShowDialogUtil.dismissDialogs();
-                                        finish();
-                                    }
-                                }, 2500);
-                            } else {
-                                //展示失败消息
-                                ShowDialogUtil.showFailDialog(mContext, getString(R.string.regist_err), loginRsp.getIfo());
+                            switch (loginRsp.getCode()) {
+                                case SportsKey.TYPE_ZERO:
+                                    //展示注册成功消息
+                                    ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
+                                    //延迟5秒关闭
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            ShowDialogUtil.dismissDialogs();
+                                            finish();
+                                        }
+                                    }, 2500);
+                                    break;
+                                default:
+                                    //展示失败消息
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), loginRsp.getMsg());
+                                    break;
                             }
-
                         } catch (Exception e) {
                             e.printStackTrace();
                             ShowDialogUtil.showSystemFail(mContext);
-                        } finally {
-
                         }
                     }
                 });
@@ -447,14 +416,5 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         ShowDialogUtil.dismissDialogs();
     }
 
-    /**
-     * 关闭键盘
-     */
-    private void closeKeyboard() {
-        View view = getWindow().peekDecorView();
-        if (view != null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
+
 }
