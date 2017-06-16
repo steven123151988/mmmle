@@ -1,6 +1,5 @@
 package com.daking.sports.activity.betting;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -578,6 +577,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 最后下注结算
      */
     private void getBetting() {
+
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.CHECK_ORDER)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
@@ -604,6 +604,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        dismisspopviw();
                         ShowDialogUtil.showSystemFail(mContext);
                     }
                 });
@@ -616,6 +617,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         try {
+                            dismisspopviw();
                             LogUtil.e("===========messageR===" + message);
                             getOrderMsgRsp = gosn.fromJson(message, GetOrderMsgRsp.class);
                             if (null == getOrderMsgRsp) {
@@ -633,13 +635,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                         @Override
                                         public void run() {
                                             ShowDialogUtil.dismissDialogs();
-                                            if (sdk_version>20){
+                                            if (sdk_version > 20) {
                                                 mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
                                                 mExplosionField.addListener(popView.findViewById(R.id.main_pop));
                                             }
                                         }
                                     }, 1500);
-                                    dismisspopviw();
+
                                     break;
                                 case SportsKey.TYPE_NINE:
                                     startActivity(new Intent(mContext, LoginActivity.class));
@@ -663,13 +665,11 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                     break;
                                 default:
                                     ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getOrderMsgRsp.getMsg());
-                                    dismisspopviw();
                                     break;
                             }
 
                         } catch (Exception e) {
-
-
+                            e.printStackTrace();
                             ShowDialogUtil.showSystemFail(mContext);
                         } finally {
 

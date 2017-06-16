@@ -26,7 +26,7 @@ public class ShowDialogUtil {
         if (null != sweetAlertDialog_fail) {
             sweetAlertDialog_fail.cancel();
         }
-        if (!(ActivityManager.getInstance().getCurrentActivity()).isFinishing()) {
+        if (null != ActivityManager.getInstance().getCurrentActivity() && !(ActivityManager.getInstance().getCurrentActivity()).isFinishing()) {
             sweetAlertDialog_fail = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
             sweetAlertDialog_fail.setTitleText(mContext.getString(R.string.sorry));
             sweetAlertDialog_fail.setContentText(mContext.getString(R.string.system_error));
@@ -49,7 +49,7 @@ public class ShowDialogUtil {
         if (null != sweetAlertDialog_success) {
             sweetAlertDialog_success.cancel();
         }
-        if (!(ActivityManager.getInstance().getCurrentActivity()).isFinishing()) {
+        if (null != ActivityManager.getInstance().getCurrentActivity() && !(ActivityManager.getInstance().getCurrentActivity()).isFinishing()) {
             sweetAlertDialog_success = new SweetAlertDialog(mContext, SportsKey.TYPE_TWO);
             sweetAlertDialog_success.setTitleText(title);
             sweetAlertDialog_success.setContentText(message);
@@ -73,7 +73,7 @@ public class ShowDialogUtil {
         if (null != sweetAlertDialog_fail) {
             sweetAlertDialog_fail.cancel();
         }
-        if (!(ActivityManager.getInstance().getCurrentActivity()).isFinishing()) {
+        if (null != ActivityManager.getInstance().getCurrentActivity() && !(ActivityManager.getInstance().getCurrentActivity()).isFinishing()) {
             sweetAlertDialog_fail = new SweetAlertDialog(mContext, SportsKey.TYPE_ONE);
             sweetAlertDialog_fail.setTitleText(title);
             sweetAlertDialog_fail.setContentText(message);

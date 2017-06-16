@@ -42,7 +42,6 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
     private ChangeBankAccountFragment changeBankNumFragment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +66,6 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -88,10 +86,10 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
      * 添加银行账户
      */
     public void addBankAccount() {
-        rb_left.setTextColor(getResources().getColor(R.color.gray_666666));
-        rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
+        rb_left.setTextColor(getResources().getColor(R.color.white_ffffff));
+        rb_left.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        rb_right.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        rb_right.setTextColor(getResources().getColor(R.color.gray_666666));
         if (null == changeBankNumFragment) {
             changeBankNumFragment = new ChangeBankAccountFragment();
         }
@@ -106,11 +104,10 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
      */
 
     public void getTakeOutMoneyView() {
-
-        rb_left.setTextColor(getResources().getColor(R.color.white_ffffff));
-        rb_left.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        rb_right.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        rb_right.setTextColor(getResources().getColor(R.color.gray_666666));
+        rb_left.setTextColor(getResources().getColor(R.color.gray_666666));
+        rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
         if (null == takeOutMoneyFragment) {
             takeOutMoneyFragment = new TakeOutMoneyFragment();
         }

@@ -16,8 +16,10 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.GetBannerData;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
+import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.MainIndexRsp;
 import com.daking.sports.util.LogUtil;
+import com.daking.sports.util.NetUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.view.banner.BannerBaseView;
@@ -46,6 +48,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private View view;
     private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F;
     private String message;
+    private LoginRsp loginRsp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,11 +98,12 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                LogUtil.e("===============initHomeIndex=========" + e);
                 if (null != getActivity()) {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showSystemFail(getActivity());
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
                 }
@@ -132,7 +136,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                         tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
                                         tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
                                         tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
-                                        SharePreferencesUtil.addString(getActivity(),SportsKey.ACCOUNT_MONEY,mainIndexRsp.getMember().getMoney() );
+                                        SharePreferencesUtil.addString(getActivity(), SportsKey.ACCOUNT_MONEY, mainIndexRsp.getMember().getMoney());
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -171,7 +175,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         MarqueeView marqueeView = (MarqueeView) view.findViewById(R.id.tv_marquee);
         marqueeView.setFocusable(true);
         marqueeView.requestFocus();
-        if (null!=message){
+        if (null != message) {
             marqueeView.setText(message);//设置文本
         }
         marqueeView.startScroll(); //start
@@ -237,78 +241,69 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      * 跳转到AG真人视频面页
      */
     private void gotoAG() {
-//        RequestBody requestBody = new FormBody.Builder()
-//                .add(SportsKey.FNNAME, "main")
-//                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-//                .build();
-//        final okhttp3.Request request = new okhttp3.Request.Builder()
-//                .url(SportsAPI.BASE_URL + SportsAPI.AG)
-//                .post(requestBody)
-//                .build();
-//        OkHttpClient okHttpClient = new OkHttpClient();
-//        okHttpClient.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                if (null != getActivity()) {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            ShowDialogUtil.showSystemFail(getActivity());
-//                        }
-//                    });
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                message = response.body().string();
-//                if (null != getActivity()) {
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                LogUtil.e("===============initHomeIndex=========" + message);
-//                                Gson gson = new Gson();
-//                                mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
-//                                if (null == mainIndexRsp) {
-//                                    ShowDialogUtil.showSystemFail(getActivity());
-//                                    return;
-//                                }
-//                                //跑马灯的逻辑
-//                                runhorseLight(mainIndexRsp.getNotice());
-//                                switch (mainIndexRsp.getCode()) {
-//                                    case SportsKey.TYPE_ZERO:
-//                                        //修改UI必须在主线程
-//                                        tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
-//                                        tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
-//                                        tv_C.setText(mainIndexRsp.getIfo().getM_League());
-//                                        tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
-//                                        tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
-//                                        tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
-//                                        SharePreferencesUtil.addString(getActivity(),SportsKey.ACCOUNT_MONEY,mainIndexRsp.getMember().getMoney() );
-//                                        break;
-//                                    case SportsKey.TYPE_NINE:
-//                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-//                                        break;
-//                                }
-//
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                                ShowDialogUtil.showSystemFail(getActivity());
-//                            } finally {
-//                            }
-//
-//                        }
-//                    });
-//
-//                }
-//
-//            }
-//        });
-//        intent = new Intent(getActivity(), WebViewActivity.class);
-//        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
-//        intent.putExtra(SportsKey.WEBVIEW_URL,;
-//        startActivity(intent);
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, "zrsx")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .build();
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.AG)
+                .post(requestBody)
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showSystemFail(getActivity());
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("===============gotoAG=========" + message);
+                                Gson gson = new Gson();
+                                loginRsp = gson.fromJson(message, LoginRsp.class);
+                                if (null == loginRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (loginRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        intent = new Intent(getActivity(), WebViewActivity.class);
+                                        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
+                                        intent.putExtra(SportsKey.WEBVIEW_URL, loginRsp.getIfo());
+                                        startActivity(intent);
+                                        break;
+                                    default:
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), loginRsp.getMsg());
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(getActivity());
+                            } finally {
+                            }
+
+                        }
+                    });
+
+                }
+
+            }
+        });
+
     }
 }

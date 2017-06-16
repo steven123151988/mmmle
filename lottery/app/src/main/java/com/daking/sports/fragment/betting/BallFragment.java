@@ -17,8 +17,10 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BallGQRsp;
 import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
+import com.daking.sports.util.NetUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.yalantis.phoenix.PullToRefreshView;
 
@@ -133,12 +135,20 @@ public class BallFragment extends BaseFragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ShowDialogUtil.showSystemFail(getActivity());
-                    }
-                });
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!NetUtil.checkNetworkState()){
+                                ToastUtil.show(getActivity(),"网络连接有问题！");
+                                return;
+                            }
+                            iv_system_error.setVisibility(View.VISIBLE);
+                            iv_system_error.setImageResource(R.drawable.konglong4);
+                        }
+                    });
+                }
+
             }
 
             @Override

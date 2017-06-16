@@ -52,10 +52,10 @@ public class BettingRecordsActivity extends BaseActivity  implements View.OnClic
                 getTranslationView();
                 break;
             case R.id.rb_right:
-                rb_left.setTextColor(getResources().getColor(R.color.gray_666666));
-                rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-                rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
+                rb_left.setTextColor(getResources().getColor(R.color.white_ffffff));
+                rb_left.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+                rb_right.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                rb_right.setTextColor(getResources().getColor(R.color.gray_666666));
                 if (null==accountHistoryFrgment){
                     accountHistoryFrgment=new AccountHistoryFrgment();
                 }
@@ -71,10 +71,12 @@ public class BettingRecordsActivity extends BaseActivity  implements View.OnClic
      * 一进来展示的view
      */
     private void getTranslationView() {
-        rb_left.setTextColor(getResources().getColor(R.color.white_ffffff));
-        rb_left.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        rb_right.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        rb_right.setTextColor(getResources().getColor(R.color.gray_666666));
+        rb_left.setTextColor(getResources().getColor(R.color.gray_666666));
+        rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
+
+
         if (null==transactionFragment){
             transactionFragment=new TransactionFragment();
         }

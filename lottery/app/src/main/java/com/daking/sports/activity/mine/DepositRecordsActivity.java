@@ -44,12 +44,7 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
         ll_takeoutrecords=fuck(R.id.ll_takeoutrecords);
         ll_takeoutrecords.setOnClickListener(this);
 
-        ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        tv_incomerecords.setTextColor(getResources().getColor(R.color.white_ffffff));
-        tv_takeoutrecords.setTextColor(getResources().getColor(R.color.black_08090b));
-        setBallMessage("deposit");
-        showFragmentViews(incomeRecordsFragment);
+        getFirstView();
 
 
     }
@@ -63,18 +58,13 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.ll_incomerecords:
+                getFirstView();
+                break;
+            case R.id.ll_takeoutrecords:
                 ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
                 ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 tv_incomerecords.setTextColor(getResources().getColor(R.color.white_ffffff));
                 tv_takeoutrecords.setTextColor(getResources().getColor(R.color.black_08090b));
-                setBallMessage("deposit");
-                showFragmentViews(incomeRecordsFragment);
-                break;
-            case R.id.ll_takeoutrecords:
-                ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-                ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                tv_takeoutrecords.setTextColor(getResources().getColor(R.color.white_ffffff));
-                tv_incomerecords.setTextColor(getResources().getColor(R.color.black_08090b));
                 setBallMessage("withdraw");
                 showFragmentViews(incomeRecordsFragment);
                 break;
@@ -84,8 +74,14 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
         }
     }
 
-
-
+    private void getFirstView() {
+        ll_takeoutrecords.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        ll_incomerecords.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        tv_takeoutrecords.setTextColor(getResources().getColor(R.color.white_ffffff));
+        tv_incomerecords.setTextColor(getResources().getColor(R.color.black_08090b));
+        setBallMessage("deposit");
+        showFragmentViews(incomeRecordsFragment);
+    }
 
 
     /**

@@ -56,10 +56,10 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 getPayView();
                 break;
             case R.id.rb_right:
-                rb_left.setTextColor(getResources().getColor(R.color.gray_666666));
-                rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-                rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
+                rb_left.setTextColor(getResources().getColor(R.color.white_ffffff));
+                rb_left.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+                rb_right.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                rb_right.setTextColor(getResources().getColor(R.color.gray_666666));
                 if (null==companyIncomeFragment){
                     companyIncomeFragment=new CompanyIncomeFragment();
                 }
@@ -76,10 +76,10 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      * 一进来展示的view
      */
     private void getPayView() {
-        rb_left.setTextColor(getResources().getColor(R.color.white_ffffff));
-        rb_left.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-        rb_right.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-        rb_right.setTextColor(getResources().getColor(R.color.gray_666666));
+        rb_left.setTextColor(getResources().getColor(R.color.gray_666666));
+        rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+        rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+        rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
         if (null==payOnlineFragment){
             payOnlineFragment=new PayOnlineFragment();
         }

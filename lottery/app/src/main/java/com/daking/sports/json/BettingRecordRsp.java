@@ -1,13 +1,14 @@
 package com.daking.sports.json;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/12.下注记录
  */
 
-public class BettingRecordRsp {
+public class BettingRecordRsp implements Serializable {
 
 
     /**
