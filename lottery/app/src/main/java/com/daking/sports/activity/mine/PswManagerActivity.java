@@ -1,5 +1,6 @@
 package com.daking.sports.activity.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daking.sports.R;
+import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -38,7 +40,7 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
     private ImageView iv_back;
     private EditText et_psw1, et_psw2, et_psw3, et_money_psw1, et_money_psw2, et_money_psw3;
     private String psw1, psw2, psw3, money_psw1, money_psw2, money_psw3;
-    private Button btn_confirm,btn_money_confirm;
+    private Button btn_confirm, btn_money_confirm;
     private String message;
     private LoginRsp loginRsp;
     private Handler handler;
@@ -61,7 +63,7 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
         et_money_psw3 = (EditText) findViewById(R.id.et_money_psw3);
         btn_confirm = (Button) findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
-        btn_money_confirm=fuck(R.id.btn_money_confirm);
+        btn_money_confirm = fuck(R.id.btn_money_confirm);
         btn_money_confirm.setOnClickListener(this);
 
     }
@@ -147,7 +149,9 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
                                         @Override
                                         public void run() {
                                             ShowDialogUtil.dismissDialogs();
+                                            startActivity(new Intent(mContext, LoginActivity.class));
                                             finish();
+
                                         }
                                     }, 2000);
                                     break;
@@ -175,7 +179,7 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         ShowDialogUtil.dismissDialogs();
-        if (null!=handler){
+        if (null != handler) {
             handler.removeCallbacksAndMessages(null);
         }
     }

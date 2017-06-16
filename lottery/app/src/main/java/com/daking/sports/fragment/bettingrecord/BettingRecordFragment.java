@@ -134,10 +134,10 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            LogUtil.e("====getBettingRecords===========" + message);
+                            try {   LogUtil.e("====getBettingRecords===========" + message);
                             bettingRecordRsp = gson.fromJson(message, BettingRecordRsp.class);
                             stopView();
-                            try {
+
                                 if (null == bettingRecordRsp) {
                                     ShowDialogUtil.showSystemFail(getActivity());
                                     return;

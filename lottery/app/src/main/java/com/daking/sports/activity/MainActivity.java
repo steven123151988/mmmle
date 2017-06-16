@@ -432,13 +432,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
                         goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
-                    case R.id.navigation_ag:
-                        mToolbar.setTitle(getString(R.string.ag));
-                        break;
-                    case R.id.navigation_lottery:
-                        mToolbar.setTitle(getString(R.string.lottery) + "(" + mainMenuRsp.getIfo().getPt_nums() + ")");
-                        ToastUtil.show(mContext, "暂未开放!");
-                        break;
                     default:
                         break;
                 }

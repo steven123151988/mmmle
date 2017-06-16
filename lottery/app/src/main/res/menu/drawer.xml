@@ -27,21 +27,21 @@
             android:icon="@drawable/basketball_left"
             android:title="@string/basketball_gun" />
 
-        <item android:title="其他">
-            <menu>
-                <item
-                    android:id="@+id/navigation_ag"
-                    android:checkable="true"
-                    android:icon="@drawable/ag_left"
-                    android:title="@string/ag" />
+        <!--<item android:title="其他">-->
+            <!--<menu>-->
+                <!--<item-->
+                    <!--android:id="@+id/navigation_ag"-->
+                    <!--android:checkable="true"-->
+                    <!--android:icon="@drawable/ag_left"-->
+                    <!--android:title="@string/ag" />-->
 
-                <item
-                    android:id="@+id/navigation_lottery"
-                    android:checkable="true"
-                    android:icon="@drawable/lottery_left"
-                    android:title="@string/lottery" />
-            </menu>
-        </item>
+                <!--<item-->
+                    <!--android:id="@+id/navigation_lottery"-->
+                    <!--android:checkable="true"-->
+                    <!--android:icon="@drawable/lottery_left"-->
+                    <!--android:title="@string/lottery" />-->
+            <!--</menu>-->
+        <!--</item>-->
     </group>
 
 </menu>

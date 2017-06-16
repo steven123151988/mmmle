@@ -215,8 +215,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             ToastUtil.show(mContext, "两次密码不匹配");
             return;
         }
-        if (money_psw.length() < 6) {
-            ToastUtil.show(mContext, "提款密码为6位数");
+        if (money_psw.length() < 4) {
+            ToastUtil.show(mContext, "提款密码为4位数");
             return;
         }
         if (birthday.length() < 8) {

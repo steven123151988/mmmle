@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_e6e6e6"
         android:orientation="horizontal"
-        android:padding="@dimen/dimen_10">
+        android:padding="@dimen/dimen_5">
 
         <LinearLayout
 

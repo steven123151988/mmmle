@@ -107,7 +107,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                     return;
                 }
                 if (money > max) {
-                    ToastUtil.show(getActivity(), "该支付方式最小充值金额为" + max);
+                    ToastUtil.show(getActivity(), "该支付方式最大充值金额为" + max);
                     return;
                 }
                 if (money >= min && money <= max) {

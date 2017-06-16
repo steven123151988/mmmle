@@ -577,7 +577,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 最后下注结算
      */
     private void getBetting() {
-
+        //先关闭然后再请求不免多次请求
+        dismisspopviw();
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.CHECK_ORDER)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
@@ -604,7 +605,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        dismisspopviw();
+
                         ShowDialogUtil.showSystemFail(mContext);
                     }
                 });
@@ -617,7 +618,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
                         try {
-                            dismisspopviw();
                             LogUtil.e("===========messageR===" + message);
                             getOrderMsgRsp = gosn.fromJson(message, GetOrderMsgRsp.class);
                             if (null == getOrderMsgRsp) {
@@ -627,6 +627,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             switch (getOrderMsgRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     //write success view
+
                                     ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.bet_success), "最高可得" + redf.format(can_win_money) + "彩金！");
                                     if (null == handler) {
                                         handler = new Handler();

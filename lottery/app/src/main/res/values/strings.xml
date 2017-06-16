@@ -66,8 +66,8 @@
     <string name="birthday">生日</string>
     <string name="modify_login_psw">修改登录密码</string>
     <string name="modify_money_psw">修改提款密码</string>
-    <string name="suggest_psw">为了您的额账号安全，我们强烈建议您每30天修改一次密码。</string>
-    <string name="suggest_modify_moneypsw">为了您的资金安全,我们强烈建议您不定时修改密码。</string>
+    <string name="suggest_psw">为了您的额账号安全，我们强烈建议您每30天修改一次密码。账户密码必须6-15个字符,0-9或a-zA-Z.</string>
+    <string name="suggest_modify_moneypsw">为了您的资金安全,我们强烈建议您不定时修改提款密码。密码为4位数字0-9。</string>
     <string name="pswisempty">密码有空值</string>
     <string name="password">原密码</string>
     <string name="newpassword1">新密码</string>
@@ -117,7 +117,7 @@
     <string name="regist_question11">你喜欢的颜色</string>
     <string name="regist_question12">你喜欢的球队</string>
     <string name="regist_question13">你喜欢的球星</string>
-    <string name="regist_null">所填参数有空值，请核对后在提交注册</string>
+    <string name="regist_null">注册资料要全部填写完成才能完成注册。</string>
     <string name="year">年</string>
     <string name="month">月</string>
     <string name="day">日</string>
@@ -127,7 +127,7 @@
     <string name="betting_bill">交易单</string>
     <string name="history_date">日期</string>
     <string name="history_total">投注额</string>
-    <string name="history_total_can">有效金额</string>
+    <string name="history_total_can"> 有效金额</string>
     <string name="history_win_or_lose">输/赢</string>
     <string name="login_err">登陆失败</string>
     <string name="please_typein_money">请输入金额</string>
@@ -155,7 +155,7 @@
     <string name="betting_finish">赛事已关闭！</string>
     <string name="init_money">0.00</string>
     <string name="app_support_lowest_sdk">APP支持安卓最低版本为4.0</string>
-    <string name="net_error">网络连接有问题，请检查</string>
+    <string name="net_error">网络连接有问题,请检查！</string>
     <string name="error">错误</string>
     <string name="sorry">Sorry...</string>
     <string name="bet_min">赛事最小投注额为</string>
