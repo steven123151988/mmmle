@@ -85,6 +85,15 @@ public class GetOrderMsgRsp implements Serializable {
         private String str;
         private String json_paras;
         private String token;
+        private String Money;
+
+        public String getMoney() {
+            return Money;
+        }
+
+        public void setMoney(String money) {
+            Money = money;
+        }
 
         public String getToken() {
             return token;

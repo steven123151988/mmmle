@@ -504,7 +504,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ShowDialogUtil.showSystemFail(mContext);
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });
             }
@@ -606,7 +606,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                     @Override
                     public void run() {
 
-                        ShowDialogUtil.showSystemFail(mContext);
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });
             }
@@ -627,7 +627,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             switch (getOrderMsgRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     //write success view
-
+                                    SharePreferencesUtil.addString(mContext, SportsKey.ACCOUNT_MONEY, getOrderMsgRsp.getIfo().getMoney());
                                     ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.bet_success), "最高可得" + redf.format(can_win_money) + "彩金！");
                                     if (null == handler) {
                                         handler = new Handler();

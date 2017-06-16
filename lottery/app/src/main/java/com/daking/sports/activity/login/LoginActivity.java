@@ -112,7 +112,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showSystemFail(mContext);
+                            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
 

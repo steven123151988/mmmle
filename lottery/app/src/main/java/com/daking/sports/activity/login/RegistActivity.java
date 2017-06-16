@@ -280,7 +280,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                             loginRsp = gson.fromJson(message2, LoginRsp.class);
                             if (null == loginRsp) {
                                 //展示失败消息
-                                ShowDialogUtil.showSystemFail(mContext);
+                                ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                                 return;
                             }
                             switch (loginRsp.getCode()) {

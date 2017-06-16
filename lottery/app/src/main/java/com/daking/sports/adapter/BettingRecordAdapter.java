@@ -89,10 +89,32 @@ public class BettingRecordAdapter extends BaseAdapter {
         }
         viewHolder.tv_B.setText("时间：" + mifo.get(position).getBetTime());
         viewHolder.tv_C.setText("单号：" + mifo.get(position).getID());
-        viewHolder.tv_D.setText(mifo.get(position).getMiddle().getLeag());
-        viewHolder.tv_E.setText(mifo.get(position).getMiddle().getMid());
-        viewHolder.tv_F.setText(mifo.get(position).getMiddle().getTeam());
-        viewHolder.tv_G.setText(mifo.get(position).getMiddle().getRate());
+        if (mifo.get(position).getMiddle().getLeag().equals("")){
+            viewHolder.tv_D.setVisibility(view.GONE);
+        }else{
+            viewHolder.tv_D.setVisibility(View.VISIBLE);
+            viewHolder.tv_D.setText(mifo.get(position).getMiddle().getLeag());
+        }
+
+        if (mifo.get(position).getMiddle().getMid().equals("")){
+            viewHolder.tv_E.setVisibility(view.GONE);
+        }else{
+            viewHolder.tv_E.setVisibility(View.VISIBLE);
+            viewHolder.tv_E.setText(mifo.get(position).getMiddle().getMid());
+        }
+
+        if (mifo.get(position).getMiddle().getTeam().equals("")){
+            viewHolder.tv_F.setVisibility(view.GONE);
+        }else{
+            viewHolder.tv_F.setVisibility(View.VISIBLE);
+            viewHolder.tv_F.setText(mifo.get(position).getMiddle().getTeam());
+        }
+        if (mifo.get(position).getMiddle().getRate().equals("")){
+            viewHolder.tv_G.setVisibility(view.GONE);
+        }else{
+            viewHolder.tv_G.setVisibility(View.VISIBLE);
+            viewHolder.tv_G.setText(mifo.get(position).getMiddle().getRate());
+        }
         viewHolder.tv_H.setText("投注: " + mifo.get(position).getBetScore());
         viewHolder.tv_I.setText("可赢: " + mifo.get(position).getGwin());
         return view;
