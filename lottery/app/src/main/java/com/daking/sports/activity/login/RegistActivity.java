@@ -151,7 +151,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ShowDialogUtil.showSystemFail(mContext);
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });
 
@@ -262,7 +262,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ShowDialogUtil.showSystemFail(mContext);
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });
 

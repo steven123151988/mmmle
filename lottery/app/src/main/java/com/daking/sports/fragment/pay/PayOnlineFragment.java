@@ -155,7 +155,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showSystemFail(getActivity());
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
                 }
@@ -272,7 +272,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showSystemFail(getActivity());
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
                 }

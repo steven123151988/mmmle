@@ -243,7 +243,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ShowDialogUtil.showSystemFail(mContext);
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });
             }

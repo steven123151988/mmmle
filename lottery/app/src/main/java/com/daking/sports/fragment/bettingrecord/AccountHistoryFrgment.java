@@ -65,7 +65,7 @@ public class AccountHistoryFrgment extends BaseFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showSystemFail(getActivity());
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
                 }

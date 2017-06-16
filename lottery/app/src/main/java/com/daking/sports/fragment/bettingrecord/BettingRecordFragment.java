@@ -119,7 +119,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                         @Override
                         public void run() {
                             stopView();
-                            ShowDialogUtil.showSystemFail(getActivity());
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
                 }

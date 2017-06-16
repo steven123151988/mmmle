@@ -168,7 +168,7 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showSystemFail(getActivity());
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
                 }

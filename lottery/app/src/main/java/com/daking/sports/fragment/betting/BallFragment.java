@@ -139,10 +139,7 @@ public class BallFragment extends BaseFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (!NetUtil.checkNetworkState()){
-                                ToastUtil.show(getActivity(),"网络连接有问题！");
-                                return;
-                            }
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                             iv_system_error.setVisibility(View.VISIBLE);
                             iv_system_error.setImageResource(R.drawable.konglong4);
                         }
