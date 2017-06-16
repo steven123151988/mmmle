@@ -5,12 +5,12 @@
     android:background="@color/white_ffffff"
     android:orientation="vertical">
 
-    <com.yalantis.phoenix.PullToRefreshView
-        android:visibility="gone"
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    <!--<com.yalantis.phoenix.PullToRefreshView-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/pull_to_refresh"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+    <!--</com.yalantis.phoenix.PullToRefreshView>-->
         <ListView
             android:id="@+id/lv_betting"
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:divider="@color/red_84201e"
             android:dividerHeight="1dp" />
 
-    </com.yalantis.phoenix.PullToRefreshView>
+
 
     <ImageView
         android:id="@+id/iv_system_error"

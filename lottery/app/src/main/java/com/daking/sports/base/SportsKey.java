@@ -59,5 +59,6 @@ public class SportsKey {
     public static final String BANK_ACCOUNT = "band_account";
     public static final String CHG_BANK = "chg_bank";
     public static final String RECORDS_POSITION = "records_position";
+    public static final String ACCOUNT_MONEY = "accountmoney";
 
 }

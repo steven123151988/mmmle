@@ -111,19 +111,19 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     private void getballView(String ball, String type) {
         switch(ball){
             case SportsKey.FOOTBALL:
-                ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
-                ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
-                tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
-                tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
-                tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
-                break;
-            case SportsKey.BASKETBALL:
                 ll_football.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 ll_basketball.setBackgroundColor(getResources().getColor(R.color.red_84201e));
                 ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
                 tv_football.setTextColor(getResources().getColor(R.color.black_08090b));
                 tv_basketball.setTextColor(getResources().getColor(R.color.white_ffffff));
+                tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
+                break;
+            case SportsKey.BASKETBALL:
+                ll_football.setBackgroundColor(getResources().getColor(R.color.red_84201e));
+                ll_basketball.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                ll_shixun.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
+                tv_football.setTextColor(getResources().getColor(R.color.white_ffffff));
+                tv_basketball.setTextColor(getResources().getColor(R.color.black_08090b));
                 tv_shixun.setTextColor(getResources().getColor(R.color.black_08090b));
                 break;
         }

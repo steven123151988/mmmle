@@ -132,6 +132,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                         tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
                                         tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
                                         tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
+                                        SharePreferencesUtil.addString(getActivity(),SportsKey.ACCOUNT_MONEY,mainIndexRsp.getMember().getMoney() );
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -236,9 +237,78 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      * 跳转到AG真人视频面页
      */
     private void gotoAG() {
-        intent = new Intent(getActivity(), WebViewActivity.class);
-        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
-        intent.putExtra(SportsKey.WEBVIEW_URL, SportsAPI.AG);
-        startActivity(intent);
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, "main")
+//                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+//                .build();
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.AG)
+//                .post(requestBody)
+//                .build();
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ShowDialogUtil.showSystemFail(getActivity());
+//                        }
+//                    });
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                message = response.body().string();
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                LogUtil.e("===============initHomeIndex=========" + message);
+//                                Gson gson = new Gson();
+//                                mainIndexRsp = gson.fromJson(message, MainIndexRsp.class);
+//                                if (null == mainIndexRsp) {
+//                                    ShowDialogUtil.showSystemFail(getActivity());
+//                                    return;
+//                                }
+//                                //跑马灯的逻辑
+//                                runhorseLight(mainIndexRsp.getNotice());
+//                                switch (mainIndexRsp.getCode()) {
+//                                    case SportsKey.TYPE_ZERO:
+//                                        //修改UI必须在主线程
+//                                        tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
+//                                        tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
+//                                        tv_C.setText(mainIndexRsp.getIfo().getM_League());
+//                                        tv_D.setText(mainIndexRsp.getIfo().getMB_Ball() + " : " + mainIndexRsp.getIfo().getTG_Ball());
+//                                        tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
+//                                        tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
+//                                        SharePreferencesUtil.addString(getActivity(),SportsKey.ACCOUNT_MONEY,mainIndexRsp.getMember().getMoney() );
+//                                        break;
+//                                    case SportsKey.TYPE_NINE:
+//                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+//                                        break;
+//                                }
+//
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                ShowDialogUtil.showSystemFail(getActivity());
+//                            } finally {
+//                            }
+//
+//                        }
+//                    });
+//
+//                }
+//
+//            }
+//        });
+//        intent = new Intent(getActivity(), WebViewActivity.class);
+//        intent.putExtra(SportsKey.WEBVIEW_TITLE, getResources().getString(R.string.ag));
+//        intent.putExtra(SportsKey.WEBVIEW_URL,;
+//        startActivity(intent);
     }
 }

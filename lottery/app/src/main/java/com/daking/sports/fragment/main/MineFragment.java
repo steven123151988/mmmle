@@ -39,7 +39,7 @@ import okhttp3.Response;
  */
 public class MineFragment extends BaseFragment implements View.OnClickListener {
     private ServiceFragment serviceFragment;
-    private TextView tv_name;
+    private TextView tv_name,tv_account_money;
     private FirstFragment firstFragment;
     private LoginRsp loginRsp;
     private String message;
@@ -55,7 +55,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.rl_6).setOnClickListener(this);
         view.findViewById(R.id.rl_7).setOnClickListener(this);
         tv_name = (TextView) view.findViewById(R.id.tv_name);
+        tv_account_money= (TextView) view.findViewById(R.id.tv_account_money);
         tv_name.setText(SharePreferencesUtil.getString(getActivity(), SportsKey.USER_NAME, ""));
+        String money= SharePreferencesUtil.getString(getActivity(),SportsKey.ACCOUNT_MONEY,"0");
+        tv_account_money.setText("账户余额："+money);
         return view;
     }
 

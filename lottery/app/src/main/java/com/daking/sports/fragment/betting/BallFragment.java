@@ -40,7 +40,6 @@ import okhttp3.Response;
 
 public class BallFragment extends BaseFragment {
     private BettingAdapter bettingAdapter;
-    private PullToRefreshView mPullToRefreshView;
     private ListView lv_betting;
     private String ball, balltype;
     private BallGQRsp ballGQRsp;
@@ -56,8 +55,6 @@ public class BallFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_football, null);
         iv_system_error = (ImageView) view.findViewById(R.id.iv_system_error);
         iv_system_error.setVisibility(View.GONE);
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setVisibility(view.VISIBLE);
 
         if (null != getArguments().getString(SportsKey.BALL)) {
             ball = getArguments().getString(SportsKey.BALL);
@@ -68,18 +65,6 @@ public class BallFragment extends BaseFragment {
         LogUtil.e("===BallFragment==type=======" + ball + balltype);
         lv_betting = (ListView) view.findViewById(R.id.lv_betting);
 
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                        getballmsg(ball, balltype);
-                    }
-                }, 1000);
-            }
-        });
         return view;
     }
 
@@ -164,10 +149,10 @@ public class BallFragment extends BaseFragment {
                         @Override
                         public void run() {
                             try {
-                                LogUtil.e("=====getballmsg====="+message);
+                                LogUtil.e("=====getballmsg=====" + message);
                                 ballGQRsp = gson.fromJson(message, BallGQRsp.class);
                                 if (null == ballGQRsp) {
-                                    mPullToRefreshView.setVisibility(View.GONE);
+
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     iv_system_error.setImageResource(R.drawable.konglong1);
                                     return;
@@ -195,27 +180,22 @@ public class BallFragment extends BaseFragment {
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
                                         break;
                                     case SportsKey.TYPE_SEVEN:
-                                        mPullToRefreshView.setVisibility(View.GONE);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         iv_system_error.setImageResource(R.drawable.konglong1);
                                         break;
                                     case SportsKey.TYPE_EIGHT:
-                                        mPullToRefreshView.setVisibility(View.GONE);
                                         iv_system_error.setImageResource(R.drawable.konglong1);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;
                                     case SportsKey.TYPE_1000:
-                                        mPullToRefreshView.setVisibility(View.GONE);
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;
                                     case SportsKey.TYPE_1001:
-                                        mPullToRefreshView.setVisibility(View.GONE);
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;
                                     case SportsKey.TYPE_1002:
-                                        mPullToRefreshView.setVisibility(View.GONE);
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         break;

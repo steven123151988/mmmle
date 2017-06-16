@@ -25,7 +25,7 @@ public class SportsAPI {
     public static final String MEM_CAPITAL_FLOW="member/member/mem_capital_flow";
     public static final String INCOME_POST="pay/payonline/income_post";//请求第3方
     public static final String NEWS="http://hg0909.com/index.php/Help/promotion";
-    public static final String AG ="http://gci.6686.me:81/magingame/NewPlaza31/?pid=C39&stamp=1494492228780";
+    public static final String AG ="zrsx/index/show";
     public static final String HELP="http://hg0909.com/index.php/Help";
     public static final String COMPANY_INCOME_H5="http://hg0909.com/index.php/Bank/listPay";//公司入款说明
 
