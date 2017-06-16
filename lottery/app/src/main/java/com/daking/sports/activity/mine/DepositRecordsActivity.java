@@ -43,13 +43,8 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
         ll_incomerecords.setOnClickListener(this);
         ll_takeoutrecords=fuck(R.id.ll_takeoutrecords);
         ll_takeoutrecords.setOnClickListener(this);
-
         getFirstView();
-
-
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -68,9 +63,6 @@ public class DepositRecordsActivity  extends BaseActivity implements View.OnClic
                 setBallMessage("withdraw");
                 showFragmentViews(incomeRecordsFragment);
                 break;
-
-
-
         }
     }
 

@@ -93,7 +93,7 @@ public class AccountHistoryFrgment extends BaseFragment {
                                         break;
                                     case SportsKey.TYPE_NINETEEN:
                                         //没记录
-                                        ToastUtil.show(getActivity(),"暂时没有记录！");
+                                        ToastUtil.show(getActivity(), "暂时没有记录！");
                                         break;
                                 }
 

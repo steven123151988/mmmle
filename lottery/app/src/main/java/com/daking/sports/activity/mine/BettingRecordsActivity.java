@@ -75,8 +75,6 @@ public class BettingRecordsActivity extends BaseActivity  implements View.OnClic
         rb_left.setBackgroundColor(getResources().getColor(R.color.white_ffffff));
         rb_right.setBackgroundColor(getResources().getColor(R.color.red_84201e));
         rb_right.setTextColor(getResources().getColor(R.color.white_ffffff));
-
-
         if (null==transactionFragment){
             transactionFragment=new TransactionFragment();
         }

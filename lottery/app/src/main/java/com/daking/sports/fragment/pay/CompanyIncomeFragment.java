@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.ProviderInfo;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private EditText ed_card_ower;
     private String card_ower_name;
     private LoginRsp LoginRsp;
+    private Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,6 +84,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         tv_card_name = (TextView) view.findViewById(R.id.tv_card_name);
         tv_banknum = (TextView) view.findViewById(R.id.tv_banknum);
         tv_bankname = (TextView) view.findViewById(R.id.tv_bankname);
+
         return view;
     }
 
@@ -364,8 +367,18 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                                 }
                                 switch (LoginRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
-                                        ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), LoginRsp.getIfo());
-                                        getActivity().finish();
+                                        ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), LoginRsp.getMsg());
+                                        if (null == handler) {
+                                            handler = new Handler();
+                                        }
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ShowDialogUtil.dismissDialogs();
+                                                getActivity().finish();
+                                            }
+                                        }, 2500);
+
                                         break;
                                     default:
                                         ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), LoginRsp.getMsg());
@@ -390,4 +403,12 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ShowDialogUtil.dismissDialogs();
+        if (null != handler) {
+            handler.removeCallbacksAndMessages(null);
+        }
+    }
 }

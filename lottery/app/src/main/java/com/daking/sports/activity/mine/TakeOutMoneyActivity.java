@@ -60,13 +60,6 @@ public class TakeOutMoneyActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_back:

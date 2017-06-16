@@ -1,6 +1,7 @@
 package com.daking.sports.fragment.IncomeAndTakeOut;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
@@ -91,8 +93,8 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
 
     private void getIncomeRecords(String type, final int page) {
         LogUtil.e("======page=========" + page);
-        if (page > 1) {
-            beginLoadingMore();
+        if (page==1){
+            adapter = new IncomeAdapter(getActivity());
         }
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "capital")
@@ -114,7 +116,6 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            stopView();
                             ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                         }
                     });
@@ -129,7 +130,6 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
                         @Override
                         public void run() {
                             try {
-                                stopView();
                                 LogUtil.e("====getIncomeRecords===========" + message);
                                 incomeRep = gson.fromJson(message, IncomeRep.class);
                                 if (null == incomeRep) {
@@ -176,18 +176,57 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        beginRefreshing();
-        page = 1;
-        getIncomeRecords(paytype, page);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                beginRefreshing();
+                page = 1;
+                getIncomeRecords(paytype, page);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                // 加载完毕后在 UI 线程结束下拉刷新
+                mRefreshLayout.endRefreshing();
+
+            }
+        }.execute();
+
     }
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        page++;
-        if (page <= incomeRep.getPages()) {
-            getIncomeRecords(paytype, page);
-        }
-        return false;
+        // 如果网络可用，则异步加载网络数据，并返回 true，显示正在加载更多
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                page++;
+                if (page <= incomeRep.getPages()) {
+                    getIncomeRecords(paytype, page);
+                } else {
+                    if (null != getActivity()) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtil.show(getActivity(), "没有更多数据了！");
+                            }
+                        });
+                    }
+
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                // 加载完毕后在 UI 线程结束加载更多
+                mRefreshLayout.endLoadingMore();
+            }
+        }.execute();
+
+        return true;
+
     }
 
     // 通过代码方式控制进入正在刷新状态。应用场景：某些应用在 activity 的 onStart 方法中调用，自动进入正在刷新状态获取最新数据
@@ -200,11 +239,4 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
         mRefreshLayout.beginLoadingMore();
     }
 
-    /**
-     * 停止动画
-     */
-    private void stopView() {
-        mRefreshLayout.endRefreshing();
-        mRefreshLayout.endLoadingMore();
-    }
 }

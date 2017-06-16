@@ -65,7 +65,6 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
         btn_confirm.setOnClickListener(this);
         btn_money_confirm = fuck(R.id.btn_money_confirm);
         btn_money_confirm.setOnClickListener(this);
-
     }
 
     @Override
@@ -86,7 +85,6 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
                 money_psw3 = et_money_psw3.getText().toString().replace(" ", "");
                 changePsw(money_psw1, money_psw2, money_psw3, "withdraw");
                 break;
-
         }
 
     }
@@ -166,11 +164,8 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
                         } finally {
 
                         }
-
                     }
                 });
-
-
             }
         });
     }

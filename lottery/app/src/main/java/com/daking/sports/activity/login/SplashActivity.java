@@ -44,10 +44,10 @@ public class SplashActivity extends BaseActivity {
                     }
                 }, 2500);
             } else {
-                ShowDialogUtil.showFailDialog(mContext,getString(R.string.sorry), getString(R.string.app_support_lowest_sdk));
+                ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.app_support_lowest_sdk));
             }
         } else {
-            ShowDialogUtil.showFailDialog(mContext,getString(R.string.sorry),getString(R.string.net_error));
+            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
         }
     }
 
@@ -61,10 +61,6 @@ public class SplashActivity extends BaseActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
     }
-
-
-
-
 
     @Override
     protected void onDestroy() {
