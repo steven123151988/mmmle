@@ -365,6 +365,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                                 switch (LoginRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
                                         ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), LoginRsp.getIfo());
+                                        getActivity().finish();
                                         break;
                                     default:
                                         ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), LoginRsp.getMsg());
