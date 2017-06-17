@@ -87,11 +87,11 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
             case R.id.btn_confirm_pay:
                 banknum = et_banknum.getText().toString().replace(" ", ""); //银行看账号
                 if (TextUtils.isEmpty(bankname)) {
-                    ToastUtil.show(getActivity(), "请选择银行");
+                    ToastUtil.show(getActivity(), getString(R.string.select_bank));
                     return;
                 }
                 if (TextUtils.isEmpty(banknum)) {
-                    ToastUtil.show(getActivity(), "请填写银行卡号");
+                    ToastUtil.show(getActivity(), getString(R.string.typein_banknum));
                     return;
                 }
                 changeBankAccount();

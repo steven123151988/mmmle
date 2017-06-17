@@ -79,6 +79,7 @@
             android:name="com.daking.sports.activity.mine.DepositRecordsActivity"
             android:screenOrientation="portrait" />
         <activity
+        android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
             android:name="com.daking.sports.activity.mine.TakeOutMoneyActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -174,5 +174,7 @@
     <string name="do_not_have_type">暂无有效的充值方式</string>
     <string name="no_more_message">没有更多数据了！</string>
     <string name="type_in_money">请填写提款金额！</string>
-    <string name="not_click_manytimes">请勿多次联系点击！</string>
+    <string name="not_click_manytimes">请勿多次连续点击！</string>
+    <string name="select_bank">请选择银行</string>
+    <string name="typein_banknum">请填写银行卡号！</string>
 </resources>
