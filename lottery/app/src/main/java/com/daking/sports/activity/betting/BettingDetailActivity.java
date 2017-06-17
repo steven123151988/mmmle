@@ -450,33 +450,39 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btn_confirm_bet:
+                //避免多次请求
                 long time = System.currentTimeMillis();
+                LogUtil.e("=========time=========="+time);
+                LogUtil.e("=========mClickTime=========="+mClickTime);
+                LogUtil.e("=========time - mClickTime=========="+(time - mClickTime));
                 if (time - mClickTime <= 2000) {
                      return;
                 }else {
                     mClickTime = time;
-                }
-                if (TextUtils.isEmpty(et_input_money.getText().toString())) {
-                    ToastUtil.show(mContext, getString(R.string.type_in_betting_money));
-                } else {
-                    if (null != getOrderMsgRsp) {
-                        int MIN = Integer.parseInt(getOrderMsgRsp.getIfo().getGMIN_SINGLE());
-                        int MAX = Integer.parseInt(getOrderMsgRsp.getIfo().getGmax());
-                        if (money < MIN) {
-                            ToastUtil.show(mContext, getString(R.string.bet_min) + MIN);
-                            return;
-                        }
-                        if (money > MAX) {
-                            ToastUtil.show(mContext, getString(R.string.bet_max) + MAX);
-                            return;
-                        }
-                        if (MIN <= money && money <= MAX) {
-                            getBetting();
+                    if (TextUtils.isEmpty(et_input_money.getText().toString())) {
+                        ToastUtil.show(mContext, getString(R.string.type_in_betting_money));
+                    } else {
+                        if (null != getOrderMsgRsp) {
+                            int MIN = Integer.parseInt(getOrderMsgRsp.getIfo().getGMIN_SINGLE());
+                            int MAX = Integer.parseInt(getOrderMsgRsp.getIfo().getGmax());
+                            if (money < MIN) {
+                                ToastUtil.show(mContext, getString(R.string.bet_min) + MIN);
+                                return;
+                            }
+                            if (money > MAX) {
+                                ToastUtil.show(mContext, getString(R.string.bet_max) + MAX);
+                                return;
+                            }
+                            if (MIN <= money && money <= MAX) {
+                                getBetting();
+                            }
+
                         }
 
                     }
-
                 }
+
+
                 break;
             case R.id.iv_right:
                 dismisspopviw();
@@ -539,12 +545,18 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             switch (getOrderMsgRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     if (null == popupWindow) {
-                                        showPopwindow(getOrderMsgRsp);
+                                        if (!isFinishing()){
+                                            showPopwindow(getOrderMsgRsp);
+                                        }
+
                                     } else {
                                         if (popupWindow.isShowing()) {
                                             popupWindow.dismiss();
                                         } else {
-                                            showPopwindow(getOrderMsgRsp);
+                                            if (!isFinishing()){
+                                                showPopwindow(getOrderMsgRsp);
+                                            }
+
                                         }
                                     }
                                     break;
@@ -640,6 +652,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             }
                             switch (getOrderMsgRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
+                                    dismisspopviw();
                                     //write success view
                                     SharePreferencesUtil.addString(mContext, SportsKey.ACCOUNT_MONEY, getOrderMsgRsp.getIfo().getMoney());
                                     ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.bet_success), "最高可得" + redf.format(can_win_money) + "彩金！");
@@ -651,6 +664,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                         public void run() {
                                             ShowDialogUtil.dismissDialogs();
                                             if (sdk_version > 20) {
+                                                dismisspopviw();
                                                 mExplosionField = ExplosionField.attach2Window(BettingDetailActivity.this);
                                                 mExplosionField.addListener(popView.findViewById(R.id.main_pop));
                                             }

@@ -67,6 +67,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private String card_ower_name;
     private LoginRsp LoginRsp;
     private Handler handler;
+    private long mClickTime, mClickTime2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,10 +107,27 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.rl_bank:
-                setupViewpager();
+                //避免多次请求
+                long time = System.currentTimeMillis();
+                if (time - mClickTime2 <= 3000) {
+                    ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
+                    return;
+                } else {
+                    mClickTime2 = time;
+                    setupViewpager();
+                }
+
                 break;
             case R.id.rl_type:
-                setupRecyclerView();//listview样式
+                //避免多次请求
+                long time2 = System.currentTimeMillis();
+                if (time2 - mClickTime <= 3000) {
+                    ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
+                    return;
+                } else {
+                    mClickTime = time2;
+                    setupRecyclerView();//listview样式
+                }
                 break;
             case R.id.rl_pay_time:
                 TimeSelectUtil timeSelectUtil = new TimeSelectUtil();
@@ -195,14 +213,17 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      */
     private void setupViewpager() {
         list_name = new ArrayList<>();
-        int size = compannyIncomeRsp.getIfo().size();
-
-        for (int i = 0; i < size; i++) {
-            list_name.add(compannyIncomeRsp.getIfo().get(i).getBank());
-        }
-        if (null == list_name) {
+        if (null == compannyIncomeRsp) {
             ToastUtil.show(getActivity(), getString(R.string.do_not_have_type));
             return;
+        }
+        int size = compannyIncomeRsp.getIfo().size();
+        if (size == 0) {
+            ToastUtil.show(getActivity(), getString(R.string.do_not_have_type));
+            return;
+        }
+        for (int i = 0; i < size; i++) {
+            list_name.add(compannyIncomeRsp.getIfo().get(i).getBank());
         }
         final ArrayList<MenuEntity> list = new ArrayList<>();
         for (int i = 0; i < list_name.size(); i++) {

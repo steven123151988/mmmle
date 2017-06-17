@@ -150,72 +150,76 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
     private void takeOutMoney() {
         money = et_money.getText().toString().replace(" ", "");//提款金额
         takeoutmoney_psw = et_takeoutmoney_psw.getText().toString().replace(" ", ""); //提款密码
-        if (TextUtils.isEmpty(money) || TextUtils.isEmpty(takeoutmoney_psw)) {
-            ToastUtil.show(getActivity(), getResources().getString(R.string.accountisempty));
+        if (TextUtils.isEmpty(money)) {
+            ToastUtil.show(getActivity(),getString(R.string.type_in_money));
             return;
-        } else {
-            RequestBody requestBody = new FormBody.Builder()
-                    .add(SportsKey.FNNAME, "draw")
-                    .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                    .add(SportsKey.PASSWORD, takeoutmoney_psw)
-                    .add(SportsKey.MONEY, money)
-                    .build();
-
-            final okhttp3.Request request = new okhttp3.Request.Builder()
-                    .url(SportsAPI.BASE_URL + SportsAPI.MEM_ONLINE_POST)
-                    .post(requestBody)
-                    .build();
-            OkHttpClient okHttpClient = new OkHttpClient();
-            okHttpClient.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    if (null != getActivity()) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
-                            }
-                        });
-                    }
-
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    message = response.body().string();
-                    if (null != getActivity()) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    LogUtil.e("========message========" + message);
-                                    loginRsp = gson.fromJson(message, LoginRsp.class);
-                                    if (null == loginRsp) {
-                                        ShowDialogUtil.showSystemFail(getActivity());
-                                        return;
-                                    }
-                                    switch (loginRsp.getCode()) {
-                                        case SportsKey.TYPE_ZERO:
-                                            ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), loginRsp.getMsg());
-                                            break;
-                                        default:
-                                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), loginRsp.getMsg());
-                                            break;
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                    ShowDialogUtil.showSystemFail(getActivity());
-                                } finally {
-
-                                }
-
-                            }
-                        });
-                    }
-                }
-            });
-
         }
+        if (TextUtils.isEmpty(takeoutmoney_psw)) {
+            ToastUtil.show(getActivity(), getString(R.string.type_in_psw));
+            return;
+        }
+
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, "draw")
+                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+                .add(SportsKey.PASSWORD, takeoutmoney_psw)
+                .add(SportsKey.MONEY, money)
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url(SportsAPI.BASE_URL + SportsAPI.MEM_ONLINE_POST)
+                .post(requestBody)
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                if (null != getActivity()) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                LogUtil.e("========message========" + message);
+                                loginRsp = gson.fromJson(message, LoginRsp.class);
+                                if (null == loginRsp) {
+                                    ShowDialogUtil.showSystemFail(getActivity());
+                                    return;
+                                }
+                                switch (loginRsp.getCode()) {
+                                    case SportsKey.TYPE_ZERO:
+                                        ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), loginRsp.getMsg());
+                                        break;
+                                    default:
+                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), loginRsp.getMsg());
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ShowDialogUtil.showSystemFail(getActivity());
+                            } finally {
+
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
 

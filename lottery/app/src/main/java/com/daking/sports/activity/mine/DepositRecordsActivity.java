@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.fragment.IncomeAndTakeOut.IncomeRecordsFragment;
+import com.daking.sports.fragment.IncomeAndTakeout.IncomeRecordsFragment;
 
 /**
  * Created by 18 on 2017/5/9. 存取款记录

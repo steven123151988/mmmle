@@ -16,6 +16,7 @@ import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.AddEdiTextWatchListenerUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -61,6 +62,9 @@ public class PswManagerActivity extends BaseActivity implements View.OnClickList
         et_money_psw1 = (EditText) findViewById(R.id.et_money_psw1);
         et_money_psw2 = (EditText) findViewById(R.id.et_money_psw2);
         et_money_psw3 = (EditText) findViewById(R.id.et_money_psw3);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_money_psw1,4);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_money_psw2,4);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_money_psw3,4);
         btn_confirm = (Button) findViewById(R.id.btn_confirm);
         btn_confirm.setOnClickListener(this);
         btn_money_confirm = fuck(R.id.btn_money_confirm);

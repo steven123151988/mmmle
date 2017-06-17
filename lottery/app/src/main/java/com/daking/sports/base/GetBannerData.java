@@ -1,11 +1,6 @@
 package com.daking.sports.base;
 
 
-import android.support.v4.content.ContextCompat;
-
-import com.daking.sports.R;
-import com.daking.sports.application.ActivityManager;
-import com.daking.sports.application.SportsApplication;
 import com.daking.sports.view.banner.BaseBannerBean;
 
 import java.util.ArrayList;

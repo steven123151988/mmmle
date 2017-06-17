@@ -1,4 +1,4 @@
-package com.daking.sports.fragment.IncomeAndTakeOut;
+package com.daking.sports.fragment.IncomeAndTakeout;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -22,7 +22,6 @@ import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;

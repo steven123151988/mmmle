@@ -45,6 +45,7 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setBuiltInZoomControls(true);
 		webSettings.setSupportZoom(true);
+		webSettings.setUserAgentString("app");
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW); }
 

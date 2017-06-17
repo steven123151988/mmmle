@@ -98,7 +98,7 @@
     <string name="change_banknum">更改账户</string>
     <string name="getmoney_psw">取款密码</string>
     <string name="take_money">提款金额</string>
-    <string name="type_in_psw">请输入取款密码</string>
+    <string name="type_in_psw">请输入取款密码!</string>
     <string name="atleast">最低100元</string>
     <string name="takeout_bank">开户银行:</string>
     <string name="takeout_num">银行账号:</string>
@@ -173,4 +173,6 @@
     <string name="confirm_income">确定充值</string>
     <string name="do_not_have_type">暂无有效的充值方式</string>
     <string name="no_more_message">没有更多数据了！</string>
+    <string name="type_in_money">请填写提款金额！</string>
+    <string name="not_click_manytimes">请勿多次联系点击！</string>
 </resources>
