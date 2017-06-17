@@ -172,5 +172,5 @@
     <string name="company_income_h5">公司入款说明</string>
     <string name="confirm_income">确定充值</string>
     <string name="do_not_have_type">暂无有效的充值方式</string>
-
+    <string name="no_more_message">没有更多数据了！</string>
 </resources>

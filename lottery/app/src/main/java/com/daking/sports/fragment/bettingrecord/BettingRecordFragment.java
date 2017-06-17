@@ -217,7 +217,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtil.show(getActivity(), "没有更多数据了！");
+                                ToastUtil.show(getActivity(),getString(R.string.no_more_message));
                             }
                         });
                     }

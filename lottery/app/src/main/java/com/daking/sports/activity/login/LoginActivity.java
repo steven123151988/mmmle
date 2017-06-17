@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private LoginRsp LoginRsp;
     private TextView tv_center;
     private Gson gson;
+    private Handler handler;
 
 
     @Override
@@ -141,7 +142,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                                     //展示成功的对话框
                                     ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.loginsuccss), LoginRsp.getMsg());
                                     //延迟5秒关闭
-                                    Handler handler = new Handler();
+                                    handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -183,5 +184,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         ShowDialogUtil.dismissDialogs();
+        if (null!=handler){
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 }

@@ -168,11 +168,7 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
     }
 
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ShowDialogUtil.dismissDialogs();
-    }
+
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
@@ -203,13 +199,14 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
             protected Void doInBackground(Void... params) {
                 page++;
                 if (page <= incomeRep.getPages()) {
+                    beginLoadingMore();
                     getIncomeRecords(paytype, page);
                 } else {
                     if (null != getActivity()) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtil.show(getActivity(), "没有更多数据了！");
+                                ToastUtil.show(getActivity(),getString(R.string.no_more_message));
                             }
                         });
                     }
@@ -237,6 +234,12 @@ public class IncomeRecordsFragment extends BaseFragment implements BGARefreshLay
     // 通过代码方式控制进入加载更多状态
     public void beginLoadingMore() {
         mRefreshLayout.beginLoadingMore();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ShowDialogUtil.dismissDialogs();
     }
 
 }

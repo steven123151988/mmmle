@@ -61,7 +61,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private PopupWindow popupWindow;
     private View popView;
     private TextView tv_score_A, tv_score_B;
-    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K, tv_center_down;  //对话框的textview
+    //对话框的textview
+    private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F, tv_G, tv_H, tv_I, tv_J, tv_K, tv_center_down;
     private Button btn_confirm_bet;
     private EditText et_input_money;
     private double can_win_money;
@@ -73,9 +74,12 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private BettingDetailRsp.IfoBean.BetmsgBean BetmsgBean;
     private LinearLayout ll_ball;
     private String ball, ballteam, balltype;
-    private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;  //足球头部的球数据
-    private TextView tv_basketball_mb1, tv_basketball_mb2, tv_basketball_mb3, tv_basketball_mb4, tv_basketball_mb5, tv_basketball_mb6, tv_basketball_mb7, tv_jiashi;
-    private TextView tv_basketball_tg1, tv_basketball_tg2, tv_basketball_tg3, tv_basketball_tg4, tv_basketball_tg5, tv_basketball_tg6, tv_basketball_tg7;
+    //足球头部的球数据
+    private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;
+    private TextView tv_basketball_mb1, tv_basketball_mb2, tv_basketball_mb3, tv_basketball_mb4,
+            tv_basketball_mb5, tv_basketball_mb6, tv_basketball_mb7, tv_jiashi;
+    private TextView tv_basketball_tg1, tv_basketball_tg2, tv_basketball_tg3,
+            tv_basketball_tg4, tv_basketball_tg5, tv_basketball_tg6, tv_basketball_tg7;
     private Double rate;
     private int money;
     private GetOrderMsgRsp getOrderMsgRsp;
@@ -96,7 +100,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         ballteam = getIntent().getStringExtra(SportsKey.BALL_TEAM);
         initView();
         LogUtil.e("=======ball===========" + ball + "===" + balltype + "mid" + mid);
-
     }
 
     @Override
@@ -452,9 +455,11 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         int MAX = Integer.parseInt(getOrderMsgRsp.getIfo().getGmax());
                         if (money < MIN) {
                             ToastUtil.show(mContext, getString(R.string.bet_min) + MIN);
+                            return;
                         }
                         if (money > MAX) {
                             ToastUtil.show(mContext, getString(R.string.bet_max) + MAX);
+                            return;
                         }
                         if (MIN <= money && money <= MAX) {
                             getBetting();

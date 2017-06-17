@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mToolbar.setTitle(getString(R.string.app_name));
         //这句一定要在下面几句之前调用，不然就会出现点击无反应
         setSupportActionBar(mToolbar);
-//        setNavigationViewItemClickListener();
+        setNavigationViewItemClickListener();
         //ActionBarDrawerToggle配合Toolbar，实现Toolbar上菜单按钮开关效果。
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                     ToastUtil.show(mContext, "暂时没有您选择的赛事！");
                                     break;
                                 default:
-                                    ShowDialogUtil.showFailDialog(mContext,getString(R.string.sorry),mainMenuRsp.getMsg());
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), mainMenuRsp.getMsg());
                                     break;
                             }
                         } catch (Exception e) {
@@ -402,7 +402,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * 左侧空间点击事件的监听
      */
     private void setNavigationViewItemClickListener() {
-
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -415,21 +414,35 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         getFistView();
                         break;
                     case R.id.navigation_football_dan:
-                        mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
+                        if (null == mainMenuRsp) {
+                            mToolbar.setTitle(getString(R.string.football_dan));
+                        } else {
+                            mToolbar.setTitle(getString(R.string.football_dan) + "(" + mainMenuRsp.getIfo().getFt_ds_nums() + ")");
+                        }
                         goBetting(SportsKey.FOOTBALL, SportsKey.JRSS);
-
                         break;
                     case R.id.navigation_football_gun:
-                        mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
+                        if (null == mainMenuRsp) {
+                            mToolbar.setTitle(getString(R.string.football_gun));
+                        } else {
+                            mToolbar.setTitle(getString(R.string.football_gun) + "(" + mainMenuRsp.getIfo().getFt_gq_nums() + ")");
+                        }
                         goBetting(SportsKey.FOOTBALL, SportsKey.GQ);
-
                         break;
                     case R.id.navigation_basketball_dan:
-                        mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
+                        if (null == mainMenuRsp) {
+                            mToolbar.setTitle(getString(R.string.basketball_dan));
+                        } else {
+                            mToolbar.setTitle(getString(R.string.basketball_dan) + "(" + mainMenuRsp.getIfo().getBk_ds_nums() + ")");
+                        }
                         goBetting(SportsKey.BASKETBALL, SportsKey.JRSS);
                         break;
                     case R.id.navigation_basketball_gun:
-                        mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
+                        if (null == mainMenuRsp) {
+                            mToolbar.setTitle(getString(R.string.basketball_gun));
+                        } else {
+                            mToolbar.setTitle(getString(R.string.basketball_gun) + "(" + mainMenuRsp.getIfo().getBk_gq_nums() + ")");
+                        }
                         goBetting(SportsKey.BASKETBALL, SportsKey.GQ);
                         break;
                     default:

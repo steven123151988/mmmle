@@ -51,7 +51,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private EditText et_money_psw;//提款密码
     private EditText et_answer;//回答问题
     private EditText et_birthday;
-    private String agent;
     private String account;
     private String psw;
     private String psw2;
@@ -63,7 +62,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private TextView tv_center, tv_check_question;
     private SweetSheet mSweetSheet;
     private MenuEntity menuEntity;
-    private String question;
     private RelativeLayout rl;
     private ImageView iv_back;
     private LoginRsp loginRsp;
@@ -280,7 +278,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                             loginRsp = gson.fromJson(message2, LoginRsp.class);
                             if (null == loginRsp) {
                                 //展示失败消息
-                                ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
+                                ShowDialogUtil.showSystemFail(mContext);
                                 return;
                             }
                             switch (loginRsp.getCode()) {
