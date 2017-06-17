@@ -66,6 +66,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     private int min, max;//能充值的最大值最小值
     private PayIncomeRsp payIncomeRsp;
     private Gson gson = new Gson();
+    private long mClickTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,7 +86,16 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_choose_type://选择充值方式
-                getPayUrl();
+                //避免多次请求
+                long time = System.currentTimeMillis();
+                if (time - mClickTime <= 2500) {
+                    ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
+                    return;
+                } else {
+                    mClickTime = time;
+                    getPayUrl();
+                }
+
                 break;
 
             case R.id.btn_confirm_pay:

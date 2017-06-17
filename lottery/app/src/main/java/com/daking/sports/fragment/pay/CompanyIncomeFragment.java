@@ -67,7 +67,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private String card_ower_name;
     private LoginRsp LoginRsp;
     private Handler handler;
-    private long mClickTime, mClickTime2;
+    private long mClickTime, mClickTime2, mClickTime3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,7 +109,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
             case R.id.rl_bank:
                 //避免多次请求
                 long time = System.currentTimeMillis();
-                if (time - mClickTime2 <= 3000) {
+                if (time - mClickTime2 <= 2500) {
                     ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
                     return;
                 } else {
@@ -130,10 +130,18 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 }
                 break;
             case R.id.rl_pay_time:
-                TimeSelectUtil timeSelectUtil = new TimeSelectUtil();
-                if (null != getActivity() && null != tv_time) {
-                    timeSelectUtil.selectTime(getActivity(), tv_time);
+                long time3 = System.currentTimeMillis();
+                if (time3 - mClickTime3 <= 2500) {
+                    ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
+                    return;
+                } else {
+                    mClickTime3 = time3;
+                    TimeSelectUtil timeSelectUtil = new TimeSelectUtil();
+                    if (null != getActivity() && null != tv_time) {
+                        timeSelectUtil.selectTime(getActivity(), tv_time);
+                    }
                 }
+
                 break;
             case R.id.btn_confirm_pay:
                 companypost();

@@ -93,7 +93,7 @@
     <string name="pay_time">汇款时间</string>
     <string name="confirm_pay">确定提交</string>
     <string name="bank_name">银行账户</string>
-    <string name="bank_num">请输入完整的银行账号</string>
+    <string name="bank_num">请输入银行账号</string>
     <string name="takeout_money">我要提款</string>
     <string name="change_banknum">更改账户</string>
     <string name="getmoney_psw">取款密码</string>
