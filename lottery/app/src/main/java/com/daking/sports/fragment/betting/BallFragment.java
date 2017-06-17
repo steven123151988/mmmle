@@ -139,7 +139,7 @@ public class BallFragment extends BaseFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
+//                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                             iv_system_error.setVisibility(View.VISIBLE);
                             iv_system_error.setImageResource(R.drawable.konglong4);
                         }

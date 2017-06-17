@@ -73,10 +73,10 @@
                         android:layout_toRightOf="@+id/iv_psw1"
                         android:background="@null"
                         android:hint="@string/password"
-                        android:textColorHint="@color/white_ffffff"
                         android:maxLength="15"
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
+                        android:textColorHint="@color/white_ffffff"
                         android:textSize="@dimen/dimen_16" />
                 </RelativeLayout>
 
@@ -104,7 +104,6 @@
                         android:src="@mipmap/login_psw" />
 
                     <EditText
-                        android:textColorHint="@color/white_ffffff"
                         android:id="@+id/et_psw2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -116,6 +115,7 @@
                         android:maxLength="15"
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
+                        android:textColorHint="@color/white_ffffff"
                         android:textSize="@dimen/dimen_16" />
                 </RelativeLayout>
 
@@ -142,7 +142,6 @@
                         android:src="@mipmap/login_psw" />
 
                     <EditText
-                        android:textColorHint="@color/white_ffffff"
                         android:id="@+id/et_psw3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -154,6 +153,7 @@
                         android:maxLength="15"
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
+                        android:textColorHint="@color/white_ffffff"
                         android:textSize="@dimen/dimen_16" />
                 </RelativeLayout>
 
@@ -188,10 +188,10 @@
                     android:textSize="@dimen/dimen_16" />
 
                 <TextView
-                    android:paddingRight="@dimen/dimen_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_5"
+                    android:paddingRight="@dimen/dimen_20"
                     android:text="@string/suggest_modify_moneypsw"
                     android:textColor="@color/white_ffffff"
                     android:textSize="@dimen/dimen_16" />
@@ -220,7 +220,6 @@
                         android:src="@mipmap/login_psw" />
 
                     <EditText
-                        android:textColorHint="@color/white_ffffff"
                         android:id="@+id/et_money_psw1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -232,6 +231,7 @@
                         android:maxLength="15"
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
+                        android:textColorHint="@color/white_ffffff"
                         android:textSize="@dimen/dimen_16" />
                 </RelativeLayout>
 
@@ -259,7 +259,6 @@
                         android:src="@mipmap/login_psw" />
 
                     <EditText
-                        android:textColorHint="@color/white_ffffff"
                         android:id="@+id/et_money_psw2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -267,10 +266,13 @@
                         android:layout_marginRight="@dimen/dimen_20"
                         android:layout_toRightOf="@+id/iv_money_psw2"
                         android:background="@null"
+                        android:digits="0123456789"
                         android:hint="@string/newpassword1"
-                        android:maxLength="15"
+                        android:inputType="number"
+                        android:maxLength="4"
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
+                        android:textColorHint="@color/white_ffffff"
                         android:textSize="@dimen/dimen_16" />
                 </RelativeLayout>
 
@@ -297,7 +299,6 @@
                         android:src="@mipmap/login_psw" />
 
                     <EditText
-                        android:textColorHint="@color/white_ffffff"
                         android:id="@+id/et_money_psw3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -305,19 +306,22 @@
                         android:layout_marginRight="@dimen/dimen_20"
                         android:layout_toRightOf="@+id/iv_money_psw3"
                         android:background="@null"
+                        android:digits="0123456789"
                         android:hint="@string/newpassword2"
-                        android:maxLength="15"
+                        android:inputType="number"
+                        android:maxLength="4"
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
+                        android:textColorHint="@color/white_ffffff"
                         android:textSize="@dimen/dimen_16" />
                 </RelativeLayout>
 
                 <Button
 
-                    android:layout_marginBottom="@dimen/dimen_50"
                     android:id="@+id/btn_money_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="@dimen/dimen_50"
                     android:layout_marginLeft="@dimen/dimen_20"
                     android:layout_marginRight="@dimen/dimen_20"
                     android:layout_marginTop="@dimen/dimen_30"

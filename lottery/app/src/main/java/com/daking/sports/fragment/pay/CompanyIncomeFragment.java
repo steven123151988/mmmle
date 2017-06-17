@@ -49,7 +49,7 @@ import okhttp3.Response;
 
 public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener {
     private EditText et_money;
-    private String money, type, time;
+    private String money, type;
     private SweetSheet mSweetSheet;
     private RelativeLayout rl;
     private TextView tv_type;

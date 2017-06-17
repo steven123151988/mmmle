@@ -87,6 +87,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private String message, message2;
     private int bet_position;
     private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
+    private long mClickTime;
 
 
     @Override
@@ -437,6 +438,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         //进入退出的动画
         popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         popupWindow.showAtLocation(popView, Gravity.BOTTOM, 0, 0);
+
+
     }
 
 
@@ -447,6 +450,12 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btn_confirm_bet:
+                long time = System.currentTimeMillis();
+                if (time - mClickTime <= 2000) {
+                     return;
+                }else {
+                    mClickTime = time;
+                }
                 if (TextUtils.isEmpty(et_input_money.getText().toString())) {
                     ToastUtil.show(mContext, getString(R.string.type_in_betting_money));
                 } else {
