@@ -2,6 +2,7 @@ package com.daking.sports.view.banner;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -19,6 +20,7 @@ import com.daking.sports.application.SportsApplication;
 import com.daking.sports.base.GetBannerData;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.util.LogUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -91,9 +93,9 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 	}
 	//传进来数据
 	@Override
-	public void update(Object _data) {
-		bannerData = (List<BaseBannerBean>) _data;
-		mAdapter = new BannerAdapter(GetBannerData.getBannerData());
+	public void update(Object data) {
+		bannerData = (List<BaseBannerBean>) data;
+		mAdapter = new BannerAdapter(bannerData);
 		mViewPager.setAdapter(mAdapter);
 		mIndicator.setViewPager(mViewPager);
 		initCutHandler();
@@ -202,16 +204,8 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 		public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = new ImageView(getContext());
             final BaseBannerBean d = (BaseBannerBean) datas.get(position);
-			if (d.getPosition()==1){
-				imageView.setBackground(ContextCompat.getDrawable(SportsApplication.getInstance(), R.mipmap.ad1));
-			}
-			if (d.getPosition()==2){
-				imageView.setBackground(ContextCompat.getDrawable(SportsApplication.getInstance(), R.mipmap.ad2));
-			}
-			if (d.getPosition()==3){
-				imageView.setBackground(ContextCompat.getDrawable(SportsApplication.getInstance(), R.mipmap.ad3));
-			}
-//			Picasso.with(context).load(d.getUrl()).into(imageView);
+			//http://www.jb51.net/article/108596.htm  picasso用法
+			Picasso.with(context).load(d.getImg()).fit().into(imageView);
 //			((ViewPager)container).addView(imageView, position);
 			((ViewPager)container).addView(imageView);
 			imageView.setOnClickListener(new OnClickListener() {

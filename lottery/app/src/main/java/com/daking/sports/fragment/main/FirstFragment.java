@@ -19,16 +19,18 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.MainIndexRsp;
 import com.daking.sports.util.LogUtil;
-import com.daking.sports.util.NetUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.view.banner.BannerBaseView;
+import com.daking.sports.view.banner.BaseBannerBean;
 import com.daking.sports.view.banner.MainBannerView;
 import com.dalong.marqueeview.MarqueeView;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -54,17 +56,10 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first, null);
         initView();
-
         return view;
     }
 
     private void initView() {
-        //轮播图
-        RelativeLayout bannerContent = (RelativeLayout) view.findViewById(R.id.banner_cont);
-        BannerBaseView banner = new MainBannerView(getActivity());
-        bannerContent.addView(banner);
-        banner.update(GetBannerData.getBannerData());
-
         tv_A = (TextView) view.findViewById(R.id.tv_A);
         tv_B = (TextView) view.findViewById(R.id.tv_B);
         tv_C = (TextView) view.findViewById(R.id.tv_C);
@@ -107,7 +102,6 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                         }
                     });
                 }
-
             }
 
             @Override
@@ -129,6 +123,17 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                 runhorseLight(mainIndexRsp.getNotice());
                                 switch (mainIndexRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
+                                        //轮播图
+                                        RelativeLayout bannerContent = (RelativeLayout) view.findViewById(R.id.banner_cont);
+                                        BannerBaseView banner = new MainBannerView(getActivity());
+                                        bannerContent.addView(banner);
+
+                                        List<BaseBannerBean> list = new ArrayList<BaseBannerBean>();
+                                        int size=mainIndexRsp.getSlide().size();
+                                        for (int i=0;i<size;i++){
+                                            list.add(new BaseBannerBean(mainIndexRsp.getSlide().get(i).getUrl(),mainIndexRsp.getSlide().get(i).getImg()));
+                                        }
+                                        banner.update(list);
                                         //修改UI必须在主线程
                                         tv_A.setText(mainIndexRsp.getIfo().getMB_Win_Rate());
                                         tv_B.setText(mainIndexRsp.getIfo().getMB_Team());
