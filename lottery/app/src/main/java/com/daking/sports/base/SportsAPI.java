@@ -3,7 +3,7 @@ package com.daking.sports.base;
 
 public class SportsAPI {
     public static final String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
-    public static  String BASE_URL = "";
+    public static  String BASE_URL = "http://sport.api.lebole5.com";
     public static final String CONFIG_INDEX = "/config/index";//请求全局变量
     public static final String REGIST = "/member/register/check_reg";//注册
     public static final String CHECK_USER = "/member/register/chk_user";//检查用户名称

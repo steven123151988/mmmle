@@ -40,7 +40,6 @@ public class SplashActivity extends BaseActivity {
     private String message;
     private ConfigRsp configRsp;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +79,7 @@ public class SplashActivity extends BaseActivity {
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url("http://sport.api.lebole5.com" + SportsAPI.CONFIG_INDEX)
+                .url(SportsAPI.BASE_URL + SportsAPI.CONFIG_INDEX)
                 .post(requestBody)
                 .build();
 
@@ -88,14 +87,12 @@ public class SplashActivity extends BaseActivity {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });
-
             }
 
             @Override
@@ -110,14 +107,15 @@ public class SplashActivity extends BaseActivity {
                             configRsp = gson.fromJson(message, ConfigRsp.class);
                             //返回信息解析失败，提示系统异常、
                             if (null == configRsp) {
-                                //展示失败消息
                                 ShowDialogUtil.showSystemFail(mContext);
                                 return;
                             }
                             switch (configRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-                                   SportsAPI.BASE_URL=configRsp.getIfo().getUrl();
-                                    initLogType();
+                                    if (null != configRsp.getIfo().getUrl() && !configRsp.getIfo().getUrl().equals("")) {
+                                        SportsAPI.BASE_URL = configRsp.getIfo().getUrl();
+                                        initLogType();
+                                    }
                                     break;
                                 default:
                                     ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), configRsp.getMsg());
@@ -143,7 +141,6 @@ public class SplashActivity extends BaseActivity {
         } else {
             startActivity(new Intent(this, MainActivity.class));
         }
-
         finish();
     }
 

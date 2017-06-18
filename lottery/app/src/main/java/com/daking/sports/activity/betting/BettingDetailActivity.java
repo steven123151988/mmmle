@@ -72,7 +72,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     private Gson gosn = new Gson();
     private BettingDetailRsp bettingDetailRsp;
     private BettingDetailRsp.IfoBean.BetmsgBean BetmsgBean;
-    private LinearLayout ll_ball;
+    private LinearLayout ll_ball, ll_jiashi, ll_basketball_tg6, ll_basketball_mb6;
     private String ball, ballteam, balltype;
     //足球头部的球数据
     private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;
@@ -134,6 +134,9 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         tv_center.setVisibility(View.VISIBLE);
         ll_title_basketball = fuck(R.id.ll_title_basketball);//篮球头部球类信息
         ll_title_football = fuck(R.id.ll_title_football);//足球头部球类信息
+        ll_jiashi = fuck(R.id.ll_jiashi); //篮球加时
+        ll_basketball_tg6 = fuck(R.id.ll_basketball_tg6);
+        ll_basketball_mb6 = fuck(R.id.ll_basketball_mb6);
         iv_betting_bg = fuck(R.id.iv_betting_bg);
         switch (ball) {
             case SportsKey.FOOTBALL:
@@ -301,10 +304,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                                 tv_basketball_tg5.setText(bettingDetailRsp.getIfo().getScore_t4());
                                                 tv_basketball_tg7.setText(bettingDetailRsp.getIfo().getTG_Ball());
                                                 if (bettingDetailRsp.getIfo().getScore_tot().equals("-")) {
-                                                    tv_basketball_tg6.setVisibility(View.GONE);
-                                                    tv_basketball_mb6.setVisibility(View.GONE);
-                                                    tv_jiashi.setVisibility(View.GONE);
+                                                    ll_jiashi.setVisibility(View.GONE);
+                                                    ll_basketball_tg6.setVisibility(View.GONE);
+                                                    ll_basketball_mb6.setVisibility(View.GONE);
                                                 } else {
+                                                    ll_jiashi.setVisibility(View.VISIBLE);
+                                                    ll_basketball_tg6.setVisibility(View.VISIBLE);
+                                                    ll_basketball_mb6.setVisibility(View.VISIBLE);
                                                     tv_basketball_mb6.setText(bettingDetailRsp.getIfo().getScore_mot());
                                                     tv_basketball_tg6.setText(bettingDetailRsp.getIfo().getScore_tot());
                                                 }
@@ -451,8 +457,8 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 //避免多次请求
                 long time = System.currentTimeMillis();
                 if (time - mClickTime <= 2000) {
-                     return;
-                }else {
+                    return;
+                } else {
                     mClickTime = time;
                     if (TextUtils.isEmpty(et_input_money.getText().toString())) {
                         ToastUtil.show(mContext, getString(R.string.type_in_betting_money));
@@ -536,14 +542,14 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             switch (getOrderMsgRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
                                     if (null == popupWindow) {
-                                        if (!isFinishing()){
+                                        if (!isFinishing()) {
                                             showPopwindow(getOrderMsgRsp);
                                         }
                                     } else {
                                         if (popupWindow.isShowing()) {
                                             popupWindow.dismiss();
                                         } else {
-                                            if (!isFinishing()){
+                                            if (!isFinishing()) {
                                                 showPopwindow(getOrderMsgRsp);
                                             }
                                         }
