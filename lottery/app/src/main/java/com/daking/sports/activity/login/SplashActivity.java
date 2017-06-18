@@ -8,10 +8,27 @@ import android.os.Handler;
 import com.daking.sports.R;
 import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseActivity;
+import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.ConfigRsp;
+import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.NetUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.nio.channels.spi.AbstractInterruptibleChannel;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static com.daking.sports.base.SportsAPI.BASE_URL;
 
 
 /**
@@ -20,6 +37,9 @@ import com.daking.sports.util.ShowDialogUtil;
 
 public class SplashActivity extends BaseActivity {
     private int sdk_version = Build.VERSION.SDK_INT;  // 进入之前获取手机的SDK版本号
+    private String message;
+    private ConfigRsp configRsp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +59,7 @@ public class SplashActivity extends BaseActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        initLogType();
-                        finish();
+                        initConfigIndex();
                     }
                 }, 2500);
             } else {
@@ -52,6 +71,70 @@ public class SplashActivity extends BaseActivity {
     }
 
     /**
+     * 请求全局变量
+     */
+    private void initConfigIndex() {
+        RequestBody requestBody = new FormBody.Builder()
+                .add(SportsKey.FNNAME, SportsKey.CONFIG)
+                .add(SportsKey.HOST, "le7")
+                .build();
+
+        final okhttp3.Request request = new okhttp3.Request.Builder()
+                .url("http://sport.api.lebole5.com" + SportsAPI.CONFIG_INDEX)
+                .post(requestBody)
+                .build();
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
+                    }
+                });
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                message = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            LogUtil.e("=======initConfigIndex===" + message);
+                            Gson gson = new Gson();
+                            configRsp = gson.fromJson(message, ConfigRsp.class);
+                            //返回信息解析失败，提示系统异常、
+                            if (null == configRsp) {
+                                //展示失败消息
+                                ShowDialogUtil.showSystemFail(mContext);
+                                return;
+                            }
+                            switch (configRsp.getCode()) {
+                                case SportsKey.TYPE_ZERO:
+                                   SportsAPI.BASE_URL=configRsp.getIfo().getUrl();
+                                    initLogType();
+                                    break;
+                                default:
+                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), configRsp.getMsg());
+                                    break;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ShowDialogUtil.showSystemFail(mContext);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
+    /**
      * 查看登陆状态，若UID为空就要去登陆
      */
     private void initLogType() {
@@ -60,6 +143,8 @@ public class SplashActivity extends BaseActivity {
         } else {
             startActivity(new Intent(this, MainActivity.class));
         }
+
+        finish();
     }
 
     @Override

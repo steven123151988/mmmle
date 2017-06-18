@@ -2,7 +2,10 @@ package com.daking.sports.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.daking.sports.util.LogUtil;
 import com.umeng.analytics.MobclickAgent;
@@ -13,10 +16,10 @@ import com.umeng.message.PushAgent;
 /**
  * 自定义的application类
  */
-public class SportsApplication extends Application  {
+public class SportsApplication extends MultiDexApplication {
     private static SportsApplication instance = null;
-    public static SportsApplication getInstance()
-    {
+
+    public static SportsApplication getInstance() {
         return instance;
     }
 
@@ -27,12 +30,18 @@ public class SportsApplication extends Application  {
         //设置日志等级
         LogUtil.setLevel(2);
         //设置友盟统计场景
-        MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType. E_UM_NORMAL);
+        MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
         //友盟日志加密6.0.0版本及以后
         MobclickAgent.enableEncrypt(true);
         //注册友盟推送
         initUmengPush();
         registerActivityLifecycleCallbacks();
+    }
+    //TODO Didn't find class on path: dexpathlist
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(SportsApplication.this);
     }
 
     /**
@@ -45,7 +54,7 @@ public class SportsApplication extends Application  {
             @Override
             public void onSuccess(String deviceToken) {
                 //注册成功会返回device token
-                LogUtil.e("=======deviceToken======="+deviceToken);
+                LogUtil.e("=======deviceToken=======" + deviceToken);
             }
 
             @Override
@@ -91,7 +100,6 @@ public class SportsApplication extends Application  {
             }
         });
     }
-
 
 
 }

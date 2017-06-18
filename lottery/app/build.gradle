@@ -9,7 +9,16 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0.0"
+        multiDexEnabled true // Didn't find class on path: dexpathlist
+
+
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g" // Didn't find class on path: dexpathlist
+
+    }
+
     buildTypes {
         release {
             minifyEnabled false

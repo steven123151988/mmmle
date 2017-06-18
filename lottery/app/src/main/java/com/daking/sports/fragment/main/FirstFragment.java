@@ -52,6 +52,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private String message;
     private LoginRsp loginRsp;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first, null);
@@ -131,9 +132,9 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                         bannerContent.addView(banner);
 
                                         List<BaseBannerBean> list = new ArrayList<BaseBannerBean>();
-                                        int size=mainIndexRsp.getSlide().size();
-                                        for (int i=0;i<size;i++){
-                                            list.add(new BaseBannerBean(mainIndexRsp.getSlide().get(i).getUrl(),mainIndexRsp.getSlide().get(i).getImg()));
+                                        int size = mainIndexRsp.getSlide().size();
+                                        for (int i = 0; i < size; i++) {
+                                            list.add(new BaseBannerBean(mainIndexRsp.getSlide().get(i).getUrl(), mainIndexRsp.getSlide().get(i).getImg()));
                                         }
                                         banner.update(list);
                                         //修改UI必须在主线程
@@ -144,6 +145,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                         tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
                                         tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
                                         SharePreferencesUtil.addString(getActivity(), SportsKey.ACCOUNT_MONEY, mainIndexRsp.getMember().getMoney());
+                                        SharePreferencesUtil.addBoolean(getActivity(), SportsKey.IF_GET_LUNBOTU, true);
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -172,7 +174,11 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         MobclickAgent.onPageStart("FirstFragment");
         //跑马灯
         runhorseLight(" ");
-
+        LogUtil.e("=============onResume============");
+        //如果因为没登录请求没成功主页数据（轮播图等），在这里再请求一次
+        if (!SharePreferencesUtil.getBoolean(getActivity(), SportsKey.IF_GET_LUNBOTU, false)) {
+            initHomeIndex();
+        }
     }
 
     /**

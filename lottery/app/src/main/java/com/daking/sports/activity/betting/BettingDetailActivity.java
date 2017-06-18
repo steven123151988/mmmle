@@ -186,11 +186,9 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
         // 根据赛事类型选择头部显示的图片
         switch (balltype) {
             case SportsKey.TYPE_ONE + "":
-//                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_ing, null));
                 iv_betting_bg.setBackground(ContextCompat.getDrawable(mContext, R.mipmap.betting_ing));
                 break;
             case SportsKey.TYPE_ZERO + "":
-//                iv_betting_bg.setBackground(getResources().getDrawable(R.mipmap.betting_notstart, null));
                 iv_betting_bg.setBackground(ContextCompat.getDrawable(mContext, R.mipmap.betting_notstart));
                 break;
         }
@@ -452,9 +450,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
             case R.id.btn_confirm_bet:
                 //避免多次请求
                 long time = System.currentTimeMillis();
-                LogUtil.e("=========time=========="+time);
-                LogUtil.e("=========mClickTime=========="+mClickTime);
-                LogUtil.e("=========time - mClickTime=========="+(time - mClickTime));
                 if (time - mClickTime <= 2000) {
                      return;
                 }else {
@@ -476,13 +471,9 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                             if (MIN <= money && money <= MAX) {
                                 getBetting();
                             }
-
                         }
-
                     }
                 }
-
-
                 break;
             case R.id.iv_right:
                 dismisspopviw();
@@ -548,7 +539,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                         if (!isFinishing()){
                                             showPopwindow(getOrderMsgRsp);
                                         }
-
                                     } else {
                                         if (popupWindow.isShowing()) {
                                             popupWindow.dismiss();
@@ -556,7 +546,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                             if (!isFinishing()){
                                                 showPopwindow(getOrderMsgRsp);
                                             }
-
                                         }
                                     }
                                     break;

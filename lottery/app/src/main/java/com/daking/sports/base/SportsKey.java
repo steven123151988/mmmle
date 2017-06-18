@@ -22,6 +22,7 @@ public class SportsKey {
     public static final int TYPE_1000 = 1000;
     public static final int TYPE_1001 = 1001;
     public static final int TYPE_1002 = 1002;
+    public static final String HOST = "host";
     public static final String USER_NAME = "username";
     public static final String PASSWORD = "password";
     public static final String LANGUAGE = "langx";
@@ -60,5 +61,7 @@ public class SportsKey {
     public static final String CHG_BANK = "chg_bank";
     public static final String RECORDS_POSITION = "records_position";
     public static final String ACCOUNT_MONEY = "accountmoney";
+    public static final String IF_GET_LUNBOTU = "ifgetlunbotu";
+    public static final String CONFIG = "config";
 
 }
