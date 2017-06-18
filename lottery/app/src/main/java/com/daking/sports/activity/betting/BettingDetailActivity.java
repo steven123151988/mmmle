@@ -456,7 +456,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
             case R.id.btn_confirm_bet:
                 //避免多次请求
                 long time = System.currentTimeMillis();
-                if (time - mClickTime <= 2000) {
+                if (time - mClickTime <= 2500) {
                     return;
                 } else {
                     mClickTime = time;

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">皇冠6686</string>
-    <string name="mainpage">购彩</string>
+    <string name="mainpage">首页</string>
     <string name="betting">投注</string>
     <string name="score">比分</string>
     <string name="prize">开奖</string>
@@ -13,7 +13,6 @@
     <string name="foget_psw">忘记密码</string>
     <string name="login">登录</string>
     <string name="logout">退出登录</string>
-    <string name="horseRacelamp">我们将一如既往的为您提供更优质的服务,请遵守游戏规则，否则。。。</string>
     <string name="pc_pay">充值</string>
     <string name="pc_getoutmoney">提款</string>
     <string name="pc_betting_history">投注记录</string>
@@ -177,4 +176,5 @@
     <string name="not_click_manytimes">请勿多次连续点击！</string>
     <string name="select_bank">请选择银行</string>
     <string name="typein_banknum">请填写银行卡号！</string>
+    <string name="take_out_money">提款金额最低100元！</string>
 </resources>

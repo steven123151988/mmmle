@@ -87,8 +87,6 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
                         }
                     });
                 }
-
-
             }
 
             @Override
@@ -151,11 +149,15 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
         money = et_money.getText().toString().replace(" ", "");//提款金额
         takeoutmoney_psw = et_takeoutmoney_psw.getText().toString().replace(" ", ""); //提款密码
         if (TextUtils.isEmpty(money)) {
-            ToastUtil.show(getActivity(),getString(R.string.type_in_money));
+            ToastUtil.show(getActivity(), getString(R.string.type_in_money));
             return;
         }
         if (TextUtils.isEmpty(takeoutmoney_psw)) {
             ToastUtil.show(getActivity(), getString(R.string.type_in_psw));
+            return;
+        }
+        if (Integer.parseInt(money) < 100) {
+            ToastUtil.show(getActivity(), getString(R.string.take_out_money));
             return;
         }
 

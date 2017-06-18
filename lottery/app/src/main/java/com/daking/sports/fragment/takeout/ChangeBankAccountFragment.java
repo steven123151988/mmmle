@@ -1,5 +1,6 @@
 package com.daking.sports.fragment.takeout;
 
+import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,9 +8,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.mine.TakeOutMoneyActivity;
@@ -17,6 +21,7 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.CloseSoftInputFromWindowUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -43,7 +48,7 @@ import okhttp3.Response;
  * Created by 18 on 2017/5/10.  更改银行账号
  */
 
-public class ChangeBankAccountFragment extends BaseFragment implements View.OnClickListener {
+public class ChangeBankAccountFragment extends BaseFragment implements View.OnClickListener, View.OnLayoutChangeListener {
     private EditText et_banknum;
     private String banknum, bankname;
     private SweetSheet mSweetSheet;
@@ -57,6 +62,11 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
     private Gson gson = new Gson();
     private Handler handler;
     private long mClickTime;
+    //屏幕高度
+    private int screenHeight = 0;
+    //软件盘弹起后所占高度阀值
+    private int keyHeight = 0;
+    private boolean ifopen = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +77,18 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
         view.findViewById(R.id.btn_confirm_pay).setOnClickListener(this);
         tv_bank = (TextView) view.findViewById(R.id.tv_bank);
         rl = (RelativeLayout) view.findViewById(R.id.rl);
+        //获取屏幕高度
+        screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+        //阀值设置为屏幕高度的1/3
+        keyHeight = screenHeight / 3;
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //添加layout大小发生改变监听器
+        rl.addOnLayoutChangeListener(this);
     }
 
     @Override
@@ -81,7 +102,20 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
                     return;
                 } else {
                     mClickTime = time;
-                    selectBankCard();
+                    //键盘打开的时间先关闭
+                    if (ifopen) {
+                        CloseSoftInputFromWindowUtil.closeSoftInputFromWindow();
+                    }
+                    if (null == handler) {
+                        handler = new Handler();
+                    }
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            selectBankCard();
+                        }
+                    }, 250);
+
                 }
                 break;
             case R.id.btn_confirm_pay:
@@ -119,7 +153,6 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
                         sb.append(xrp.getAttributeValue(0));
                         // 获取一个标签中的各个数据
                         stringList.add(sb.toString());
-                        LogUtil.e("===============" + sb.toString());
                     }
                 }
                 xrp.next();
@@ -250,5 +283,17 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
             handler.removeCallbacksAndMessages(null);
         }
 
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
+        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+            ifopen = true;
+//            Toast.makeText(getActivity(), "监听到软键盘弹起...", Toast.LENGTH_SHORT).show();
+        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+            ifopen = false;
+//            Toast.makeText(getActivity(), "监听到软件盘关闭...", Toast.LENGTH_SHORT).show();
+        }
     }
 }

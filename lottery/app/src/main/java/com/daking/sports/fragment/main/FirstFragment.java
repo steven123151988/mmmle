@@ -57,7 +57,6 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first, null);
         initView();
-        LogUtil.e("=============onCreateView=======");
         initHomeIndex();
         return view;
     }
