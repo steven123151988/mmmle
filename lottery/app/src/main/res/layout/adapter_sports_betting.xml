@@ -32,7 +32,7 @@
             android:layout_marginRight="@dimen/dimen_10"
             android:layout_marginTop="@dimen/dimen_5"
             android:layout_toRightOf="@+id/tv_1"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:orientation="vertical">
 
             <TextView
@@ -60,7 +60,7 @@
             android:layout_marginBottom="@dimen/dimen_5"
             android:layout_marginRight="@dimen/dimen_10"
             android:layout_marginTop="@dimen/dimen_5"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:orientation="vertical">
 
             <TextView

@@ -18,7 +18,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_weight="0.75"
             android:orientation="vertical">
 
             <TextView
@@ -75,7 +75,13 @@
 
 
     </LinearLayout>
+    <LinearLayout
 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black_08090b"
+        />
     <ListView
         android:id="@+id/lv_history"
         android:layout_width="match_parent"
@@ -83,5 +89,12 @@
         android:layout_marginTop="@dimen/dimen_1"
         android:divider="@color/black_333333"
         android:dividerHeight="1dp"
+        />
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black_08090b"
         />
 </LinearLayout>

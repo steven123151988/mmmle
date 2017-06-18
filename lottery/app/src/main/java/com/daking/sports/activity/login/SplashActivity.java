@@ -112,8 +112,8 @@ public class SplashActivity extends BaseActivity {
                             }
                             switch (configRsp.getCode()) {
                                 case SportsKey.TYPE_ZERO:
-                                    if (null != configRsp.getIfo().getUrl() && !configRsp.getIfo().getUrl().equals("")) {
-                                        SportsAPI.BASE_URL = configRsp.getIfo().getUrl();
+                                    if (null != configRsp.getIfo().getBase_url() && !configRsp.getIfo().getBase_url().equals("")) {
+                                        SportsAPI.BASE_URL = configRsp.getIfo().getBase_url();
                                         initLogType();
                                     }
                                     break;

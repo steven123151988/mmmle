@@ -51,13 +51,13 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F;
     private String message;
     private LoginRsp loginRsp;
+    private String service_url,help_url;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_first, null);
         initView();
-        initHomeIndex();
         return view;
     }
 
@@ -144,7 +144,9 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                         tv_E.setText(mainIndexRsp.getIfo().getTG_Win_Rate());
                                         tv_F.setText(mainIndexRsp.getIfo().getTG_Team());
                                         SharePreferencesUtil.addString(getActivity(), SportsKey.ACCOUNT_MONEY, mainIndexRsp.getMember().getMoney());
-                                        SharePreferencesUtil.addBoolean(getActivity(), SportsKey.IF_GET_LUNBOTU, true);
+                                        SportsAPI.HELP=mainIndexRsp.getHelp_url();
+                                        SportsAPI.SERVICE_URL=mainIndexRsp.getService_url();
+                                        LogUtil.e("=======mainIndexRsp.getService_url()=========="+mainIndexRsp.getService_url());
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -175,9 +177,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
         runhorseLight(" ");
         LogUtil.e("=============onResume============");
         //如果因为没登录请求没成功主页数据（轮播图等），在这里再请求一次
-        if (!SharePreferencesUtil.getBoolean(getActivity(), SportsKey.IF_GET_LUNBOTU, false)) {
-            initHomeIndex();
-        }
+        initHomeIndex();
     }
 
     /**

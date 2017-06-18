@@ -2,6 +2,7 @@ package com.daking.sports.fragment.pay;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.PayIncomeRsp;
 import com.daking.sports.json.PayStypeRsp;
+import com.daking.sports.util.CloseSoftInputFromWindowUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -48,7 +50,7 @@ import okhttp3.Response;
  * Created by 18 on 2017/5/7. 在线入款面页
  */
 
-public class PayOnlineFragment extends BaseFragment implements View.OnClickListener {
+public class PayOnlineFragment extends BaseFragment implements View.OnClickListener, View.OnLayoutChangeListener {
     private LinearLayout ll_first_view;
     private WebView mWebView;
     private Button btn_confirm_pay;
@@ -67,6 +69,12 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     private PayIncomeRsp payIncomeRsp;
     private Gson gson = new Gson();
     private long mClickTime;
+    //屏幕高度
+    private int screenHeight = 0;
+    //软件盘弹起后所占高度阀值
+    private int keyHeight = 0;
+    private boolean ifopen = false;
+    private Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,7 +87,18 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         tv_type = (TextView) view.findViewById(R.id.tv_type);
         btn_confirm_pay.setOnClickListener(this);
         view.findViewById(R.id.rl_choose_type).setOnClickListener(this);
+        //获取屏幕高度
+        screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+        //阀值设置为屏幕高度的1/3
+        keyHeight = screenHeight / 3;
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //添加layout大小发生改变监听器
+        rl.addOnLayoutChangeListener(this);
     }
 
     @Override
@@ -93,9 +112,22 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                     return;
                 } else {
                     mClickTime = time;
-                    getPayUrl();
-                }
+                    if (ifopen) {
+                        CloseSoftInputFromWindowUtil.closeSoftInputFromWindow();
+                        if (null == handler) {
+                            handler = new Handler();
+                        }
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                getPayUrl();
+                            }
+                        }, 150);
+                    } else {
+                        getPayUrl();
+                    }
 
+                }
                 break;
 
             case R.id.btn_confirm_pay:
@@ -136,10 +168,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
                         }
                     });
                 }
-
-
                 break;
-
         }
     }
 
@@ -358,5 +387,18 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     public void onDestroy() {
         super.onDestroy();
         ShowDialogUtil.dismissDialogs();
+        if (null != handler) {
+            handler.removeCallbacksAndMessages(null);
+        }
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
+        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+            ifopen = true;
+        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+            ifopen = false;
+        }
     }
 }

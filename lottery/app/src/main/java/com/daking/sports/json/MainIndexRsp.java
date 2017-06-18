@@ -11,14 +11,18 @@ public class MainIndexRsp  implements Serializable{
 
     /**
      * notice : 尊敬的会员：您好，由于近期部分地区不法分子猖獗跳转本公司域名，请大家切勿相信并存款 ，如有遇到类似问题请您使用浏览器输入 182.16.22.99 进行登入会员账号 ，谢谢
-     * member : {"ID":"4988","Oid":"a5b67d06810c3cc2b229ra2","Online":"0","Language":"zh-cn","UserName":"aadmin","Money":"5863","Money2":"5505","Credit":"14410","Alias":"流枫","contory":"您的手机号码","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-17","LoginTime":"2017-06-17 03:11:11","OnlineTime":"2017-06-17 03:11:11","LogoutTime":"2016-09-20 12:57:41","AddDate":"2016-02-27 01:46:05","EditDate":"2016-02-27","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"鄞州银行","Bank_Account":"1111112222222333333","bank":"鄞州银行","E_Mail":"1111","Phone":"","Notes":"","Withdrawal_Passwd":"1111","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"96e79218965eb72c92a549dd5a330112","ctime":"10","ttime":"2","cmoney":"13401.00","tmoney":"200.00","level_id":"1","agopen":"1","agpan":"C39A","cpopen":"0","gd_cpopen":"1","mgopen":"1","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
-     * slide : [{"img":"http://hg0909.com/Public/images/ad1.jpg","url":"http://hg0909.com/index.php/Help/promotion11"},{"img":"http://hg0909.com/Public/images/ad2.jpg","url":"http://hg0909.com/index.php/Help/promotion31"},{"img":"http://hg0909.com/Public/images/ad3.jpg","url":"http://hg0909.com/index.php/Help/promotion32"}]
+     * member : {"ID":"4988","Oid":"9f500f46d20c3cc2b229ra2","Online":"0","Language":"zh-cn","UserName":"aadmin","Money":"5725","Money2":"5505","Credit":"14410","Alias":"流枫","contory":"您的手机号码","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-18","LoginTime":"2017-06-18 07:05:40","OnlineTime":"2017-06-18 07:05:40","LogoutTime":"2016-09-20 12:57:41","AddDate":"2016-02-27 01:46:05","EditDate":"2016-02-27","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"中国建设银行","Bank_Account":"6217000100010002000","bank":"中国建设银行","E_Mail":"1111","Phone":"","Notes":"","Withdrawal_Passwd":"1111","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"5abd06d6f6ef0e022e11b8a41f57ebda","ctime":"10","ttime":"2","cmoney":"13401.00","tmoney":"200.00","level_id":"1","agopen":"1","agpan":"C39A","cpopen":"0","gd_cpopen":"1","mgopen":"1","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
+     * slide : [{"img":"http://hg0909.com/Public/images/ad1.jpg","url":"http://hg0909.com/index.php/Help/promotion11?act=app"},{"img":"http://hg0909.com/Public/images/ad2.jpg","url":"http://hg0909.com/index.php/Help/promotion31?act=app"},{"img":"http://hg0909.com/Public/images/ad3.jpg","url":"http://hg0909.com/index.php/Help/promotion32?act=app"}]
+     * service_url : https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1
+     * help_url : http://hg0909.com/index.php/Help
      * code : 0
-     * ifo : {"MID":"2784050","M_Start":"2017-06-17 02:30:00","M_League":"澳洲塔斯马尼亚国家超级联赛","MB_Team":"北部流浪","TG_Team":"南霍巴特","M_LetB_RB":"0 / 0.5","M_LetB":"3.5 / 4","MB_Ball":"0","TG_Ball":"1","MB_Win_Rate":"17","MB_Win_Rate_RB":"23","TG_Win_Rate":"1.02","TG_Win_Rate_RB":"1.07","mpid":"57159"}
+     * ifo : {"MID":"628987","M_Start":"2017-06-18 05:00:00","M_League":"WTA诺丁汉公开赛-双打","MB_Team":"莫妮克.亚当萨克/斯托姆.桑德斯(澳洲)","TG_Team":"乔斯林.李博/萝拉.罗布森(大不列颠)","M_LetB_RB":"1.5","M_LetB":"","MB_Ball":"0","TG_Ball":"0","MB_Win_Rate":"1.88","MB_Win_Rate_RB":"0","TG_Win_Rate":"1.88","TG_Win_Rate_RB":"0","mpid":null}
      */
 
     private String notice;
     private MemberBean member;
+    private String service_url;
+    private String help_url;
     private int code;
     private IfoBean ifo;
     private List<SlideBean> slide;
@@ -37,6 +41,22 @@ public class MainIndexRsp  implements Serializable{
 
     public void setMember(MemberBean member) {
         this.member = member;
+    }
+
+    public String getService_url() {
+        return service_url;
+    }
+
+    public void setService_url(String service_url) {
+        this.service_url = service_url;
+    }
+
+    public String getHelp_url() {
+        return help_url;
+    }
+
+    public void setHelp_url(String help_url) {
+        this.help_url = help_url;
     }
 
     public int getCode() {
@@ -66,11 +86,11 @@ public class MainIndexRsp  implements Serializable{
     public static class MemberBean {
         /**
          * ID : 4988
-         * Oid : a5b67d06810c3cc2b229ra2
+         * Oid : 9f500f46d20c3cc2b229ra2
          * Online : 0
          * Language : zh-cn
          * UserName : aadmin
-         * Money : 5863
+         * Money : 5725
          * Money2 : 5505
          * Credit : 14410
          * Alias : 流枫
@@ -85,9 +105,9 @@ public class MainIndexRsp  implements Serializable{
          * Status : 0
          * Send : 0
          * BetType : 0
-         * LoginDate : 2017-06-17
-         * LoginTime : 2017-06-17 03:11:11
-         * OnlineTime : 2017-06-17 03:11:11
+         * LoginDate : 2017-06-18
+         * LoginTime : 2017-06-18 07:05:40
+         * OnlineTime : 2017-06-18 07:05:40
          * LogoutTime : 2016-09-20 12:57:41
          * AddDate : 2016-02-27 01:46:05
          * EditDate : 2016-02-27
@@ -98,9 +118,9 @@ public class MainIndexRsp  implements Serializable{
          * Corprator : baa888
          * Super : aaa888
          * Admin : raadmin888
-         * Bank_Address : 鄞州银行
-         * Bank_Account : 1111112222222333333
-         * bank : 鄞州银行
+         * Bank_Address : 中国建设银行
+         * Bank_Account : 6217000100010002000
+         * bank : 中国建设银行
          * E_Mail : 1111
          * Phone :
          * Notes :
@@ -134,7 +154,7 @@ public class MainIndexRsp  implements Serializable{
          * OP_P_Scene : 500000
          * FS_FS_Bet : 50000
          * FS_FS_Scene : 500000
-         * md5psw : 96e79218965eb72c92a549dd5a330112
+         * md5psw : 5abd06d6f6ef0e022e11b8a41f57ebda
          * ctime : 10
          * ttime : 2
          * cmoney : 13401.00
@@ -921,20 +941,20 @@ public class MainIndexRsp  implements Serializable{
 
     public static class IfoBean {
         /**
-         * MID : 2784050
-         * M_Start : 2017-06-17 02:30:00
-         * M_League : 澳洲塔斯马尼亚国家超级联赛
-         * MB_Team : 北部流浪
-         * TG_Team : 南霍巴特
-         * M_LetB_RB : 0 / 0.5
-         * M_LetB : 3.5 / 4
+         * MID : 628987
+         * M_Start : 2017-06-18 05:00:00
+         * M_League : WTA诺丁汉公开赛-双打
+         * MB_Team : 莫妮克.亚当萨克/斯托姆.桑德斯(澳洲)
+         * TG_Team : 乔斯林.李博/萝拉.罗布森(大不列颠)
+         * M_LetB_RB : 1.5
+         * M_LetB :
          * MB_Ball : 0
-         * TG_Ball : 1
-         * MB_Win_Rate : 17
-         * MB_Win_Rate_RB : 23
-         * TG_Win_Rate : 1.02
-         * TG_Win_Rate_RB : 1.07
-         * mpid : 57159
+         * TG_Ball : 0
+         * MB_Win_Rate : 1.88
+         * MB_Win_Rate_RB : 0
+         * TG_Win_Rate : 1.88
+         * TG_Win_Rate_RB : 0
+         * mpid : null
          */
 
         private String MID;
@@ -950,7 +970,7 @@ public class MainIndexRsp  implements Serializable{
         private String MB_Win_Rate_RB;
         private String TG_Win_Rate;
         private String TG_Win_Rate_RB;
-        private String mpid;
+        private Object mpid;
 
         public String getMID() {
             return MID;
@@ -1056,11 +1076,11 @@ public class MainIndexRsp  implements Serializable{
             this.TG_Win_Rate_RB = TG_Win_Rate_RB;
         }
 
-        public String getMpid() {
+        public Object getMpid() {
             return mpid;
         }
 
-        public void setMpid(String mpid) {
+        public void setMpid(Object mpid) {
             this.mpid = mpid;
         }
     }
@@ -1068,7 +1088,7 @@ public class MainIndexRsp  implements Serializable{
     public static class SlideBean {
         /**
          * img : http://hg0909.com/Public/images/ad1.jpg
-         * url : http://hg0909.com/index.php/Help/promotion11
+         * url : http://hg0909.com/index.php/Help/promotion11?act=app
          */
 
         private String img;

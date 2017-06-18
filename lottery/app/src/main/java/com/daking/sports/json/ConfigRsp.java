@@ -8,9 +8,10 @@ import java.io.Serializable;
 
 public class ConfigRsp implements Serializable {
 
+
     /**
      * code : 0
-     * ifo : {"url":"http://sport.api.lebole5.com"}
+     * ifo : {"base_url":"http://sport.api.lebole5.com"}
      */
 
     private int code;
@@ -43,17 +44,17 @@ public class ConfigRsp implements Serializable {
 
     public static class IfoBean {
         /**
-         * url : http://sport.api.lebole5.com
+         * base_url : http://sport.api.lebole5.com
          */
 
-        private String url;
+        private String base_url;
 
-        public String getUrl() {
-            return url;
+        public String getBase_url() {
+            return base_url;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setBase_url(String base_url) {
+            this.base_url = base_url;
         }
     }
 }

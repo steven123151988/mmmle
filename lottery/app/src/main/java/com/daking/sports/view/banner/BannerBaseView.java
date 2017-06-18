@@ -29,7 +29,7 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 	/**
 	 * banner默认高宽比  height/width = 420/640
 	 */
-	private static final float BANNER_RATIO_DEFAULT = 0.45f;
+	private static final float BANNER_RATIO_DEFAULT = 0.5f;
 
 	/**
 	 * indicator默认高宽比  height/width = 26/750

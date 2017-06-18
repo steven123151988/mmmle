@@ -2,7 +2,7 @@ package com.daking.sports.base;
 
 
 public class SportsAPI {
-    public static final String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
+
     public static  String BASE_URL = "http://sport.api.lebole5.com";
     public static final String CONFIG_INDEX = "/config/index";//请求全局变量
     public static final String REGIST = "/member/register/check_reg";//注册
@@ -27,6 +27,7 @@ public class SportsAPI {
     public static final String INCOME_POST = "/pay/payonline/income_post";//请求第3方
     public static final String NEWS = "http://hg0909.com/index.php/Help/promotion";
     public static final String AG = "/zrsx/index/show";
-    public static final String HELP = "http://hg0909.com/index.php/Help";
+    public static  String HELP = "http://hg0909.com/index.php/Help";
     public static final String COMPANY_INCOME_H5 = "http://hg0909.com/index.php/Bank/listPay";//公司入款说明
+    public static  String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
 }
