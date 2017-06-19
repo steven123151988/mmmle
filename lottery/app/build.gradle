@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        ruiyinSign {
+            keyAlias 'ruiyinsports'
+            keyPassword '775854'
+            storeFile file('F:/develop/AndroidStudioSDK/ruiyinsports.jks')
+            storePassword '775854'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -9,7 +17,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0.0"
-        multiDexEnabled true // Didn't find class on path: dexpathlist
+        multiDexEnabled true
         dexOptions {
             javaMaxHeapSize "4g"
             //对于dex 的--multi-dex 选项设置与预编译的library工程有冲突,因此如果你的应用中包含引用的lirary工程,
@@ -22,6 +30,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.ruiyinSign
         }
     }
 }
@@ -37,8 +46,9 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/gson-2.2.4.jar')
     compile(name: "sweetsheet-release", ext: "aar")
-    compile 'com.nineoldandroids:library:2.4.0'    //sweetsheet用到的开源库
-//    compile 'com.yalantis:phoenix:1.2.3'  现在没使用了
+    compile 'com.nineoldandroids:library:2.4.0'
+    //sweetsheet用到的开源库
+    compile 'com.yalantis:phoenix:1.2.3' 
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.dalong:marqueeview:1.0.0'
@@ -54,6 +64,4 @@ dependencies {
     compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
     // --------------------上拉加载下拉刷新  ----------------------------
     compile 'com.android.support:multidex:1.0.1'
-
-
 }
