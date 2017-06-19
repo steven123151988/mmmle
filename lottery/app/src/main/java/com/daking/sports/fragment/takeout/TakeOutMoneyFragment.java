@@ -48,7 +48,7 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_takeoutmoney, null);
         et_takeoutmoney_psw = (EditText) view.findViewById(R.id.et_takeoutmoney_psw);
-        AddEdiTextWatchListenerUtil.addTextWatchListener(et_takeoutmoney_psw, 6);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_takeoutmoney_psw, 4);
         et_money = (EditText) view.findViewById(R.id.et_money);
         tv_tabkeout_bank = (TextView) view.findViewById(R.id.tv_tabkeout_bank);//银行
         tv_takeout_num = (TextView) view.findViewById(R.id.tv_takeout_num);//银行号码
@@ -204,6 +204,8 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
                                 switch (loginRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
                                         ShowDialogUtil.showSuccessDialog(getActivity(), getString(R.string.sucess_congratulations), loginRsp.getMsg());
+                                        et_takeoutmoney_psw.getText().clear();
+                                        et_money.getText().clear();
                                         break;
                                     default:
                                         ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), loginRsp.getMsg());

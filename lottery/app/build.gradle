@@ -10,6 +10,12 @@ android {
         versionCode 1
         versionName "1.0.0"
         multiDexEnabled true // Didn't find class on path: dexpathlist
+        dexOptions {
+            javaMaxHeapSize "4g"
+            //对于dex 的--multi-dex 选项设置与预编译的library工程有冲突,因此如果你的应用中包含引用的lirary工程,
+            // 需要将预编译设置为false:需要将预编译设置为false
+            preDexLibraries = false
+        }
     }
     useLibrary 'org.apache.http.legacy'
     buildTypes {

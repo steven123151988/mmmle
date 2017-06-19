@@ -1,6 +1,5 @@
 package com.daking.sports.fragment.takeout;
 
-import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,12 +7,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.mine.TakeOutMoneyActivity;
@@ -33,7 +29,6 @@ import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
 
 import java.io.IOException;
-import java.io.PipedReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +75,7 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
         //获取屏幕高度
         screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/3
-        keyHeight = screenHeight / 3;
+        keyHeight = screenHeight / 5;
         return view;
     }
 

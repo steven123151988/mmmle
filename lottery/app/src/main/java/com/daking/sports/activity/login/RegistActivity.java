@@ -67,6 +67,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private LoginRsp loginRsp;
     private Gson gson = new Gson();
     private String message, message2;
+    private long mClickTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +98,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         et_birthday = (EditText) findViewById(R.id.et_birthday);
         AddEdiTextWatchListenerUtil.addTextWatchListener(et_birthday, 8);
         et_money_psw = (EditText) findViewById(R.id.et_money_psw);
-        AddEdiTextWatchListenerUtil.addTextWatchListener(et_money_psw,4);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_money_psw, 4);
         et_answer = (EditText) findViewById(R.id.et_answer);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_center.setVisibility(View.VISIBLE);
@@ -197,6 +198,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
     private void regist() {
         account = et_account.getText().toString().replace(" ", "");
+
         psw = et_psw.getText().toString().replace(" ", "");
         psw2 = et_psw2.getText().toString().replace(" ", "");
         name = et_name.getText().toString().replace(" ", "");
@@ -207,6 +209,10 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 || TextUtils.isEmpty(name) || TextUtils.isEmpty(money_psw)
                 || TextUtils.isEmpty(answer) || TextUtils.isEmpty(birthday)) {
             ToastUtil.show(mContext, getResources().getString(R.string.regist_null));
+            return;
+        }
+        if (account.length()<6){
+            ToastUtil.show(mContext, getResources().getString(R.string.psw_type_error));
             return;
         }
         if (!psw.equals("") && !psw.equals(psw2)) {
@@ -229,6 +235,10 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
      * 带参数注册
      */
     private void gotoRegist() {
+        if (null==check_question){
+            ToastUtil.show(mContext,getString(R.string.plz_select_psw_question));
+            return;
+        }
         RequestBody requestBody = new FormBody.Builder()
                 .add("fnName", "reg")
                 .add("keys", "add")
@@ -402,7 +412,14 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
                 regist();
                 break;
             case R.id.ll_checkquestion:
-                setupRecyclerView();
+                //避免多次请求
+                long time = System.currentTimeMillis();
+                if (time - mClickTime <= 2500) {
+                    return;
+                } else {
+                    mClickTime = time;
+                    setupRecyclerView();
+                }
                 break;
         }
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.daking.sports.R;
@@ -22,6 +23,7 @@ import com.daking.sports.util.ShowDialogUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,13 +50,14 @@ public class BallFragment extends BaseFragment {
     private AbsListViewCompat.OnScrollCallback onScrollCallback;
     private int listview_position = 0;
     private String message;
+    private LinearLayout ll_redline;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_football, null);
         iv_system_error = (ImageView) view.findViewById(R.id.iv_system_error);
         iv_system_error.setVisibility(View.GONE);
-
+        ll_redline = (LinearLayout) view.findViewById(R.id.ll_redline);
         if (null != getArguments().getString(SportsKey.BALL)) {
             ball = getArguments().getString(SportsKey.BALL);
         }
@@ -136,9 +139,9 @@ public class BallFragment extends BaseFragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
                             iv_system_error.setVisibility(View.VISIBLE);
                             iv_system_error.setImageResource(R.drawable.konglong4);
+                            ll_redline.setVisibility(View.GONE);
                         }
                     });
                 }
@@ -156,7 +159,6 @@ public class BallFragment extends BaseFragment {
                                 LogUtil.e("=====getballmsg=====" + message);
                                 ballGQRsp = gson.fromJson(message, BallGQRsp.class);
                                 if (null == ballGQRsp) {
-
                                     iv_system_error.setVisibility(View.VISIBLE);
                                     iv_system_error.setImageResource(R.drawable.konglong1);
                                     return;
@@ -176,6 +178,12 @@ public class BallFragment extends BaseFragment {
                                             }
                                         };
                                         absListViewCompat.setOnScrollCallback(onScrollCallback);
+                                        if (ballGQRsp.getIfo().size() > 0) {
+                                            ll_redline.setVisibility(View.VISIBLE);
+                                        } else {
+                                            ll_redline.setVisibility(View.GONE);
+                                        }
+
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -186,22 +194,27 @@ public class BallFragment extends BaseFragment {
                                     case SportsKey.TYPE_SEVEN:
                                         iv_system_error.setVisibility(View.VISIBLE);
                                         iv_system_error.setImageResource(R.drawable.konglong1);
+                                        ll_redline.setVisibility(View.GONE);
                                         break;
                                     case SportsKey.TYPE_EIGHT:
                                         iv_system_error.setImageResource(R.drawable.konglong1);
                                         iv_system_error.setVisibility(View.VISIBLE);
+                                        ll_redline.setVisibility(View.GONE);
                                         break;
                                     case SportsKey.TYPE_1000:
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
+                                        ll_redline.setVisibility(View.GONE);
                                         break;
                                     case SportsKey.TYPE_1001:
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
+                                        ll_redline.setVisibility(View.GONE);
                                         break;
                                     case SportsKey.TYPE_1002:
                                         iv_system_error.setImageResource(R.drawable.konglong4);
                                         iv_system_error.setVisibility(View.VISIBLE);
+                                        ll_redline.setVisibility(View.GONE);
                                         break;
                                 }
                             } catch (Exception e) {

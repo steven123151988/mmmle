@@ -6,27 +6,39 @@
     android:orientation="vertical">
 
     <!--<com.yalantis.phoenix.PullToRefreshView-->
-        <!--android:visibility="gone"-->
-        <!--android:id="@+id/pull_to_refresh"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <!--android:visibility="gone"-->
+    <!--android:id="@+id/pull_to_refresh"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
     <!--</com.yalantis.phoenix.PullToRefreshView>-->
-        <ListView
-            android:id="@+id/lv_betting"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:divider="@color/red_84201e"
-            android:dividerHeight="1dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1"
+        android:background="@color/red_84201e"
+        android:orientation="vertical" />
 
+    <ListView
+        android:id="@+id/lv_betting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:divider="@color/red_84201e"
+        android:dividerHeight="1dp" />
 
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_redline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1"
+        android:background="@color/red_84201e"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/dimen_1"/>
 
     <ImageView
         android:id="@+id/iv_system_error"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:visibility="gone" />
 
 
 </LinearLayout>

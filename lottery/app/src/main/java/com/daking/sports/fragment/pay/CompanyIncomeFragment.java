@@ -5,6 +5,7 @@ import android.content.pm.ProviderInfo;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         //获取屏幕高度
         screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/3
-        keyHeight = screenHeight / 4;
+        keyHeight = screenHeight / 5;
         return view;
     }
 
@@ -106,6 +107,10 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         getPayUrl("company");
         //添加layout大小发生改变监听器
         rl.addOnLayoutChangeListener(this);
+        //清除上次输入的信息
+        et_money.getText().clear();
+        et_money.getText().clear();
+        ed_card_ower.getText().clear();
     }
 
     @Override
@@ -170,7 +175,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                 break;
             case R.id.rl_pay_time:
                 long time3 = System.currentTimeMillis();
-                if (time3 - mClickTime3 <= 3000) {
+                if (time3 - mClickTime3 <= 2000) {
                     ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
                     return;
                 } else {
@@ -385,19 +390,36 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      * 公司入款
      */
     private void companypost() {
+        if (null == type) {
+            ToastUtil.show(getActivity(), "请选择入款方式！");
+            return;
+        }
         money = et_money.getText().toString().replace(" ", "");        //入款金额
+        if (TextUtils.isEmpty(money)) {
+            ToastUtil.show(getActivity(), "请填写入款金额！");
+            return;
+        }
         card_ower_name = ed_card_ower.getText().toString().replace(" ", "");
         String time = SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME, "");//汇款时间
+        if (TextUtils.isEmpty(time)) {
+            ToastUtil.show(getActivity(), "请选择如款时间！");
+            return;
+        }
+        if (null == compannyIncomeRsp) {
+            ToastUtil.show(getActivity(), "系统异常，打开面页尝试！");
+            return;
+        }
+
         String intoBank = compannyIncomeRsp.getIfo().get(choose_position).getBank() + "-"
                 + compannyIncomeRsp.getIfo().get(choose_position).getUserName() + "|" + compannyIncomeRsp.getIfo().get(choose_position).getID();
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.COMPANY_POST)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add("IntoBank", intoBank)  //Bank-test122333|80
-                .add("v_amount", money)
-                .add("ctime", time)
-                .add("IntoType", type)
-                .add("v_name", card_ower_name)//还款方持卡人姓名
+                .add("IntoBank", intoBank + "")  //Bank-test122333|80
+                .add("v_amount", money + "")
+                .add("ctime", time + "")
+                .add("IntoType", type + "")
+                .add("v_name", card_ower_name + "")//还款方持卡人姓名
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()
