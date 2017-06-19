@@ -171,7 +171,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 String message = response.body().string();
                 LogUtil.e("===============initMainMenu=========" + message);
                 Gson gson = new Gson();
-
                 mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
                 runOnUiThread(new Runnable() {
                     @Override
@@ -190,7 +189,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                                     startActivity(new Intent(mContext, LoginActivity.class));
                                     break;
                                 case SportsKey.TYPE_TEN:
-                                    ToastUtil.show(mContext, "暂时没有您选择的赛事！");
+                                    ToastUtil.show(mContext, getString(R.string.not_have_you_select_match));
                                     break;
                                 default:
                                     ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), mainMenuRsp.getMsg());

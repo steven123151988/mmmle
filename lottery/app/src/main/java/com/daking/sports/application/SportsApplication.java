@@ -13,7 +13,7 @@ import com.umeng.message.PushAgent;
 /**
  * 自定义的application类
  */
-public class SportsApplication extends MultiDexApplication  {
+public class SportsApplication extends MultiDexApplication {
     public static SportsApplication instance = null;
     public static SportsApplication getInstance() {
         return instance;

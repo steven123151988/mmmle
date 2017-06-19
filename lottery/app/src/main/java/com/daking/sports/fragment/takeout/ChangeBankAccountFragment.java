@@ -17,6 +17,7 @@ import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.AddEdiTextWatchListenerUtil;
 import com.daking.sports.util.CloseSoftInputFromWindowUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -67,6 +68,7 @@ public class ChangeBankAccountFragment extends BaseFragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_changebanknum, null);
         et_banknum = (EditText) view.findViewById(R.id.et_banknum);
+        AddEdiTextWatchListenerUtil.addTextWatchListener(et_banknum,19);
         view.findViewById(R.id.btn_confirm_pay).setOnClickListener(this);
         view.findViewById(R.id.rl_bank).setOnClickListener(this);
         view.findViewById(R.id.btn_confirm_pay).setOnClickListener(this);
