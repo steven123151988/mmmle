@@ -51,8 +51,6 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     private TextView tv_A, tv_B, tv_C, tv_D, tv_E, tv_F;
     private String message;
     private LoginRsp loginRsp;
-    private String service_url,help_url;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -146,7 +144,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                         SharePreferencesUtil.addString(getActivity(), SportsKey.ACCOUNT_MONEY, mainIndexRsp.getMember().getMoney());
                                         SportsAPI.HELP=mainIndexRsp.getHelp_url();
                                         SportsAPI.SERVICE_URL=mainIndexRsp.getService_url();
-                                        LogUtil.e("=======mainIndexRsp.getService_url()=========="+mainIndexRsp.getService_url());
+                                        SportsAPI.COMPANY_INCOME_H5=mainIndexRsp.getCompany_url();
                                         break;
                                     case SportsKey.TYPE_NINE:
                                         getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));

@@ -19,6 +19,7 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.CompannyIncomeRsp;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.CloseSoftInputFromWindowUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -47,7 +48,7 @@ import okhttp3.Response;
  * Created by 18 on 2017/5/7. 公司入款
  */
 
-public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener {
+public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener , View.OnLayoutChangeListener {
     private EditText et_money;
     private String money, type;
     private SweetSheet mSweetSheet;
@@ -68,6 +69,11 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private LoginRsp LoginRsp;
     private Handler handler;
     private long mClickTime, mClickTime2, mClickTime3;
+    //屏幕高度
+    private int screenHeight = 0;
+    //软件盘弹起后所占高度阀值
+    private int keyHeight = 0;
+    private boolean ifopen = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,7 +91,10 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         tv_card_name = (TextView) view.findViewById(R.id.tv_card_name);
         tv_banknum = (TextView) view.findViewById(R.id.tv_banknum);
         tv_bankname = (TextView) view.findViewById(R.id.tv_bankname);
-
+        //获取屏幕高度
+        screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
+        //阀值设置为屏幕高度的1/3
+        keyHeight = screenHeight / 3;
         return view;
     }
 
@@ -95,6 +104,8 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         super.onResume();
         //请求在线入款账户
         getPayUrl("company");
+        //添加layout大小发生改变监听器
+        rl.addOnLayoutChangeListener(this);
     }
 
     @Override
@@ -109,12 +120,26 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
             case R.id.rl_bank:
                 //避免多次请求
                 long time = System.currentTimeMillis();
-                if (time - mClickTime2 <= 2500) {
+                if (time - mClickTime2 <= 3000) {
                     ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
                     return;
                 } else {
                     mClickTime2 = time;
-                    setupViewpager();
+                    if (ifopen) {
+                        CloseSoftInputFromWindowUtil.closeSoftInputFromWindow();
+                        if (null == handler) {
+                            handler = new Handler();
+                        }
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                setupViewpager();
+                            }
+                        }, 150);
+                    } else {
+                        setupViewpager();
+                    }
+
                 }
 
                 break;
@@ -126,12 +151,26 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
                     return;
                 } else {
                     mClickTime = time2;
-                    setupRecyclerView();//listview样式
+                    if (ifopen) {
+                        CloseSoftInputFromWindowUtil.closeSoftInputFromWindow();
+                        if (null == handler) {
+                            handler = new Handler();
+                        }
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                setupRecyclerView();//listview样式
+                            }
+                        }, 150);
+                    } else {
+                        setupRecyclerView();//listview样式
+                    }
+
                 }
                 break;
             case R.id.rl_pay_time:
                 long time3 = System.currentTimeMillis();
-                if (time3 - mClickTime3 <= 2500) {
+                if (time3 - mClickTime3 <= 3000) {
                     ToastUtil.show(getActivity(), getString(R.string.not_click_manytimes));
                     return;
                 } else {
@@ -438,6 +477,16 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         ShowDialogUtil.dismissDialogs();
         if (null != handler) {
             handler.removeCallbacksAndMessages(null);
+        }
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
+        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+            ifopen = true;
+        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
+            ifopen = false;
         }
     }
 }
