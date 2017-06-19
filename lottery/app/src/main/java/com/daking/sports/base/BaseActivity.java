@@ -16,8 +16,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PushAgent.getInstance(mContext).onAppStart();
         mContext = this;
+        PushAgent.getInstance(mContext).onAppStart();
     }
 
     @Override

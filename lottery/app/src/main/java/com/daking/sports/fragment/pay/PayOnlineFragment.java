@@ -89,8 +89,8 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         view.findViewById(R.id.rl_choose_type).setOnClickListener(this);
         //获取屏幕高度
         screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
-        //阀值设置为屏幕高度的1/3
-        keyHeight = screenHeight / 3;
+        //阀值设置为屏幕高度的1/4
+        keyHeight = screenHeight / 4;
         return view;
     }
 
@@ -396,9 +396,11 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
         //现在认为只要控件将Activity向上推的高度超过了1/3屏幕高，就认为软键盘弹起
         if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > keyHeight)) {
+            LogUtil.e("=================软键盘弹起=================");
             ifopen = true;
         } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > keyHeight)) {
             ifopen = false;
+            LogUtil.e("=================软键盘guanbi=================");
         }
     }
 }

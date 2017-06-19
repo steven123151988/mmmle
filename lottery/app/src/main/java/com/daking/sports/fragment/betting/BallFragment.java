@@ -17,12 +17,9 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BallGQRsp;
 import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
-import com.daking.sports.util.NetUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
-import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
-import com.yalantis.phoenix.PullToRefreshView;
 
 import java.io.IOException;
 import java.util.Timer;

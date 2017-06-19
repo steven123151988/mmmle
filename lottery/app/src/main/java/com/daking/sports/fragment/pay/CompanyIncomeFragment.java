@@ -48,7 +48,7 @@ import okhttp3.Response;
  * Created by 18 on 2017/5/7. 公司入款
  */
 
-public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener , View.OnLayoutChangeListener {
+public class CompanyIncomeFragment extends BaseFragment implements View.OnClickListener, View.OnLayoutChangeListener {
     private EditText et_money;
     private String money, type;
     private SweetSheet mSweetSheet;
@@ -94,7 +94,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         //获取屏幕高度
         screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/3
-        keyHeight = screenHeight / 3;
+        keyHeight = screenHeight / 4;
         return view;
     }
 
