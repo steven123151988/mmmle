@@ -28,7 +28,7 @@
                 android:padding="@dimen/dimen_10"
                 android:paddingBottom="@dimen/dimen_5"
                 android:text="@string/income_records"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
 
         </LinearLayout>
@@ -49,7 +49,7 @@
                 android:padding="@dimen/dimen_10"
                 android:paddingBottom="@dimen/dimen_5"
                 android:text="@string/takeout_records"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
 
         </LinearLayout>

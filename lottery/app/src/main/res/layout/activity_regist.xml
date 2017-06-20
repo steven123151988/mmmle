@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/dimen_20"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/regist_account"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/et_account"
@@ -52,7 +52,7 @@
                 android:maxLength="15"
                 android:maxLines="1"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -62,7 +62,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/regist_psw"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/et_psw"
@@ -87,7 +87,7 @@
                 android:maxLines="1"
                 android:password="true"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -97,7 +97,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/regist_confirm"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/et_psw2"
@@ -122,7 +122,7 @@
                 android:maxLines="1"
                 android:password="true"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -132,7 +132,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -141,8 +141,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/regist_name"
                 android:textColor="@color/black_333333"
-
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/et_name"
@@ -156,7 +155,7 @@
                 android:maxLength="6"
                 android:maxLines="1"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -166,7 +165,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -175,7 +174,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/regist_money_psw"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/et_money_psw"
@@ -191,7 +190,7 @@
                 android:maxLength="4"
                 android:maxLines="1"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -202,7 +201,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -212,7 +211,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/modifypsw_question"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tv_check_question"
@@ -222,7 +221,7 @@
                 android:layout_weight="0.64"
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/please_check"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -240,7 +239,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -249,7 +248,7 @@
                 android:paddingLeft="@dimen/dimen_20"
                 android:text="@string/modifypsw_answer"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <EditText
                 android:id="@+id/et_answer"
@@ -261,7 +260,7 @@
                 android:gravity="center"
                 android:maxLength="15"
                 android:maxLines="1"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -271,7 +270,7 @@
             android:layout_marginTop="@dimen/dimen_1"
             android:background="@color/white_ffffff"
             android:orientation="horizontal"
-            android:padding="@dimen/dimen_5">
+            android:padding="@dimen/dimen_10">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -287,7 +286,7 @@
                     android:paddingLeft="@dimen/dimen_20"
                     android:text="@string/birthday"
                     android:textColor="@color/black_333333"
-                    android:textSize="@dimen/dimen_16" />
+                    android:textSize="@dimen/sp_16" />
 
                 <EditText
                     android:id="@+id/et_birthday"
@@ -302,7 +301,7 @@
                     android:maxLength="8"
                     android:maxLines="1"
                     android:textColor="@color/black_333333"
-                    android:textSize="@dimen/dimen_14" />
+                    android:textSize="@dimen/sp_16" />
             </LinearLayout>
 
         </LinearLayout>
@@ -318,7 +317,7 @@
             android:gravity="center"
             android:text="@string/register"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
     </LinearLayout>
 </RelativeLayout>

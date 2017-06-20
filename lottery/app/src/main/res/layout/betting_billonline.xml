@@ -38,7 +38,7 @@
                 android:maxLines="1"
                 android:text="@string/betting_bill"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:id="@+id/tv_center_down"
@@ -51,7 +51,7 @@
                 android:maxLines="1"
                 android:text="0"
                 android:textColor="@color/yellow_f6ac18"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_14" />
 
 
         </LinearLayout>
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:text="A"
             android:textColor="@color/black_333333"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
 
             />
 
@@ -102,7 +102,7 @@
             android:layout_marginTop="@dimen/dimen_5"
             android:text="B"
             android:textColor="@color/black_333333"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
 
             />
 
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="C"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
 
                 />
 
@@ -133,7 +133,7 @@
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="D"
                 android:textColor="@color/red_84201e"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
 
                 />
 
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="E"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
 
                 />
         </LinearLayout>
@@ -165,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:text="F"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
 
                 />
 
@@ -178,7 +178,7 @@
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="G"
                 android:textColor="@color/black_333333"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
 
                 />
 
@@ -191,7 +191,7 @@
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="H"
                 android:textColor="@color/red_84201e"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
 
                 />
         </LinearLayout>
@@ -224,7 +224,7 @@
                 android:inputType="number"
                 android:maxLength="6"
                 android:maxLines="1"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_14" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/can_win_total"
-                    android:textSize="@dimen/dimen_16" />
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:id="@+id/tv_K"
@@ -246,7 +246,7 @@
                     android:layout_marginTop="@dimen/dimen_5"
                     android:text="0.00"
                     android:textColor="@color/red_84201e"
-                    android:textSize="@dimen/dimen_18" />
+                    android:textSize="@dimen/sp_18" />
 
 
             </LinearLayout>
@@ -262,7 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/betting_once_atleast"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:maxEms="10"
@@ -273,7 +273,7 @@
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="I"
                 android:textColor="@color/red_84201e"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
@@ -288,7 +288,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/betting_once_atmost"
-                android:textSize="@dimen/dimen_14" />
+                android:textSize="@dimen/sp_14" />
 
             <TextView
                 android:maxEms="10"
@@ -299,7 +299,7 @@
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:text="J"
                 android:textColor="@color/red_84201e"
-                android:textSize="@dimen/dimen_16" />
+                android:textSize="@dimen/sp_16" />
 
 
         </LinearLayout>
@@ -312,7 +312,7 @@
         android:background="@color/red_84201e"
         android:text="确认交易"
         android:textColor="@color/white_ffffff"
-        android:textSize="@dimen/dimen_16"
+        android:textSize="@dimen/sp_16"
 
         />
 

@@ -32,7 +32,7 @@
             android:layout_toRightOf="@+id/iv_1"
             android:text="@string/pc_pay"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
             android:layout_toRightOf="@+id/iv_2"
             android:text="@string/pc_getoutmoney"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
             android:layout_toRightOf="@+id/iv_3"
             android:text="@string/pc_betting_history"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
             android:layout_toRightOf="@+id/iv_4"
             android:text="@string/pc_account_datail"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -184,7 +184,7 @@
             android:layout_toRightOf="@+id/iv_5"
             android:text="@string/pc_paw_manager"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -222,7 +222,7 @@
             android:layout_toRightOf="@+id/iv_6"
             android:text="@string/pc_service"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -232,6 +232,7 @@
             android:layout_marginRight="@dimen/dimen_20"
             android:src="@mipmap/right_arrows" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rl_7"
         android:layout_width="match_parent"
@@ -254,9 +255,8 @@
             android:layout_toRightOf="@+id/iv_7"
             android:text="@string/logout"
             android:textColor="@color/gray_4c4c4c"
-            android:textSize="@dimen/dimen_16" />
+            android:textSize="@dimen/sp_16" />
 
-      7
     </RelativeLayout>
 
 </LinearLayout>

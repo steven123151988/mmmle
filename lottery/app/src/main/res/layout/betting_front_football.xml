@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:text="主队 "
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             android:visibility="invisible"
             Android:gravity="center" />
 
@@ -34,7 +34,7 @@
             android:drawableLeft="@mipmap/football_msg1"
             android:src="@mipmap/football_msg1"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:drawableLeft="@mipmap/football_msg2"
             android:src="@mipmap/football_msg2"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
 
@@ -55,7 +55,7 @@
             android:drawableLeft="@mipmap/football_msg3"
             android:text=""
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:text="总分"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
 
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:text="主队"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
         <TextView
@@ -93,7 +93,7 @@
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
         <TextView
@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
         <TextView
@@ -113,7 +113,7 @@
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
         <TextView
@@ -124,7 +124,7 @@
             android:layout_weight="1"
             android:text="-"
             android:textColor="@color/white_ffffff"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/sp_14"
             Android:gravity="center" />
 
 
@@ -149,7 +149,7 @@
                 android:layout_weight="1"
                 android:text="客队"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
                 Android:gravity="center" />
 
             <TextView
@@ -159,7 +159,7 @@
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
                 Android:gravity="center" />
 
             <TextView
@@ -169,7 +169,7 @@
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
                 Android:gravity="center" />
 
             <TextView
@@ -179,7 +179,7 @@
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
                 Android:gravity="center" />
 
             <TextView
@@ -190,7 +190,7 @@
                 android:layout_weight="1"
                 android:text="-"
                 android:textColor="@color/white_ffffff"
-                android:textSize="@dimen/dimen_14"
+                android:textSize="@dimen/sp_14"
                 Android:gravity="center" />
         </LinearLayout>
     </LinearLayout>

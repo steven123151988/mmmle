@@ -50,7 +50,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         setContentView(R.layout.activity_login);
         et_account = (EditText) findViewById(R.id.et_account);
         et_psw = (EditText) findViewById(R.id.et_psw);
-        //不然用户按回车键
+        //不让用户按回车键
         et_account.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

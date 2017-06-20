@@ -64,7 +64,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     private CompannyIncomeRsp compannyIncomeRsp;
     private List list_name;
     private TextView tv_card_name, tv_banknum, tv_bankname;
-    private int choose_position;
+    private int choose_position = 9999;
     private EditText ed_card_ower;
     private String card_ower_name;
     private LoginRsp LoginRsp;
@@ -75,6 +75,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
     //软件盘弹起后所占高度阀值
     private int keyHeight = 0;
     private boolean ifopen = false;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -298,12 +299,15 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
             @Override
             public boolean onItemClick(int position, MenuEntity menuEntity) {
                 choose_position = position;
-                //即时改变当前项的颜色
-                list.get(position).titleColor = 0xff5823ff;
-                ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
-                tv_card_name.setText(compannyIncomeRsp.getIfo().get(choose_position).getUserName());
-                tv_banknum.setText(compannyIncomeRsp.getIfo().get(choose_position).getBank_Account());
-                tv_bankname.setText(compannyIncomeRsp.getIfo().get(choose_position).getBank());
+                if (choose_position != 9999) {
+                    //即时改变当前项的颜色
+                    list.get(position).titleColor = 0xff5823ff;
+                    ((RecyclerViewDelegate) mSweetSheet.getDelegate()).notifyDataSetChanged();
+                    tv_card_name.setText(compannyIncomeRsp.getIfo().get(choose_position).getUserName());
+                    tv_banknum.setText(compannyIncomeRsp.getIfo().get(choose_position).getBank_Account());
+                    tv_bankname.setText(compannyIncomeRsp.getIfo().get(choose_position).getBank());
+                }
+
                 //根据返回值, true 会关闭 SweetSheet ,false 则不会.
                 return true;
             }
@@ -391,25 +395,31 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
      */
     private void companypost() {
         if (null == type) {
-            ToastUtil.show(getActivity(), "请选择入款方式！");
+            ToastUtil.show(getActivity(), getString(R.string.select_income_type));
             return;
         }
         money = et_money.getText().toString().replace(" ", "");        //入款金额
         if (TextUtils.isEmpty(money)) {
-            ToastUtil.show(getActivity(), "请填写入款金额！");
+            ToastUtil.show(getActivity(), getString(R.string.type_in_income_money));
             return;
         }
         card_ower_name = ed_card_ower.getText().toString().replace(" ", "");
         String time = SharePreferencesUtil.getString(getActivity(), SportsKey.PAY_TIME, "");//汇款时间
         if (TextUtils.isEmpty(time)) {
-            ToastUtil.show(getActivity(), "请选择如款时间！");
+            ToastUtil.show(getActivity(), getString(R.string.select_time));
             return;
         }
         if (null == compannyIncomeRsp) {
-            ToastUtil.show(getActivity(), "系统异常，打开面页尝试！");
+            ToastUtil.show(getActivity(), getString(R.string.systm_err_try_again));
             return;
         }
 
+        if (type.equals("网银转账") || type.equals("ATM现金") || type.equals("ATM卡转") || type.equals("银行柜台")) {
+            if (choose_position ==9999) {
+                ToastUtil.show(getActivity(), getString(R.string.must_select_bank_message));
+                return;
+            }
+        }
         String intoBank = compannyIncomeRsp.getIfo().get(choose_position).getBank() + "-"
                 + compannyIncomeRsp.getIfo().get(choose_position).getUserName() + "|" + compannyIncomeRsp.getIfo().get(choose_position).getID();
         RequestBody requestBody = new FormBody.Builder()

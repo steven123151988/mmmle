@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/modify_login_psw"
                     android:textColor="@color/white_ffffff"
-                    android:textSize="@dimen/dimen_16" />
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
                     android:layout_marginTop="@dimen/dimen_5"
                     android:text="@string/suggest_psw"
                     android:textColor="@color/white_ffffff"
-                    android:textSize="@dimen/dimen_16" />
+                    android:textSize="@dimen/sp_16" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
                         android:textColorHint="@color/white_ffffff"
-                        android:textSize="@dimen/dimen_16" />
+                        android:textSize="@dimen/sp_16" />
                 </RelativeLayout>
 
 
@@ -118,7 +118,7 @@
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
                         android:textColorHint="@color/white_ffffff"
-                        android:textSize="@dimen/dimen_16" />
+                        android:textSize="@dimen/sp_16" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -157,7 +157,7 @@
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
                         android:textColorHint="@color/white_ffffff"
-                        android:textSize="@dimen/dimen_16" />
+                        android:textSize="@dimen/sp_16" />
                 </RelativeLayout>
 
                 <Button
@@ -188,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/modify_money_psw"
                     android:textColor="@color/white_ffffff"
-                    android:textSize="@dimen/dimen_16" />
+                    android:textSize="@dimen/sp_16" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                     android:paddingRight="@dimen/dimen_20"
                     android:text="@string/suggest_modify_moneypsw"
                     android:textColor="@color/white_ffffff"
-                    android:textSize="@dimen/dimen_16" />
+                    android:textSize="@dimen/sp_16" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -237,7 +237,7 @@
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
                         android:textColorHint="@color/white_ffffff"
-                        android:textSize="@dimen/dimen_16" />
+                        android:textSize="@dimen/sp_16" />
                 </RelativeLayout>
 
 
@@ -278,7 +278,7 @@
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
                         android:textColorHint="@color/white_ffffff"
-                        android:textSize="@dimen/dimen_16" />
+                        android:textSize="@dimen/sp_16" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -318,7 +318,7 @@
                         android:maxLines="1"
                         android:textColor="@color/white_fbfbfb"
                         android:textColorHint="@color/white_ffffff"
-                        android:textSize="@dimen/dimen_16" />
+                        android:textSize="@dimen/sp_16" />
                 </RelativeLayout>
 
                 <Button
@@ -333,7 +333,7 @@
                     android:gravity="center"
                     android:text="@string/make_sure_change_money_pwd"
                     android:textColor="@color/white_ffffff"
-                    android:textSize="@dimen/dimen_18" />
+                    android:textSize="@dimen/sp_18" />
             </LinearLayout>
 
         </LinearLayout>

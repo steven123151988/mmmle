@@ -39,7 +39,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="@color/red_84201e"
-                    android:textSize="@dimen/dimen_30" />
+                    android:textSize="@dimen/sp_30" />
 
                 <TextView
                     android:id="@+id/tv_score_A"
@@ -49,7 +49,7 @@
                     android:gravity="center"
                     android:text="0"
                     android:textColor="@color/red_84201e"
-                    android:textSize="@dimen/dimen_40" />
+                    android:textSize="@dimen/sp_40" />
 
                 <TextView
                     android:id="@+id/tv_score_B"
@@ -59,7 +59,7 @@
                     android:gravity="center"
                     android:text="0"
                     android:textColor="@color/red_84201e"
-                    android:textSize="@dimen/dimen_40" />
+                    android:textSize="@dimen/sp_40" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="@color/red_84201e"
-                    android:textSize="@dimen/dimen_30" />
+                    android:textSize="@dimen/sp_30" />
 
             </LinearLayout>
         </FrameLayout>

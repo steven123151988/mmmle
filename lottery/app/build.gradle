@@ -48,7 +48,7 @@ dependencies {
     compile(name: "sweetsheet-release", ext: "aar")
     compile 'com.nineoldandroids:library:2.4.0'
     //sweetsheet用到的开源库
-    compile 'com.yalantis:phoenix:1.2.3' 
+    compile 'com.yalantis:phoenix:1.2.3'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.dalong:marqueeview:1.0.0'

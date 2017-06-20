@@ -12,7 +12,7 @@
         android:padding="@dimen/dimen_5"
         android:text="A"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_16" />
+        android:textSize="@dimen/sp_16" />
 
 
     <TextView
@@ -22,7 +22,7 @@
         android:padding="@dimen/dimen_5"
         android:text="B"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
 
@@ -32,7 +32,7 @@
         android:padding="@dimen/dimen_5"
         android:text="C"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/tv_D"
@@ -41,7 +41,7 @@
         android:padding="@dimen/dimen_5"
         android:text="D"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/tv_E"
@@ -50,7 +50,7 @@
         android:padding="@dimen/dimen_5"
         android:text="E"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/tv_F"
@@ -59,7 +59,7 @@
         android:padding="@dimen/dimen_5"
         android:text="F"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/tv_G"
@@ -68,7 +68,7 @@
         android:padding="@dimen/dimen_5"
         android:text="G"
         android:textColor="@color/red_84201e"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/tv_H"
@@ -77,7 +77,7 @@
         android:padding="@dimen/dimen_5"
         android:text="H"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
     <TextView
         android:id="@+id/tv_I"
@@ -86,6 +86,6 @@
         android:padding="@dimen/dimen_5"
         android:text="I"
         android:textColor="@color/black_333333"
-        android:textSize="@dimen/dimen_14" />
+        android:textSize="@dimen/sp_14" />
 
 </LinearLayout>

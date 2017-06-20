@@ -66,4 +66,23 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_icon_size">48dp</dimen>
+
+    <dimen name="sp_0.5">0.5sp</dimen>
+    <dimen name="sp_1">1sp</dimen>
+    <dimen name="sp_2">2sp</dimen>
+    <dimen name="sp_3">3sp</dimen>
+    <dimen name="sp_5">5sp</dimen>
+    <dimen name="sp_6">6sp</dimen>
+    <dimen name="sp_8">8sp</dimen>
+    <dimen name="sp_10">10sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_13">13sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="sp_15">15sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_17">17sp</dimen>
+    <dimen name="sp_18">18sp</dimen>
+    <dimen name="sp_20">20sp</dimen>
+    <dimen name="sp_30">30sp</dimen>
+    <dimen name="sp_40">40sp</dimen>
 </resources>
