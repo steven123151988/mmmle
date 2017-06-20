@@ -64,7 +64,9 @@ public class SplashActivity extends BaseActivity {
             } else {
                 ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.app_support_lowest_sdk));
             }
+
         } else {
+            LogUtil.e("================123============");
             ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
         }
     }
@@ -90,6 +92,7 @@ public class SplashActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        LogUtil.e("===========initConfigIndex====error=====");
                         ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                     }
                 });

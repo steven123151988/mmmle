@@ -21,13 +21,13 @@
 
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_45"
             android:layout_marginLeft="@dimen/dimen_30"
             android:layout_marginRight="@dimen/dimen_30"
             android:layout_marginTop="@dimen/dimen_50"
-            android:background="@color/white_ffffff">
+            android:background="@color/white_ffffff"
+        >
 
             <TextView
                 android:layout_width="match_parent"

@@ -77,7 +77,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
     //足球头部的球数据
     private TextView tv_mb_A, tv_mb_B, tv_mb_C, tv_mb_D, tv_tg_A, tv_tg_B, tv_tg_C, tv_tg_D;
     private TextView tv_basketball_mb1, tv_basketball_mb2, tv_basketball_mb3, tv_basketball_mb4,
-            tv_basketball_mb5, tv_basketball_mb6, tv_basketball_mb7, tv_jiashi;
+            tv_basketball_mb5, tv_basketball_mb6, tv_basketball_mb7;
     private TextView tv_basketball_tg1, tv_basketball_tg2, tv_basketball_tg3,
             tv_basketball_tg4, tv_basketball_tg5, tv_basketball_tg6, tv_basketball_tg7;
     private Double rate;
@@ -168,7 +168,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 ll_title_football.setVisibility(View.GONE);
                 ll_title_basketball.setVisibility(View.VISIBLE);
                 //篮球球类数据
-                tv_jiashi = fuck(R.id.tv_jiashi);
                 tv_basketball_mb1 = fuck(R.id.tv_basketball_mb1);
                 tv_basketball_mb2 = fuck(R.id.tv_basketball_mb2);
                 tv_basketball_mb3 = fuck(R.id.tv_basketball_mb3);
