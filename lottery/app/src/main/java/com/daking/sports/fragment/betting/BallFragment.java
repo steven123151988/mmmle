@@ -165,6 +165,7 @@ public class BallFragment extends BaseFragment {
                                 }
                                 switch (ballGQRsp.getCode()) {
                                     case SportsKey.TYPE_ZERO:
+                                        iv_system_error.setVisibility(View.GONE);
                                         bettingAdapter = new BettingAdapter(getActivity(), ballGQRsp.getIfo(), ball);
                                         lv_betting.setAdapter(bettingAdapter);
                                         bettingAdapter.notifyDataSetChanged();
