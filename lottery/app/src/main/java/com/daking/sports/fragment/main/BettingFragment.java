@@ -17,7 +17,6 @@ import com.daking.sports.activity.MainActivity;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.betting.BallFragment;
-import com.daking.sports.fragment.betting.ShixunFragment;
 import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
@@ -31,7 +30,6 @@ public class BettingFragment extends BaseFragment implements View.OnClickListene
     private LinearLayout ll_football, ll_basketball, ll_shixun;
     private TextView tv_football, tv_basketball, tv_shixun;
     private BallFragment ballFragment;
-    private ShixunFragment shixunFragment;
     private View view_betting;
     private String ball, type;
 

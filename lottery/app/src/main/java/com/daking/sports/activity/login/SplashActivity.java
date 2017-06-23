@@ -11,7 +11,6 @@ import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.ConfigRsp;
-import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.NetUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -19,7 +18,6 @@ import com.daking.sports.util.ShowDialogUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.nio.channels.spi.AbstractInterruptibleChannel;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,7 +26,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.daking.sports.base.SportsAPI.BASE_URL;
 
 
 /**
@@ -66,7 +63,6 @@ public class SplashActivity extends BaseActivity {
             }
 
         } else {
-            LogUtil.e("================123============");
             ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
         }
     }

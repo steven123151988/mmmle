@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.BettingRecordAdapter;
-import com.daking.sports.adapter.IncomeAdapter;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;

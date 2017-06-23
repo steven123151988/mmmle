@@ -1,7 +1,6 @@
 package com.daking.sports.fragment.pay;
 
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.os.Handler;

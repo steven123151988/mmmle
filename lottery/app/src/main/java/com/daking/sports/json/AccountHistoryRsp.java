@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Administrator on 2017/6/13.
  */
 
-public class AccountHistoryRsp   implements Serializable {
+public class AccountHistoryRsp implements Serializable {
 
     /**
      * start_date : 2017-06-05 21:13:17

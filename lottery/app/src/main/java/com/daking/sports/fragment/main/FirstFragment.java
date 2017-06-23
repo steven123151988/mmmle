@@ -13,7 +13,6 @@ import com.daking.sports.activity.MainActivity;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.base.BaseFragment;
-import com.daking.sports.base.GetBannerData;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.LoginRsp;

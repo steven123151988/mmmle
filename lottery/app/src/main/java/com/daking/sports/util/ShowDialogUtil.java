@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.daking.sports.R;
-import com.daking.sports.application.ActivityManager;
 import com.daking.sports.base.SportsKey;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;

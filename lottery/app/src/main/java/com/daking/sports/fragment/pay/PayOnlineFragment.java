@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.PayIncomeRsp;
 import com.daking.sports.json.PayStypeRsp;
-import com.daking.sports.util.AddEdiTextWatchListenerUtil;
 import com.daking.sports.util.CloseSoftInputFromWindowUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -36,9 +34,7 @@ import com.mingle.sweetpick.RecyclerViewDelegate;
 import com.mingle.sweetpick.SweetSheet;
 
 import java.io.IOException;
-import java.text.BreakIterator;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import okhttp3.Call;

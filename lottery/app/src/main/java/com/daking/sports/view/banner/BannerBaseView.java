@@ -2,9 +2,7 @@ package com.daking.sports.view.banner;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -17,9 +15,7 @@ import android.widget.RelativeLayout;
 import com.daking.sports.R;
 import com.daking.sports.activity.webview.WebViewActivity;
 import com.daking.sports.application.SportsApplication;
-import com.daking.sports.base.GetBannerData;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.util.LogUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
