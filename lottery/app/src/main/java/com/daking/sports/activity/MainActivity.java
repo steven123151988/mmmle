@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
+import com.daking.sports.application.SportsApplicationUtil;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -486,7 +487,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         long time = System.currentTimeMillis();
         if (time - mClickTime <= 2000) {
             super.onBackPressed();
-            System.exit(0);
+            SportsApplicationUtil.exit(mContext);
+//            System.exit(0);
         } else {
             mClickTime = time;
             ToastUtil.show(mContext, "再次点击退出");
