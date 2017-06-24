@@ -154,7 +154,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .url(SportsAPI.BASE_URL + SportsAPI.HOME_MENU)
                 .post(requestBody)
                 .build();
-
+        LogUtil.e("===========" + SportsAPI.BASE_URL + SportsAPI.HOME_MENU);
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -169,14 +169,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String message = response.body().string();
+                final String message = response.body().string();
                 LogUtil.e("===============initMainMenu=========" + message);
-                Gson gson = new Gson();
-                mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            Gson gson = new Gson();
+                            mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
                             if (null == mainMenuRsp) {
                                 ShowDialogUtil.showSystemFail(mContext);
                                 return;
