@@ -10,24 +10,9 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.BaseActivity;
-import com.daking.sports.base.SportsAPI;
-import com.daking.sports.base.SportsKey;
 import com.daking.sports.fragment.takeout.ChangeBankAccountFragment;
 import com.daking.sports.fragment.takeout.TakeOutMoneyFragment;
-import com.daking.sports.json.MemOnlineRsp;
-import com.daking.sports.util.LogUtil;
-import com.daking.sports.util.SharePreferencesUtil;
-import com.daking.sports.util.ShowDialogUtil;
-import com.google.gson.Gson;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * 在线提款

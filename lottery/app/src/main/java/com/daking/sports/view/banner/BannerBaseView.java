@@ -95,7 +95,6 @@ public class BannerBaseView extends RelativeLayout implements BannerViewBehavior
 		mViewPager.setAdapter(mAdapter);
 		mIndicator.setViewPager(mViewPager);
 		initCutHandler();
-		return;
 	}
 
 	@Override

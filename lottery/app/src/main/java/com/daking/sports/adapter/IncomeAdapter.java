@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.base.SportsKey;
-import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.json.IncomeRep;
 import com.daking.sports.util.SharePreferencesUtil;
 

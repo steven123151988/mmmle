@@ -73,7 +73,7 @@ public class SplashActivity extends BaseActivity {
     private void initConfigIndex() {
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.CONFIG)
-                .add(SportsKey.HOST, "le1")
+                .add(SportsKey.HOST, "le7")
                 .build();
 
         final okhttp3.Request request = new okhttp3.Request.Builder()

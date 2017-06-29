@@ -83,7 +83,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
         final int defaultFillColor = Color.parseColor("#FFFFFFFF");
         final int defaultOrientation = 0;
         final int defaultStrokeColor = Color.parseColor("#FFDDDDDD");
-        final float defaultStrokeWidth =2;
+        final float defaultStrokeWidth = 2;
         final float defaultRadius = 6;
         final boolean defaultCentered = true;
         final boolean defaultSnap = false;
@@ -101,16 +101,11 @@ public class CirclePageIndicator extends View implements PageIndicator {
         mPaintFill.setStyle(Style.FILL);
         mPaintFill.setColor(defaultFillColor);
         mRadius = defaultRadius;
-        mSelectedRadius =  defaultRadius;
+        mSelectedRadius = defaultRadius;
         mSnap = defaultSnap;
 
         Drawable background = new ColorDrawable(Color.parseColor("#FFFFFF"));
-        if (background != null) {
-          setBackgroundDrawable(background);
-        }
-
-
-
+        setBackgroundDrawable(background);
         final ViewConfiguration configuration = ViewConfiguration.get(context);
         mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
     }
@@ -179,21 +174,21 @@ public class CirclePageIndicator extends View implements PageIndicator {
     }
 
     public void setSelectedRadius(float selectedRadius) {
-    	mSelectedRadius = selectedRadius;
+        mSelectedRadius = selectedRadius;
     }
-    
+
     public float getSelectedRadius() {
         return mSelectedRadius;
     }
-    
+
     public float getRadius() {
         return mRadius;
     }
-    
+
     public void setRadius(float radius) {
         mRadius = radius;
     }
-    
+
     public void setSnap(boolean snap) {
         mSnap = snap;
         invalidate();
@@ -462,8 +457,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
     /**
      * Determines the width of this view
      *
-     * @param measureSpec
-     *            A measureSpec packed into an int
+     * @param measureSpec A measureSpec packed into an int
      * @return The width of the view, honoring constraints from measureSpec
      */
     private int measureLong(int measureSpec) {
@@ -477,7 +471,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
         } else {
             //Calculate the width according the views count
             final int count = mViewPager.getAdapter().getCount();
-            result = (int)(getPaddingLeft() + getPaddingRight()
+            result = (int) (getPaddingLeft() + getPaddingRight()
                     + (count * 2 * mRadius) + (count - 1) * mRadius + 1);
             //Respect AT_MOST value if that was what is called for by measureSpec
             if (specMode == MeasureSpec.AT_MOST) {
@@ -490,8 +484,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
     /**
      * Determines the height of this view
      *
-     * @param measureSpec
-     *            A measureSpec packed into an int
+     * @param measureSpec A measureSpec packed into an int
      * @return The height of the view, honoring constraints from measureSpec
      */
     private int measureShort(int measureSpec) {
@@ -504,7 +497,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
             result = specSize;
         } else {
             //Measure the height
-            result = (int)(2 * mRadius + getPaddingTop() + getPaddingBottom() + 1);
+            result = (int) (2 * mRadius + getPaddingTop() + getPaddingBottom() + 1);
             //Respect AT_MOST value if that was what is called for by measureSpec
             if (specMode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize);
@@ -515,7 +508,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
 
     @Override
     public void onRestoreInstanceState(Parcelable state) {
-        SavedState savedState = (SavedState)state;
+        SavedState savedState = (SavedState) state;
         super.onRestoreInstanceState(savedState.getSuperState());
         mCurrentPage = savedState.currentPage;
         mSnapPage = savedState.currentPage;

@@ -41,6 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginLeft="@dimen/dimen_10"
+                    android:layout_marginStart="@dimen/dimen_10"
                     app:direction="left"
                     app:isRepeat="true"
                     app:marqueebackground="#FFFFFF"

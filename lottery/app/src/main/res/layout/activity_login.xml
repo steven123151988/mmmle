@@ -52,6 +52,7 @@
                 android:layout_marginLeft="@dimen/dimen_20"
                 android:layout_marginRight="@dimen/dimen_20"
                 android:layout_toRightOf="@+id/iv_iphone"
+                android:layout_toEndOf="@+id/iv_iphone"
                 android:background="@null"
                 android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ_"
                 android:hint="@string/input_account_name"
