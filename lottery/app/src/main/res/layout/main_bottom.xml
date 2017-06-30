@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/iv_home"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:padding="@dimen/dimen_5"
                 android:src="@mipmap/main_main" />
@@ -45,7 +45,7 @@
             <ImageView
                 android:id="@+id/iv_betting"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@mipmap/main_betting_notselcet" />
 
@@ -70,7 +70,7 @@
             <ImageView
                 android:id="@+id/iv_score"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@mipmap/main_score_notselect" />
 
@@ -93,7 +93,7 @@
             <ImageView
                 android:id="@+id/iv_prize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@mipmap/main_prize_notselect" />
 
@@ -117,7 +117,7 @@
             <ImageView
                 android:id="@+id/iv_mine"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@mipmap/main_mine_notselct" />
 

@@ -14,9 +14,9 @@
     <style name="main_button_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginTop">3dp</item>
         <item name="android:textColor">@color/white_ffffff</item>
-        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textSize">@dimen/sp_15</item>
     </style>
 
     <style name="mypopwindow_anim_style">
