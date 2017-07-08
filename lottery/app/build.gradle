@@ -54,7 +54,7 @@ android {
 }
 
 //获取当前打包的时间
-def releaseTime() {
+def static releaseTime() {
     return new Date().format("yyyyMMdd-HHmmss")
 }
 

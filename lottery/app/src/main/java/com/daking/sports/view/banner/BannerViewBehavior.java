@@ -4,7 +4,7 @@ import android.view.View;
 
 public interface BannerViewBehavior {
 	
-	public void update(Object object);
+	 void update(Object object);
 	
-	public View getView();
+	 View getView();
 }
