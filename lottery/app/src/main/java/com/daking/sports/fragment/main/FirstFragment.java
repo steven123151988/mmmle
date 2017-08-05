@@ -20,6 +20,7 @@ import com.daking.sports.json.MainIndexRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.view.MarqueeTextView;
 import com.daking.sports.view.banner.BannerBaseView;
 import com.daking.sports.view.banner.BaseBannerBean;
 import com.daking.sports.view.banner.MainBannerView;
@@ -118,6 +119,7 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
                                     ShowDialogUtil.showSystemFail(getActivity());
                                     return;
                                 }
+
                                 //跑马灯的逻辑
                                 runhorseLight(mainIndexRsp.getNotice());
                                 switch (mainIndexRsp.getCode()) {
@@ -170,9 +172,6 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("FirstFragment");
-        //跑马灯
-        runhorseLight(" ");
-        LogUtil.e("=============onResume============");
         //如果因为没登录请求没成功主页数据（轮播图等），在这里再请求一次
         initHomeIndex();
     }
@@ -181,13 +180,8 @@ public class FirstFragment extends BaseFragment implements View.OnClickListener 
      * 跑马灯的逻辑
      */
     private void runhorseLight(String message) {
-        MarqueeView marqueeView = (MarqueeView) view.findViewById(R.id.tv_marquee);
-        marqueeView.setFocusable(true);
-        marqueeView.requestFocus();
-        if (null != message) {
-            marqueeView.setText(message);//设置文本
-        }
-        marqueeView.startScroll(); //start
+        MarqueeTextView marqueeView = (MarqueeTextView) view.findViewById(R.id.marquee);
+        marqueeView.setText(message);
     }
 
     @Override

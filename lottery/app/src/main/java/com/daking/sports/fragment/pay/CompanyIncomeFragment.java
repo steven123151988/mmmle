@@ -96,6 +96,7 @@ public class CompanyIncomeFragment extends BaseFragment implements View.OnClickL
         screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/3
         keyHeight = screenHeight / 5;
+        LogUtil.e("=============pay2=============");
         return view;
     }
 

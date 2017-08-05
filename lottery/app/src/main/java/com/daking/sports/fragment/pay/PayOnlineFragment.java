@@ -89,6 +89,7 @@ public class PayOnlineFragment extends BaseFragment implements View.OnClickListe
         screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
         //阀值设置为屏幕高度的1/4
         keyHeight = screenHeight / 5;
+        LogUtil.e("===================pay====");
         return view;
     }
 
