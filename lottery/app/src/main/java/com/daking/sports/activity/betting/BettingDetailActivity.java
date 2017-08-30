@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -121,7 +122,12 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 }
             }, 2000);
         } else {
-            getBettingDetail();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    getBettingDetail();
+                }
+            }).start();
         }
 
     }
@@ -229,6 +235,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 获取赛事的详细信息
      */
     private void getBettingDetail() {
+        LogUtil.e("=====123456====="+(  Looper.getMainLooper().getThread() == Thread.currentThread()));
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "selmatch")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
