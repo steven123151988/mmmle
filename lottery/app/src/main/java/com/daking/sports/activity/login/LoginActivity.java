@@ -78,7 +78,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
                 startActivity(new Intent(mContext, RegistActivity.class));
                 break;
             case R.id.btn_login:
-                login();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        login();
+                    }
+                }).start();
                 break;
             case R.id.btn_forgetPsw:
                 startActivity(new Intent(mContext, PswManagerActivity.class));

@@ -222,7 +222,13 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                         if (BetmsgBean.getData().get(bet_position).getRate().equals("") || null == BetmsgBean.getData().get(bet_position).getRate()) {
                             ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.rate_error));
                         } else {
-                            getOrder(bet_position);
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    getOrder(bet_position);
+                                }
+                            }).start();
+
                         }
                     }
                 });
@@ -481,7 +487,16 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                                 return;
                             }
                             if (MIN <= money && money <= MAX) {
-                                getBetting();
+                                //先关闭然后再请求不免多次请求
+                                dismisspopviw();
+
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        getBetting();
+                                    }
+                                }).start();
+
                             }
                         }
                     }
@@ -607,8 +622,6 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 最后下注结算
      */
     private void getBetting() {
-        //先关闭然后再请求不免多次请求
-        dismisspopviw();
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, SportsKey.CHECK_ORDER)
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))

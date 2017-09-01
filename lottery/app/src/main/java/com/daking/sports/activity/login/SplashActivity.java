@@ -55,6 +55,7 @@ public class SplashActivity extends BaseActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         initConfigIndex();
                     }
                 }, 2500);
