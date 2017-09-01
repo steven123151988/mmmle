@@ -57,7 +57,13 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
         lv_records = (ListView) view.findViewById(R.id.listview);
         adapter = new BettingRecordAdapter(getActivity(), ball);
         LogUtil.e("=========ball=====" + ball);
-        getBettingRecords(ball, page);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getBettingRecords(ball, page);
+            }
+        }).start();
+
         initRefreshLayout(mRefreshLayout);
         return view;
     }

@@ -42,7 +42,12 @@ public class AccountHistoryFrgment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_accounthistory, null);
         lv_history = (ListView) view.findViewById(R.id.lv_history);
-        getHistory();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getHistory();
+            }
+        }).start();
         return view;
     }
 
