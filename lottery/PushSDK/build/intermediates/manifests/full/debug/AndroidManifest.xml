@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.umeng.message.lib.test" >
+    package="com.umeng.message.lib"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="22" />
-
-    <instrumentation
-        android:name="android.test.InstrumentationTestRunner"
-        android:functionalTest="false"
-        android:handleProfiling="false"
-        android:label="Tests for com.umeng.message.lib.test"
-        android:targetPackage="com.umeng.message.lib.test" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -29,9 +24,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
-    <application android:debuggable="true" >
-        <uses-library android:name="android.test.runner" />
-
+    <application>
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
@@ -112,7 +105,7 @@
             android:exported="true"
             android:process=":channel" >
             <intent-filter>
-                <action android:name="com.umeng.message.lib.test.intent.action.COMMAND" />
+                <action android:name="${applicationId}.intent.action.COMMAND" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
@@ -156,7 +149,7 @@
 
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
-            android:authorities="com.umeng.message.lib.test.umeng.message"
+            android:authorities="${applicationId}.umeng.message"
             android:exported="false" >
             <grant-uri-permission android:pathPattern=".*" />
         </provider>

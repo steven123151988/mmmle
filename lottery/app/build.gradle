@@ -10,14 +10,14 @@ android {
 //        }
 //    }
 
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.daking.sports"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0"
         multiDexEnabled true
         dexOptions {
             javaMaxHeapSize "4g"
@@ -32,6 +32,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.ruiyinSign
+        }
+    }
+
+    allprojects {
+        repositories {
+            maven {
+                url 'https://maven.google.com'
+            }
         }
     }
 

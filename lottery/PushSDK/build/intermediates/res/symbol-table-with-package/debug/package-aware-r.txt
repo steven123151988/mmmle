@@ -1,3 +1,4 @@
+com.umeng.message.lib
 int id notification_large_icon1 0x7f0c0001
 int id notification_large_icon2 0x7f0c0002
 int id notification_text 0x7f0c0003
