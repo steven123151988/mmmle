@@ -1,6 +1,5 @@
 package com.daking.sports.api;
 
-import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 
 import com.daking.sports.base.SportsKey;
@@ -8,6 +7,7 @@ import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
 import com.daking.sports.util.JsonUtil;
+import com.daking.sports.util.SharePreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +18,7 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+
 
 
 /**
@@ -183,6 +184,22 @@ public class HttpRequest {
                 .addParam(SportsKey.LANGUAGE, SportsKey.ZH_CN)
                 .build();
         Call<LoginRsp> call = mService.login(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+    /**
+     *  获取左侧菜单的menu数据
+     * @param tag
+     * @param uid
+     * @param callback
+     */
+    public void getHomeMenu(Object tag,String uid,HttpCallback<LoginRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.FNNAME, "menu")
+                .addParam(SportsKey.UID,uid)
+                .build();
+        Call<LoginRsp> call = mService.getMainmenu(body);
         putCall(tag, call);
         call.enqueue(callback);
     }

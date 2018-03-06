@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.application.SportsApplicationUtil;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
@@ -32,6 +35,7 @@ import com.daking.sports.fragment.main.FirstFragment;
 import com.daking.sports.fragment.main.MineFragment;
 import com.daking.sports.fragment.main.PrizeFragment;
 import com.daking.sports.fragment.main.ScoreFragment;
+import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.MainMenuRsp;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -143,66 +147,81 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * 请求左侧菜单的数据
      */
     private void initMainMenu() {
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "menu")
-                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
-                .build();
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, "menu")
+//                .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
+//                .build();
+//
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.HOME_MENU)
+//                .post(requestBody)
+//                .build();
+//        LogUtil.e("===========" + SportsAPI.BASE_URL + SportsAPI.HOME_MENU);
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        ShowDialogUtil.showSystemFail(mContext);
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                final String message = response.body().string();
+//                LogUtil.e("===============initMainMenu=========" + message);
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            Gson gson = new Gson();
+//                            mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
+//                            if (null == mainMenuRsp) {
+//                                ShowDialogUtil.showSystemFail(mContext);
+//                                return;
+//                            }
+//                            switch (mainMenuRsp.getCode()) {
+//                                case SportsKey.TYPE_ZERO:
+//                                    //得到接口数据才能赋值，不然报空
+//                                    setNavigationViewItemClickListener();
+//                                    break;
+//                                case SportsKey.TYPE_NINE:
+//                                    startActivity(new Intent(mContext, LoginActivity.class));
+//                                    break;
+//                                case SportsKey.TYPE_TEN:
+//                                    ToastUtil.show(mContext, getString(R.string.not_have_you_select_match));
+//                                    break;
+//                                default:
+//                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), mainMenuRsp.getMsg());
+//                                    break;
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                            ShowDialogUtil.showSystemFail(mContext);
+//                        } finally {
+//
+//                        }
+//                    }
+//                });
+//
+//            }
+//        });
 
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.HOME_MENU)
-                .post(requestBody)
-                .build();
-        LogUtil.e("===========" + SportsAPI.BASE_URL + SportsAPI.HOME_MENU);
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        String uid = SharePreferencesUtil.getString(mContext, SportsKey.UID, "0");
+        HttpRequest.getInstance().getHomeMenu(MainActivity.this, uid, new HttpCallback<LoginRsp>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ShowDialogUtil.showSystemFail(mContext);
-                    }
-                });
+            public void onSuccess(LoginRsp data) {
+                //得到接口数据才能赋值，不然报空
+                setNavigationViewItemClickListener();
+
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String message = response.body().string();
-                LogUtil.e("===============initMainMenu=========" + message);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Gson gson = new Gson();
-                            mainMenuRsp = gson.fromJson(message, MainMenuRsp.class);
-                            if (null == mainMenuRsp) {
-                                ShowDialogUtil.showSystemFail(mContext);
-                                return;
-                            }
-                            switch (mainMenuRsp.getCode()) {
-                                case SportsKey.TYPE_ZERO:
-                                    //得到接口数据才能赋值，不然报空
-                                    setNavigationViewItemClickListener();
-                                    break;
-                                case SportsKey.TYPE_NINE:
-                                    startActivity(new Intent(mContext, LoginActivity.class));
-                                    break;
-                                case SportsKey.TYPE_TEN:
-                                    ToastUtil.show(mContext, getString(R.string.not_have_you_select_match));
-                                    break;
-                                default:
-                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), mainMenuRsp.getMsg());
-                                    break;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ShowDialogUtil.showSystemFail(mContext);
-                        } finally {
-
-                        }
-                    }
-                });
-
+            public void onFailure(String msgCode, String errorMsg) {
+                ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), errorMsg);
             }
         });
     }

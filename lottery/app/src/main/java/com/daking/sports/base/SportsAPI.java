@@ -2,7 +2,7 @@ package com.daking.sports.base;
 
 
 public class SportsAPI {
-    public static  String BASE_URL = "http://sport.api.lebole5.com";
+    public static String BASE_URL = "http://sport.api.lebole5.com";
     public static final String CONFIG_INDEX = "/config/index";//请求全局变量
     public static final String REGIST = "/member/register/check_reg";//注册
     public static final String CHECK_USER = "/member/register/chk_user";//检查用户名称
@@ -27,13 +27,13 @@ public class SportsAPI {
     public static final String GET_VERSION_ANDROID = "systems/getVersionAndroid";
     public static final String NEWS = "http://hg0909.com/index.php/Help/promotion";
     public static final String AG = "/zrsx/index/show";
-    public static  String HELP = "http://hg0909.com/index.php/Help";
-    public static  String COMPANY_INCOME_H5 = "http://hg0909.com/index.php/Bank/listPay";//公司入款说明
-    public static  String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
-
+    public static String HELP = "http://hg0909.com/index.php/Help";
+    public static String COMPANY_INCOME_H5 = "http://hg0909.com/index.php/Bank/listPay";//公司入款说明
+    public static String SERVICE_URL = "https://chat.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=588188&configID=49151&jid=8032204814&s=1";
 
     /**
-     *  根据错误码找到提示信息
+     * 根据错误码找到提示信息
+     *
      * @param errorCode
      * @return
      */
@@ -44,203 +44,131 @@ public class SportsAPI {
         String info = "";
         boolean needErrorCode = false;
         switch (errorCode) {
-            case "2001":
-                info = "您的密码输入有误，请重试！";
+            case "1":
+                info = "姓名没输入中文或是没传值.";
                 break;
-            case "2002":
-                info = "该用户不存在，请检查后重试！";
+            case "2":
+                info = "IP存在异常情况.";
                 break;
-            case "2003":
-                needErrorCode = true;
-                info = "因网络原因，您的注册未成功，请重试！";
+            case "3":
+                info = "帐户已经有人使用，请重新注册.";
                 break;
-            case "2004":
-                info = "该用户名已被占用，请重新输入！";
+            case "4":
+                info = "Keys字段错误参数错误.";
                 break;
-            case "2005":
-                info = "该账户已被停用，如有疑问，请联系客服！";
+            case "5":
+                info = "网站错误，请联系网站管理员，感谢您的访问-.-.";
                 break;
-            case "2006":
-                info = "恭喜您，操作成功！";
+            case "6":
+                info = "登出失败！";
                 break;
-            case "2007":
-                info = "您的支付密码输入有误，请重新输入！";
+            case "7":
+                info = "暂无你所选择的足球赛事盘口，请稍后查看！";
                 break;
-            case "2008":
-                info = "用户名必须为字母开头的6~15位字母和数字组合，请重新输入！";
+            case "8":
+                info = "暂无你所选择的蓝球赛事盘口，请稍后查看！";
                 break;
-            case "2009":
-                info = "密码必须为6~15位字母和数字组合，请重新输入！";
+            case "9":
+                info = "身份信息已过期，请重新登录!";
                 break;
-            case "2010":
-                info = "您的支付密码过于简单，请重新输入！";
+            case "10":
+                info = "暂无赛事盘口，请稍后查看！";
                 break;
-            case "2011":
-                info = "禁止使用同名注册，请重新输入！";
+            case "11":
+                info = "未登录.";
                 break;
-            case "2012":
-                info = "请检查您的手机号码格式是否正确，谢谢！";
+            case "12":
+                info = "赛事已关闭！";
                 break;
-            case "2013":
-                info = "该账户已被冻结，如有疑问，请联系客服！";
+            case "13":
+                info = "暂无可下注盘口.";
                 break;
-            case "2014":
-                info = "此IP已被注册";
+            case "14":
+                info = "网络错误！";
                 break;
-            case "2018":
-                info = "您已很长时间未修改密码，为了您的账号安全，请修改密码";
+            case "15":
+                info = "订单重复！";
                 break;
-            case "3001":
-                needErrorCode = true;
-                info = "下注内容未开放，请尝试其他游戏！";
+            case "16":
+                info = "账户余额不足！";
                 break;
-            case "3002":
-                needErrorCode = true;
-                info = "下注内容未开放，请尝试该游戏的其他玩法！";
+            case "19":
+                info = "暂无投注记录！";
                 break;
-            case "3003":
-                needErrorCode = true;
-                info = "抱歉，网络原因导致下注未成功，请重新尝试！";
+            case "20":
+                info = "用户名格式不正确.";
                 break;
-            case "3004":
-                info = "单双玩法一期仅能下注一次，请下期再试！";
+            case "21":
+                info = "该用户名已经被注册.";
                 break;
-            case "4001":
-                info = "登录信息已失效，请重新登录";
+            case "22":
+                info = "您输入的推荐代理不存在.";
                 break;
-            case "4003":
-                info = "系统维护中，请稍后重试";
+            case "23":
+                info = "真实姓名格式不正确，请输入全中文姓名！";
                 break;
-            case "5001":
-                info = "请检查您的投注内容和金额是否正确！";
+            case "24":
+                info = "密码格式不正确！";
                 break;
-            case "5002":
-                needErrorCode = true;
-                info = "该游戏正在封盘，可前往其他游戏！";
+            case "25":
+                info = "操作失败!(数据库操作失败)";
                 break;
-            case "5003":
-                needErrorCode = true;
-                info = "因网络原因，本次投注未成功，请稍后重试！";
+            case "26":
+                info = "原密码格式不正确!";
                 break;
-            case "5004":
-                info = "您当前余额不足，可立即前往充值！";
+            case "27":
+                info = "新密码格式不正确！";
                 break;
-            case "5005":
-                info = "请检查您的金额输入是否正确，谢谢！";
+            case "28":
+                info = "原密码输入错误！";
                 break;
-            case "5006":
-                info = "您的操作过于频繁，请稍后再试！";
+            case "29":
+                info = "网络出现故障，密码修改失败！";
                 break;
-            case "5007":
-                info = "请您在上一笔交易完成后再试，谢谢！";
+            case "30":
+                info = "原提款密码格式不正确！";
                 break;
-            case "5008":
-                info = "网络繁忙，请稍后再试！";
+            case "31":
+                info = "新提款密码格式不正确！";
                 break;
-            case "5009":
-                info = "您的操作过于频繁，请稍后再试！";
+            case "50":
+                info = "请选择开户银行！";//两个50
                 break;
-            case "5010":
-                info = "请不要重复提交，谢谢！";
+            case "51":
+                info = "请填写16位或19位正确数字格式的银行账号！";
                 break;
-            case "6001":
-                info = "您选择的号码过少，请确认后再进行下注！";
+            case "52":
+                info = "银行账户信息修改失败！";
                 break;
-            case "6002":
-                info = "您选择的号码过多，请确认后再进行下注！";
+            case "53":
+                info = "提款申请失败！原因:你输入的提款密码错误！";
                 break;
-            case "6003":
-                info = "您的下注金额低于最低投注额，请重新输入！";
+            case "54":
+                info = "提款申请失败！原因:提款金额大于账户资金!";
                 break;
-            case "6004":
-                info = "您的今日提款次数已达上限，请明天再来！";
+            case "55":
+                info = "提款操作失败！";
                 break;
-            case "60041":
-                info = "请您在上一笔交易完成后再试，谢谢！";
+            case "56":
+                info = "请输入有效数字的金额！";
                 break;
-            case "7001":
-                needErrorCode = true;
-                info = "操作失败，请检查您的网络，并稍后再试！";
+            case "60":
+                info = "暂无公司的入款账号，请选择其它在线支付方式！";
                 break;
-            case "7002":
-                needErrorCode = true;
-                info = "您的订单查询操作不成功，请刷新后再试！";
+            case "61":
+                info = "暂无此类入款账号，请选择其它在线支付方式！";
                 break;
-            case "7003":
-                needErrorCode = true;
-                info = "您的额度转换操作不成功，请刷新后再试！";
+            case "99":
+                info = "fnName沒傳值或沒傳對值！";
                 break;
-            case "7004":
-                info = "您的订单查询不成功，请刷新后再试！";
+            case "1000":
+                info = "上面的回传参数msg展示所有体育赛事维护内容.";
                 break;
-            case "7005":
-                info = "输入的验证码有误，请重新输入";
+            case "1001":
+                info = "上面的回传参数msg展示滚球赛事维护内容.";
                 break;
-            case "8001":
-                info = "输入的手机号码格式有误，请重新输入";
-                break;
-            case "8002":
-                info = "该用户已经绑定过手机号";
-                break;
-            case "8003":
-                needErrorCode = true;
-                info = "更新手机号码失败";
-                break;
-            case "8004":
-                info = "手机号未绑定,无法进行此操作";
-                break;
-            case "8005":
-                info = "手机号与当前绑定的不一致";
-                break;
-            case "8007":
-                needErrorCode = true;
-                info = "领取彩金失败，数据库错误";
-                break;
-            case "8008":
-                needErrorCode = true;
-                info = "您的支付密码修改不成功，请重试！";
-                break;
-            case "8009":
-                needErrorCode = true;
-                info = "您的登录密码修改不成功，请重试！";
-                break;
-            case "8010":
-                info = "该网站未开通手机短信功能";
-                break;
-            case "8011":
-                info = "输入的手机号码格式有误，请重新输入";
-                break;
-            case "8012":
-                info = "网络连接有误，请检查您的网络！";
-                break;
-            case "8013":
-                info = "验证码输入错误，请重新输入";
-                break;
-            case "8014":
-                info = "验证码已失效，请重新获取验证码";
-                break;
-            case "8015":
-                needErrorCode = true;
-                info = "解绑失败";
-                break;
-            case "8016":
-                info = "该手机号已被绑定过";
-                break;
-            case "9001":
-                needErrorCode = true;
-                info = "该手机号已被绑定过";
-                break;
-            case "9002":
-                info = "签到不成功，请稍后重试！";
-                break;
-            case "9003":
-                info = "您的剩余抽奖次数为0，请下次再来！";
-                break;
-            case "9004":
-                info = "您的剩余抽奖次数为0，请下次再来！";
-                break;
-            case "9005":
-                info = "您的账户暂未达到抽奖要求，请留意抽奖规则，谢谢！";
+            case "1002":
+                info = "上面的回传参数msg展示今日赛事维护内容.";
                 break;
             case "10011":
             case "10012":

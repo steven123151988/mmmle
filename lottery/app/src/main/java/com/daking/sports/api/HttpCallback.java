@@ -47,8 +47,7 @@ public abstract class HttpCallback<T extends BaseModel> implements Callback<T> {
 
     private void onApiFailure(T model) {
         String msgCode = model.getMsg();
-        onFailure(msgCode,
-                SportsAPI.getErrorCodeInfo(msgCode));
+        onFailure(msgCode, SportsAPI.getErrorCodeInfo(msgCode));
     }
 
     @Override

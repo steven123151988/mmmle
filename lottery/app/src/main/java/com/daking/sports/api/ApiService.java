@@ -44,4 +44,10 @@ public interface ApiService {
     @POST(SportsAPI.LOGIN)
     Call<LoginRsp> login(@Body RequestBody body);
 
+    /**
+     *   获取左侧menu信息
+     */
+    @POST(SportsAPI.HOME_MENU)
+    Call<LoginRsp> getMainmenu(@Body RequestBody body);
+
 }
