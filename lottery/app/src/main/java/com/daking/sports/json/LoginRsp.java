@@ -1,12 +1,11 @@
 package com.daking.sports.json;
 
-import java.io.Serializable;
 
 /**
  * Created by 18 on 2017/5/8.
  */
 
-public class LoginRsp implements Serializable {
+public class LoginRsp extends BaseModel {
 
 
     /**
@@ -15,27 +14,9 @@ public class LoginRsp implements Serializable {
      * ifo : 46f1ddeb482b829ec14bra7
      */
 
-    private int code;
-    private String msg;
     private String ifo;
     private String backup;
 
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public String getIfo() {
         return ifo;

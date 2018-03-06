@@ -15,13 +15,17 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.AddEdiTextWatchListenerUtil;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.ShowDialogUtil;
+import com.daking.sports.util.TextUtil;
 import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 import com.mingle.entity.MenuEntity;
@@ -86,7 +90,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             public CharSequence filter(CharSequence source, int start, int end,
                                        Spanned dest, int dstart, int dend) {
                 for (int i = start; i < end; i++) {
-                    if (!isChinese(source.charAt(i))) {
+                    if (!TextUtil.isChinese(source.charAt(i))) {
                         return "";
                     }
                 }
@@ -109,88 +113,82 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         rl = (RelativeLayout) findViewById(R.id.rl);
     }
 
-    /**
-     * 判定输入汉字
-     *
-     * @param c
-     * @return
-     */
-    public static boolean isChinese(char c) {
-        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
-                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
-                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
-                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
-                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
-                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * 检查用户名是否可用
      */
     private void checkUser() {
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "chk_user")
-                .add(SportsKey.USER_NAME, account)
-                .build();
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, "chk_user")
+//                .add(SportsKey.USER_NAME, account)
+//                .build();
+//
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.CHECK_USER)
+//                .post(requestBody)
+//                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
+//                    }
+//                });
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                message = response.body().string();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            LogUtil.e(message);
+//                            loginRsp = gson.fromJson(message, LoginRsp.class);
+//
+//                            if (null == loginRsp) {
+//                                ShowDialogUtil.showSystemFail(mContext);
+//                                return;
+//                            }
+//                            switch (loginRsp.getCode()) {
+//                                case SportsKey.TYPE_ZERO:
+//                                    //用户名可用,直接去注册
+//                                    gotoRegist();
+//                                    break;
+//                                default:
+//                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.error), loginRsp.getMsg());
+//                                    break;
+//                            }
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                            ShowDialogUtil.showSystemFail(mContext);
+//                        } finally {
+//
+//                        }
+//
+//                    }
+//                });
+//
+//
+//            }
+//        });
 
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.CHECK_USER)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        HttpRequest.getInstance().checkUser(RegistActivity.this, account, new HttpCallback<LoginRsp>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
-                    }
-                });
-
+            public void onSuccess(LoginRsp data) {
+                //用户名可用,直接去注册
+                gotoRegist();
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                message = response.body().string();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            LogUtil.e(message);
-                            loginRsp = gson.fromJson(message, LoginRsp.class);
-
-                            if (null == loginRsp) {
-                                ShowDialogUtil.showSystemFail(mContext);
-                                return;
-                            }
-                            switch (loginRsp.getCode()) {
-                                case SportsKey.TYPE_ZERO:
-                                    //用户名可用,直接去注册
-                                    gotoRegist();
-                                    break;
-                                default:
-                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.error), loginRsp.getMsg());
-                                    break;
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ShowDialogUtil.showSystemFail(mContext);
-                        } finally {
-
-                        }
-
-                    }
-                });
-
-
+            public void onFailure(String msgCode, String errorMsg) {
+                ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), errorMsg);
             }
         });
     }
@@ -211,8 +209,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             ToastUtil.show(mContext, getResources().getString(R.string.regist_null));
             return;
         }
-        if (account.length()<6){
-            ToastUtil.show(mContext, getResources().getString(R.string.psw_type_error));
+        if (account.length() < 6) {
+            ToastUtil.show(mContext, getResources().getString(R.string.account_type_error));
             return;
         }
         if (!psw.equals("") && !psw.equals(psw2)) {
@@ -227,6 +225,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
             ToastUtil.show(mContext, "生日格式为8位数");
             return;
         }
+
+
         checkUser();
     }
 
@@ -235,91 +235,113 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
      * 带参数注册
      */
     private void gotoRegist() {
-        if (null==check_question){
-            ToastUtil.show(mContext,getString(R.string.plz_select_psw_question));
+        if (null == check_question) {
+            ToastUtil.show(mContext, getString(R.string.plz_select_psw_question));
             return;
         }
-        RequestBody requestBody = new FormBody.Builder()
-                .add("fnName", "reg")
-                .add("keys", "add")
-                .add("website", "android")
-                .add("website1", "android")
-                .add("reg", "3")
-                .add("username", account)//账号
-                .add("password", psw)//密码
-                .add("currency", "RMB")  //首选货币
-                .add("alias", name)  //真实姓名
-                .add("question", check_question) //密码提示问题
-                .add("answer", answer)//答案
-                .add("drpAuthCode", money_psw)
-                .add("birthday", birthday)
-                .add("contory", "中国")
-                .add("city", "深圳")
-                .add("know_site", "0")
-                .add("Checkbox", "1")  //是否选中已经满18岁
-                .build();
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.REGIST)
-                .post(requestBody)
-                .build();
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add("fnName", "reg")
+//                .add("keys", "add")
+//                .add("website", "android")
+//                .add("website1", "android")
+//                .add("reg", "3")
+//                .add("username", account)//账号
+//                .add("password", psw)//密码
+//                .add("currency", "RMB")  //首选货币
+//                .add("alias", name)  //真实姓名
+//                .add("question", check_question) //密码提示问题
+//                .add("answer", answer)//答案
+//                .add("drpAuthCode", money_psw)
+//                .add("birthday", birthday)
+//                .add("contory", "中国")
+//                .add("city", "深圳")
+//                .add("know_site", "0")
+//                .add("Checkbox", "1")  //是否选中已经满18岁
+//                .build();
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.REGIST)
+//                .post(requestBody)
+//                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
+//                    }
+//                });
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                message2 = response.body().string();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            LogUtil.e(message2);
+//                            Gson gson = new Gson();
+//                            loginRsp = gson.fromJson(message2, LoginRsp.class);
+//                            if (null == loginRsp) {
+//                                //展示失败消息
+//                                ShowDialogUtil.showSystemFail(mContext);
+//                                return;
+//                            }
+//                            switch (loginRsp.getCode()) {
+//                                case SportsKey.TYPE_ZERO:
+//                                    //展示注册成功消息
+//                                    ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
+//                                    //延迟5秒关闭
+//                                    Handler handler = new Handler();
+//                                    handler.postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            ShowDialogUtil.dismissDialogs();
+//                                            finish();
+//                                        }
+//                                    }, 2500);
+//                                    break;
+//                                default:
+//                                    //展示失败消息
+//                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), loginRsp.getMsg());
+//                                    break;
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                            ShowDialogUtil.showSystemFail(mContext);
+//                        }
+//                    }
+//                });
+//
+//
+//            }
+//        });
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
+        HttpRequest.getInstance().gotoRegist(RegistActivity.this, account,
+                psw, name, check_question, answer, money_psw, birthday, new HttpCallback<LoginRsp>() {
                     @Override
-                    public void run() {
-                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
+                    public void onSuccess(LoginRsp data) {
+                        ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
+                        //延迟5秒关闭
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                ShowDialogUtil.dismissDialogs();
+                                finish();
+                            }
+                        }, 2500);
+                    }
+
+                    @Override
+                    public void onFailure(String msgCode, String errorMsg) {
+                        ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), errorMsg);
                     }
                 });
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                message2 = response.body().string();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            LogUtil.e(message2);
-                            Gson gson = new Gson();
-                            loginRsp = gson.fromJson(message2, LoginRsp.class);
-                            if (null == loginRsp) {
-                                //展示失败消息
-                                ShowDialogUtil.showSystemFail(mContext);
-                                return;
-                            }
-                            switch (loginRsp.getCode()) {
-                                case SportsKey.TYPE_ZERO:
-                                    //展示注册成功消息
-                                    ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
-                                    //延迟5秒关闭
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            ShowDialogUtil.dismissDialogs();
-                                            finish();
-                                        }
-                                    }, 2500);
-                                    break;
-                                default:
-                                    //展示失败消息
-                                    ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), loginRsp.getMsg());
-                                    break;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            ShowDialogUtil.showSystemFail(mContext);
-                        }
-                    }
-                });
-
-
-            }
-        });
     }
 
 

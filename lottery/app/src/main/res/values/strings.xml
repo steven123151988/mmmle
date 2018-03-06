@@ -178,11 +178,19 @@
     <string name="typein_banknum">请填写银行卡号！</string>
     <string name="take_out_money">提款金额最低100元！</string>
     <string name="plz_select_psw_question">请选择密码提示问题！</string>
-    <string name="psw_type_error">密码格式不正确，因为6-15位字符！</string>
+    <string name="psw_type_error">密码格式不正确，应为6-15位字符！</string>
+    <string name="account_type_error">账户格式不正确，应为6-15位字符！</string>
     <string name="not_have_you_select_match"> 暂时没有您选择的赛事！</string>
     <string name="must_select_bank_message">银行相关转账需要选择转账的银行信息！</string>
     <string name="select_time">请选择如款时间！</string>
     <string name="select_income_type">请选择入款方式！</string>
     <string name="type_in_income_money">请填写入款金额！</string>
     <string name="systm_err_try_again">系统异常，重新打开面页尝试！</string>
+    <string name="app_update">新版本升级V</string>
+    <string name="center_text">让您享受更流畅的游戏过程！</string>
+    <string name="center_text2">为了让您享受更流畅的游戏过程,本APP支持的最低Android版本为4.2</string>
+    <string name="confirm_text">马上更新</string>
+    <string name="close_app">关闭应用</string>
+    <string name="cancle_text">以后在说</string>
+
 </resources>

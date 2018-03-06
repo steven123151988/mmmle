@@ -5,7 +5,7 @@ import com.daking.sports.base.SportsAPI;
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2018/3/5.
+ * Created by SUNNY18 on 2018/3/5.
  */
 
 public class BaseModel implements Serializable {

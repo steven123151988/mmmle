@@ -24,6 +24,7 @@ public class SportsAPI {
     public static final String CHANGE_BANK_INFO = "/member/member/chg_info";//添加更改账户
     public static final String MEM_CAPITAL_FLOW = "/member/member/mem_capital_flow";
     public static final String INCOME_POST = "/pay/payonline/income_post";//请求第3方
+    public static final String GET_VERSION_ANDROID = "systems/getVersionAndroid";
     public static final String NEWS = "http://hg0909.com/index.php/Help/promotion";
     public static final String AG = "/zrsx/index/show";
     public static  String HELP = "http://hg0909.com/index.php/Help";

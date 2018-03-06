@@ -1,9 +1,12 @@
 package com.daking.sports.api;
 
+import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.ConfigRsp;
+import com.daking.sports.json.LoginRsp;
+import com.daking.sports.json.LotteryVersion;
 import com.daking.sports.util.JsonUtil;
 
 import java.util.ArrayList;
@@ -84,34 +87,6 @@ public class HttpRequest {
         }
     }
 
-//    /**
-//     * 用户注册
-//     *
-//     * @param username    用户名
-//     * @param password    密码
-//     * @param realName    真实姓名
-//     * @param payPassword 支付密码
-//     * @param qqskype     邮箱(可不传)
-//     * @param telephone   电话(可不传)
-//     * @param parentName  代理名称(可不传)
-//     */
-//    public void register(Object tag, String username, String password, String realName,
-//                         String payPassword, @Nullable String qqskype, @Nullable String telephone,
-//                         @Nullable String parentName, HttpCallback<BaseModel> callback) {
-//        RequestBody body = new RequestBodyBuilder()
-//                .addParam("username", username)
-//                .addParam("password", password)
-//                .addParam("realname", realName)
-//                .addParam("paypasswd", payPassword)
-//                .addParam("qqskype", qqskype)
-//                .addParam("telphone", telephone)
-//                .addParam("parentname", parentName)
-//                .build();
-//        Call<BaseModel> call = mService.getConfig(body);
-//        putCall(tag, call);
-//        call.enqueue(callback);
-//    }
-
 
     public void getConfig(Object tag, HttpCallback<ConfigRsp> callback) {
         RequestBody body = new RequestBodyBuilder()
@@ -121,6 +96,96 @@ public class HttpRequest {
         Call<ConfigRsp> call = mService.getConfig(body);
         putCall(tag, call);
         call.enqueue(callback);
-
     }
+
+    /**
+     * 检查用户名是否已经被占用
+     *
+     * @param tag
+     * @param callback
+     */
+    public void checkUser(Object tag, String account, HttpCallback<LoginRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.FNNAME, "chk_user")
+                .addParam(SportsKey.USER_NAME, account)
+                .build();
+        Call<LoginRsp> call = mService.checkUser(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 注册账户
+     *
+     * @param tag
+     * @param account
+     * @param psw
+     * @param name
+     * @param check_question
+     * @param answer
+     * @param money_psw
+     * @param birthday
+     * @param callback
+     */
+    public void gotoRegist(Object tag, String account, String psw,
+                           String name, String check_question, String answer,
+                           String money_psw, String birthday, HttpCallback<LoginRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam("fnName", "reg")
+                .addParam("keys", "add")
+                .addParam("website", "android")
+                .addParam("website1", "android")
+                .addParam("reg", "3")
+                .addParam("username", account)//账号
+                .addParam("password", psw)//密码
+                .addParam("currency", "RMB")  //首选货币
+                .addParam("alias", name)  //真实姓名
+                .addParam("question", check_question) //密码提示问题
+                .addParam("answer", answer)//答案
+                .addParam("drpAuthCode", money_psw)
+                .addParam("birthday", birthday)
+                .addParam("contory", "中国")
+                .addParam("city", "中国")
+                .addParam("know_site", "0")
+                .addParam("Checkbox", "1")  //是否选中已经满18岁
+                .build();
+        Call<LoginRsp> call = mService.gotoRegist(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+
+    /**
+     * app版本升级
+     *
+     * @param tag
+     * @param callback
+     */
+    public void appUpGrade(Object tag, HttpCallback<LotteryVersion> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .build();
+        Call<LotteryVersion> call = mService.appUpGrade(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 登陆
+     *
+     * @param tag
+     * @param callback
+     */
+    public void login(Object tag, String account, String psw, HttpCallback<LoginRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.USER_NAME, account)
+                .addParam(SportsKey.PASSWORD, psw)
+                .addParam(SportsKey.FNNAME, SportsKey.LOGIN)
+                .addParam(SportsKey.LANGUAGE, SportsKey.ZH_CN)
+                .build();
+        Call<LoginRsp> call = mService.login(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+
 }

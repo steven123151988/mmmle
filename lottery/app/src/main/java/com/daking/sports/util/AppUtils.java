@@ -565,4 +565,22 @@ public class AppUtils {
 		}
 		return false;
 	}
+
+	/**
+	 * 获取当前版本号
+	 */
+	public static String getAppVersionName(Context context) {
+		String versionName = "1.0";
+		try {
+			PackageManager packageManager = context.getPackageManager();
+			PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+			versionName = packageInfo.versionName;
+			if (TextUtils.isEmpty(versionName)) {
+				return "1.0";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return versionName;
+	}
 }

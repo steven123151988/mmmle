@@ -13,7 +13,7 @@ import android.widget.EditText;
 import com.daking.sports.application.ActivityManager;
 
 /**
- * Created by Administrator on 2017/6/16.监听editext的size数量
+ * Created by Sunny18 on 2017/6/16.监听editext的size数量
  */
 
 public class AddEdiTextWatchListenerUtil {
