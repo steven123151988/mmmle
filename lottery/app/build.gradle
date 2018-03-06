@@ -10,8 +10,8 @@ android {
 //        }
 //    }
 
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.daking.sports"
         minSdkVersion 16
@@ -32,14 +32,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.ruiyinSign
-        }
-    }
-
-    allprojects {
-        repositories {
-            maven {
-                url 'https://maven.google.com'
-            }
         }
     }
 
@@ -77,7 +69,6 @@ repositories {
 dependencies {
     compile project(':PushSDK')
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/gson-2.2.4.jar')
     compile(name: "sweetsheet-release", ext: "aar")
     compile 'com.nineoldandroids:library:2.4.0'    //sweetsheet用到的开源库
     compile 'com.yalantis:phoenix:1.2.3'
@@ -85,8 +76,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.dalong:marqueeview:1.0.0'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.squareup.okio:okio:1.13.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'cn.pedant.sweetalert:library:1.3'
     compile 'de.hdodenhof:circleimageview:1.3.0'
@@ -94,4 +85,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'org.greenrobot:eventbus:3.1.1'
+    compile 'com.jakewharton:butterknife:8.8.1'
 }

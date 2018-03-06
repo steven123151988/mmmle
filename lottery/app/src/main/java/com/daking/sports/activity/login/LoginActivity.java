@@ -1,6 +1,8 @@
 package com.daking.sports.activity.login;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -17,6 +19,7 @@ import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.LoginRsp;
+import com.daking.sports.util.CustomVideoView;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 import com.daking.sports.util.ShowDialogUtil;
@@ -42,12 +45,19 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     private TextView tv_center;
     private Gson gson;
     private Handler handler;
-
+    //创建播放视频的控件对象
+    private CustomVideoView videoview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //初始化其他view
+        initView();
+    }
+
+    private void initView() {
         et_account = (EditText) findViewById(R.id.et_account);
         et_psw = (EditText) findViewById(R.id.et_psw);
         //不让用户按回车键
@@ -69,6 +79,24 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         findViewById(R.id.btn_forgetPsw).setOnClickListener(this);
         findViewById(R.id.btn_register).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
+    }
+
+
+    private void initVideoview() {
+        //加载视频资源控件
+        videoview = (CustomVideoView) findViewById(R.id.videoview);
+        //设置播放加载路径
+
+        videoview.setVideoURI(Uri.parse("android.resource://com.daking.sports/" + R.raw.loginback));
+        //播放
+        videoview.start();
+        //循环播放
+        videoview.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoview.start();
+            }
+        });
     }
 
     @Override
@@ -171,6 +199,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //初始化音频
+        initVideoview();
+    }
 
     @Override
     public void onBackPressed() {
@@ -181,15 +215,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (null != videoview) {
+            videoview.stopPlayback();
+        }
         ShowDialogUtil.dismissDialogs();
-        if (null!=handler){
+        if (null != handler) {
             handler.removeCallbacksAndMessages(null);
         }
     }

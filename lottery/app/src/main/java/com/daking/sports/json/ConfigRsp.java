@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Administrator on 2017/6/18.
  */
 
-public class ConfigRsp implements Serializable {
+public class ConfigRsp extends BaseModel {
 
 
     /**
@@ -14,25 +14,18 @@ public class ConfigRsp implements Serializable {
      * ifo : {"base_url":"http://sport.api.lebole5.com"}
      */
 
-    private int code;
+
     private IfoBean ifo;
-    private String msg;
+//    private String msg;
 
-    public String getMsg() {
-        return msg;
-    }
+//    public String getMsg() {
+//        return msg;
+//    }
+//
+//    public void setMsg(String msg) {
+//        this.msg = msg;
+//    }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public IfoBean getIfo() {
         return ifo;
