@@ -391,6 +391,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
 //            @Override
 //            public void onSuccess(BettingDetailRsp data) {
 //
+        
 //            }
 //
 //            @Override
