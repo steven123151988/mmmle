@@ -1,13 +1,12 @@
 package com.daking.sports.json;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 18 on 2017/5/30.
  */
 
-public class BallGQRsp implements Serializable {
+public class BallGQRsp extends BaseModel {
 
 
     /**
@@ -29,17 +28,7 @@ public class BallGQRsp implements Serializable {
     private int bk_nums;
     private int zrsx_nums;
     private String pt_nums;
-    private int code;
     private List<IfoBean> ifo;
-    private String msg;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public MemberBean getMember() {
         return member;
@@ -95,14 +84,6 @@ public class BallGQRsp implements Serializable {
 
     public void setPt_nums(String pt_nums) {
         this.pt_nums = pt_nums;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 
     public List<IfoBean> getIfo() {

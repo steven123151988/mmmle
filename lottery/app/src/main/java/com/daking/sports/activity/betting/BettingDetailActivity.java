@@ -27,6 +27,8 @@ import android.widget.TextView;
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.MyExpandableListAdapter;
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.base.BaseActivity;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -241,7 +243,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
      * 获取赛事的详细信息
      */
     private void getBettingDetail() {
-        LogUtil.e("=====123456====="+(  Looper.getMainLooper().getThread() == Thread.currentThread()));
+        LogUtil.e("=====123456=====" + (Looper.getMainLooper().getThread() == Thread.currentThread()));
         RequestBody requestBody = new FormBody.Builder()
                 .add(SportsKey.FNNAME, "selmatch")
                 .add(SportsKey.UID, SharePreferencesUtil.getString(mContext, SportsKey.UID, "0"))
@@ -383,6 +385,19 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
 
             }
         });
+
+//        String uid = SharePreferencesUtil.getString(mContext, SportsKey.UID, "0");
+//        HttpRequest.getInstance().getMatch(BettingDetailActivity.this, uid, mid, new HttpCallback<BettingDetailRsp>() {
+//            @Override
+//            public void onSuccess(BettingDetailRsp data) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(String msgCode, String errorMsg) {
+//
+//            }
+//        });
     }
 
 
@@ -542,7 +557,7 @@ public class BettingDetailActivity extends BaseActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (!isFinishing()){
+                        if (!isFinishing()) {
                             ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.net_error));
                         }
 

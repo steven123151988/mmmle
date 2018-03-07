@@ -228,12 +228,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-
-    @Override
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);

@@ -2,6 +2,9 @@ package com.daking.sports.api;
 
 
 import com.daking.sports.base.SportsAPI;
+import com.daking.sports.json.AccountHistoryRsp;
+import com.daking.sports.json.BallGQRsp;
+import com.daking.sports.json.BettingDetailRsp;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
@@ -45,9 +48,37 @@ public interface ApiService {
     Call<LoginRsp> login(@Body RequestBody body);
 
     /**
-     *   获取左侧menu信息
+     * 获取左侧menu信息
      */
     @POST(SportsAPI.HOME_MENU)
-    Call<LoginRsp> getMainmenu(@Body RequestBody body);
+    Call<LoginRsp> getMainMenu(@Body RequestBody body);
+
+    /**
+     * 获取球类信息列表
+     */
+    @POST(SportsAPI.MATCH_LIST)
+    Call<BallGQRsp> getBallMsg(@Body RequestBody body);
+
+
+    /**
+     * 获取球类信息列表
+     */
+    @POST(SportsAPI.BET_HIS)
+    Call<AccountHistoryRsp> getBetHistory(@Body RequestBody body);
+
+    /**
+     * 赛事详情
+     */
+    @POST(SportsAPI.GET_MATCH)
+    Call<BettingDetailRsp> getMatch(@Body RequestBody body);
+
+    /**
+     * 修改账户密码
+     */
+    @POST(SportsAPI.CHANGE_PWD)
+    Call<LoginRsp> changePsw(@Body RequestBody body);
+
+
+
 
 }

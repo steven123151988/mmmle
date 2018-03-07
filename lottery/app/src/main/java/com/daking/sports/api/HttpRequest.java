@@ -3,6 +3,9 @@ package com.daking.sports.api;
 import android.support.v4.util.ArrayMap;
 
 import com.daking.sports.base.SportsKey;
+import com.daking.sports.json.AccountHistoryRsp;
+import com.daking.sports.json.BallGQRsp;
+import com.daking.sports.json.BettingDetailRsp;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
@@ -18,7 +21,6 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-
 
 
 /**
@@ -189,17 +191,98 @@ public class HttpRequest {
     }
 
     /**
-     *  获取左侧菜单的menu数据
+     * 获取左侧菜单的menu数据
+     *
      * @param tag
      * @param uid
      * @param callback
      */
-    public void getHomeMenu(Object tag,String uid,HttpCallback<LoginRsp> callback) {
+    public void getHomeMenu(Object tag, String uid, HttpCallback<LoginRsp> callback) {
         RequestBody body = new RequestBodyBuilder()
                 .addParam(SportsKey.FNNAME, "menu")
-                .addParam(SportsKey.UID,uid)
+                .addParam(SportsKey.UID, uid)
                 .build();
-        Call<LoginRsp> call = mService.getMainmenu(body);
+        Call<LoginRsp> call = mService.getMainMenu(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取球类信息列表
+     *
+     * @param tag
+     * @param uid
+     * @param ball
+     * @param type
+     * @param callback
+     */
+    public void getBallMsg(Object tag, String uid, String ball, String type, HttpCallback<BallGQRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.FNNAME, "mlist")
+                .addParam(SportsKey.UID, uid)
+                .addParam(SportsKey.BALL, ball)
+                .addParam(SportsKey.TYPE, type)
+                .build();
+        Call<BallGQRsp> call = mService.getBallMsg(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+
+    /**
+     * 获取账户历史
+     *
+     * @param tag
+     * @param uid
+     * @param callback
+     */
+    public void getBetHistory(Object tag, String uid, HttpCallback<AccountHistoryRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.FNNAME, "bet_his")
+                .addParam(SportsKey.UID, uid)
+                .build();
+        Call<AccountHistoryRsp> call = mService.getBetHistory(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 获取赛事详情
+     *
+     * @param tag
+     * @param uid
+     * @param mid
+     * @param callback
+     */
+    public void getMatch(Object tag, String uid, String mid, HttpCallback<BettingDetailRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.FNNAME, "selmatch")
+                .addParam(SportsKey.UID, uid)
+                .addParam(SportsKey.MID, mid)
+                .build();
+        Call<BettingDetailRsp> call = mService.getMatch(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param tag
+     * @param psw1
+     * @param newPSW
+     * @param type
+     * @param callback
+     */
+    public void changePsw(Object tag, String uid,String psw1, String newPSW, String type, HttpCallback<LoginRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.UID, uid)
+                .addParam(SportsKey.FNNAME, "chg_pwd")
+                .addParam(SportsKey.OLD_PWD, psw1)
+                .addParam(SportsKey.BEW_PWD, newPSW)
+                .addParam(SportsKey.TYPE, type)
+                .build();
+        Call<LoginRsp> call = mService.changePsw(body);
         putCall(tag, call);
         call.enqueue(callback);
     }

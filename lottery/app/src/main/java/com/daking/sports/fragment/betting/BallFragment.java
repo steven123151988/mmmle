@@ -12,10 +12,13 @@ import android.widget.ListView;
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.BettingAdapter;
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.BallGQRsp;
+import com.daking.sports.json.LotteryVersion;
 import com.daking.sports.util.AbsListViewCompat;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.SharePreferencesUtil;
@@ -118,112 +121,175 @@ public class BallFragment extends BaseFragment {
         if (null == ball || null == type) {
             return;
         }
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "mlist")
-                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add(SportsKey.BALL, ball)
-                .add(SportsKey.TYPE, type)
-                .build();
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, "mlist")
+//                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+//                .add(SportsKey.BALL, ball)
+//                .add(SportsKey.TYPE, type)
+//                .build();
+//
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.MATCH_LIST)
+//                .post(requestBody)
+//                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            iv_system_error.setVisibility(View.VISIBLE);
+//                            iv_system_error.setImageResource(R.drawable.konglong4);
+//                            ll_redline.setVisibility(View.GONE);
+//                        }
+//                    });
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                message = response.body().string();
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                LogUtil.e("=====getballmsg=====" + message);
+//                                ballGQRsp = gson.fromJson(message, BallGQRsp.class);
+//                                if (null == ballGQRsp) {
+//                                    iv_system_error.setVisibility(View.VISIBLE);
+//                                    iv_system_error.setImageResource(R.drawable.konglong1);
+//                                    return;
+//                                }
+//                                switch (ballGQRsp.getCode()) {
+//                                    case SportsKey.TYPE_ZERO:
+//                                        iv_system_error.setVisibility(View.GONE);
+//                                        bettingAdapter = new BettingAdapter(getActivity(), ballGQRsp.getIfo(), ball);
+//                                        lv_betting.setAdapter(bettingAdapter);
+//                                        bettingAdapter.notifyDataSetChanged();
+//                                        lv_betting.setSelection(listview_position);
+//                                        AbsListViewCompat absListViewCompat = new AbsListViewCompat();
+//                                        absListViewCompat.setScrollView(lv_betting);
+//                                        onScrollCallback = new AbsListViewCompat.OnScrollCallback() {
+//                                            @Override
+//                                            public void onScrollChanged(int state, int direction, int position) {
+//                                                listview_position = position;
+//                                            }
+//                                        };
+//                                        absListViewCompat.setOnScrollCallback(onScrollCallback);
+//                                        if (ballGQRsp.getIfo().size() > 0) {
+//                                            ll_redline.setVisibility(View.VISIBLE);
+//                                        } else {
+//                                            ll_redline.setVisibility(View.GONE);
+//                                        }
+//
+//                                        break;
+//                                    case SportsKey.TYPE_NINE:
+//                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+//                                        break;
+//                                    case SportsKey.TYPE_ELEVEN:
+//                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+//                                        break;
+//                                    case SportsKey.TYPE_SEVEN:
+//                                        iv_system_error.setVisibility(View.VISIBLE);
+//                                        iv_system_error.setImageResource(R.drawable.konglong1);
+//                                        ll_redline.setVisibility(View.GONE);
+//                                        break;
+//                                    case SportsKey.TYPE_EIGHT:
+//                                        iv_system_error.setImageResource(R.drawable.konglong1);
+//                                        iv_system_error.setVisibility(View.VISIBLE);
+//                                        ll_redline.setVisibility(View.GONE);
+//                                        break;
+//                                    case SportsKey.TYPE_1000:
+//                                        iv_system_error.setImageResource(R.drawable.konglong4);
+//                                        iv_system_error.setVisibility(View.VISIBLE);
+//                                        ll_redline.setVisibility(View.GONE);
+//                                        break;
+//                                    case SportsKey.TYPE_1001:
+//                                        iv_system_error.setImageResource(R.drawable.konglong4);
+//                                        iv_system_error.setVisibility(View.VISIBLE);
+//                                        ll_redline.setVisibility(View.GONE);
+//                                        break;
+//                                    case SportsKey.TYPE_1002:
+//                                        iv_system_error.setImageResource(R.drawable.konglong4);
+//                                        iv_system_error.setVisibility(View.VISIBLE);
+//                                        ll_redline.setVisibility(View.GONE);
+//                                        break;
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                ShowDialogUtil.showSystemFail(getActivity());
+//                            } finally {
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+        String uid = SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0");
+        HttpRequest.getInstance().getBallMsg(BallFragment.this, uid, ball, type, new HttpCallback<BallGQRsp>() {
 
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.MATCH_LIST)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            iv_system_error.setVisibility(View.VISIBLE);
-                            iv_system_error.setImageResource(R.drawable.konglong4);
-                            ll_redline.setVisibility(View.GONE);
-                        }
-                    });
+            public void onSuccess(BallGQRsp data) {
+                iv_system_error.setVisibility(View.GONE);
+                bettingAdapter = new BettingAdapter(getActivity(), ballGQRsp.getIfo(), ball);
+                lv_betting.setAdapter(bettingAdapter);
+                bettingAdapter.notifyDataSetChanged();
+                lv_betting.setSelection(listview_position);
+                AbsListViewCompat absListViewCompat = new AbsListViewCompat();
+                absListViewCompat.setScrollView(lv_betting);
+                onScrollCallback = new AbsListViewCompat.OnScrollCallback() {
+                    @Override
+                    public void onScrollChanged(int state, int direction, int position) {
+                        listview_position = position;
+                    }
+                };
+                absListViewCompat.setOnScrollCallback(onScrollCallback);
+                if (ballGQRsp.getIfo().size() > 0) {
+                    ll_redline.setVisibility(View.VISIBLE);
+                } else {
+                    ll_redline.setVisibility(View.GONE);
                 }
-
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                message = response.body().string();
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                LogUtil.e("=====getballmsg=====" + message);
-                                ballGQRsp = gson.fromJson(message, BallGQRsp.class);
-                                if (null == ballGQRsp) {
-                                    iv_system_error.setVisibility(View.VISIBLE);
-                                    iv_system_error.setImageResource(R.drawable.konglong1);
-                                    return;
-                                }
-                                switch (ballGQRsp.getCode()) {
-                                    case SportsKey.TYPE_ZERO:
-                                        iv_system_error.setVisibility(View.GONE);
-                                        bettingAdapter = new BettingAdapter(getActivity(), ballGQRsp.getIfo(), ball);
-                                        lv_betting.setAdapter(bettingAdapter);
-                                        bettingAdapter.notifyDataSetChanged();
-                                        lv_betting.setSelection(listview_position);
-                                        AbsListViewCompat absListViewCompat = new AbsListViewCompat();
-                                        absListViewCompat.setScrollView(lv_betting);
-                                        onScrollCallback = new AbsListViewCompat.OnScrollCallback() {
-                                            @Override
-                                            public void onScrollChanged(int state, int direction, int position) {
-                                                listview_position = position;
-                                            }
-                                        };
-                                        absListViewCompat.setOnScrollCallback(onScrollCallback);
-                                        if (ballGQRsp.getIfo().size() > 0) {
-                                            ll_redline.setVisibility(View.VISIBLE);
-                                        } else {
-                                            ll_redline.setVisibility(View.GONE);
-                                        }
-
-                                        break;
-                                    case SportsKey.TYPE_NINE:
-                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                                        break;
-                                    case SportsKey.TYPE_ELEVEN:
-                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                                        break;
-                                    case SportsKey.TYPE_SEVEN:
-                                        iv_system_error.setVisibility(View.VISIBLE);
-                                        iv_system_error.setImageResource(R.drawable.konglong1);
-                                        ll_redline.setVisibility(View.GONE);
-                                        break;
-                                    case SportsKey.TYPE_EIGHT:
-                                        iv_system_error.setImageResource(R.drawable.konglong1);
-                                        iv_system_error.setVisibility(View.VISIBLE);
-                                        ll_redline.setVisibility(View.GONE);
-                                        break;
-                                    case SportsKey.TYPE_1000:
-                                        iv_system_error.setImageResource(R.drawable.konglong4);
-                                        iv_system_error.setVisibility(View.VISIBLE);
-                                        ll_redline.setVisibility(View.GONE);
-                                        break;
-                                    case SportsKey.TYPE_1001:
-                                        iv_system_error.setImageResource(R.drawable.konglong4);
-                                        iv_system_error.setVisibility(View.VISIBLE);
-                                        ll_redline.setVisibility(View.GONE);
-                                        break;
-                                    case SportsKey.TYPE_1002:
-                                        iv_system_error.setImageResource(R.drawable.konglong4);
-                                        iv_system_error.setVisibility(View.VISIBLE);
-                                        ll_redline.setVisibility(View.GONE);
-                                        break;
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                ShowDialogUtil.showSystemFail(getActivity());
-                            } finally {
-                            }
-                        }
-                    });
+            public void onFailure(String msgCode, String errorMsg) {
+                switch (msgCode) {
+                    case SportsKey.TYPE_NINE + "":
+                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                        break;
+                    case SportsKey.TYPE_ELEVEN + "":
+                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                        break;
+                    case SportsKey.TYPE_SEVEN + "":
+                        iv_system_error.setVisibility(View.VISIBLE);
+                        iv_system_error.setImageResource(R.drawable.konglong1);
+                        ll_redline.setVisibility(View.GONE);
+                        break;
+                    case SportsKey.TYPE_EIGHT + "":
+                        iv_system_error.setImageResource(R.drawable.konglong1);
+                        iv_system_error.setVisibility(View.VISIBLE);
+                        ll_redline.setVisibility(View.GONE);
+                        break;
+                    case SportsKey.TYPE_1000 + "":
+                        iv_system_error.setImageResource(R.drawable.konglong4);
+                        iv_system_error.setVisibility(View.VISIBLE);
+                        ll_redline.setVisibility(View.GONE);
+                        break;
+                    case SportsKey.TYPE_1001 + "":
+                        iv_system_error.setImageResource(R.drawable.konglong4);
+                        iv_system_error.setVisibility(View.VISIBLE);
+                        ll_redline.setVisibility(View.GONE);
+                        break;
+                    case SportsKey.TYPE_1002 + "":
+                        iv_system_error.setImageResource(R.drawable.konglong4);
+                        iv_system_error.setVisibility(View.VISIBLE);
+                        ll_redline.setVisibility(View.GONE);
+                        break;
                 }
             }
         });

@@ -7,7 +7,7 @@ import java.util.List;
  * Created by 18 on 2017/5/31.
  */
 
-public class BettingDetailRsp implements Serializable {
+public class BettingDetailRsp extends BaseModel {
 
     /**
      * member : {"ID":"12247","Oid":"d5b6503abd6e79120dfera3","Online":"0","Language":"zh-cn","UserName":"xiaobao","Money":"0","Money2":"0","Credit":"0","Alias":"测试","contory":"您所在的城市","Sports":"0","Lottery":"0","Points":"0","OpenType":"D","CurType":"RMB","Pay_Type":"1","LineType":"0","Status":"0","Send":"0","BetType":"0","LoginDate":"2017-06-09","LoginTime":"2017-06-09 22:32:51","OnlineTime":"2017-06-09 22:32:51","LogoutTime":"0000-00-00 00:00:00","AddDate":"2017-03-12 01:34:59","EditDate":"2017-03-12","LoginIP":"122.55.4.242","Url":".http://bet365test.lebole5.com/","Agents":"daa888","World":"caa888","Corprator":"baa888","Super":"aaa888","Admin":"raadmin888","Bank_Address":"","Bank_Account":"","bank":"","E_Mail":"马尼拉","Phone":"","Notes":"","Withdrawal_Passwd":"0000","Address":"","Reg":"1","ratio":"1","FT_R_Bet":"500000","FT_R_Scene":"500000","FT_P_Bet":"500000","FT_P_Scene":"500000","BK_R_Bet":"500000","BK_R_Scene":"500000","BK_P_Bet":"500000","BK_P_Scene":"500000","BS_R_Bet":"500000","BS_R_Scene":"500000","BS_P_Bet":"500000","BS_P_Scene":"500000","TN_R_Bet":"500000","TN_R_Scene":"500000","TN_P_Bet":"500000","TN_P_Scene":"500000","VB_R_Bet":"500000","VB_R_Scene":"500000","VB_P_Bet":"500000","VB_P_Scene":"500000","OP_R_Bet":"500000","OP_R_Scene":"500000","OP_P_Bet":"500000","OP_P_Scene":"500000","FS_FS_Bet":"50000","FS_FS_Scene":"500000","md5psw":"c294db97b3ca9115fe875aeb9e488c67","ctime":"0","ttime":"0","cmoney":"0.00","tmoney":"0.00","level_id":"0","agopen":"0","agpan":"C39A","cpopen":"0","gd_cpopen":"0","mgopen":"0","blacklist":"0","ptopen":"1","FT_RE_Scene":"500000","AliPayOpen":"0","WeiPayOpen":"0"}
@@ -16,17 +16,8 @@ public class BettingDetailRsp implements Serializable {
      */
 
     private MemberBean member;
-    private int code;
     private IfoBean ifo;
-    private String msg;
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public MemberBean getMember() {
         return member;
@@ -36,13 +27,6 @@ public class BettingDetailRsp implements Serializable {
         this.member = member;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public IfoBean getIfo() {
         return ifo;

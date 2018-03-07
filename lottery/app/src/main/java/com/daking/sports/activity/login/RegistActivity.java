@@ -324,7 +324,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         HttpRequest.getInstance().gotoRegist(RegistActivity.this, account,
                 psw, name, check_question, answer, money_psw, birthday, new HttpCallback<LoginRsp>() {
                     @Override
-                    public void onSuccess(LoginRsp data) {
+                    public void onSuccess(LoginRsp loginRsp) {
                         ShowDialogUtil.showSuccessDialog(mContext, getString(R.string.register_success), loginRsp.getMsg());
                         //延迟5秒关闭
                         Handler handler = new Handler();

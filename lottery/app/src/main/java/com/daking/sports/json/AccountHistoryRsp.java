@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Administrator on 2017/6/13.
  */
 
-public class AccountHistoryRsp implements Serializable {
+public class AccountHistoryRsp extends BaseModel {
 
     /**
      * start_date : 2017-06-05 21:13:17
@@ -18,7 +18,6 @@ public class AccountHistoryRsp implements Serializable {
 
     private String start_date;
     private String end_date;
-    private int code;
     private List<IfoBean> ifo;
 
     public String getStart_date() {
@@ -37,13 +36,6 @@ public class AccountHistoryRsp implements Serializable {
         this.end_date = end_date;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public List<IfoBean> getIfo() {
         return ifo;
