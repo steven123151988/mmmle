@@ -6,6 +6,7 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.AccountHistoryRsp;
 import com.daking.sports.json.BallGQRsp;
 import com.daking.sports.json.BettingDetailRsp;
+import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
@@ -274,7 +275,7 @@ public class HttpRequest {
      * @param type
      * @param callback
      */
-    public void changePsw(Object tag, String uid,String psw1, String newPSW, String type, HttpCallback<LoginRsp> callback) {
+    public void changePsw(Object tag, String uid, String psw1, String newPSW, String type, HttpCallback<LoginRsp> callback) {
         RequestBody body = new RequestBodyBuilder()
                 .addParam(SportsKey.UID, uid)
                 .addParam(SportsKey.FNNAME, "chg_pwd")
@@ -283,6 +284,19 @@ public class HttpRequest {
                 .addParam(SportsKey.TYPE, type)
                 .build();
         Call<LoginRsp> call = mService.changePsw(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
+
+    public void betBetting(Object tag, String uid,  String ball, int page, HttpCallback<BettingRecordRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.UID, uid)
+                .addParam(SportsKey.FNNAME, "betlist")
+                .addParam(SportsKey.BALL, ball)
+                .addParam(SportsKey.PAGE, page)
+                .build();
+        Call<BettingRecordRsp> call = mService.betBetting(body);
         putCall(tag, call);
         call.enqueue(callback);
     }

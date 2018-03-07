@@ -11,6 +11,8 @@ import android.widget.ListView;
 import com.daking.sports.R;
 import com.daking.sports.activity.login.LoginActivity;
 import com.daking.sports.adapter.BettingRecordAdapter;
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -22,6 +24,7 @@ import com.daking.sports.util.ToastUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
@@ -101,83 +104,104 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
     }
 
     private void getBettingRecords(final String ball, final int page) {
-        LogUtil.e("======page=========" + page);
-        if (page==1){
+
+        if (null != getActivity() && page == 1) {
             adapter = new BettingRecordAdapter(getActivity(), ball);
         }
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "betlist")
-                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .add(SportsKey.BALL, ball)
-                .add(SportsKey.PAGE, page + "")
-                .build();
-
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.BET_BETTING)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, "betlist")
+//                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+//                .add(SportsKey.BALL, ball)
+//                .add(SportsKey.PAGE, page + "")
+//                .build();
+//
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.BET_BETTING)
+//                .post(requestBody)
+//                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
+//                        }
+//                    });
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//                message = response.body().string();
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                LogUtil.e("====getBettingRecords===========" + message);
+//                                bettingRecordRsp = gson.fromJson(message, BettingRecordRsp.class);
+//
+//
+//                                if (null == bettingRecordRsp) {
+//                                    ShowDialogUtil.showSystemFail(getActivity());
+//                                    return;
+//                                }
+//                                switch (bettingRecordRsp.getCode()) {
+//                                    case SportsKey.TYPE_ZERO:
+//                                        lv_records.setAdapter(adapter);
+//                                        adapter.resetData(page, bettingRecordRsp.getIfo());
+//                                        adapter.notifyDataSetChanged();
+//                                        int position = SharePreferencesUtil.getInteger(getActivity(), SportsKey.RECORDS_POSITION, 1);
+//                                        lv_records.setSelection(position);
+//                                        break;
+//                                    case SportsKey.TYPE_NINE:
+//                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+//                                        break;
+//                                    case SportsKey.TYPE_NINETEEN:
+//                                        ToastUtil.show(getActivity(), "没有记录");
+//                                        break;
+//                                    default:
+//                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), bettingRecordRsp.getMsg());
+//                                        break;
+//                                }
+//
+//
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                ShowDialogUtil.showSystemFail(getActivity());
+//                            } finally {
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
+        String uid = SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0");
+        HttpRequest.getInstance().betBetting(BettingRecordFragment.this, uid, ball, page, new HttpCallback<BettingRecordRsp>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
-                        }
-                    });
-                }
-
+            public void onSuccess(BettingRecordRsp data) {
+                lv_records.setAdapter(adapter);
+                adapter.resetData(page, bettingRecordRsp.getIfo());
+                adapter.notifyDataSetChanged();
+                int position = SharePreferencesUtil.getInteger(getActivity(), SportsKey.RECORDS_POSITION, 1);
+                lv_records.setSelection(position);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                message = response.body().string();
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                LogUtil.e("====getBettingRecords===========" + message);
-                                bettingRecordRsp = gson.fromJson(message, BettingRecordRsp.class);
-
-
-                                if (null == bettingRecordRsp) {
-                                    ShowDialogUtil.showSystemFail(getActivity());
-                                    return;
-                                }
-                                switch (bettingRecordRsp.getCode()) {
-                                    case SportsKey.TYPE_ZERO:
-                                        lv_records.setAdapter(adapter);
-                                        adapter.resetData(page, bettingRecordRsp.getIfo());
-                                        adapter.notifyDataSetChanged();
-                                        int position = SharePreferencesUtil.getInteger(getActivity(), SportsKey.RECORDS_POSITION, 1);
-                                        lv_records.setSelection(position);
-                                        break;
-                                    case SportsKey.TYPE_NINE:
-                                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
-                                        break;
-                                    case SportsKey.TYPE_NINETEEN:
-                                        ToastUtil.show(getActivity(), "没有记录");
-                                        break;
-                                    default:
-                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), bettingRecordRsp.getMsg());
-                                        break;
-                                }
-
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                ShowDialogUtil.showSystemFail(getActivity());
-                            } finally {
-                            }
-                        }
-                    });
-                }
+            public void onFailure(String msgCode, String errorMsg) {
+                if (null != getActivity())
+                    if (msgCode.equals(String.valueOf(SportsKey.TYPE_NINE))) {
+                        getActivity().startActivity(new Intent(getActivity(), LoginActivity.class));
+                    } else {
+                        ShowDialogUtil.showFailDialog(getActivity(), getActivity().getString(R.string.sorry), errorMsg);
+                    }
             }
         });
 
@@ -222,7 +246,7 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtil.show(getActivity(),getString(R.string.no_more_message));
+                                ToastUtil.show(getActivity(), getString(R.string.no_more_message));
                             }
                         });
                     }

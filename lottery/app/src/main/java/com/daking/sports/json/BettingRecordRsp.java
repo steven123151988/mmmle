@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Administrator on 2017/6/12.下注记录
  */
 
-public class BettingRecordRsp implements Serializable {
+public class BettingRecordRsp extends BaseModel {
 
 
     /**
@@ -26,16 +26,7 @@ public class BettingRecordRsp implements Serializable {
     private int total_nums;
     private int pages;
     private int cpage;
-    private int code;
-    private String msg;
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     private List<IfoBean> ifo;
 
@@ -77,14 +68,6 @@ public class BettingRecordRsp implements Serializable {
 
     public void setCpage(int cpage) {
         this.cpage = cpage;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 
     public List<IfoBean> getIfo() {

@@ -5,6 +5,7 @@ import com.daking.sports.base.SportsAPI;
 import com.daking.sports.json.AccountHistoryRsp;
 import com.daking.sports.json.BallGQRsp;
 import com.daking.sports.json.BettingDetailRsp;
+import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
@@ -79,6 +80,10 @@ public interface ApiService {
     Call<LoginRsp> changePsw(@Body RequestBody body);
 
 
+    /**
+     * 赛事详情
+     */
 
-
+    @POST(SportsAPI.BET_BETTING)
+    Call<BettingRecordRsp> betBetting(@Body RequestBody body);
 }
