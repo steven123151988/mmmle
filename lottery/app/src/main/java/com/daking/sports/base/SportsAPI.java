@@ -57,7 +57,7 @@ public class SportsAPI {
                 info = "Keys字段错误参数错误.";
                 break;
             case "5":
-                info = "网站错误，请联系网站管理员，感谢您的访问-.-.";
+                info = "网站错误，请联系网站管理员，感谢您的访问.";
                 break;
             case "6":
                 info = "登出失败！";
