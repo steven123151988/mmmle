@@ -10,6 +10,7 @@ import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
+import com.daking.sports.json.MemOnlineRsp;
 import com.daking.sports.util.JsonUtil;
 import com.daking.sports.util.SharePreferencesUtil;
 
@@ -288,7 +289,14 @@ public class HttpRequest {
         call.enqueue(callback);
     }
 
-
+    /**
+     *   获取赛事详情
+     * @param tag
+     * @param uid
+     * @param ball
+     * @param page
+     * @param callback
+     */
     public void betBetting(Object tag, String uid,  String ball, int page, HttpCallback<BettingRecordRsp> callback) {
         RequestBody body = new RequestBodyBuilder()
                 .addParam(SportsKey.UID, uid)
@@ -301,5 +309,20 @@ public class HttpRequest {
         call.enqueue(callback);
     }
 
+    /**
+     *  在线提款
+     * @param tag
+     * @param uid
+     * @param callback
+     */
+    public void memOnline(Object tag, String uid,  HttpCallback<MemOnlineRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.UID, uid)
+                .addParam(SportsKey.FNNAME, "withdrawals")
+                .build();
+        Call<MemOnlineRsp> call = mService.memOnline(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
 
 }

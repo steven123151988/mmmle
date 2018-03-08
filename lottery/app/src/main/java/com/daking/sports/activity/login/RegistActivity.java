@@ -1,6 +1,8 @@
 package com.daking.sports.activity.login;
 
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.InputFilter;
@@ -23,6 +25,8 @@ import com.daking.sports.base.SportsKey;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.util.AddEdiTextWatchListenerUtil;
+import com.daking.sports.util.CloseSoftInputFromWindowUtil;
+import com.daking.sports.util.CustomVideoView;
 import com.daking.sports.util.LogUtil;
 import com.daking.sports.util.ShowDialogUtil;
 import com.daking.sports.util.TextUtil;
@@ -72,6 +76,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private Gson gson = new Gson();
     private String message, message2;
     private long mClickTime;
+    private CustomVideoView videoview;  //创建播放视频的控件对象
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +119,12 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         rl = (RelativeLayout) findViewById(R.id.rl);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //初始化音频
+        starVideoview();
+    }
 
     /**
      * 检查用户名是否可用
@@ -196,7 +208,6 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
     private void regist() {
         account = et_account.getText().toString().replace(" ", "");
-
         psw = et_psw.getText().toString().replace(" ", "");
         psw2 = et_psw2.getText().toString().replace(" ", "");
         name = et_name.getText().toString().replace(" ", "");
@@ -206,27 +217,29 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         if (TextUtils.isEmpty(account) || TextUtils.isEmpty(psw) || TextUtils.isEmpty(psw2)
                 || TextUtils.isEmpty(name) || TextUtils.isEmpty(money_psw)
                 || TextUtils.isEmpty(answer) || TextUtils.isEmpty(birthday)) {
-            ToastUtil.show(mContext, getResources().getString(R.string.regist_null));
+            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.regist_null));
             return;
         }
         if (account.length() < 6) {
-            ToastUtil.show(mContext, getResources().getString(R.string.account_type_error));
+            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.account_type_error));
             return;
         }
         if (!psw.equals("") && !psw.equals(psw2)) {
-            ToastUtil.show(mContext, "两次密码不匹配");
+            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.account_not_same));
             return;
         }
         if (money_psw.length() < 4) {
-            ToastUtil.show(mContext, "提款密码为4位数");
+            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.take_out_money_psw4));
             return;
         }
         if (birthday.length() < 8) {
-            ToastUtil.show(mContext, "生日格式为8位数");
+            ShowDialogUtil.showFailDialog(mContext, getString(R.string.sorry), getString(R.string.birthday_number_8));
             return;
         }
 
-
+        /**
+         *   检查用户名字是否可用
+         */
         checkUser();
     }
 
@@ -346,6 +359,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
 
     private void setupRecyclerView() {
+        CloseSoftInputFromWindowUtil.closeSoftInputFromWindow();
         final ArrayList<MenuEntity> list = new ArrayList<>();
         for (int i = 1; i < 14; i++) {
             menuEntity = new MenuEntity();
@@ -446,6 +460,21 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+    private void starVideoview() {
+        //加载视频资源控件
+        videoview = (CustomVideoView) findViewById(R.id.videoview);
+        //设置播放加载路径
+        videoview.setVideoURI(Uri.parse("android.resource://com.daking.sports/" + R.raw.loginback));
+        //播放
+        videoview.start();
+        //循环播放
+        videoview.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoview.start();
+            }
+        });
+    }
 
     @Override
     protected void onDestroy() {

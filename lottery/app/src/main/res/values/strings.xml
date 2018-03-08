@@ -177,6 +177,9 @@
     <string name="select_bank">请选择银行</string>
     <string name="typein_banknum">请填写银行卡号！</string>
     <string name="take_out_money">提款金额最低100元！</string>
+    <string name="take_out_money_psw4">提款密码为4位数！</string>
+    <string name="birthday_number_8">生日格式为8位数！</string>
+
     <string name="plz_select_psw_question">请选择密码提示问题！</string>
     <string name="psw_type_error">密码格式不正确，应为6-15位字符！</string>
     <string name="account_type_error">账户格式不正确，应为6-15位字符！</string>

@@ -203,6 +203,8 @@ public class BettingRecordFragment extends BaseFragment implements BGARefreshLay
                         ShowDialogUtil.showFailDialog(getActivity(), getActivity().getString(R.string.sorry), errorMsg);
                     }
             }
+
+
         });
 
 

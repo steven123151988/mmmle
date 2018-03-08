@@ -6,32 +6,16 @@ import java.io.Serializable;
  * Created by Administrator on 2017/6/13.
  */
 
-public class MemOnlineRsp implements Serializable {
+public class MemOnlineRsp extends BaseModel {
 
     /**
      * code : 0
      * ifo : {"UserName":"xiaobao","Money":"0","Alias":"测试","bank":"","Bank_Account":"","Bank_Address":""}
      */
 
-    private int code;
+
     private IfoBean ifo;
-    private String msg;
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public IfoBean getIfo() {
         return ifo;

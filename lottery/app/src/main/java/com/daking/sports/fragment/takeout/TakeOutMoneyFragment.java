@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.daking.sports.R;
 import com.daking.sports.activity.mine.TakeOutMoneyActivity;
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -65,68 +67,88 @@ public class TakeOutMoneyFragment extends BaseFragment implements View.OnClickLi
 
 
     private void getOutMoney() {
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, "withdrawals")
-                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
-                .build();
-
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.MEM_ONLINE)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, "withdrawals")
+//                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0"))
+//                .build();
+//
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.MEM_ONLINE)
+//                .post(requestBody)
+//                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
+//                        }
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                message = response.body().string();
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                LogUtil.e("======getOutMoney========" + message);
+//                                memonlineRsp = gson.fromJson(message, MemOnlineRsp.class);
+//                                if (null == memonlineRsp) {
+//                                    ShowDialogUtil.showSystemFail(getActivity());
+//                                    return;
+//                                }
+//                                switch (memonlineRsp.getCode()) {
+//                                    case SportsKey.TYPE_ZERO:
+//                                        if (memonlineRsp.getIfo().getBank_Account().equals("")) {
+//                                            ((TakeOutMoneyActivity) getActivity()).addBankAccount();
+//                                        } else {
+//                                            tv_tabkeout_bank.setText(memonlineRsp.getIfo().getBank());
+//                                            tv_takeout_num.setText(memonlineRsp.getIfo().getBank_Account());
+//                                            tv_takeout_name.setText(memonlineRsp.getIfo().getAlias());
+//                                            ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
+//                                        }
+//                                        break;
+//                                    default:
+//                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), memonlineRsp.getMsg());
+//                                        break;
+//
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                ShowDialogUtil.showSystemFail(getActivity());
+//                            }
+//                        }
+//                    });
+//                }
+//
+//            }
+//        });
+        String uid = SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "0");
+        HttpRequest.getInstance().memOnline(TakeOutMoneyFragment.this, uid, new HttpCallback<MemOnlineRsp>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
-                        }
-                    });
+            public void onSuccess(MemOnlineRsp data) {
+                if (memonlineRsp.getIfo().getBank_Account().equals("")) {
+                    ((TakeOutMoneyActivity) getActivity()).addBankAccount();
+                } else {
+                    tv_tabkeout_bank.setText(memonlineRsp.getIfo().getBank());
+                    tv_takeout_num.setText(memonlineRsp.getIfo().getBank_Account());
+                    tv_takeout_name.setText(memonlineRsp.getIfo().getAlias());
+                    ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
                 }
+
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                message = response.body().string();
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                LogUtil.e("======getOutMoney========" + message);
-                                memonlineRsp = gson.fromJson(message, MemOnlineRsp.class);
-                                if (null == memonlineRsp) {
-                                    ShowDialogUtil.showSystemFail(getActivity());
-                                    return;
-                                }
-                                switch (memonlineRsp.getCode()) {
-                                    case SportsKey.TYPE_ZERO:
-                                        if (memonlineRsp.getIfo().getBank_Account().equals("")) {
-                                            ((TakeOutMoneyActivity) getActivity()).addBankAccount();
-                                        } else {
-                                            tv_tabkeout_bank.setText(memonlineRsp.getIfo().getBank());
-                                            tv_takeout_num.setText(memonlineRsp.getIfo().getBank_Account());
-                                            tv_takeout_name.setText(memonlineRsp.getIfo().getAlias());
-                                            ((TakeOutMoneyActivity) getActivity()).getTakeOutMoneyView();
-                                        }
-                                        break;
-                                    default:
-                                        ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), memonlineRsp.getMsg());
-                                        break;
-
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                ShowDialogUtil.showSystemFail(getActivity());
-                            }
-                        }
-                    });
-                }
-
+            public void onFailure(String msgCode, String errorMsg) {
+                ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), errorMsg);
             }
         });
     }

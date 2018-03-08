@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.daking.sports.application.ActivityManager;
 
 /**
- * Created by Administrator on 2017/6/18.
+ * 关闭弹起的键盘
  */
 
 public class CloseSoftInputFromWindowUtil {

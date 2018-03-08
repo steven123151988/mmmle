@@ -9,6 +9,7 @@ import com.daking.sports.json.BettingRecordRsp;
 import com.daking.sports.json.ConfigRsp;
 import com.daking.sports.json.LoginRsp;
 import com.daking.sports.json.LotteryVersion;
+import com.daking.sports.json.MemOnlineRsp;
 
 import okhttp3.RequestBody;
 
@@ -86,4 +87,11 @@ public interface ApiService {
 
     @POST(SportsAPI.BET_BETTING)
     Call<BettingRecordRsp> betBetting(@Body RequestBody body);
+
+    /**
+     * 在线提款
+     */
+    @POST(SportsAPI.MEM_ONLINE)
+    Call<MemOnlineRsp> memOnline(@Body RequestBody body);
+
 }
