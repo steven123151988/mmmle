@@ -58,7 +58,7 @@ public class HttpRequest {
         mCallMap.put(tag, callList);
     }
 
-    public synchronized void cancel(Object tag) {
+    public synchronized void cancelRequest(Object tag) {
         if (tag == null) {
             return;
         }

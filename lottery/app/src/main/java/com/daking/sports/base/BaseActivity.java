@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.view.CustomProgressDialog;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
@@ -60,5 +62,9 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        HttpRequest.getInstance().cancelRequest(this);
+    }
 }
