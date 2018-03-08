@@ -234,10 +234,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ShowDialogUtil.dismissDialogs();
         if (null != videoview) {
             videoview.stopPlayback();
         }
-        ShowDialogUtil.dismissDialogs();
         if (null != handler) {
             handler.removeCallbacksAndMessages(null);
         }

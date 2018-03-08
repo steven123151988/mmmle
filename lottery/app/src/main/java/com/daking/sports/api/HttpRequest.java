@@ -325,4 +325,20 @@ public class HttpRequest {
         call.enqueue(callback);
     }
 
+    /**
+     *  登出
+     * @param tag
+     * @param uid
+     * @param callback
+     */
+    public void loginOut(Object tag, String uid,  HttpCallback<LoginRsp> callback) {
+        RequestBody body = new RequestBodyBuilder()
+                .addParam(SportsKey.UID, uid)
+                .addParam(SportsKey.FNNAME,  SportsKey.LOGIN_OUT)
+                .build();
+        Call<LoginRsp> call = mService.loginOut(body);
+        putCall(tag, call);
+        call.enqueue(callback);
+    }
+
 }

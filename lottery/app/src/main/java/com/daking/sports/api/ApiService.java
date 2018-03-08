@@ -94,4 +94,10 @@ public interface ApiService {
     @POST(SportsAPI.MEM_ONLINE)
     Call<MemOnlineRsp> memOnline(@Body RequestBody body);
 
+    /**
+     * 登出
+     */
+    @POST(SportsAPI.LOGIN_OUT)
+    Call<LoginRsp> loginOut(@Body RequestBody body);
+
 }

@@ -215,5 +215,12 @@ public class SplashActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         ShowDialogUtil.dismissDialogs();
+        if (null != SweetAlertDialog)
+            SweetAlertDialog.dismiss();
+
+        if (null!=uploadApkDialog){
+            uploadApkDialog.cancel();
+        }
+
     }
 }

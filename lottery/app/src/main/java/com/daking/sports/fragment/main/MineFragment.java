@@ -14,6 +14,8 @@ import com.daking.sports.activity.mine.DepositRecordsActivity;
 import com.daking.sports.activity.mine.PayActivity;
 import com.daking.sports.activity.mine.PswManagerActivity;
 import com.daking.sports.activity.mine.TakeOutMoneyActivity;
+import com.daking.sports.api.HttpCallback;
+import com.daking.sports.api.HttpRequest;
 import com.daking.sports.base.BaseFragment;
 import com.daking.sports.base.SportsAPI;
 import com.daking.sports.base.SportsKey;
@@ -76,6 +78,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if (null == getActivity())
+            return;
         switch (v.getId()) {
             case R.id.rl_1:
                 //充值
@@ -115,70 +119,89 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
      * 退出登陆
      */
     private void loginout() {
-        RequestBody requestBody = new FormBody.Builder()
-                .add(SportsKey.FNNAME, SportsKey.LOGIN_OUT)
-                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
-                .build();
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add(SportsKey.FNNAME, SportsKey.LOGIN_OUT)
+//                .add(SportsKey.UID, SharePreferencesUtil.getString(getActivity(), SportsKey.UID, ""))
+//                .build();
+//
+//        final okhttp3.Request request = new okhttp3.Request.Builder()
+//                .url(SportsAPI.BASE_URL + SportsAPI.LOGIN_OUT)
+//                .post(requestBody)
+//                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient();
+//        okHttpClient.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
+//                        }
+//                    });
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                message = response.body().string();
+//                //到主线程上更新UI
+//                if (null != getActivity()) {
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                LogUtil.e("===============loginout=========" + message);
+//                                Gson gson = new Gson();
+//                                loginRsp = gson.fromJson(message, LoginRsp.class);
+//                                if (null == loginRsp) {
+//                                    ShowDialogUtil.showSystemFail(getActivity());
+//                                    return;
+//                                }
+//                                switch (loginRsp.getCode()) {
+//                                    case SportsKey.TYPE_ZERO:
+//                                        if (null == firstFragment) {
+//                                            firstFragment = new FirstFragment();
+//                                        }
+//                                        SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
+//                                        ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
+//                                        ToastUtil.show(getActivity(), loginRsp.getMsg());
+//                                        break;
+//                                    case SportsKey.TYPE_SIX:
+//                                        ToastUtil.show(getActivity(), loginRsp.getMsg());
+//                                        break;
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                ShowDialogUtil.showSystemFail(getActivity());
+//                            } finally {
+//                            }
+//
+//                        }
+//                    });
+//
+//                }
+//
+//            }
+//        });
 
-        final okhttp3.Request request = new okhttp3.Request.Builder()
-                .url(SportsAPI.BASE_URL + SportsAPI.LOGIN_OUT)
-                .post(requestBody)
-                .build();
-
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.newCall(request).enqueue(new Callback() {
+        if (null == getActivity()) return;
+        String uid = SharePreferencesUtil.getString(getActivity(), SportsKey.UID, "");
+        HttpRequest.getInstance().loginOut(MineFragment.this, uid, new HttpCallback<LoginRsp>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ShowDialogUtil.showFailDialog(getActivity(), getString(R.string.sorry), getString(R.string.net_error));
-                        }
-                    });
+            public void onSuccess(LoginRsp data) {
+                if (null == firstFragment) {
+                    firstFragment = new FirstFragment();
                 }
-
+                SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
+                ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                message = response.body().string();
-                //到主线程上更新UI
-                if (null != getActivity()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                LogUtil.e("===============loginout=========" + message);
-                                Gson gson = new Gson();
-                                loginRsp = gson.fromJson(message, LoginRsp.class);
-                                if (null == loginRsp) {
-                                    ShowDialogUtil.showSystemFail(getActivity());
-                                    return;
-                                }
-                                switch (loginRsp.getCode()) {
-                                    case SportsKey.TYPE_ZERO:
-                                        if (null == firstFragment) {
-                                            firstFragment = new FirstFragment();
-                                        }
-                                        SharePreferencesUtil.addString(getActivity(), SportsKey.UID, "0");
-                                        ((MainActivity) getActivity()).showFragmentViews(SportsKey.TYPE_ONE, firstFragment);
-                                        ToastUtil.show(getActivity(), loginRsp.getMsg());
-                                        break;
-                                    case SportsKey.TYPE_SIX:
-                                        ToastUtil.show(getActivity(), loginRsp.getMsg());
-                                        break;
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                ShowDialogUtil.showSystemFail(getActivity());
-                            } finally {
-                            }
-
-                        }
-                    });
-
-                }
+            public void onFailure(String msgCode, String errorMsg) {
+                ShowDialogUtil.showFailDialog(getActivity(), getActivity().getString(R.string.sorry), errorMsg);
 
             }
         });
