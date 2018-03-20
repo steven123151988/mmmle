@@ -132,7 +132,7 @@ public class SportsAPI {
                 info = "新提款密码格式不正确！";
                 break;
             case "50":
-                info = "请选择开户银行！";//两个50
+                info = "请选择开户银行！";
                 break;
             case "51":
                 info = "请填写16位或19位正确数字格式的银行账号！";
@@ -171,10 +171,25 @@ public class SportsAPI {
                 info = "上面的回传参数msg展示今日赛事维护内容.";
                 break;
             case "10011":
+                needErrorCode = true;
+                info = "返回数据类型解析错误{JSONException}.";
+                break;
             case "10012":
+                needErrorCode = true;
+                info = "请求连接错误{ConnectException}.";
+                break;
             case "10013":
+                needErrorCode = true;
+                info = "请求权限错误{SSLHandshakeException}.";
+                break;
             case "10014":
+                needErrorCode = true;
+                info = "网络异常{UnknownHostException}.";
+                break;
             case "10015":
+                needErrorCode = true;
+                info = "请求连接超时{SocketTimeoutException}.";
+                break;
             case "10016":
                 needErrorCode = true;
                 info = "您的网络连接超时，请稍后再试！";
