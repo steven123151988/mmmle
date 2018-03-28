@@ -102,12 +102,17 @@
     <orderEntry type="library" exported="" name="sweetsheet-release:@aar" level="project" />
     <orderEntry type="library" exported="" name="com.yalantis:phoenix-1.2.3" level="project" />
     <orderEntry type="library" exported="" name="cn.pedant.sweetalert:library-1.3" level="project" />
+    <orderEntry type="library" exported="" name="com.google.flatbuffers:flatbuffers-java:1.8.0@jar" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="com.android.support:multidex-instrumentation-1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="com.dhh:websocket2-1.5.0" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-core-ui-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.nineoldandroids:library:2.4.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="io.objectbox:objectbox-java-api:1.4.4@jar" level="project" />
     <orderEntry type="library" exported="" name="cn.bingoogolapple:bga-refreshlayout-1.1.7" level="project" />
+    <orderEntry type="library" exported="" name="org.greenrobot:essentials:3.0.0-RC1@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
+    <orderEntry type="library" exported="" name="org.reactivestreams:reactive-streams:1.0.1@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-core-utils-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="com.google.code.gson:gson:2.7@jar" level="project" />
@@ -115,20 +120,25 @@
     <orderEntry type="library" exported="" name="de.hdodenhof:circleimageview-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-fragment-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.squareup.retrofit2:retrofit:2.3.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="io.reactivex.rxjava2:rxjava:2.1.5@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-media-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.jakewharton:butterknife-8.8.1" level="project" />
     <orderEntry type="library" exported="" name="com.jakewharton:butterknife-annotations:8.8.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="io.objectbox:objectbox-android-1.4.4" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:animated-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="io.reactivex.rxjava2:rxandroid-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:transition-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.umeng.analytics:analytics:6.1.4@jar" level="project" />
+    <orderEntry type="library" exported="" name="com.google.code.findbugs:jsr305:3.0.2@jar" level="project" />
     <orderEntry type="library" exported="" name="com.squareup.picasso:picasso:2.5.2@jar" level="project" />
     <orderEntry type="library" exported="" name="com.pnikosis:materialish-progress-1.0" level="project" />
     <orderEntry type="library" exported="" name="org.greenrobot:eventbus:3.1.1@jar" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:recyclerview-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-annotations:25.3.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="io.objectbox:objectbox-java:1.4.4@jar" level="project" />
     <orderEntry type="module" module-name="PushSDK" exported="" />
     <orderEntry type="library" exported="" name="org.apache.http.legacy-android-25" level="project" />
   </component>

@@ -62,5 +62,5 @@ public class SportsKey {
     public static final String RECORDS_POSITION = "records_position";
     public static final String ACCOUNT_MONEY = "accountmoney";
     public static final String CONFIG = "config";
-
+    public static final String WEB_SOCKET_URL = "config";
 }
